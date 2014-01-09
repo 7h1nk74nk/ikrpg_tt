@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="cycler_skillability">
+		<cycler_ability>
+			<frame />
+			<stateframe>
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,5,6,5</offset>
+				</hover>
+			</stateframe>
+			<parameters>
+				<defaultlabel>-</defaultlabel>
+			</parameters>
+		</cycler_ability>
+	</template>
+
+	<template name="number_charskilltotal">
+		<number_linked>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<readonly />
+			<displaysign />
+			<rollable />
+			<hideonvalue>0</hideonvalue>
+			<source>
+				<name>stat</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>...encumbrance.armorcheckpenalty</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>...levelbonus</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>trained</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>misc</name>
+				<op>+</op>
+			</source>
+			<script>
+				function onSourceValue(source, sourcename)
+					if sourcename == "trained" then
+						if source.getValue() == 1 then
+							return 5;
+						end
+						return 0;
+					elseif sourcename == "...encumbrance.armorcheckpenalty" then
+						if StringManager.contains({"strength", "dexterity", "constitution"}, DB.getValue(window.getDatabaseNode(), "statname", "")) then
+							return math.min(source.getValue(), 0);
+						end
+						return 0;
+					end
+
+					return super.onSourceValue(source, sourcename);
+				end
+
+				function action(draginfo)
+					local nodeWin = window.getDatabaseNode();
+					if nodeWin then
+						local rActor = ActorManager.getActor("pc", nodeWin.getChild("..."));
+						local sLabel = DB.getValue(nodeWin, "label", "");
+						local sStat = DB.getValue(nodeWin, "statname", "");
+						ActionSkill.performRoll(draginfo, rActor, sLabel, getValue(), sStat);
+					end
+	
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)	
+					return action();
+				end
+			</script>
+		</number_linked>
+	</template>
+	<template name="number_charskilltotal_sm">
+		<number_charskilltotal>
+			<font>sheetnumbersmall</font>
+		</number_charskilltotal>
+	</template>
+	<template name="number_charskillfield">
+		<number>
+			<frame>
+				<name>textline</name>
+				<offset>0,-2,0,0</offset>
+			</frame>
+			<stateframe>
+				<keyedit>
+					<name>rowshade</name>
+					<offset>1,1,1,1</offset>
+				</keyedit>
+				<hover>
+					<name>rowshade</name>
+					<offset>1,1,1,1</offset>
+				</hover>
+				<drophilight>
+					<name>rowshade</name>
+					<offset>1,1,1,1</offset>
+				</drophilight>
+			</stateframe>
+			<droptypes>
+				<type>number</type>
+			</droptypes>
+			<font>sheetnumber</font>
+			<delaykeyupdate />
+			<hideonvalue>0</hideonvalue>
+			<nodrag />
+			<displaysign />
+		</number>
+	</template>
+	<template name="number_charskillfield_static">
+		<number>
+			<frame>
+				<name>textline</name>
+				<offset>0,-2,0,0</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<hideonvalue>0</hideonvalue>
+			<nodrag />
+			<displaysign />
+			<disabled />
+		</number>
+	</template>
+</root>

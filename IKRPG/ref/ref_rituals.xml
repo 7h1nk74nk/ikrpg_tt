@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Ritual lists -->
+	<windowclass name="reference_rituallistitem">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<link_field name="link">
+				<bounds>5,0,20,20</bounds>
+			</link_field>
+			<stringcontrol_linked_static name="name">
+				<bounds>30,2,200,15</bounds>
+			</stringcontrol_linked_static>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_rituallist">
+		<frame>referencepage</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>450</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic>
+				<resize>vertical</resize>
+			</dynamic>
+			<maximum>
+				<height>100000</height>
+			</maximum>
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>description</field>
+		</tooltip>
+		<sheetdata>
+			<!-- TITLE -->
+			<windowtitlebar>
+				<title>
+					<field>description</field>
+				</title>
+			</windowtitlebar>
+
+			<!-- LIST -->
+			<windowlist name="list">
+				<bounds>25,50,-25,-70</bounds>
+				<datasource>.groups</datasource>
+				<class>reference_rituallistitem</class>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>15,15,15,15</offset>
+				</frame>
+				<child><backcolor>1A40301E</backcolor></child>
+				<child></child>
+				<filter><control>filter</control></filter>
+				<filteron><control>name</control></filteron>
+			</windowlist>
+			<scrollbar>
+				<bounds>-35,60,20,-80</bounds>
+				<target>grouplist</target>
+			</scrollbar>
+			
+			<!-- LIST CONTROLS -->
+			<filter name="filter">
+				<bounds>55,-45,-90,20</bounds>
+			</filter>
+			<button_filter name="filtertrigger">
+				<bounds>20,-55,21,41</bounds>
+			</button_filter>			
+			
+			<resize_referencepage />
+			<close_referencepage />
+		</sheetdata>
+	</windowclass>
+
+	<!-- Power description sheet -->
+	<windowclass name="ritual_stats">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_refflavor name="flavor" />
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>10</height>
+			</spacer>
+			
+			<string_column name="level" />
+			<label_column>
+				<anchor>level</anchor>
+				<static>Level</static>
+			</label_column>
+			<string_column name="category" />
+			<label_column>
+				<anchor>category</anchor>
+				<static>Category</static>
+			</label_column>
+			<string_column name="time" />
+			<label_column>
+				<anchor>time</anchor>
+				<static>Casting Time</static>
+			</label_column>
+			<string_column name="duration" />
+			<label_column>
+				<anchor>duration</anchor>
+				<static>Duration</static>
+			</label_column>
+			<string_column name="component" />
+			<label_column>
+				<anchor>component</anchor>
+				<static>Component</static>
+			</label_column>
+			<string_column name="price" />
+			<label_column>
+				<anchor>price</anchor>
+				<static>Price</static>
+			</label_column>
+			<string_column name="skill" />
+			<label_column>
+				<anchor>skill</anchor>
+				<static>Skill</static>
+			</label_column>
+			<string_column name="prerequisite" />
+			<label_column>
+				<anchor>prerequisite</anchor>
+				<static>Prerequisite</static>
+			</label_column>
+
+			<line_column name="line_desc"/>
+			
+			<label_refdesc name="label_desc" />
+			<ft_refdesc name="details">
+				<label>label_desc</label>
+				<separator>line_desc</separator>
+			</ft_refdesc>
+
+			<spacer>
+				<anchor>details</anchor>
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_ritual">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>300</width>
+				<height>370</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name" />
+			<link_tl>
+				<class>reference_ritual</class>
+			</link_tl>
+
+			<sub_refcontent name="content">
+				<class>ritual_stats</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

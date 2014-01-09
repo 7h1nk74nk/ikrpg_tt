@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_familiar">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>340</width>
+				<height>410</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<minimum>
+				<width>340</width>
+				<height>410</height>
+			</minimum>
+			<dynamic />
+		</sizelimits>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name">
+				<anchored>
+					<right>
+						<offset>-118</offset>
+					</right>
+				</anchored>
+				<color>#FFFFFFFF</color>
+				<frame>
+					<name>headerfamiliar</name>
+					<offset>40,10,118,10</offset>
+				</frame>
+			</string_name_static>
+			<link_tl>
+				<class>reference_familiar</class>
+			</link_tl>
+			<button_activateid name="identityadd">
+				<bounds>-63,10,23,22</bounds>
+			</button_activateid>
+			<tokenfield name="token">
+				<bounds>-98,10,25,25</bounds>
+				<empty>indicator_emptytoken</empty>
+			</tokenfield>
+
+			<sub_refcontent name="content">
+				<class>familiar_description</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="familiar_description">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_refflavor name="flavor" />
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>10</height>
+			</spacer>
+
+			<string_column name="senses" />
+			<label_column>
+				<anchor>senses</anchor>
+				<static>Senses</static>
+			</label_column>
+
+			<string_column name="speed" />
+			<label_column>
+				<anchor>speed</anchor>
+				<static>Speed</static>
+			</label_column>
+
+			<!-- Constant Benefits -->
+			<label_columnheader>
+				<static>Constant Benefits</static>
+			</label_columnheader>
+			<string_columnfull name="constant">
+				<offset>5,12</offset>
+			</string_columnfull>
+
+			<!-- Active Benefits -->
+			<label_columnheader>
+				<static>Active Benefits</static>
+			</label_columnheader>
+			<string_columnfull name="active">
+				<offset>5,12</offset>
+			</string_columnfull>
+
+			<spacer name="spacer">
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+</root>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>    
+	<windowclass name="charsheet_skills">
+		<placement>
+			<size>
+				<width>252</width>
+				<height>611</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+			<frame_char name="skillframe">
+				<bounds>15,5,400,525</bounds>
+			</frame_char>
+
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>SKILLS</static>
+            <anchored>
+                <to>skillframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<label_sm>
+				<bounds>30,25,30,10</bounds>
+				<static>Name</static>
+			</label_sm>
+            <label_sm>
+				<bounds>220,25,30,10</bounds>
+				<static>Type</static>
+			</label_sm>			
+			<label_sm>
+				<bounds>258,25,30,10</bounds>
+				<static>Stat</static>
+			</label_sm>			
+			<label_sm>
+				<bounds>295,25,30,10</bounds>
+				<static>Max</static>
+			</label_sm>
+			<label_sm>
+				<bounds>330,25,30,10</bounds>
+				<static>Rank</static>
+			</label_sm>
+            <label_sm>
+				<bounds>365,25,30,10</bounds>
+				<static>Total</static>
+			</label_sm>
+
+			<windowlist name="skilllist">
+				<anchored>
+					<to>skillframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<datasource>.skilllist</datasource>
+				<class>charsheet_skill</class>
+                
+				<sortby><control>order</control></sortby>
+				<script file="charsheet/scripts/charsheet_skilllist.lua" />
+			</windowlist>
+			<scrollbar_charlist>
+				<anchored>
+					<to>skilllist</to>
+                    <offset>-5,-10</offset>
+				</anchored>
+				<target>skilllist</target>
+			</scrollbar_charlist>
+            
+            
+            
+            
+            
+           
+            
+            
+		</sheetdata>
+	</windowclass>
+</root>

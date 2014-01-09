@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="sct_roll">
+		<sizelimits>
+			<minimum>
+				<height>25</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function onInit()
+				registerMenuItem("Remove Roll", "deletepointer", 3);
+				registerMenuItem("Confirm Remove", "delete", 3, 3);
+			end
+
+			function onMenuSelection(selection, subselection)
+				if selection == 3 and subselection == 3 then
+					getDatabaseNode().delete();
+				end
+			end
+		</script>
+		<sheetdata>
+			<stringfield name="actor">
+				<bounds>15,6,100,16</bounds>
+				<font>chatfont</font>
+				<static />
+			</stringfield>
+			<number name="roll">
+				<bounds>115,6,50,16</bounds>
+				<font>chatfont</font>
+				<static />
+				<nodrag />
+			</number>
+			<buttongroup_radio name="result">
+				<anchored>
+					<to>roll</to>
+					<position>righthigh</position>
+					<offset>40,2</offset>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<parameters>
+					<optionwidth>70</optionwidth>
+					<values>success|failure</values>
+				</parameters>
+			</buttongroup_radio>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="sct_skill">
+		<sizelimits>
+			<minimum>
+				<height>25</height>
+			</minimum>
+		</sizelimits>
+		<script file="ct/scripts/sct_skill.lua" />
+		<sheetdata>
+			<stringu name="label">
+				<bounds>10,8,100,20</bounds>
+			</stringu>
+
+			<basicnumber_sm name="DC">
+				<bounds>130,0,50,25</bounds>
+			</basicnumber_sm>
+
+			<number_sm_static name="success">
+				<bounds>205,0,50,25</bounds>
+				<frame>
+					<name>modifier</name>
+					<offset>3,3,3,3</offset>
+				</frame>
+				<hideonvalue>0</hideonvalue>
+			</number_sm_static>
+			<number_sm_static name="failure">
+				<bounds>273,0,50,25</bounds>
+				<frame>
+					<name>modifier</name>
+					<offset>3,3,3,3</offset>
+				</frame>
+				<hideonvalue>0</hideonvalue>
+			</number_sm_static>
+
+			<button_toggle name="activate_results">
+				<bounds>327,10,10,10</bounds>
+				<icon>indicator_quicklist</icon>
+				<script>
+					function onValueChanged()
+						window.results.setVisible(getValue());
+						window.spacer.setVisible(getValue());
+					end
+				</script>
+			</button_toggle>
+
+			<windowlist name="results">
+				<anchored>
+					<top><offset>30</offset></top>
+					<left><offset>10</offset></left>
+					<size>
+						<width>350</width>
+					</size>
+				</anchored>
+				<datasource>.rolls</datasource>
+				<class>sct_roll</class>
+				<invisible />
+				<noscroll />
+				<child><backcolor>1A40301E</backcolor></child>
+				<child></child>
+			</windowlist>
+			
+			<spacer name="spacer">
+				<anchor>results</anchor>
+				<height>5</height>
+				<invisible />
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="skillchallenge_tracker">
+		<frame>utilitybox</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>600</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<minimum>
+				<width>400</width>
+				<height>400</height>
+			</minimum>
+			<maximum>
+				<width>400</width>
+				<height>10000</height>
+			</maximum>
+			<dynamic>
+				<offset>5,15</offset>
+			</dynamic>
+		</sizelimits>
+		<nodelete />
+		<softclose />
+		<sheetdata>
+			<!-- TITLE -->
+			<windowtitlebar>
+				<title>
+					<text>Skill Challenge Tracker</text>
+				</title>
+			</windowtitlebar>
+
+			<!-- HEADERS -->
+			<frame_sct name="overviewframe">
+				<bounds>20,60,-20,-80</bounds>				
+			</frame_sct>
+
+			<stringcontrol name="DClabel">
+				<bounds>170,50,50,15</bounds>
+				<font>sct-header</font>
+				<static>DC</static>
+			</stringcontrol>
+			<stringcontrol name="successlabel">
+				<bounds>240,50,50,15</bounds>
+				<font>sct-header</font>
+				<static>Success</static>
+			</stringcontrol>
+			<stringcontrol name="failurelabel">
+				<bounds>310,50,50,15</bounds>
+				<font>sct-header</font>
+				<static>Failure</static>
+			</stringcontrol>
+
+			<!-- SKILL LIST -->
+			<windowlist name="skilllist">
+				<anchored>
+					<to>overviewframe</to>
+					<position>over</position>
+					<offset>-5,-15</offset>
+				</anchored>
+				<datasource>.skills</datasource>
+				<class>sct_skill</class>
+				<script file="ct/scripts/sct_list.lua" />
+			</windowlist>
+			<scrollbar>
+				<anchored>
+					<to>skilllist</to>
+					<position>right</position>
+					<offset>-10,5</offset>
+				</anchored>
+				<target>skilllist</target>
+			</scrollbar>
+
+			<!-- TOTALS -->
+			<frame_sct name="totalframe">
+				<bounds>20,-80,-20,-30</bounds>
+			</frame_sct>
+
+			<label name="totals">
+				<bounds>160,-60,50,15</bounds>
+				<static>Totals:</static>
+			</label>
+			<number_static name="totalsuccess">
+				<bounds>230,-66,50,25</bounds>
+				<frame>
+					<name>modifier</name>
+					<offset>1,1,1,1</offset>
+				</frame>
+			</number_static>
+			<number_static name="totalfailure">
+				<bounds>298,-66,50,25</bounds>
+				<frame>
+					<name>modifier</name>
+					<offset>1,1,1,1</offset>
+				</frame>
+			</number_static>
+
+			<buttoncontrol name="clear">
+				<bounds>40,-66,33,26</bounds>
+				<icon>
+					<normal>button_ctnextround</normal>
+					<pressed>button_ctnextround_down</pressed>
+				</icon>
+				<tooltip>
+					<text>Clear rolls and DCs</text>
+				</tooltip>
+				<script>
+					function onButtonPress()
+						SCManager.reset();
+					end
+				</script>
+			</buttoncontrol>
+
+			<resize_utilitybox />
+			<close_utilitybox />
+		</sheetdata>
+	</windowclass>
+</root>

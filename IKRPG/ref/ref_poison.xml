@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="poisondesc">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_refflavor name="flavor" />
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>10</height>
+			</spacer>
+
+			<number_column name="cost" />
+			<label_column>
+				<anchor>cost</anchor>
+				<static>Cost (gp):</static>
+			</label_column>
+
+			<string_column name="attack" />
+			<label_column>
+				<anchor>attack</anchor>
+				<static>Attack:</static>
+			</label_column>
+
+			<line_column name="line_desc"/>
+			
+			<ft_refdesc name="formattedpoisonblock">
+				<separator>line_desc</separator>
+			</ft_refdesc>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_poison">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>350</width>
+				<height>370</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name">
+				<anchored>
+					<right>
+						<offset>-123</offset>
+					</right>
+				</anchored>
+				<color>#FFFFFFFF</color>
+				<frame>
+					<name>headerpoison</name>
+					<offset>40,10,123,10</offset>
+				</frame>
+			</string_name_static>
+			<link_tl>
+				<class>reference_poison</class>
+			</link_tl>
+			<stringc_level_label>
+				<static>Poison Level</static>
+			</stringc_level_label>
+			<number_leveltop name="level" />
+
+			<sub_refcontent name="content">
+				<class>poisondesc</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+		
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

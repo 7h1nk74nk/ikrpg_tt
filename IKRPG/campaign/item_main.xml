@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="item_stats_weapon">
+		<script file="campaign/scripts/campaign_item_main.lua" />
+		<sheetdata>
+			<!-- Used for critical and damage fields -->
+			<hs name="name" />
+			<hs name="keywords" />
+
+			<anchor_column name="columnanchor" />
+			
+			<string_columnfull name="flavor">
+				<font>chatitalicfont</font>
+				<selectioncolor>90ffffff</selectioncolor>
+				<empty>Click to enter description</empty>
+			</string_columnfull>
+
+			<line_column name="divider" />
+			
+			<string_column name="nonid_name" />
+			<label_column name="nonid_name_label">
+				<anchor>nonid_name</anchor>
+				<static>Alt Name</static>
+			</label_column>
+			
+			<string_column name="nonidentified" />
+			<label_column name="nonidentified_label">
+				<anchor>nonidentified</anchor>
+				<static>Notes</static>
+			</label_column>
+			
+			<line_column name="divider2" />
+
+			<string_column name="class" />
+			<label_column name="class_label">
+				<anchor>class</anchor>
+				<static>Class</static>
+			</label_column>
+
+			<string_column name="subclass" />
+			<label_column name="subclass_label">
+				<anchor>subclass</anchor>
+				<static>Subclass</static>
+			</label_column>
+
+			<string_column name="cost" />
+			<label_column name="cost_label">
+				<anchor>cost</anchor>
+				<static>Cost</static>
+			</label_column>
+
+			<number_column name="weight" />
+			<label_column name="weight_label">
+				<anchor>weight</anchor>
+				<static>Weight (lbs)</static>
+			</label_column>
+
+			<line_column name="divider3" />
+
+			<number_column name="level" />
+			<label_column name="level_label">
+				<anchor>level</anchor>
+				<static>Level</static>
+			</label_column>
+
+			<number_column name="bonus">
+				<displaysign />
+			</number_column>
+			<label_column name="bonus_label">
+				<anchor>bonus</anchor>
+				<static>Bonus</static>
+			</label_column>
+
+			<string_column name="enhancement" />
+			<label_column name="enhancement_label">
+				<anchor>enhancement</anchor>
+				<static>Enhancement</static>
+			</label_column>
+
+			<string_column name="damage">
+				<script file="common/scripts/string_powerdesc.lua" />
+			</string_column>
+			<label_column name="damage_label">
+				<anchor>damage</anchor>
+				<static>Damage</static>
+			</label_column>
+			
+			<number_column name="profbonus">
+				<displaysign />
+			</number_column>
+			<label_column name="profbonus_label">
+				<anchor>profbonus</anchor>
+				<static>Prof.</static>
+			</label_column>
+			
+			<number_column name="range" />
+			<label_column name="range_label">
+				<anchor>range</anchor>
+				<static>Range</static>
+			</label_column>
+			
+			<string_column name="critical">
+				<script file="common/scripts/string_powerdesc.lua" />
+			</string_column>
+			<label_column name="critical_label">
+				<anchor>critical</anchor>
+				<static>Critical</static>
+			</label_column>
+			
+			<string_column name="prerequisite" />
+			<label_column name="prerequisite_label">
+				<anchor>prerequisite</anchor>
+				<static>Prerequisite</static>
+			</label_column>
+
+			<string_column name="properties" />
+			<label_column name="properties_label">
+				<anchor>properties</anchor>
+				<static>Properties</static>
+			</label_column>
+
+			<string_column name="group" />
+			<label_column name="group_label">
+				<anchor>group</anchor>
+				<static>Group</static>
+			</label_column>
+			
+			<string_column name="special" />
+			<label_column name="special_label">
+				<anchor>special</anchor>
+				<static>Special</static>
+			</label_column>
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_stats_armor">
+		<script file="campaign/scripts/campaign_item_main.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_columnfull name="flavor">
+				<font>chatitalicfont</font>
+				<selectioncolor>90ffffff</selectioncolor>
+				<empty>Click to enter description</empty>
+			</string_columnfull>
+
+			<line_column name="divider" />
+			
+			<string_column name="nonid_name" />
+			<label_column name="nonid_name_label">
+				<anchor>nonid_name</anchor>
+				<static>Alt Name</static>
+			</label_column>
+			
+			<string_column name="nonidentified" />
+			<label_column name="nonidentified_label">
+				<anchor>nonidentified</anchor>
+				<static>Notes</static>
+			</label_column>
+			
+			<line_column name="divider2" />
+
+			<string_column name="class" />
+			<label_column name="class_label">
+				<anchor>class</anchor>
+				<static>Class</static>
+			</label_column>
+
+			<string_column name="subclass" />
+			<label_column name="subclass_label">
+				<anchor>subclass</anchor>
+				<static>Subclass</static>
+			</label_column>
+
+			<string_column name="cost" />
+			<label_column name="cost_label">
+				<anchor>cost</anchor>
+				<static>Cost</static>
+			</label_column>
+
+			<number_column name="weight" />
+			<label_column name="weight_label">
+				<anchor>weight</anchor>
+				<static>Weight (lbs)</static>
+			</label_column>
+
+			<line_column name="divider3" />
+
+			<number_column name="level" />
+			<label_column name="level_label">
+				<anchor>level</anchor>
+				<static>Level</static>
+			</label_column>
+
+			<number_column name="bonus">
+				<displaysign />
+			</number_column>
+			<label_column name="bonus_label">
+				<anchor>bonus</anchor>
+				<static>Bonus</static>
+			</label_column>
+
+			<string_column name="enhancement" />
+			<label_column name="enhancement_label">
+				<anchor>enhancement</anchor>
+				<static>Enhancement</static>
+			</label_column>
+
+			<number_column name="ac">
+				<displaysign />
+			</number_column>
+			<label_column name="ac_label">
+				<anchor>ac</anchor>
+				<static>AC</static>
+			</label_column>
+
+			<number_column name="min_enhance">
+				<displaysign />
+			</number_column>
+			<label_column name="min_enhance_label">
+				<anchor>min_enhance</anchor>
+				<static>Min Bonus</static>
+			</label_column>
+
+			<number_column name="checkpenalty">
+				<displaysign />
+			</number_column>
+			<label_column name="checkpenalty_label">
+				<anchor>checkpenalty</anchor>
+				<static>Check Penalty</static>
+			</label_column>
+
+			<number_column name="speed" />
+			<label_column name="speed_label">
+				<anchor>speed</anchor>
+				<static>Speed</static>
+			</label_column>
+
+			<string_column name="prerequisite" />
+			<label_column name="prerequisite_label">
+				<anchor>prerequisite</anchor>
+				<static>Prerequisite</static>
+			</label_column>
+
+			<string_column name="special" />
+			<label_column name="special_label">
+				<anchor>special</anchor>
+				<static>Special</static>
+			</label_column>
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_stats_other">
+		<script file="campaign/scripts/campaign_item_main.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_columnfull name="flavor">
+				<font>chatitalicfont</font>
+				<selectioncolor>90ffffff</selectioncolor>
+				<empty>Click to enter description</empty>
+			</string_columnfull>
+			
+			<line_column name="divider" />
+			
+			<string_column name="nonid_name" />
+			<label_column name="nonid_name_label">
+				<anchor>nonid_name</anchor>
+				<static>Alt Name</static>
+			</label_column>
+			
+			<string_column name="nonidentified" />
+			<label_column name="nonidentified_label">
+				<anchor>nonidentified</anchor>
+				<static>Notes</static>
+			</label_column>
+			
+			<line_column name="divider2" />
+
+			<string_column name="class" />
+			<label_column name="class_label">
+				<anchor>class</anchor>
+				<static>Class</static>
+			</label_column>
+
+			<string_column name="subclass" />
+			<label_column name="subclass_label">
+				<anchor>subclass</anchor>
+				<static>Subclass</static>
+			</label_column>
+
+			<string_column name="cost" />
+			<label_column name="cost_label">
+				<anchor>cost</anchor>
+				<static>Cost</static>
+			</label_column>
+
+			<number_column name="weight" />
+			<label_column name="weight_label">
+				<anchor>weight</anchor>
+				<static>Weight (lbs)</static>
+			</label_column>
+
+			<line_column name="divider3" />
+
+			<number_column name="level" />
+			<label_column name="level_label">
+				<anchor>level</anchor>
+				<static>Level</static>
+			</label_column>
+
+			<number_column name="bonus">
+				<displaysign />
+			</number_column>
+			<label_column name="bonus_label">
+				<anchor>bonus</anchor>
+				<static>Bonus</static>
+			</label_column>
+
+			<string_column name="enhancement" />
+			<label_column name="enhancement_label">
+				<anchor>enhancement</anchor>
+				<static>Enhancement</static>
+			</label_column>
+
+			<string_column name="shield" />
+			<label_column name="shield_label">
+				<anchor>shield</anchor>
+				<static>Shield</static>
+			</label_column>
+
+			<string_column name="prerequisite" />
+			<label_column name="prerequisite_label">
+				<anchor>prerequisite</anchor>
+				<static>Prerequisite</static>
+			</label_column>
+
+			<string_column name="special" />
+			<label_column name="special_label">
+				<anchor>special</anchor>
+				<static>Special</static>
+			</label_column>
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+</root>

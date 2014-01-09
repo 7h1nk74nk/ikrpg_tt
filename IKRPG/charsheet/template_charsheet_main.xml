@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+    <template name="number_labeled">
+        <basicnumber>
+            <anchored>
+                <position>belowleft</position>
+                <offset>0,8</offset>
+                <size>
+                    <width>36</width>
+                    <height>27</height>
+                </size>
+            </anchored>
+
+            <script>
+                labelwidget = nil;
+            
+                function onInit()
+                    labelwidget = addTextWidget("sheetlabelinline", string.upper(label[1]));
+                    if labelwidget then
+                        local w,h = labelwidget.getSize();
+                        labelwidget.setPosition("insidebottom", 0, -3);
+                    end
+                end
+            </script>
+        </basicnumber>
+    </template>
+            
+	<template name="button_activatepc">
+		<buttoncontrol>
+			<icon>
+				<normal>button_identityactivate</normal>
+				<pressed>button_identityactivate_down</pressed>
+			</icon>
+			<script>
+				function onInit()
+					if User.isLocal() then
+						setVisible(false);
+					end
+				end
+				
+				function onButtonPress()
+					if User.isLocal() then
+						return;
+					end
+					
+					if User.isHost() then
+						GmIdentityManager.addIdentity(window.name.getValue());
+					else
+						local nodeWin = window.getDatabaseNode();
+						if nodeWin then
+							local identityname = nodeWin.getName();
+
+							User.setCurrentIdentity(identityname);
+
+							if CampaignRegistry and CampaignRegistry.colortables and CampaignRegistry.colortables[identityname] then
+								local colortable = CampaignRegistry.colortables[identityname];
+								User.setCurrentIdentityColors(colortable.color or "000000", colortable.blacktext or false);
+							end
+						end
+					end
+				end
+			</script>
+		</buttoncontrol>
+	</template>
+
+	<template name="string_charclasslevelsummary">
+		<stringcu>
+			<readonly />
+			<script file="charsheet/scripts/charsheet_classlevelsummary.lua" />
+		</stringcu>
+	</template>
+
+	<template name="number_charabilityscore">
+		<basicnumber>
+			<anchored>
+				<position>belowleft</position>
+				<offset>0,8</offset>
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>
+			<default>10</default>
+		</basicnumber>
+	</template>
+	<template name="string_charabilitylabel">
+		<stringcontrol>
+			<anchored>
+				<position>lefthigh</position>
+				<offset>0,4</offset>
+				<size>
+					<width>90</width>
+					<height>20</height>
+				</size>
+			</anchored>
+			<static />
+			<font>sheetlabel</font>
+		</stringcontrol>
+	</template>
+	<template name="number_charabilitybonus">
+		<number_chartotal>
+			<anchored>
+				<position>right</position>
+				<offset>100,0</offset>
+				<size>
+					<width>36</width>
+				</size>
+			</anchored>
+			<hideonvalue value="0" />
+			<script>
+				function onSourceUpdate()
+					setValue(math.floor((sources[scorefield[1]].getValue() - 10) / 2) + getModifier());
+				end
+
+				function onInit()
+					addSource(scorefield[1]);
+
+					super.onInit();
+				end
+			</script>
+		</number_chartotal>
+	</template>
+	<template name="number_charabilitycheck">
+		<number_chartotal>
+			<anchored>
+				<position>right</position>
+				<offset>9,0</offset>
+				<size>
+					<width>36</width>
+				</size>
+			</anchored>
+			<hideonvalue value="0" />
+			<rollable />
+			<displaysign />
+			<modifiersize>mini</modifiersize>
+			<script>
+				function onSourceUpdate()
+					setValue(sources[abilitybonusfield[1]].getValue() + sources[levelbonusfield[1]].getValue());
+				end
+
+				function onInit()
+					addSource(abilitybonusfield[1]);
+					addSource(levelbonusfield[1]);
+
+					super.onInit();
+				end
+
+				function action(draginfo)
+					local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+					ActionAbility.performRoll(draginfo, rActor, self.target[1]);
+
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+					
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</number_chartotal>
+	</template>
+
+	<template name="number_charwounds">
+		<number_charadd>
+			<hideonvalue value="0" />
+			<script>
+				function onInit()
+					if super.onInit then
+						super.onInit();
+					end
+					
+					OptionsManager.registerCallback("WNDC", onValueChanged);
+					onValueChanged();
+				end
+				
+				function onClose()
+					OptionsManager.unregisterCallback("WNDC", onValueChanged);
+				end
+
+				function onDrop(x, y, draginfo)
+					if draginfo.getType() == "number" then
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						ActionDamage.applyDamage(nil, rActor, draginfo.getDescription(), draginfo.getNumberData());
+						return true;
+					end
+				end
+
+				function onValueChanged()
+					local sColor = ActorManager.getWoundColor("pc", window.getDatabaseNode());
+					setColor(sColor);
+				end
+			</script>
+		</number_charadd>
+	</template>
+
+	<template name="button_charmainskill">
+		<buttoncontrol>
+			<anchored>
+				<to>anchor_charmainskill</to>
+				<top />
+				<left>
+					<anchor>right</anchor>
+					<relation>relative</relation>
+					<offset>15</offset>
+				</left>
+				<size>
+					<width>25</width>
+					<height>25</height>
+				</size>
+			</anchored>
+			<icon>
+				<normal>button_roll</normal>
+				<pressed>button_roll_down</pressed>
+			</icon>
+			<script>
+				function onInit()
+					if skill then	
+						setTooltipText(skill[1] .. " Check");
+					end
+				end
+				
+				function action(draginfo)
+					if skill then
+						local nodeChar = window.getDatabaseNode();
+						local rActor = ActorManager.getActor("pc", nodeChar);
+						
+						local nValue = CharManager.getSkillValue(rActor, skill[1]);
+						
+						ActionSkill.performRoll(draginfo, rActor, skill[1], nValue);
+					end
+				end
+				
+				function onButtonPress()
+					action();
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					action(draginfo);
+					return true;
+				end
+			</script>
+		</buttoncontrol>
+	</template>
+</root>

@@ -1,0 +1,1106 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheetmini_basic">
+		<placement>
+			<size>
+				<width>360</width>
+				<height>220</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+			<!-- HEALTH -->
+			<frame_char name="mini_hpframe">
+				<bounds>0,10,215,145</bounds>
+			</frame_char>
+
+			<number_charadd name="hp" source="hp.total">
+				<anchored>
+					<to>mini_hpframe</to>
+					<position>insidetopleft</position>
+					<offset>15,24</offset>
+					<size>
+						<width>35</width>
+						<height>25</height>
+					</size>
+				</anchored>
+			</number_charadd>
+			<label_fieldtop>
+				<anchored>
+					<to>hp</to>
+				</anchored>
+				<static>HP</static>
+			</label_fieldtop>
+
+			<basicnumber name="hptemp" source="hp.temporary">
+				<anchored>
+					<to>hp</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+				<color>#FF0000AA</color>
+				<hideonvalue>0</hideonvalue>
+			</basicnumber>
+			<label_fieldtop>
+				<anchored>
+					<to>hptemp</to>
+				</anchored>
+				<static>Temp</static>
+			</label_fieldtop>
+
+			<number_charwounds name="wounds" source="hp.wounds">
+				<anchored>
+					<to>hptemp</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+			</number_charwounds>
+			<label_fieldtop>
+				<anchored>
+					<to>wounds</to>
+				</anchored>
+				<static>Wounds</static>
+			</label_fieldtop>
+			
+			<basicnumber name="healsurgesmax" source="hp.surgesmax">
+				<anchored>
+					<to>mini_hpframe</to>
+					<position>insidetopleft</position>
+					<offset>15,75</offset>
+					<size>
+						<width>35</width>
+						<height>25</height>
+					</size>
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+			</basicnumber>
+			<label_fieldtop>
+				<anchored>
+					<to>healsurgesmax</to>
+				</anchored>
+				<static>Surges</static>
+			</label_fieldtop>
+
+			<basicnumber name="healsurgesused" source="hp.surgesused">
+				<anchored>
+					<to>healsurgesmax</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+			</basicnumber>
+			<label_fieldtop>
+				<anchored>
+					<to>healsurgesused</to>
+				</anchored>
+				<static>Used</static>
+			</label_fieldtop>
+
+			<number_chartotal name="healsurge" source="hp.surge">
+				<anchored>
+					<to>healsurgesused</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+				<modifiersize>mini</modifiersize>
+				<modifierfield>hp.surgemodifier</modifierfield>
+				<source>
+					<name>hp.total</name>
+					<op>+</op>
+				</source>
+				<script>
+					function onSourceValue(source, sourcename)
+						if sourcename == "hp.total" then
+							return math.floor(source.getValue() / 4);
+						end
+
+						return super.onSourceValue(source, sourcename);
+					end
+				</script>
+			</number_chartotal>			
+
+			<buttoncontrol name="healsurge_button">
+				<anchored>
+					<to>healsurge</to>
+					<position>above</position>
+					<size>
+						<height>23</height>
+					</size>
+				</anchored>
+				<icon>
+					<normal>button_surge</normal>
+					<pressed>button_surge_down</pressed>
+				</icon>
+				<tooltip>
+					<text>Apply healing surge</text>
+				</tooltip>
+				<script>
+					function onButtonPress()
+						CharManager.useHealingSurge(window.getDatabaseNode());
+					end
+				</script>
+			</buttoncontrol>
+
+			<string_labeled name="specialdefenses" source="defenses.special">
+				<anchored>
+					<to>mini_hpframe</to>
+					<position>insidetopleft</position>
+					<offset>15,112</offset>
+					<size>
+						<width>185</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<label>Immune / Resist / Vulnerable</label>
+			</string_labeled>
+
+			<!-- DEFENSES -->
+			<frame_char name="mini_defenseframe">
+				<bounds>0,155,215,65</bounds>
+			</frame_char>
+
+			<number_deftotal_main name="ac" source="defenses.ac.total">
+				<anchored>
+					<to>mini_defenseframe</to>
+					<position>insidetopleft</position>
+					<offset>15,24</offset>
+					<size>
+						<width>35</width>
+						<height>25</height>
+					</size>
+				</anchored>
+				<modifierfield>defenses.ac.temporary</modifierfield>
+				<flag>encumbrance.heavyarmor</flag>
+				<bonusfield1>abilities.dexterity.bonus</bonusfield1>
+				<bonusfield2>abilities.intelligence.bonus</bonusfield2>
+				<selectfield>defenses.ac.abilityname</selectfield>
+				<showemptywidget />
+				<source>
+					<name>levelbonus</name>
+					<op>+</op>
+				</source>
+				<source>
+					<name>defenses.ac.armor</name>
+					<op>+</op>
+				</source>
+				<source>
+					<name>defenses.ac.misc</name>
+					<op>+</op>
+				</source>
+			</number_deftotal_main>
+			<label_fieldtop>
+				<anchored>
+					<to>ac</to>
+				</anchored>
+				<static>AC</static>
+			</label_fieldtop>
+
+			<number_deftotal_main name="fortitude" source="defenses.fortitude.total">
+				<anchored>
+					<to>ac</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+				<modifierfield>defenses.fortitude.temporary</modifierfield>
+				<bonusfield1>abilities.strength.bonus</bonusfield1>
+				<bonusfield2>abilities.constitution.bonus</bonusfield2>
+				<selectfield>defenses.fortitude.abilityname</selectfield>
+				<source>
+					<name>levelbonus</name>
+					<op>+</op>
+				</source>
+				<source>
+					<name>defenses.fortitude.misc</name>
+					<op>+</op>
+				</source>
+			</number_deftotal_main>
+			<label_fieldtop>
+				<anchored>
+					<to>fortitude</to>
+				</anchored>
+				<static>Fort</static>
+			</label_fieldtop>
+
+			<number_deftotal_main name="reflex" source="defenses.reflex.total">
+				<anchored>
+					<to>fortitude</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+				<modifierfield>defenses.reflex.temporary</modifierfield>
+				<bonusfield1>abilities.dexterity.bonus</bonusfield1>
+				<bonusfield2>abilities.intelligence.bonus</bonusfield2>
+				<selectfield>defenses.reflex.abilityname</selectfield>
+				<source>
+					<name>levelbonus</name>
+					<op>+</op>
+				</source>
+				<source>
+					<name>defenses.reflex.armor</name>
+					<op>+</op>
+				</source>
+				<source>
+					<name>defenses.reflex.misc</name>
+					<op>+</op>
+				</source>
+			</number_deftotal_main>
+			<label_fieldtop>
+				<anchored>
+					<to>reflex</to>
+				</anchored>
+				<static>Ref</static>
+			</label_fieldtop>
+
+			<number_deftotal_main name="will" source="defenses.will.total">
+				<anchored>
+					<to>reflex</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+				<modifierfield>defenses.will.temporary</modifierfield>
+				<bonusfield1>abilities.wisdom.bonus</bonusfield1>
+				<bonusfield2>abilities.charisma.bonus</bonusfield2>
+				<selectfield>defenses.will.abilityname</selectfield>
+				<source>
+					<name>levelbonus</name>
+					<op>+</op>
+				</source>
+				<source>
+					<name>defenses.will.misc</name>
+					<op>+</op>
+				</source>
+			</number_deftotal_main>
+			<label_fieldtop>
+				<anchored>
+					<to>will</to>
+				</anchored>
+				<static>Will</static>
+			</label_fieldtop>
+
+
+			<!-- ABILITIES -->
+			<frame_char name="mini_abilityframe">
+				<bounds>215,10,200,210</bounds>
+			</frame_char>
+
+			<number_charabilityscore name="strength" source="abilities.strength.score">
+				<anchored>
+					<to>mini_abilityframe</to>
+					<position>insidetopleft</position>
+					<offset>15,24</offset>
+				</anchored>
+			</number_charabilityscore>
+			<number_charabilityscore name="constitution" source="abilities.constitution.score">
+				<anchored>
+					<to>strength</to>
+					<position>belowleft</position>
+					<offset>0,10</offset>
+				</anchored>
+			</number_charabilityscore>
+			<number_charabilityscore name="dexterity" source="abilities.dexterity.score">
+				<anchored>
+					<to>constitution</to>
+					<position>belowleft</position>
+					<offset>0,10</offset>
+				</anchored>
+			</number_charabilityscore>
+			<number_charabilityscore name="intelligence" source="abilities.intelligence.score">
+				<anchored>
+					<to>dexterity</to>
+					<position>belowleft</position>
+					<offset>0,10</offset>
+				</anchored>
+			</number_charabilityscore>
+			<number_charabilityscore name="wisdom" source="abilities.wisdom.score">
+				<anchored>
+					<to>intelligence</to>
+					<position>belowleft</position>
+					<offset>0,10</offset>
+				</anchored>
+			</number_charabilityscore>
+			<number_charabilityscore name="charisma" source="abilities.charisma.score">
+				<anchored>
+					<to>wisdom</to>
+					<position>belowleft</position>
+					<offset>0,10</offset>
+				</anchored>
+			</number_charabilityscore>
+			
+			<number_charabilitycheck name="strengthcheck" source="abilities.strength.check">
+				<anchored>
+					<to>strength</to>
+					<offset>104,0</offset>
+				</anchored>
+				<target>strength</target>
+				<abilitybonusfield>abilities.strength.bonus</abilitybonusfield>
+				<levelbonusfield>levelbonus</levelbonusfield>
+			</number_charabilitycheck>
+			<number_charabilitycheck name="constitutioncheck" source="abilities.constitution.check">
+				<anchored>
+					<to>constitution</to>
+					<offset>104,0</offset>
+				</anchored>
+				<target>constitution</target>
+				<abilitybonusfield>abilities.constitution.bonus</abilitybonusfield>
+				<levelbonusfield>levelbonus</levelbonusfield>
+			</number_charabilitycheck>
+			<number_charabilitycheck name="dexteritycheck" source="abilities.dexterity.check">
+				<anchored>
+					<to>dexterity</to>
+					<offset>104,0</offset>
+				</anchored>
+				<target>dexterity</target>
+				<abilitybonusfield>abilities.dexterity.bonus</abilitybonusfield>
+				<levelbonusfield>levelbonus</levelbonusfield>
+			</number_charabilitycheck>
+			<number_charabilitycheck name="intelligencecheck" source="abilities.intelligence.check">
+				<anchored>
+					<to>intelligence</to>
+					<offset>104,0</offset>
+				</anchored>
+				<target>intelligence</target>
+				<abilitybonusfield>abilities.intelligence.bonus</abilitybonusfield>
+				<levelbonusfield>levelbonus</levelbonusfield>
+			</number_charabilitycheck>
+			<number_charabilitycheck name="wisdomcheck" source="abilities.wisdom.check">
+				<anchored>
+					<to>wisdom</to>
+					<offset>104,0</offset>
+				</anchored>
+				<target>wisdom</target>
+				<abilitybonusfield>abilities.wisdom.bonus</abilitybonusfield>
+				<levelbonusfield>levelbonus</levelbonusfield>
+			</number_charabilitycheck>
+			<number_charabilitycheck name="charismacheck" source="abilities.charisma.check">
+				<anchored>
+					<to>charisma</to>
+					<offset>104,0</offset>
+				</anchored>
+				<target>charisma</target>
+				<abilitybonusfield>abilities.charisma.bonus</abilitybonusfield>
+				<levelbonusfield>levelbonus</levelbonusfield>
+			</number_charabilitycheck>
+
+			<string_charabilitylabel>
+				<anchored>
+					<to>strengthcheck</to>
+				</anchored>
+				<static>Strength</static>
+			</string_charabilitylabel>
+			<string_charabilitylabel>
+				<anchored>
+					<to>dexteritycheck</to>
+				</anchored>
+				<static>Dexterity</static>
+			</string_charabilitylabel>
+			<string_charabilitylabel>
+				<anchored>
+					<to>constitutioncheck</to>
+				</anchored>
+				<static>Constitution</static>
+			</string_charabilitylabel>
+			<string_charabilitylabel>
+				<anchored>
+					<to>intelligencecheck</to>
+				</anchored>
+				<static>Intelligence</static>
+			</string_charabilitylabel>
+			<string_charabilitylabel>
+				<anchored>
+					<to>wisdomcheck</to>
+				</anchored>
+				<static>Wisdom</static>
+			</string_charabilitylabel>
+			<string_charabilitylabel>
+				<anchored>
+					<to>charismacheck</to>
+				</anchored>
+				<static>Charisma</static>
+			</string_charabilitylabel>
+			
+			<label_fieldtop>
+				<anchored>
+					<to>strength</to>
+				</anchored>
+				<static>Score</static>
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored>
+					<to>strengthcheck</to>
+				</anchored>
+				<static>Check</static>
+			</label_fieldtop>
+
+			<!-- SAVES -->
+			<frame_char name="saveframe">
+				<bounds>0,220,115,65</bounds>
+			</frame_char>
+
+			<number_save name="save" source="defenses.save.total">
+				<anchored>
+					<to>saveframe</to>
+					<position>insidetopleft</position>
+					<offset>20,24</offset>
+					<size>
+						<width>35</width>
+						<height>25</height>
+					</size>
+				</anchored>
+			</number_save>
+			<label_fieldtop name="savelabel">
+				<anchored>
+					<to>save</to>
+				</anchored>
+				<static>Save</static>
+			</label_fieldtop>
+
+			<buttongroup_checkcounter name="faileddeathsaves">
+				<anchored>
+					<to>save</to>
+					<position>righthigh</position>
+					<offset>14,1</offset>
+					<size>
+						<height>20</height>
+						<width>20</width>
+					</size>
+				</anchored>
+				<sourcefields>
+					<current>hp.faileddeathsaves</current>
+					<maximum>hp.maxdeathsaves</maximum>
+				</sourcefields>
+				<script>
+					function onInit()
+						super.onInit();
+						setMaxValue(3);
+					end
+				</script>
+			</buttongroup_checkcounter>
+			<label_fieldtop name="faileddeathlabel">
+				<anchored>
+					<to>faileddeathsaves</to>
+				</anchored>
+				<static>FDS</static>
+			</label_fieldtop>
+
+			<!-- SPEED / ACTION -->
+			<frame_char name="miscframe">
+				<bounds>115,220,115,65</bounds>
+			</frame_char>
+
+			<number_charspeed name="speedfinal" source="speed.final">
+				<anchored>
+					<to>miscframe</to>
+					<position>insidetopleft</position>
+					<offset>20,24</offset>
+					<size>
+						<width>35</width>
+						<height>25</height>
+					</size>
+				</anchored>
+			</number_charspeed>
+			<label_fieldtop>
+				<anchored>
+					<to>speedfinal</to>
+				</anchored>
+				<static>Speed</static>
+			</label_fieldtop>
+
+			<genericcontrol name="anchor_charmainskill">
+				<anchored>
+					<to>miscframe</to>
+					<position>insidetopleft</position>
+					<offset>54,24</offset>
+					<size>
+						<height>20</height>
+						<width>0</width>
+					</size>
+				</anchored>
+			</genericcontrol>
+			
+			<button_charmainskill name="perception">
+				<skill>Perception</skill>
+			</button_charmainskill>
+			<label_fieldtop name="label_perception">
+				<anchored>
+					<to>perception</to>
+					<offset>8,2</offset>
+				</anchored>
+				<static>Percept</static>
+			</label_fieldtop>
+			
+			<!-- COMBAT ROLLS -->
+			<frame_char name="mini_combatframe">
+				<bounds>230,220,185,65</bounds>
+			</frame_char>
+
+			<number_charinit name="initiative" source="initiative.total">
+				<anchored>
+					<to>mini_combatframe</to>
+					<position>insidetopleft</position>
+					<offset>20,24</offset>
+					<size>
+						<width>35</width>
+						<height>25</height>
+					</size>
+				</anchored>
+			</number_charinit>
+			<label_fieldtop>
+				<anchored>
+					<to>initiative</to>
+				</anchored>
+				<static>Init</static>
+			</label_fieldtop>
+
+			<number_charmeleetotal name="melee" source="attacks.melee.total">
+				<anchored>
+					<to>initiative</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+			</number_charmeleetotal>
+			<label_fieldtop>
+				<anchored>
+					<to>melee</to>
+				</anchored>
+				<static>Melee</static>
+			</label_fieldtop>
+
+			<number_charrangedtotal name="ranged" source="attacks.ranged.total">
+				<anchored>
+					<to>melee</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+			</number_charrangedtotal>
+			<label_fieldtop>
+				<anchored>
+					<to>ranged</to>
+				</anchored>
+				<static>Ranged</static>
+			</label_fieldtop>
+
+			<!-- WEAPONS -->
+			<frame_char name="mini_weaponframe">
+				<bounds>0,285,-10,-8</bounds>
+			</frame_char>
+
+			<windowlist name="weaponlist">
+				<anchored>
+					<to>mini_weaponframe</to>
+					<position>over</position>
+					<offset>-12,-10</offset>
+				</anchored>
+				<datasource>.weaponlist</datasource>
+				<class>charsheetmini_weaponitem</class>
+				<sortby><control>order</control></sortby>
+			</windowlist>
+			<scrollbar>
+				<anchored>
+					<to>weaponlist</to>
+					<position>right</position>
+					<offset>-5,5</offset>
+				</anchored>
+				<target>weaponlist</target>
+			</scrollbar>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charsheetmini_weaponitem">
+		<sizelimits>
+			<minimum>
+				<height>10</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function onInit()
+				local nodeFocus = getDatabaseNode();
+
+				local nodeAttackMeleeBase = nodeFocus.getChild("...attacks.melee.abilityname");
+				if nodeAttackMeleeBase then
+					nodeAttackMeleeBase.onUpdate = onAbilityChanged;
+				end
+				local nodeAttackRangedBase = nodeFocus.getChild("...attacks.ranged.abilityname");
+				if nodeAttackRangedBase then
+					nodeAttackRangedBase.onUpdate = onAbilityChanged;
+				end
+				
+				for k,v in pairs(DataCommon.abilities) do
+					local nodeAbility = nodeFocus.getChild("...abilities." .. v .. ".bonus");
+					if nodeAbility then
+						nodeAbility.onUpdate = onAbilityChanged;
+					end
+				end
+				
+				onAbilityChanged();
+			end
+
+			function onAbilityChanged()
+				onAttackChanged();
+				onDamageChanged();
+			end
+			
+			function highlightAttack(bOnControl)
+				if bOnControl then
+					attackshade.setFrame("rowshade");
+				else
+					attackshade.setFrame(nil);
+				end
+			end
+			
+			function highlightDamage(bOnControl)
+				if bOnControl then
+					damageshade.setFrame("rowshade");
+				else
+					damageshade.setFrame(nil);
+				end
+			end
+			
+			function onAttackAction(draginfo)
+				local rActor, rAction, rFocus = CharManager.getAdvancedRollStructures("attack", nil, getDatabaseNode());
+				ActionAttack.performRoll(draginfo, rActor, rAction, rFocus);
+				return true;
+			end
+			
+			function onDamageAction(draginfo)
+				local rActor, rAction, rFocus = CharManager.getAdvancedRollStructures("damage", nil, getDatabaseNode());
+				ActionDamage.performRoll(draginfo, rActor, rAction, rFocus);
+				return true;
+			end
+			
+			function onAttackChanged()
+				local nodeFocus = getDatabaseNode();
+				local rActor = ActorManager.getActor("pc", nodeFocus.getChild("..."));
+
+				local nMod = bonus.getValue();
+				nMod = nMod + ActorManager.getAbilityBonus(rActor, "halflevel");
+
+				local rFocus = CharManager.getFocusRecord("attack", nodeFocus);
+				if rFocus then
+					for _,v in pairs(rFocus.clauses) do
+						for _,vStat in pairs(v.stat) do
+							nMod = nMod + ActorManager.getAbilityBonus(rActor, vStat);
+						end
+					end
+				end
+
+				local sValue = string.format("%+d", nMod);
+
+				local sDefense = attackdef.getValue();
+				if sDefense ~= "" then
+					sValue = sValue .. " vs. ";
+					if sDefense == "ac" then
+						sValue = sValue .. string.upper(sDefense);
+					elseif sDefense == "reflex" then
+						sValue = sValue .. string.upper(string.sub(sDefense, 1, 1)) .. string.sub(sDefense, 2, 3);
+					else
+						sValue = sValue .. string.upper(string.sub(sDefense, 1, 1)) .. string.sub(sDefense, 2, 4);
+					end
+				end
+				
+				attackview.setValue(sValue);
+			end
+
+			function onDamageChanged()
+				local nodeFocus = getDatabaseNode();
+				local rActor = ActorManager.getActor("pc", nodeFocus.getChild("..."));
+
+				local nMod = damagebonus.getValue();
+
+				local rFocus = CharManager.getFocusRecord("damage", nodeFocus);
+				if rFocus then
+					for _,v in pairs(rFocus.clauses) do
+						for _,vStat in pairs(v.stat) do
+							nMod = nMod + ActorManager.getAbilityBonus(rActor, vStat);
+						end
+					end
+				end
+				
+				local sValue = string.format("%+d", nMod);
+
+				damageview.setValue(sValue);
+			end
+		</script>
+		<sheetdata>
+			<hn name="order" />
+			
+			<state_charweapontype name="type">
+				<bounds>-250,0,25,25</bounds>
+				<readonly />
+			</state_charweapontype>
+
+			<genericcontrol name="attackshade">
+				<anchored>
+					<left>
+						<parent>type</parent>
+						<anchor>right</anchor>
+						<offset>3</offset>
+					</left>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<size>
+						<height>35</height>
+						<width>113</width>
+					</size>
+				</anchored>
+			</genericcontrol>
+			<genericcontrol name="attackframe">
+				<anchored>
+					<left>
+						<parent>type</parent>
+						<anchor>right</anchor>
+						<offset>3</offset>
+					</left>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<size>
+						<height>35</height>
+						<width>113</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>bonus</name>
+				</frame>
+				<script>
+					function onInit()
+						setHoverCursor("hand");
+					end
+					
+					function onHover(bOnControl)
+						window.highlightAttack(bOnControl);
+					end
+
+					function onDoubleClick(x,y)
+						return window.onAttackAction();
+					end			
+
+					function onDragStart(button, x, y, draginfo)
+						return window.onAttackAction(draginfo);
+					end
+				</script>
+			</genericcontrol>
+			<genericcontrol name="attackicon">
+				<anchored>
+					<to>attackframe</to>
+					<position>insidetopleft</position>
+					<offset>4,0</offset>
+					<size>
+						<height>35</height>
+						<width>30</width>
+					</size>
+				</anchored>
+				<icon>d20icon</icon>
+				<script>
+					function onInit()
+						setHoverCursor("hand");
+					end
+					
+					function onHover(bOnControl)
+						window.highlightAttack(bOnControl);
+					end
+
+					function onDoubleClick(x,y)
+						return window.onAttackAction();
+					end			
+
+					function onDragStart(button, x, y, draginfo)
+						return window.onAttackAction(draginfo);
+					end
+				</script>
+			</genericcontrol>
+	
+			<hs name="attackstat">
+				<script>
+					function onValueChanged()
+						window.onAttackChanged();
+					end
+				</script>
+			</hs>
+			<hn name="bonus">
+				<script>
+					function onValueChanged()
+						window.onAttackChanged();
+					end
+				</script>
+			</hn>
+			<hs name="attackdef">
+				<script>
+					function onValueChanged()
+						window.onAttackChanged();
+					end
+				</script>
+			</hs>
+			<stringcontrol name="attackview">
+				<anchored>
+					<left>
+						<parent>attackicon</parent>
+						<anchor>right</anchor>
+					</left>
+					<top>
+						<anchor>top</anchor>
+						<offset>10</offset>
+					</top>
+				</anchored>
+				<font>sheettext</font>
+				<static />
+				<script>
+					function onInit()
+						setHoverCursor("hand");
+					end
+					
+					function onHover(bOnControl)
+						window.highlightAttack(bOnControl);
+					end
+
+					function onDoubleClick(x,y)
+						return window.onAttackAction();
+					end			
+
+					function onDragStart(button, x, y, draginfo)
+						return window.onAttackAction(draginfo);
+					end
+				</script>
+			</stringcontrol>
+			
+			<genericcontrol name="damageshade">
+				<anchored>
+					<left>
+						<parent>attackframe</parent>
+						<anchor>right</anchor>
+					</left>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<size>
+						<width>105</width>
+						<height>35</height>
+					</size>
+				</anchored>
+			</genericcontrol>
+			<genericcontrol name="damageframe">
+				<anchored>
+					<left>
+						<parent>attackframe</parent>
+						<anchor>right</anchor>
+					</left>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<size>
+						<width>105</width>
+						<height>35</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>slottedbonus</name>
+				</frame>
+				<script>
+					function onInit()
+						setHoverCursor("hand");
+					end
+					
+					function onHover(bOnControl)
+						window.highlightDamage(bOnControl);
+					end
+
+					function onDoubleClick(x,y)
+						return window.onDamageAction();
+					end			
+
+					function onDragStart(button, x, y, draginfo)
+						return window.onDamageAction(draginfo);
+					end
+				</script>
+			</genericcontrol>
+			<dice name="damagedice">
+				<anchored>
+					<to>damageframe</to>
+					<position>insideleft</position>
+					<size>
+						<width>70</width>
+					</size>
+				</anchored>
+				<shadow>
+					<offset>7,1</offset>
+					<size>70,20</size>
+				</shadow>
+				<script>
+					function onInit()
+						setHoverCursor("hand");
+					end
+					
+					function onHover(bOnControl)
+						window.highlightDamage(bOnControl);
+					end
+
+					function onDoubleClick(x,y)
+						return window.onDamageAction();
+					end			
+
+					function onDragStart(button, x, y, draginfo)
+						return window.onDamageAction(draginfo);
+					end
+				</script>
+			</dice>
+
+			<hs name="damagestat">
+				<script>
+					function onValueChanged()
+						window.onDamageChanged();
+					end
+				</script>
+			</hs>
+			<hn name="damagebonus">
+				<script>
+					function onValueChanged()
+						window.onDamageChanged();
+					end
+				</script>
+			</hn>
+			<stringcontrol name="damageview">
+				<anchored>
+					<to>damageframe</to>
+					<position>insidetopleft</position>
+					<offset>71,10</offset>
+				</anchored>
+				<font>sheettext</font>
+				<static />
+				<script>
+					function onInit()
+						setHoverCursor("hand");
+					end
+					
+					function onHover(bOnControl)
+						window.highlightDamage(bOnControl);
+					end
+
+					function onDoubleClick(x,y)
+						return window.onDamageAction();
+					end			
+
+					function onDragStart(button, x, y, draginfo)
+						return window.onDamageAction(draginfo);
+					end
+				</script>
+			</stringcontrol>
+
+			<stringu name="name">
+				<anchored>
+					<left />
+					<top><offset>6</offset></top>
+					<right>
+						<parent>type</parent>
+						<anchor>left</anchor>
+					</right>
+				</anchored>
+			</stringu>
+			
+			<number_sm_static name="rangeincrement">
+				<bounds>20,25,35,20</bounds>
+				<frame>
+					<name>modifier</name>
+					<offset>0,3,0,3</offset>
+				</frame>
+				<script>
+					function onInit()
+						if super.onInit then
+							super.onInit();
+						end
+						
+						onValueChanged();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 0 then
+							setVisible(true);
+							window.range_label.setVisible(true);
+						else
+							setVisible(false);
+							window.range_label.setVisible(false);
+						end
+					end
+				</script>
+			</number_sm_static>
+			<label_sm name="range_label">
+				<anchored>
+					<to>rangeincrement</to>
+					<position>lefthigh</position>
+					<offset>0,5</offset>
+				</anchored>
+				<static>Rng</static>
+			</label_sm>
+			
+			<number_charweapon_sm_static name="maxammo">
+				<anchored>
+					<to>rangeincrement</to>
+					<position>right</position>
+					<offset>35,0</offset>
+					<size>
+						<width>35</width>
+					</size>
+				</anchored>
+				<script>
+					function onInit()
+						if super.onInit then
+							super.onInit();
+						end
+
+						onValueChanged();
+					end
+					
+					function onValueChanged()
+						if getValue() &gt; 0 then
+							setVisible(true);
+							window.ammo_label.setVisible(true);
+						else
+							setVisible(false);
+							window.ammo_label.setVisible(false);
+						end
+					end
+				</script>
+			</number_charweapon_sm_static>
+			<label_sm name="ammo_label">
+				<anchored>
+					<to>maxammo</to>
+					<position>lefthigh</position>
+					<offset>0,5</offset>
+				</anchored>
+				<static>Ammo</static>
+			</label_sm>
+		</sheetdata>
+	</windowclass>
+</root>

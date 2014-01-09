@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="battle_npcmaplinkitem">
+		<sizelimits>
+			<minimum>
+				<height>27</height>
+				<width>27</width>
+			</minimum>
+		</sizelimits>
+		<script file="campaign/scripts/campaign_encounter_maplink.lua" />
+		<sheetdata>
+			<hn name="imagex" />
+			<hn name="imagey" />
+			<hnc name="imageid" />
+			<hlink name="imageref" />
+
+			<tokencontrol name="token">
+				<bounds>2,2,23,23</bounds>
+				<script>
+					function onDragEnd(draginfo)
+						local prototype, dropref = draginfo.getTokenData();
+						window.setLink(dropref);
+						return true;
+					end
+				</script>
+			</tokencontrol>
+			<buttoncontrol name="linked">
+				<bounds>2,2,23,23</bounds>
+				<invisible />
+				<icon>
+					<normal>icon_maplinked</normal>
+					<pressed>icon_maplinked</pressed>
+				</icon>
+				<script>
+					function onButtonPress()
+						if User.isHost() then
+							window.clearLink();
+						end
+					end
+				</script>
+			</buttoncontrol>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="battle_npclistitem">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<script file="campaign/scripts/campaign_encounter_npc.lua" />
+		<sheetdata>
+			<basicnumber name="count">
+				<bounds>5,6,20,14</bounds>
+				<font>reference-r</font>
+				<default>1</default>
+				<min>1</min>
+				<script>
+					function onValueChanged()
+						window.synchToCount();
+					end
+				</script>
+			</basicnumber>
+			
+			<tokenfield name="token">
+				<bounds>33,2,23,23</bounds>
+				<empty>indicator_emptytoken</empty>
+				<script>
+					function onValueChanged()
+						window.synchTokenView();
+					end
+				</script>
+			</tokenfield>
+			
+			<stringu name="name">
+				<anchored>
+					<position>insidetopleft</position>
+					<offset>65,6</offset>
+					<right><offset>-76</offset></right>
+					<size><height>15</height></size>
+				</anchored>
+				<font>reference-r</font>
+				<multilinespacing>15</multilinespacing>
+			</stringu>
+			
+			<basicnumber name="leveladj">
+				<bounds>-71,6,35,14</bounds>
+				<font>reference-r</font>
+				<displaysign />
+				<hideonvalue>0</hideonvalue>
+			</basicnumber>
+			
+			<windowreferencefield name="link">
+				<bounds>-26,4,20,20</bounds>
+				<icon>
+					<normal>button_dragtarget</normal>
+				</icon>
+			</windowreferencefield>
+
+			<stringcontrol name="maplinklist_label">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<offset>11</offset>
+					</top>
+					<left><offset>5</offset></left>
+					<size>
+						<width>60</width>
+					</size>
+				</anchored>
+				<static>Placement:</static>
+			</stringcontrol>
+			<windowlist name="maplinklist">
+				<anchored>
+					<to>name</to>
+					<top>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left><offset>5</offset></left>
+					<right><offset>-5</offset></right>
+				</anchored>			
+				<datasource>.maplink</datasource>
+				<class>battle_npcmaplinkitem</class>
+				<skipempty />
+				<noscroll />
+				<columns>
+					<width>27</width>
+					<fillwidth />
+				</columns>
+			</windowlist>
+			
+			<spacer>
+				<anchor>name</anchor>
+				<relative />
+				<height>3</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="battle_skillchallengelistitem">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<basicstring name="name">
+				<bounds>5,3,200,15</bounds>
+				<frame />
+				<font>reference-b</font>
+				<empty>&#171; Skill or Detail &#187;</empty>
+			</basicstring>
+			<basicnumber name="numberdata">
+				<bounds>-45,2,40,16</bounds>
+				<frame />
+				<font>reference-r</font>
+				<hideonvalue>0</hideonvalue>
+			</basicnumber>
+			<stringfield name="text">
+				<anchored>
+					<top>
+						<anchor>bottom</anchor>
+						<parent>name</parent>
+						<offset>2</offset>
+					</top>
+					<left><offset>15</offset></left>
+					<right><offset>-5</offset></right>
+				</anchored>
+				<font>reference-r</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>FFD296</selectioncolor>
+				<empty>&#171; Click to enter detail text &#187;</empty>
+			</stringfield>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="battle_sub_combat">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<number_column name="level">
+				<gmeditonly />
+			</number_column>
+			<label_column>
+				<anchor>level</anchor>
+				<static>Level</static>
+			</label_column>
+			<number_column name="xp">
+				<anchor>level</anchor>
+				<right />
+				<gmeditonly />
+			</number_column>
+			<label_column>
+				<right />
+				<anchor>xp</anchor>
+				<static>XP</static>
+			</label_column>
+
+			<label_columnheader>
+				<static>Setup</static>
+			</label_columnheader>
+						
+			<!-- ENCOUNTER NPCS -->
+			<genericcontrol name="labelanchor">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<size>
+						<width>0</width>
+						<height>15</height>
+					</size>
+				</anchored>
+			</genericcontrol>>
+			<stringcontrol>
+				<anchored>
+					<top>
+						<parent>labelanchor</parent>
+					</top>
+					<left><offset>13</offset></left>
+				</anchored>
+				<font>reference-b</font>
+				<static>#</static>
+			</stringcontrol>
+			<stringcontrol>
+				<anchored>
+					<top>
+						<parent>labelanchor</parent>
+					</top>
+					<left><offset>28</offset></left>
+				</anchored>
+				<font>reference-b</font>
+				<static>Token</static>
+			</stringcontrol>
+			<stringcontrol>
+				<anchored>
+					<top>
+						<parent>labelanchor</parent>
+					</top>
+					<left><offset>80</offset></left>
+				</anchored>
+				<font>reference-b</font>
+				<static>Name</static>
+			</stringcontrol>
+			<stringcontrol>
+				<anchored>
+					<top>
+						<parent>labelanchor</parent>
+					</top>
+					<right><offset>-45</offset></right>
+				</anchored>
+				<font>reference-b</font>
+				<static>Lvl Adj</static>
+			</stringcontrol>
+
+			<list_campaignencounternpc name="npclist">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right><offset>-10</offset></right>
+					<bottom><offset>-25</offset></bottom>
+				</anchored>
+				<datasource>.npclist</datasource>
+				<class>battle_npclistitem</class>
+			</list_campaignencounternpc>
+			<scrollbar>
+				<anchored>
+					<to>npclist</to>
+					<position>right</position>
+					<offset>-10,0</offset>
+					<size>
+						<width>20</width>
+					</size>
+				</anchored>
+				<target>npclist</target>
+			</scrollbar>
+
+			<stringcontrol>
+				<anchored>
+					<top>
+						<anchor>bottom</anchor>
+						<offset>-20</offset>
+					</top>
+					<left><offset>5</offset></left>
+					<right><offset>-5</offset></right>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<font>chatitalicfont</font>
+				<center />
+				<static>Drop NPC links on this frame to add</static>
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="battle_sub_skillchallenge">
+		<sheetdata>
+			<!-- SKILL CHALLENGE DESCRIPTION -->
+			<anchor_column name="columnanchor" />
+			<number_column name="level">
+				<gmeditonly />
+			</number_column>
+			<label_column>
+				<anchor>level</anchor>
+				<static>Level</static>
+			</label_column>
+			<number_column name="xp">
+				<anchor>level</anchor>
+				<right />
+				<gmeditonly />
+			</number_column>
+			<label_column>
+				<right />
+				<anchor>xp</anchor>
+				<static>XP</static>
+			</label_column>
+
+			<label_columnheader>
+				<static>Flavor</static>
+				<target>flavor</target>
+			</label_columnheader>
+			<string_columnfull name="flavor">
+				<offset>5,8</offset>
+				<frame />
+				<font>reference-i</font>
+				<empty>&#171; Enter flavor text &#187;</empty>
+			</string_columnfull>
+			<label_columnheader>
+				<static>Overview</static>
+				<target>details</target>
+			</label_columnheader>
+			<string_columnfull name="details">
+				<offset>5,8</offset>
+				<frame />
+				<font>reference-r</font>
+				<empty>&#171; Enter encounter overview &#187;</empty>
+			</string_columnfull>
+
+			<label_columnheader>
+				<static>Details</static>
+				<target>skillchallengelist</target>
+				<script>
+					function onClickRelease(button, x, y)
+						local bVisible = false;
+						for k,v in pairs(window.skillchallengelist.getWindows()) do
+							bVisible = bVisible or v.text.isVisible();
+						end
+						bVisible = not bVisible;
+						
+						for k,v in pairs(window.skillchallengelist.getWindows()) do
+							v.text.setVisible(bVisible);
+						end
+						
+						setWidget(bVisible);
+					end
+				</script>
+			</label_columnheader>
+			<list_campaignencountersc name="skillchallengelist">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>8</offset>
+					</top>
+					<left />
+					<right><offset>-10</offset></right>
+				</anchored>
+				<datasource>.items</datasource>
+				<class>battle_skillchallengelistitem</class>
+			</list_campaignencountersc>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="battle">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>400</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>400</width>
+				<height>400</height>
+			</minimum>
+		</sizelimits>
+		<nodelete />
+		<minimize>minimized_combat</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script file="campaign/scripts/campaign_encounter.lua" />
+		<sheetdata>
+			<!-- NAME -->
+			<string_campaign_encounter_name name="name">
+				<frame>
+					<name>headerpowerenc</name>
+				</frame>
+				<color>#FFFFFFFF</color>
+				<empty>&#171; New Encounter &#187;</empty>
+			</string_campaign_encounter_name>
+			<link_campaign>
+				<class>battle</class>
+			</link_campaign>
+			
+			<!-- ENCOUNTER DETAILS -->
+			<genericcontrol name="contentframe">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<offset>15</offset>
+					</top>
+					<left><offset>15</offset></left>
+					<right><offset>-15</offset></right>
+					<bottom><offset>-40</offset></bottom>
+				</anchored>
+				<disabled />
+			</genericcontrol>
+			<subwindow name="sub_combat">
+				<anchored>
+					<to>contentframe</to>
+					<position>over</position>
+				</anchored>
+				<class>battle_sub_combat</class>
+			</subwindow>
+			<subwindow name="sub_skillchallenge">
+				<anchored>
+					<to>contentframe</to>
+					<position>over</position>
+				</anchored>
+				<class>battle_sub_skillchallenge</class>
+			</subwindow>
+			<scrollbar>
+				<anchored>
+					<to>sub_skillchallenge</to>
+					<position>right</position>
+					<offset>-5,-10</offset>
+				</anchored>
+				<target>sub_skillchallenge</target>
+			</scrollbar>
+			
+			<!-- TYPE -->
+			<genericcontrol name="typeframe">
+				<bounds>1,-35,-1,-1</bounds>
+				<frame>
+					<name>campaigncontrolframe</name>
+				</frame>
+				<disabled />
+			</genericcontrol>
+			<radio_campaign_encountertype name="type">
+				<anchored>
+					<top>
+						<parent>typeframe</parent>
+						<offset>10</offset>
+					</top>
+					<left>
+						<parent>typeframe</parent>
+						<anchor>center</anchor>
+						<offset>-90</offset>
+					</left>
+					<size>
+						<height>15</height>
+					</size>
+				</anchored>
+				<script>				
+					function onValueChanged()
+						window.updateDisplay();
+					end
+				</script>
+			</radio_campaign_encountertype>
+
+			<buttoncontrol name="button_add">
+				<bounds>5,-30,33,26</bounds>
+				<icon>
+					<normal>button_ctnextactor</normal>
+					<pressed>button_ctnextactor_down</pressed>
+				</icon>
+				<script>
+					function onButtonPress()
+						window.addEncounter();
+					end
+				</script>
+				<invisible />
+			</buttoncontrol>
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

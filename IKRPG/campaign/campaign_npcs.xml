@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="npcsmall">
+		<sizelimits>
+			<minimum>
+				<height>10</height>
+			</minimum>
+		</sizelimits>
+		<nodelete />
+		<script file="campaign/scripts/campaign_list_record.lua" />
+		<sheetdata>
+			<link_list name="open">
+				<class>npc</class>
+			</link_list>
+
+			<icon_access name="access" />
+			<icon_modified name="modified" />
+			
+			<string_campaignrecordname name="name">
+				<empty>&#171; New Personality &#187;</empty>
+			</string_campaignrecordname>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="battlesmall">
+		<sizelimits>
+			<minimum>
+				<height>10</height>
+			</minimum>
+		</sizelimits>
+		<nodelete />
+		<script file="campaign/scripts/campaign_list_record.lua" />
+		<sheetdata>
+			<link_list name="open">
+				<class>battle</class>
+			</link_list>
+			<button_iconcycler name="type">
+				<anchored>
+					<top><offset>2</offset></top>
+					<left>
+						<parent>open</parent>
+						<anchor>right</anchor>
+						<offset>2</offset>
+					</left>
+					<size>
+						<width>14</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<parameters>
+					<icons>indicator_skillchallenge</icons>
+					<values>skillchallenge</values>
+					<tooltips>Skill Challenge</tooltips>
+					<defaulticon>indicator_combat</defaulticon>
+					<defaulttooltip>Combat</defaulttooltip>
+				</parameters>
+				<readonly />
+				<disabled />
+			</button_iconcycler>
+
+			<icon_access name="access" />
+			<icon_modified name="modified" />
+			
+			<string_campaignrecordname name="name">
+				<anchored>
+					<left>
+						<parent>type</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+				</anchored>
+				<empty>&#171; New Encounter &#187;</empty>
+			</string_campaignrecordname>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="npclist">
+		<frame>scrollboxfortabs</frame>
+		<placement>
+			<size>
+				<width>350</width>
+				<height>350</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>350</width>
+				<height>350</height>
+			</minimum>
+		</sizelimits>
+		<softclose />
+		<nodelete />
+		<sheetdata>
+			<banner_campaign name="banner_npc">
+				<icon>title_npcs</icon>
+				<invisible />
+			</banner_campaign>
+			<banner_campaign name="banner_battle">
+				<icon>title_encounters</icon>
+				<invisible />
+			</banner_campaign>
+
+			<list_campaign_tabbed name="list_npcs">
+				<datasource>.</datasource>
+				<class>npcsmall</class>
+				<acceptdrop>
+					<class>npc</class>
+					<field>*</field>
+				</acceptdrop>
+				<invisible />
+			</list_campaign_tabbed>
+			<scrollbar_campaign_tabbed>
+				<target>list_npcs</target>
+			</scrollbar_campaign_tabbed>
+			<list_campaign_tabbed name="list_battles">
+				<datasource>..battle</datasource>
+				<class>battlesmall</class>
+				<script file="campaign/scripts/campaign_list_encounter.lua" />
+				<invisible />
+			</list_campaign_tabbed>
+			<scrollbar_campaign_tabbed>
+				<target>list_battles</target>
+			</scrollbar_campaign_tabbed>
+
+			<categories name="category_npc">
+				<targetcontrol>list_npcs</targetcontrol>
+				<invisible />
+			</categories>
+			<categories name="category_battle">
+				<targetcontrol>list_battles</targetcontrol>
+				<invisible />
+			</categories>
+
+			<filter_campaign name="filter" />
+			<filtertrigger_campaign name="filtertrigger" />
+			
+			<button_new name="button_new">
+				<gmvisibleonly />
+				<script>
+					function onButtonPress()
+						if User.isHost() then
+							local nIndex = window.tabs.getIndex();
+
+							local node = window.getDatabaseNode();
+							local sClass = "npc";
+							if nIndex == 2 then
+								node = DB.getRoot().getChild("battle");
+								sClass = "battle";
+							end
+
+							local nodeChild = nil;
+							if node then
+								nodeChild = node.createChild();
+							end
+							if nodeChild then
+								local w = Interface.openWindow(sClass, nodeChild.getNodeName());
+								if w and w.name then
+									w.name.setFocus();
+								end
+							end
+						end
+					end
+				</script>
+			</button_new>
+			
+			<buttongroup_tabs_long name="tabs">
+				<anchored>
+					<right><offset>-11</offset></right>
+				</anchored>
+				<tab>
+					<icon>tab_npcs</icon>
+					<subwindow>banner_npc,list_npcs,category_npc</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_battles</icon>
+					<subwindow>banner_battle,list_battles,category_battle</subwindow>
+				</tab>
+			</buttongroup_tabs_long>
+			
+			<resize_scrollboxfortabs />
+			<close_scrollbox />
+		</sheetdata>
+	</windowclass>
+</root>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet">
+		<frame>charsheet</frame>
+		<placement>
+			<size>
+				<width>445</width>
+				<height>625</height>
+			</size>
+			<position>
+				<x>240</x>
+				<y>80</y>
+			</position>
+		</placement>
+		<sizelimits>
+			<minimum>
+				<width>445</width>
+				<height>625</height>
+			</minimum>
+			<maximum>
+				<width>445</width>
+				<height>625</height>
+			</maximum>
+		</sizelimits>
+		<softclose />
+		<nodelete />
+		<playercontrol />
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script file="charsheet/scripts/charsheet_toplevel.lua" />
+		<sheetdata>
+			<!-- ACTIVATE IDENTITY -->
+			<button_activatepc>
+				<bounds>370,30,23,22</bounds>
+			</button_activatepc>
+		
+			<!-- TOKEN -->
+			<tokenfield name="combattoken">
+				<bounds>320,23,40,40</bounds>
+				<empty>indicator_emptytoken</empty>
+				<tooltip>
+					<text>Token</text>
+				</tooltip>
+			</tokenfield>
+		
+			<!-- PORTRAIT -->
+			<genericcontrol name="portraitbase">
+				<bounds>262,21,45,45</bounds>
+				<icon>charlist_base</icon>
+				<disabled />
+			</genericcontrol>
+			<portraitselectioncontrol name="localportrait">
+				<bounds>337,21,45,45</bounds>
+				<base>portraittoken_base</base>
+				<mask>portraittoken_mask</mask>
+				<invisible />
+				<script>
+					function onInit()
+						local sPortrait = User.getLocalIdentityPortrait(window.getDatabaseNode());
+						if sPortrait then
+							setFile(sPortrait);
+						end
+					end
+					
+					function onDrop(x, y, draginfo)
+						if draginfo.isType("portraitselection") then
+							CharManager.setPortrait(window.getDatabaseNode(), draginfo.getStringData());
+							return true;
+						end
+					end
+					
+					function onClickDown(button, x, y)
+						return true;
+					end
+					
+					function onClickRelease(button, x, y)
+						local nodeChar = window.getDatabaseNode();
+						if nodeChar then
+							local wnd = Interface.openWindow("portraitselection", "");
+							if wnd then
+								wnd.SetLocalNode(nodeChar);
+							end
+						end
+					end
+				</script>
+			</portraitselectioncontrol>
+			<genericcontrol name="portrait">
+				<bounds>262,21,45,45</bounds>
+				<tooltip>
+					<text>Portrait</text>
+				</tooltip>
+				<script>
+					function onInit()
+						local nodeChar = window.getDatabaseNode();
+						if nodeChar then
+							local nodeCharName = nodeChar.getName();
+							if nodeCharName then
+								setIcon("portrait_" .. nodeCharName .. "_charlist", true);
+							end
+						end
+					end
+					
+					function onDrop(x, y, draginfo)
+						if draginfo.isType("portraitselection") then
+							CharManager.setPortrait(window.getDatabaseNode(), draginfo.getStringData());
+							return true;
+						end
+					end
+					
+					function onClickDown(button, x, y)
+						return true;
+					end
+					
+					function onClickRelease(button, x, y)
+						local nodeChar = window.getDatabaseNode();
+						if nodeChar then
+							local wnd = Interface.openWindow("portraitselection", "");
+							if wnd then
+								wnd.SetLocalNode(nodeChar);
+							end
+						end
+					end
+				</script>
+			</genericcontrol>
+			
+			<!-- NAME -->
+			<frame_char name="overviewframe">
+				<bounds>15,20,230,45</bounds>
+			</frame_char>
+			<string_labeled name="name">
+				<anchored>
+					<to>overviewframe</to>
+					<position>insidetopleft</position>
+					<offset>15,10</offset>
+					<size>
+						<width>150</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<label>name</label>
+			</string_labeled>
+			
+			<basicnumber name="xp_total">
+				<anchored>
+					<to>overviewframe</to>
+					<position>insidetopleft</position>
+					<offset>180,12</offset>
+					<size>
+						<width>35</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+			</basicnumber>
+
+
+			<subwindow name="main">
+				<bounds>0,65,-1,-22</bounds>
+				<class>charsheet_main</class>
+			</subwindow>
+			<subwindow name="combat">
+				<bounds>0,65,-1,-22</bounds>
+				<class>charsheet_combat</class>
+			</subwindow>
+			<subwindow name="skills">
+				<bounds>0,65,-1,-22</bounds>
+				<class>charsheet_skills</class>
+			</subwindow>
+			<subwindow name="abilities">
+				<bounds>0,65,-1,-22</bounds>
+				<class>charsheet_abilities</class>
+			</subwindow>
+			<subwindow name="inventory">
+				<bounds>0,65,-1,-22</bounds>
+				<class>charsheet_inventory</class>
+			</subwindow>
+			<subwindow name="notes">
+				<bounds>0,65,-1,-22</bounds>
+				<class>charsheet_notes</class>
+			</subwindow>
+			<subwindow name="powers">
+				<bounds>0,65,-1,-22</bounds>
+				<class>charsheet_tab_powers</class>
+			</subwindow>
+
+			<buttongroup_tabs name="tabs">
+				<tab>
+					<icon>tab_main</icon>
+					<subwindow>main</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_combat</icon>
+					<subwindow>combat</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_skills</icon>
+					<subwindow>skills</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_abilities</icon>
+					<subwindow>abilities</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_inventory</icon>
+					<subwindow>inventory</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_notes</icon>
+					<subwindow>notes</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_powers</icon>
+					<subwindow>powers</subwindow>
+				</tab>
+			</buttongroup_tabs>
+		
+<!-- 			<button_charmini>
+				<bounds>10,-25,40,15</bounds>
+			</button_charmini> -->
+
+			<close_charsheet />
+		</sheetdata>
+	</windowclass>
+	
+
+	<windowclass name="charsheetmini_top">
+		<frame>charsheet</frame>
+		<placement>
+			<size>
+				<width>450</width>
+				<height>480</height>
+			</size>
+			<position>
+				<x>410</x>
+				<y>90</y>
+			</position>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>450</width>
+				<height>480</height>
+			</minimum>
+		</sizelimits>
+		<minimize>minimized_npc</minimize>
+		<softclose />
+		<nodelete />
+		<playercontrol />
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script file="charsheet/scripts/charsheet_toplevel.lua" />
+		<sheetdata>
+			<frame_char name="mini_top_frame">
+				<bounds>10,20,-32,40</bounds>
+			</frame_char>
+			<stringu name="name">
+				<anchored>
+					<to>mini_top_frame</to>
+					<position>insidetopleft</position>
+					<offset>15,10</offset>
+					<size>
+						<width>120</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<static />
+			</stringu>
+			<stringu name="race">
+				<anchored>
+					<to>mini_top_frame</to>
+					<position>insidetopleft</position>
+					<offset>145,10</offset>
+					<size>
+						<width>100</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<static />
+			</stringu>
+			<string_charclasslevelsummary name="class">
+				<anchored>
+					<to>mini_top_frame</to>
+					<left><offset>255</offset></left>
+					<top><offset>10</offset></top>
+					<right><offset>-45</offset></right>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+			</string_charclasslevelsummary>
+			<basicnumber name="level">
+				<bounds>-67,30,22,20</bounds>
+			</basicnumber>
+
+			<!-- ACTIVATE IDENTITY -->
+			<button_activatepc>
+				<bounds>-35,30,23,22</bounds>
+			</button_activatepc>
+
+			<subwindow name="main">
+				<bounds>10,50,-22,-15</bounds>
+				<class>charsheetmini_basic</class>
+			</subwindow>
+			<subwindow name="abilities">
+				<bounds>10,50,-22,-15</bounds>
+				<class>charsheetmini_abilities</class>
+			</subwindow>
+			<subwindow name="inventory">
+				<bounds>10,50,-22,-15</bounds>
+				<class>charsheetmini_inventory</class>
+			</subwindow>
+			<subwindow name="powers">
+				<bounds>10,50,-22,-15</bounds>
+				<class>charsheetmini_tab_powers</class>
+			</subwindow>
+			
+			<buttongroup_tabs name="tabs">
+				<tab>
+					<icon>tab_main</icon>
+					<subwindow>main</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_abilities</icon>
+					<subwindow>abilities</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_inventory</icon>
+					<subwindow>inventory</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_powers</icon>
+					<subwindow>powers</subwindow>
+				</tab>
+			</buttongroup_tabs>
+			
+			<button_charfull>
+				<bounds>10,-25,40,15</bounds>
+			</button_charfull>
+
+			<resize_charsheet />
+			<close_charsheet />
+		</sheetdata>
+	</windowclass>
+</root>

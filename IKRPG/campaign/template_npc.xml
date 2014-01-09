@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="radio_campaign_npctype">
+		<buttongroup_radio>
+			<parameters>
+				<optionwidth>80</optionwidth>
+				<labels>Creature|Trap|Vehicle</labels>
+				<values>Creature|Trap|Vehicle</values>
+			</parameters>
+			<gmeditonly />
+		</buttongroup_radio>
+	</template>
+	<template name="radio_campaign_encountertype">
+		<buttongroup_radio>
+			<parameters>
+				<optionwidth>90</optionwidth>
+				<labels>Combat|Skill Challenge</labels>
+				<values>combat|skillchallenge</values>
+				<defaultindex>1</defaultindex>
+			</parameters>
+			<gmeditonly />
+		</buttongroup_radio>
+	</template>
+
+	<template name="list_campaignencounternpc">
+		<windowlist>
+			<allowdelete />
+			<sortby><field>name</field></sortby>
+			<child><backcolor>1A40301E</backcolor></child>
+			<child></child>
+			<script file="campaign/scripts/campaign_list_encounternpc.lua" />
+		</windowlist>
+	</template>
+	<template name="list_campaignencountersc">
+		<windowlist>
+			<allowcreate />
+			<allowdelete />
+			<createonempty />
+			<noscroll />
+			<footer>footer_wide</footer>
+			<child><backcolor>1A40301E</backcolor></child>
+			<child></child>
+			<script file="campaign/scripts/campaign_list_encountersc.lua" />
+		</windowlist>
+	</template>
+
+	<template name="token_npc">
+		<tokenfield>
+			<bounds>5,8,35,35</bounds>
+			<empty>indicator_emptytoken</empty>
+		</tokenfield>
+	</template>
+	
+	<template name="label_npc">
+		<stringcontrol>
+			<font>reference-b</font>
+			<multilinespacing>15</multilinespacing>
+			<selectioncolor>90FFFFFF</selectioncolor>
+			<nodrag />
+			<readonly />
+		</stringcontrol>
+	</template>
+	<template name="string_npc">
+		<basicstring>
+			<frame />
+			<font>reference-r</font>
+			<multilinespacing>15</multilinespacing>
+			<selectioncolor>90909090</selectioncolor>
+		</basicstring>
+	</template>
+	
+	<template name="number_npc_init">
+		<basicnumber>
+			<frame />
+			<font>reference-r</font>
+			<displaysign />
+			<rollable2 />
+			<script>
+				function action(draginfo)
+					local rActor = ActorManager.getActor("npc", window.getDatabaseNode());
+					ActionInit.performRoll(draginfo, rActor);
+
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="number_npc">
+		<basicnumber>
+			<frame />
+			<font>reference-r</font>
+		</basicnumber>
+	</template>
+	
+	<template name="number_npc_perception">
+		<basicnumber>
+			<frame />
+			<font>reference-r</font>
+			<displaysign />
+			<rollable2 />
+			<script>
+				function action(draginfo)
+					local rActor = ActorManager.getActor("npc", window.getDatabaseNode());
+					ActionSkill.performRoll(draginfo, rActor, "Perception", getValue());
+					
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+					
+				function onDoubleClick(x, y)
+					return action();
+				end
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="number_npc_save">
+		<basicnumber>
+			<frame />
+			<font>reference-r</font>
+			<displaysign />
+			<rollable2 />
+			<script>
+				function action(draginfo)
+					local rActor = ActorManager.getActor("npc", window.getDatabaseNode());
+					ActionSave.performRoll(draginfo, rActor);
+					
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+					
+				function onDoubleClick(x, y)
+					return action();
+				end
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="header_npc_text">
+		<label_npc>
+			<anchored>
+				<top><offset>3</offset></top>
+				<left><offset>10</offset></left>
+				<right><offset>-20</offset></right>
+				<size>
+					<height>15</height>
+				</size>
+			</anchored>
+		</label_npc>
+	</template>
+	<template name="header_npc">
+		<genericcontrol>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<relation>relative</relation>
+					<anchor>bottom</anchor>
+					<offset>2</offset>
+				</top>
+				<left />
+				<right />
+				<size>
+					<height>20</height>
+				</size>
+			</anchored>
+			<frame mergerule="replace">
+				<name>campaignrowshade</name>
+			</frame>
+		</genericcontrol>
+	</template>
+
+	<template name="list_npc_powers">
+		<windowlist>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<relation>relative</relation>
+					<anchor>bottom</anchor>
+				</top>
+				<left />
+				<right />
+			</anchored>
+			<datasource>.powers</datasource>
+			<class>npc_power</class>
+			<allowcreate />
+			<allowdelete />
+			<createonempty />
+			<noscroll />
+			<script file="campaign/scripts/campaign_npc_powerlist.lua" />
+		</windowlist>
+	</template>
+	<template name="list_npc_vpowers">
+		<windowlist>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<relation>relative</relation>
+					<anchor>bottom</anchor>
+					<offset>3</offset>
+				</top>
+				<left />
+				<right />
+			</anchored>
+			<datasource>.powers</datasource>
+			<class>npc_vpower</class>
+			<noscroll />
+			<script file="campaign/scripts/campaign_npc_vpowerlist.lua" />
+		</windowlist>
+	</template>
+	<template name="list_npc_vpowerfields">
+		<windowlist>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<anchor>bottom</anchor>
+					<relation>relative</relation>
+					<offset>3</offset>
+				</top>
+				<left><offset>20</offset></left>
+				<right><offset>-15</offset></right>
+			</anchored>
+			<class>npc_vpowerfield</class>
+			<readonly />
+			<noscroll />
+			<script>
+				function update()
+					local bShow = false;
+					for _,w in pairs(getWindows()) do
+						if w.update() then
+							bShow = true;
+						end
+					end
+					
+					setVisible(bShow);
+				end
+				
+				function onFilter(w)
+					return w.onFilter();
+				end
+			</script>
+		</windowlist>
+	</template>
+
+	<template name="list_npc_trap">
+		<windowlist>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<relation>relative</relation>
+					<anchor>bottom</anchor>
+				</top>
+				<left />
+				<right />
+			</anchored>
+			<noscroll />
+			<allowcreate />
+			<allowdelete />
+			<createonempty />
+			<sortby mergerule="replace"><control>name</control></sortby>
+			<script>
+				function update()
+					local bLock = isReadOnly();
+					
+					local bShow = false;
+					for _,w in pairs(getWindows()) do
+						if w.update() then
+							bShow = true;
+						end
+					end
+					
+					if bLock then
+						setVisible(bShow);
+					else
+						setVisible(true);
+					end
+					applyFilter();
+				end
+				
+				function onFilter(w)
+					return w.onFilter();
+				end
+			</script>
+		</windowlist>
+	</template>
+
+	<template name="number_npc_ability">
+		<basicnumber>
+			<anchored>
+				<top />
+				<left>
+					<anchor>right</anchor>
+					<offset>2</offset>
+				</left>
+				<size>
+					<width>17</width>
+					<height>15</height>
+				</size>
+			</anchored>
+			<frame />
+			<font>reference-r</font>
+			<rollable2 />
+			<default>10</default>
+			<hideonvalue>0</hideonvalue>
+			<nodrop />
+			<script file="campaign/scripts/campaign_npc_main_ability.lua" />
+		</basicnumber>
+	</template>
+	<template name="stringc_npc_abilitymod">
+		<stringcontrol>
+			<anchored>
+				<top />
+				<left>
+					<anchor>right</anchor>
+					<offset>5</offset>
+				</left>
+				<size>
+					<width>30</width>
+					<height>15</height>
+				</size>
+			</anchored>
+			<font>reference-r</font>
+			<disabled />
+			<readonly />
+		</stringcontrol>
+	</template>
+
+	<template name="string_npcpowername">
+		<basicstring>
+			<font>reference-b</font>
+			<empty>&#171; Power Name &#187;</empty>
+			<script>
+				function onEnter()
+					if Input.isShiftPressed() then
+						if window.windowlist and window.windowlist.onEnter then
+							window.windowlist.onEnter();
+						end
+						return true;
+					end
+					
+					return false;
+				end
+			</script>
+		</basicstring>
+	</template>
+	
+	<template name="label_column_npc">
+		<stringcontrol>
+			<anchored>
+				<top />
+				<left><offset>-60</offset></left>
+				<size>
+					<width>60</width>
+					<height>15</height>
+				</size>
+			</anchored>
+			<font>reference-b</font>
+			<multilinespacing>15</multilinespacing>
+			<selectioncolor>90FFFFFF</selectioncolor>
+			<nodrag />
+			<readonly />
+		</stringcontrol>
+	</template>
+	<template name="string_column_npc">
+		<string_npc>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<anchor>bottom</anchor>
+					<relation>relative</relation>
+					<offset>3</offset>
+				</top>
+				<left><offset>70</offset></left>
+				<right><offset>-20</offset></right>
+			</anchored>
+		</string_npc>
+	</template>
+	<template name="label_column_npcpower">
+		<stringcontrol>
+			<anchored>
+				<top />
+				<left><offset>-60</offset></left>
+				<size>
+					<width>60</width>
+					<height>15</height>
+				</size>
+			</anchored>
+			<font>reference-b</font>
+			<multilinespacing>15</multilinespacing>
+			<selectioncolor>90FFFFFF</selectioncolor>
+			<nodrag />
+			<readonly />
+		</stringcontrol>
+	</template>
+	<template name="string_column_npcpower">
+		<string_npc>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<anchor>bottom</anchor>
+					<relation>relative</relation>
+					<offset>3</offset>
+				</top>
+				<left><offset>70</offset></left>
+				<right><offset>-20</offset></right>
+			</anchored>
+			<script>
+				function onEnter()
+					if Input.isShiftPressed() then
+						if window.windowlist and window.windowlist.onEnter then
+							window.windowlist.onEnter();
+						end
+						return true;
+					end
+					
+					return false;
+				end
+			</script>
+		</string_npc>
+	</template>
+	
+	<template name="label_npc_vpowerdesc">
+		<stringcontrol>
+			<anchored>
+				<top />
+				<left />
+				<sizelimits>
+					<maximum>
+						<width>150</width>
+					</maximum>
+				</sizelimits>
+			</anchored>
+			<nodrag />
+			<font>reference-i</font>
+			<selectioncolor>90999999</selectioncolor>
+			<multilinespacing>15</multilinespacing>
+			<readonly />
+		</stringcontrol>
+	</template>
+	<template name="string_npc_vpowerdescbase">
+		<stringcontrol>
+			<font>reference-r</font>
+			<nodrag />
+			<selectioncolor>90909090</selectioncolor>
+			<multilinespacing>15</multilinespacing>
+			<readonly />
+			<script file="common/scripts/string_powerdesc.lua" />
+		</stringcontrol>
+	</template>
+	<template name="string_npc_vpowerdesc">
+		<string_npc_vpowerdescbase>
+			<anchored>
+				<top />
+				<left>
+					<parent>label</parent>
+					<anchor>right</anchor>
+					<offset>2</offset>
+				</left>
+				<right />
+			</anchored>
+			<script file="common/scripts/string_powerdesc_npc.lua" />
+		</string_npc_vpowerdescbase>
+	</template>
+	
+	<template name="string_column_npcpowerdescbase">
+		<string_npc>
+			<script file="common/scripts/string_powerdesc.lua" />
+		</string_npc>
+	</template>
+	<template name="string_column_npcpowerdesc">
+		<string_column_npcpowerdescbase>
+			<anchored>
+				<top>
+					<parent>columnanchor</parent>
+					<anchor>bottom</anchor>
+					<relation>relative</relation>
+					<offset>3</offset>
+				</top>
+				<left><offset>70</offset></left>
+				<right><offset>-20</offset></right>
+			</anchored>
+			<script file="common/scripts/string_powerdesc_npc.lua" />
+		</string_column_npcpowerdescbase>
+	</template>
+
+	<template name="cycler_vpowertype">
+		<cycler_powertype>
+			<script>
+				function onValueChanged()
+					super.onValueChanged();
+					if isVisible() then
+						window.powertitle.setAnchor("left", "", "left", "absolute", 25);
+						window.powertitle.setFrame("campaignrowshade", 25, 3, 50, 2);
+					else
+						window.powertitle.setAnchor("left", "", "left", "absolute", 10);
+						window.powertitle.setFrame("campaignrowshade", 10, 3, 50, 2);
+					end
+				end
+			</script>
+		</cycler_powertype>
+	</template>
+</root>

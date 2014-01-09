@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="item_propertylistitem">
+		<sizelimits>
+			<minimum>
+				<height>18</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function onInit()
+				update();
+			end
+
+			function update()
+				local bReadOnly = windowlist.isReadOnly();
+				shortdescription.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_control name="shortcut">
+				<bounds>-22,2,20,20</bounds>
+				<class>reference_magicitem_property</class>
+			</link_control>
+
+			<string_textlistitem name="shortdescription">
+				<anchored>
+					<top><offset>4</offset></top>
+					<left><offset>10</offset></left>
+					<right><offset>-30</offset></right>
+				</anchored>
+				<font>sheettextsmall</font>
+				<frame>
+					<name>modifier</name>
+					<offset>7,7,7,5</offset>
+				</frame>
+				<lineoffset default="off">-1</lineoffset>
+				<multilinespacing>16</multilinespacing>
+				<selectioncolor>90ffffff</selectioncolor>
+				<gmeditonly />
+			</string_textlistitem>
+
+			<spacer>
+				<anchor>shortdescription</anchor>
+				<height>3</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+</root>

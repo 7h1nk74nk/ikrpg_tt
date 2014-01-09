@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_weapon">
+		<sizelimits>
+			<minimum>
+				<height>45</height>
+			</minimum>
+		</sizelimits>          
+		<sheetdata>
+                        
+            <button_iconcycler name="type">
+                <anchored>
+					<top><offset>2</offset></top>
+					<left><offset>2</offset></left>					
+					<size>
+						<height>40</height>
+                        <width>40</width>
+					</size>
+				</anchored>                
+                <stateframe>
+                    <hover>
+                        <name>sheetfocus</name>
+                        <offset>6,5,6,5</offset>
+                        <hidereadonly />
+                    </hover>
+                </stateframe>
+                <parameters>
+                    <icons>action_melee</icons>
+                    <values>melee</values>   
+                    <defaulticon>action_ranged</defaulticon>                    
+                </parameters>
+            </button_iconcycler>
+                
+			<stringfield name="label">
+				<anchored>
+					<to>type</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>					
+					<size>
+						<height>18</height>
+                        <width>150</width>
+					</size>
+				</anchored>
+                <font>sheettext</font>                                                                  
+                <lineoffset default="on">-1</lineoffset>
+			</stringfield>
+            
+            
+            <stringfield name="notes">
+				<anchored>
+                    <to>label</to>
+                    <position>belowleft</position>
+                    <offset>0,0</offset>
+                    <size>
+						<height>18</height>
+                        <width>190</width>
+					</size>
+                </anchored>
+                <font>sheettext</font>                                                                  
+                <lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+			<stringfield name="ammo">
+				<anchored>
+                    <to>notes</to>
+                    <position>right</position>
+                    <offset>10,0</offset>
+                    <size>
+						<height>18</height>
+                        <width>115</width>
+					</size>
+                </anchored>
+                <font>sheettext</font>                                                                  
+                <lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+            <basicnumber name="range">
+                <anchored>
+                    <to>label</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+            </basicnumber>
+            
+			<basicnumber name="rat">
+                <anchored>
+                    <to>range</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+            </basicnumber>
+            
+            <basicnumber name="mat">
+                <anchored>
+                    <to>rat</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>             
+            </basicnumber>
+            
+            <basicnumber name="damage">
+                <anchored>
+                    <to>mat</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>                
+            </basicnumber>
+			
+		</sheetdata>
+	</windowclass>
+	
+	
+	
+	<windowclass name="charsheet_magic">
+		<sizelimits>
+			<minimum>
+				<height>45</height>
+			</minimum>
+		</sizelimits>          
+		<sheetdata>
+                        
+            <button_iconcycler name="type">
+                <anchored>
+					<top><offset>2</offset></top>
+					<left><offset>2</offset></left>					
+					<size>
+						<height>40</height>
+                        <width>40</width>
+					</size>
+				</anchored>                
+                <stateframe>
+                    <hover>
+                        <name>sheetfocus</name>
+                        <offset>6,5,6,5</offset>
+                        <hidereadonly />
+                    </hover>
+                </stateframe>
+                <parameters>
+                    <icons>action_forcemagic|action_utilitymagic|action_firemagic|action_icemagic|action_acidmagic|action_lightningmagic|action_necromagic</icons>			
+                    <values>1|2|3|4|5|6|7</values>   
+                    <defaulticon>action_buffmagic</defaulticon>                    
+                </parameters>
+            </button_iconcycler>
+                
+			<stringfield name="label">
+				<anchored>
+					<to>type</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>					
+					<size>
+						<height>18</height>
+                        <width>110</width>
+					</size>
+				</anchored>
+                <font>sheettext</font>                                                                  
+                <lineoffset default="on">-1</lineoffset>
+			</stringfield>
+            
+            
+            <stringfield name="notes">
+				<anchored>
+                    <to>label</to>
+                    <position>belowleft</position>
+                    <offset>0,0</offset>
+                    <size>
+						<height>18</height>
+                        <width>315</width>
+					</size>
+                </anchored>
+                <font>sheettext</font>                                                                  
+                <lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+			<basicnumber name="cost">
+                <anchored>
+                    <to>label</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>            
+            </basicnumber>
+			
+			            
+			<basicnumber name="range">
+                <anchored>
+                    <to>cost</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>            
+            </basicnumber>
+            
+            
+			<basicnumber name="aoe">
+                <anchored>
+                    <to>range</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>            
+            </basicnumber>
+            
+            <basicnumber name="arc">
+                <anchored>
+                    <to>aoe</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+                
+            </basicnumber>
+            
+            <basicnumber name="dmg">
+                <anchored>
+                    <to>arc</to>
+                    <position>righthigh</position>
+                    <offset>10,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>                
+            </basicnumber>
+			
+		</sheetdata>
+	</windowclass>
+	
+	
+
+	
+	
+
+	
+	
+			
+	<windowclass name="charsheet_skill">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>  
+        <script file="charsheet/scripts/charsheet_skill.lua" />
+		<sheetdata>
+            
+            <numberfield name="order">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+            
+			
+            <numberfield name="subskillnumber">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+
+            <stringfield name="parentskill">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield>                     
+            
+			<stringfield name="label">
+				<anchored>
+					<top><offset>5</offset></top>
+					<left><offset>0</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>175</width>
+					</size>
+				</anchored>
+                <font>sheettext</font>                                                                  
+                <lineoffset default="on">-1</lineoffset>
+			</stringfield>
+            
+            <button_stringcycler name="skilltype">
+				<anchored>
+					<to>label</to>
+                    <position>righthigh</position>
+                    <offset>10,-2</offset>
+					<size>
+						<height>18</height>
+						<width>32</width>
+					</size>
+				</anchored>
+				<font>sheettextsmall</font>
+				<center />
+				<frame>
+					<name>bonus</name>
+					<offset>6,5,6,5</offset>
+				</frame>
+				<parameters>
+					<labels>Mil.|Gen.|Occ.</labels>					
+                    <values>Mil.|Gen.|Occ.</values>
+					<defaultlabel> - </defaultlabel>
+				</parameters>
+			</button_stringcycler>
+            
+            <button_stringcycler name="skillstat">
+				<anchored>
+					<to>skilltype</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+					<size>
+						<height>18</height>
+						<width>32</width>
+					</size>
+				</anchored>
+				<font>sheettextsmall</font>
+				<center />
+				<frame>
+					<name>bonus</name>
+					<offset>6,5,6,5</offset>
+				</frame>
+				<parameters>
+					<labels>PHY|SPD|STR|AGI|PRW|POI|INT|ARC|PER</labels>					
+                    <values>PHY|SPD|STR|AGI|PRW|POI|INT|ARC|PER</values>
+					<defaultlabel>SOC</defaultlabel>
+				</parameters>
+			</button_stringcycler>
+            
+            
+            
+			<basicnumber name="max">
+                <anchored>
+                    <to>skillstat</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+                <min>0</min>
+                <max>4</max>
+                
+            </basicnumber>
+            
+            <basicnumber name="rank">
+                <anchored>
+                    <to>skillstat</to>
+                    <position>righthigh</position>
+                    <offset>42,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+                
+            </basicnumber>
+            
+            <basicnumber name="total">
+                <anchored>
+                    <to>rank</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+                <readonly/>
+            </basicnumber>
+			
+		</sheetdata>
+	</windowclass>
+    
+    
+    
+    <windowclass name="charsheet_skill_small">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+        <script file="charsheet/scripts/charsheet_skill_small.lua" />
+		<sheetdata>		
+            
+            <numberfield name="order">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+            
+            
+            
+            <numberfield name="subskillnumber">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+
+            <stringfield name="parentskill">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield>
+            
+            <button_stringcycler name="skilltype">
+				<bounds>0,0,0,0</bounds>				
+				<parameters>
+					<labels>Mil.|Gen.|Occ.</labels>					
+                    <values>Mil.|Gen.|Occ.</values>
+					<defaultlabel> - </defaultlabel>
+				</parameters>
+                <invisible/>
+			</button_stringcycler>
+            
+            <numberfield name="max">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+            
+			<stringfield name="label">
+				<anchored>
+					<top><offset>5</offset></top>
+					<left><offset>0</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>95</width>
+					</size>
+				</anchored>
+                <font>sheettext</font>                                                                  
+                <lineoffset default="on">-1</lineoffset>
+                <readonly/>
+			</stringfield>
+                        
+            
+            <button_stringcycler name="skillstat">
+				<anchored>
+					<to>label</to>
+                    <position>righthigh</position>
+                    <offset>5,-2</offset>
+					<size>
+						<height>18</height>
+						<width>32</width>
+					</size>
+				</anchored>
+				<font>sheettextsmall</font>
+				<center />
+				<frame>
+					<name>bonus</name>
+					<offset>6,5,6,5</offset>
+				</frame>
+				<parameters>
+					<labels>PHY|SPD|STR|AGI|PRW|POI|INT|ARC|PER</labels>					
+                    <values>PHY|SPD|STR|AGI|PRW|POI|INT|ARC|PER</values>
+					<defaultlabel>SOC</defaultlabel>
+				</parameters>
+                <readonl/>
+			</button_stringcycler>
+            
+			<basicnumber name="rank">
+                <anchored>
+                    <to>skillstat</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+                <min>0</min>
+                <max>4</max>                
+            </basicnumber>
+                                    
+            <basicnumber name="total">
+                <anchored>
+                    <to>rank</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>18</height>
+                    </size>
+                </anchored>
+                <readonly/>
+            </basicnumber>	
+			
+		</sheetdata>
+	</windowclass>
+
+	
+
+    <windowclass name="charsheet_ability">
+        <sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>  
+        <script file="charsheet/scripts/charsheet_ability.lua" />
+		<sheetdata>
+            
+            <numberfield name="order">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+                        
+            <stringfield name="type">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield>   
+            
+            <stringfield name="shortdesc">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield> 
+            
+            <button_checkbox name="aquired">
+                <anchored>
+					<top><offset>5</offset></top>
+					<left><offset>0</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>18</width>
+					</size>
+				</anchored>
+            </button_checkbox>
+            
+            <stringfield name="label">
+				<anchored>
+					<top><offset>5</offset></top>
+					<left><offset>25</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>240</width>
+					</size>
+				</anchored>
+                <font>sheetlabel</font>     
+                <center/>
+                <lineoffset default="on">-1</lineoffset>
+			</stringfield>
+            
+            <stringcontrol name="prerequlabel">
+                <anchored>
+					<top><offset>25</offset></top>
+					<left><offset>25</offset></left>										
+				</anchored>
+                <font>sheettextsmall</font>                                     
+                <static>Prerequisite:</static>
+                <invisible/>
+            </stringcontrol>
+            <stringfield name="prerequisite">
+				<anchored>
+					<top><offset>25</offset></top>
+					<left><parent>prerequlabel</parent><anchor>right</anchor><offset>5</offset></left>					
+					<size>						
+                        <width>170</width>
+					</size>
+				</anchored>
+                <font>sheettextsmall</font>                     
+                <frame><name>rowshade</name></frame>
+                <multilinespacing>18</multilinespacing>
+                <invisible/>
+			</stringfield>
+            
+            <stringfield name="description">
+				<anchored>
+					<top><parent>prerequisite</parent><anchor>bottom</anchor><offset>5</offset></top>
+					<left><offset>25</offset></left>					
+					<size>						
+                        <width>240</width>
+					</size>
+				</anchored>
+                <font>sheettextsmall</font>                     
+                <multilinespacing>18</multilinespacing>                
+                <invisible/>
+			</stringfield>
+
+             <button_toggle name="expand">
+				<anchored>
+					<top><offset>5</offset></top>
+					<left><offset>270</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>18</width>
+					</size>
+				</anchored>
+				<icon>indicator_expanddown</icon>
+				<script>
+					function onValueChanged()   
+                        window.prerequisite.setVisible(getValue());
+                        window.description.setVisible(getValue());	
+                        window.prerequlabel.setVisible(getValue()); 
+					end
+				</script>
+			</button_toggle>
+           
+        </sheetdata>
+    </windowclass>
+    
+    
+    
+    <windowclass name="charsheet_ability_small">
+        <sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>  
+        
+		<sheetdata>
+            
+            <numberfield name="order">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+                        
+            <stringfield name="type">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield>
+            
+            <stringfield name="shortdesc">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield> 
+            
+            <button_checkbox name="aquired">
+                <anchored>
+					<top><offset>5</offset></top>
+					<left><offset>0</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>18</width>
+					</size>
+				</anchored>
+                <invisible/>
+                <readonly/>
+            </button_checkbox>
+            
+            <stringfield name="label">
+				<anchored>
+					<top><offset>5</offset></top>
+					<left><offset>0</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>190</width>
+					</size>
+				</anchored>
+                <font>sheetlabel</font>     
+                <center/>
+                <lineoffset default="on">-1</lineoffset>
+                <readonly/>
+			</stringfield>
+            
+            
+            
+            <stringfield name="description">
+				<anchored>
+					<top><parent>label</parent><anchor>bottom</anchor><offset>0</offset></top>
+					<left><offset>0</offset></left>					
+					<size>						
+                        <width>190</width>
+					</size>
+				</anchored>
+                <font>sheettextsmall</font>                     
+                <multilinespacing>18</multilinespacing>                
+                <invisible/>
+                <readonly/>
+			</stringfield>
+
+             <button_toggle name="expand">
+				<anchored>
+					<top><offset>5</offset></top>
+					<left><offset>195</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>18</width>
+					</size>
+				</anchored>
+				<icon>indicator_expanddown</icon>
+				<script>
+					function onValueChanged()                           
+                        window.description.setVisible(getValue());	                        
+					end
+				</script>
+			</button_toggle>
+			
+   
+        </sheetdata>
+    </windowclass>
+    
+    	<windowclass name="charsheet_abilityitem">
+		<sizelimits>
+			<minimum>
+				<height>10</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<link_smart name="shortcut">
+				<bounds>-22,0,20,20</bounds>
+				<defaultclass>ref_ability</defaultclass>
+				<toggle />
+			</link_smart>
+
+			<string_textlistitem name="value">
+				<anchored>
+					<top />
+					<left><offset>2</offset></left>
+					<right><offset>-25</offset></right>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</string_textlistitem>
+			
+		</sheetdata>
+	</windowclass>
+	
+	
+	<windowclass name="charsheet_mechanikaitem">
+		<sizelimits>
+			<minimum>
+				<height>10</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+		
+			<link_smart name="shortcut">
+				<bounds>-18,0,20,20</bounds>
+				<defaultclass>ref_ability</defaultclass>
+				<toggle />
+			</link_smart>
+
+			<string_textlistitem name="value">
+				<anchored>
+					<top />
+					<left><offset>0</offset></left>
+					<right><offset>-200</offset></right>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</string_textlistitem>
+			
+			
+			
+			<string_textlistitem name="effect">
+				<anchored>
+					<to>value</to>
+					<position>right</position>
+					<offset>10,0</offset>
+					<size>
+						<width>160</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</string_textlistitem>
+			
+		</sheetdata>
+	</windowclass>
+
+	
+	
+	<windowclass name="charsheet_spelllistitems">
+		<sizelimits>
+			<minimum>
+				<height>10</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+		
+			<link_smart name="shortcut">
+				<bounds>-25,16,20,20</bounds>
+				<defaultclass>ref_ability</defaultclass>
+				<toggle />
+			</link_smart>
+			
+			<stringfield name="label">
+				<anchored>
+					<left>
+						<anchor>left</anchor>
+						<offset>5</offset>
+					</left>
+					<top>
+						<anchor>top</anchor>
+						<offset>20</offset>
+					</top>
+					<size>
+						<width>95</width>
+					</size>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<frame>
+					<name>textline</name>
+					<offset>0,0,0,0</offset>
+				</frame>
+			</stringfield>
+			
+			<numberfield name="cost">
+				<anchored>
+					<to>label</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>21</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>textlinesmall</name>
+					<offset>0,0,0,0</offset>
+				</frame>
+				<keyeditframe>
+					<name>rowshade</name>
+					<offset>1,1,1,1</offset>
+				</keyeditframe>
+				<stateframe>
+					<drophilight>
+						<name>rowshade</name>
+						<offset>1,1,1,1</offset>
+					</drophilight>
+				</stateframe>
+				<droptypes>
+					<type>number</type>
+				</droptypes>
+				<font>sheetnumbersmall</font>
+				<hideonvalue>0</hideonvalue>
+				<noreset />
+				<nodrag />
+			</numberfield>	
+			
+			<numberfield name="range">
+				<anchored>
+					<to>cost</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>21</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>textlinesmall</name>
+					<offset>0,0,0,0</offset>
+				</frame>
+				<keyeditframe>
+					<name>rowshade</name>
+					<offset>1,1,1,1</offset>
+				</keyeditframe>
+				<stateframe>
+					<drophilight>
+						<name>rowshade</name>
+						<offset>1,1,1,1</offset>
+					</drophilight>
+				</stateframe>
+				<droptypes>
+					<type>number</type>
+				</droptypes>
+				<font>sheetnumbersmall</font>
+				<hideonvalue>0</hideonvalue>
+				<noreset />
+				<nodrag />
+			</numberfield>
+			
+			<numberfield name="AOE">
+				<anchored>
+					<to>range</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>21</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>textlinesmall</name>
+					<offset>0,0,0,0</offset>
+				</frame>
+				<keyeditframe>
+					<name>rowshade</name>
+					<offset>1,1,1,1</offset>
+				</keyeditframe>
+				<stateframe>
+					<drophilight>
+						<name>rowshade</name>
+						<offset>1,1,1,1</offset>
+					</drophilight>
+				</stateframe>
+				<droptypes>
+					<type>number</type>
+				</droptypes>
+				<font>sheetnumbersmall</font>
+				<hideonvalue>0</hideonvalue>
+				<noreset />
+				<nodrag />
+			</numberfield>
+			
+			<numberfield name="power">
+				<anchored>
+					<to>AOE</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>21</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>textlinesmall</name>
+					<offset>0,0,0,0</offset>
+				</frame>
+				<keyeditframe>
+					<name>rowshade</name>
+					<offset>1,1,1,1</offset>
+				</keyeditframe>
+				<stateframe>
+					<drophilight>
+						<name>rowshade</name>
+						<offset>1,1,1,1</offset>
+					</drophilight>
+				</stateframe>
+				<droptypes>
+					<type>number</type>
+				</droptypes>
+				<font>sheetnumbersmall</font>
+				<hideonvalue>0</hideonvalue>
+				<noreset />
+				<nodrag />
+			</numberfield>	
+			
+			<stringfield name="upkeep">
+				<anchored>
+					<to>power</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>21</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<center />
+				<frame>
+					<name>textline</name>
+					<offset>0,0,0,0</offset>
+				</frame>
+			</stringfield>
+
+			<stringfield name="offensive">
+				<anchored>
+					<to>upkeep</to>
+					<position>right</position>
+					<offset>20,0</offset>
+					<size>
+						<width>21</width>
+						<height>14</height>
+					</size>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<center/>
+				<frame>
+					<name>textline</name>
+					<offset>0,0,0,0</offset>
+				</frame>
+			</stringfield>
+						
+		</sheetdata>
+
+	</windowclass>
+
+</root>

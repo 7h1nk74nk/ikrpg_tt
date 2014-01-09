@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Catalog power list -->
+	<windowclass name="catalog_powerlistitem">
+		<sizelimits>
+			<minimum>
+				<height>23</height>
+			</minimum>
+			<maximum>
+				<height>200</height>
+			</maximum>
+		</sizelimits>
+		<script>
+			function onInit()
+				local rechargestr = DB.getValue(getDatabaseNode(), "recharge", "")
+				if rechargestr == "Daily" then
+					name.setColor("ffffffff");
+					powertype.setColor("ffffffff");
+					nameframe.setFrame("headerpowerdaily")
+				elseif rechargestr == "Encounter" or rechargestr == "Action Point" then
+					name.setColor("ffffffff");
+					powertype.setColor("ffffffff");
+					nameframe.setFrame("headerpowerenc")
+				elseif rechargestr == "At-Will" then
+					name.setColor("ffffffff");
+					powertype.setColor("ffffffff");
+					nameframe.setFrame("headerpoweratwill")
+				else
+					name.setColor("ff000000");
+					powertype.setColor("ff000000");
+				end
+			end
+		</script>
+		<sheetdata>
+			<windowreferencefield name="link">
+				<bounds>5,0,20,20</bounds>
+				<icon>
+					<normal>button_openwindow</normal>
+					<pressed>button_openwindowdown</pressed>
+				</icon>
+				<description>
+					<field>name</field>
+				</description>
+			</windowreferencefield>
+
+			<genericcontrol name="nameframe">
+				<bounds>30,2,285,20</bounds>
+			</genericcontrol>
+			<string_linked_static name="name">
+				<bounds>40,4,220,15</bounds>
+			</string_linked_static>
+
+			<stringfield name="powertype">
+				<bounds>270,4,40,15</bounds>
+				<font>reference-r</font>
+			</stringfield>
+			<stringfield name="source">
+				<bounds>325,4,-5,15</bounds>
+				<font>reference-r</font>
+			</stringfield>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="catalog_levellist">
+		<sizelimits>
+			<minimum>
+				<height>0</height>
+			</minimum>
+			<maximum>
+				<height>100000</height>
+			</maximum>
+		</sizelimits>
+		<sheetdata>
+			<anchor_column name="topanchor" />
+			
+			<string_groupdesc2 name="description" />
+			
+			<windowlist name="list">
+				<anchored>
+					<top>
+						<parent>topanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>2</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<datasource>.</datasource>
+				<class>catalog_powerlistitem</class>
+				<noscroll />
+				<script file="ref/scripts/ref_list.lua" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="catalog_classpowerlist">
+		<placement>
+			<size>
+				<width>500</width>
+				<height>420</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<maximum>
+				<height>100000</height>
+			</maximum>
+			<minimum>
+				<width>500</width>
+			</minimum>
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>description</field>
+		</tooltip>
+		<sheetdata>
+			<anchor_column name="topanchor" />
+			
+			<stringfield name="description">
+				<anchored>
+					<top>
+						<parent>topanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<font>reftable-group</font>
+				<center />
+			</stringfield>
+			
+			<list_reftablegroup name="powerlist">
+				<anchored>
+					<top>
+						<parent>topanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<class>catalog_levellist</class>
+			</list_reftablegroup>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_catalogtopgroups">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<hlink name="librarylink" />
+
+			<stringfield name="name">
+				<bounds>0,0,-1,15</bounds>
+				<font>reference-article</font>
+				<script>
+					function onClickDown(button, x, y)
+						return true;
+					end
+
+					function onClickRelease(button, x, y)
+						activate();
+						return true;
+					end
+					
+					function activate()
+						local myclass, myrecord = window.librarylink.getValue();
+						local mypagelist = window.windowlist.window.windowlist.window.pagelist;
+						mypagelist.closeAll();
+						mypagelist.createWindowWithClass(myclass, myrecord); 
+						mypagelist.setScrollPosition(0,0);
+						
+						return true;
+					end
+				</script>
+			</stringfield>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_catalogheader">
+		<sizelimits>
+			<minimum>
+				<height>35</height>
+			</minimum>
+			<maximum>
+				<height>10000</height>
+			</maximum>
+		</sizelimits>
+		<sheetdata>
+			<hnc name="suppress" />
+			
+			<genericcontrol name="chapterframe">
+				<bounds>0,1,-1,-1</bounds>
+				<frame>
+					<name>reference-chapter</name>
+				</frame>
+			</genericcontrol>
+
+			<stringfield name="name">
+				<bounds>2,7,-1,15</bounds>
+				<font>reference-chapter</font>
+				<static />
+				<script>
+					function onClickDown(button, x, y)
+						return true;
+					end
+
+					function onClickRelease(button, x, y)
+						window.section.setVisible(not window.section.isVisible());
+						return true;
+					end
+				</script>
+			</stringfield>
+			
+			<windowlist name="section">
+				<bounds>20,32,-20,-1</bounds>
+				<datasource>.section</datasource>
+				<class>reference_catalogtopgroups</class>
+				<noscroll />
+				<invisible />
+				<script file="ref/scripts/ref_list.lua" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_powercatalog">
+		<frame>utilitybox</frame>
+		<placement>
+			<size>
+				<width>950</width>
+				<height>450</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>950</width>
+				<height>450</height>
+			</minimum>
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<sheetdata>
+			<!-- TITLE -->
+			<windowtitlebar>
+				<title>
+					<text>Power Catalog</text>
+				</title>
+			</windowtitlebar>
+
+			<!-- CATALOG SECTIONS -->
+			<list_refsections name="sectionlist">
+				<datasource>.headers</datasource>
+				<class>reference_catalogheader</class>
+				<script>
+					function onFilter(w)
+						if w.suppress.getValue() == 1 then
+							return false;
+						end						
+						return true;
+					end
+				</script>
+			</list_refsections>
+			<scrollbar_refsections />
+
+			<!-- POWER LIST WINDOW -->
+			<list_refpages name="pagelist">
+				<datasource />
+				<class>catalog_classpowerlist</class>
+			</list_refpages>
+			<scrollbar_refpages />
+
+			<!-- CONTROLS -->	
+			<filter_refsections name="filter">
+				<target>sectionlist.section</target>
+				<script>
+					function onValueChanged()
+				  		if super and super.onValueChanged then
+   							super.onValueChanged();
+  						end
+  						
+						local f = getValue();
+						
+  						for _,winGroup in pairs(window.sectionlist.getWindows()) do
+							local bShowGroup = false;
+
+							for _,winClass in pairs(winGroup.section.getWindows()) do
+								if string.find(string.lower(winClass.name.getValue()), f, 0, true) then
+									bShowGroup = true;
+								end
+							end
+
+							winGroup.section.applyFilter()
+							
+							if bShowGroup then
+								winGroup.suppress.setValue(0);
+							else
+								winGroup.suppress.setValue(1);
+							end
+  						end
+  							
+						window.sectionlist.applyFilter();            
+					end				
+				</script>
+			</filter_refsections>
+			<button_filter_refsections name="filtertrigger" />
+			<button_expandsections>
+				<targets>sectionlist,section</targets>
+			</button_expandsections>
+			<button_collapsesections>
+				<targets>sectionlist,section</targets>
+			</button_collapsesections>
+			
+			<filter2 name="filter2">
+				<bounds>365,-53,-65,16</bounds>
+				<trigger>filtertrigger2</trigger>
+				<target>pagelist,powerlist,list</target>
+			</filter2>
+			<button_filter name="filtertrigger2">
+				<bounds>345,-55,21,27</bounds>
+				<target>filter2</target>
+			</button_filter>			
+			<button_expand>
+				<bounds>290,-53,20,20</bounds>
+				<targets>pagelist,powerlist,list</targets>
+				<togglelevel>2</togglelevel>
+			</button_expand>
+			<button_collapse>
+				<bounds>315,-53,20,20</bounds>
+				<targets>pagelist,powerlist,list</targets>
+				<togglelevel>2</togglelevel>
+			</button_collapse>
+
+			<resize_utilitybox />
+			<close_utilitybox />
+		</sheetdata>
+	</windowclass>
+</root>

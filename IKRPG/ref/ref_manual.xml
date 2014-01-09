@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="referencemanualarticle">
+		<sizelimits>
+			<minimum>
+				<height>22</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<hlink name="listlink" />
+			<hs name="keywords" />
+
+			<stringfield name="name">
+				<bounds>0,0,-1,18</bounds>
+				<font>reference-article</font>
+				<script>
+					function onClickDown(button, x, y)
+						return true;
+					end
+
+					function onClickRelease(button, x, y)
+						activate();
+						return true;
+					end
+					
+					function activate()
+						local myclass, myrecord = window.listlink.getValue();
+						local mypagelist = window.windowlist.window.windowlist.window.windowlist.window.pagelist;
+						mypagelist.closeAll();
+						mypagelist.createWindowWithClass(myclass, myrecord); 
+						mypagelist.setScrollPosition(0,0);
+					end
+				</script>
+			</stringfield>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_manualtextwide">
+		<sizelimits>
+			<minimum>
+				<height>25</height>
+			</minimum>
+			<maximum>
+				<height>10000</height>
+			</maximum>
+		</sizelimits>
+		<sheetdata>
+			<link_control name="open">
+				<bounds>5,5,20,20</bounds>
+				<class>referencetextwide</class>
+			</link_control>
+
+			<stringfield name="name">
+				<bounds>30,6,-25,20</bounds>
+				<font>reference-h</font>
+				<nodragselect />
+				<nodrag />
+				<static />
+			</stringfield>
+			
+			<referenceformattedtextfield name="text">
+				<anchored>
+					<top><offset>30</offset></top>
+					<left><offset>10</offset></left>
+					<right><offset>-10</offset></right>
+				</anchored>
+				<footer>footer_wide</footer>
+			</referenceformattedtextfield>
+			
+			<spacer>
+				<anchor>text</anchor>
+				<height>30</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="referencemanualsection">
+		<sizelimits>
+			<minimum>
+				<height>25</height>
+			</minimum>
+			<maximum>
+				<height>10000</height>
+			</maximum>
+		</sizelimits>
+		<sheetdata>
+			<hnc name="suppress" />
+
+			<genericcontrol name="sectionframe">
+				<bounds>0,1,-1,-1</bounds>
+				<frame>
+					<name>reference-section</name>
+				</frame>
+			</genericcontrol>
+			<stringfield name="name">
+				<bounds>2,4,-1,15</bounds>
+				<font>reference-section</font>
+				<static />
+				<script>
+					function onClickDown(button, x, y)
+						return true;
+					end
+
+					function onClickRelease(button, x, y)
+						window.article.setVisible(not window.article.isVisible());
+						if window.article.isVisible() then
+							local aTopics = window.article.getWindows();
+							if #aTopics == 1 then
+								aTopics[1].name.activate();
+							end
+						end
+						return true;
+					end
+				</script>
+			</stringfield>
+			<windowlist name="article">
+				<bounds>20,30,-20,-1</bounds>
+				<datasource>.article</datasource>
+				<class>referencemanualarticle</class>
+				<noscroll />
+				<invisible />
+				<script file="ref/scripts/ref_list.lua" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="referencemanualchapter">
+		<sizelimits>
+			<minimum>
+				<height>35</height>
+			</minimum>
+			<maximum>
+				<height>10000</height>
+			</maximum>
+		</sizelimits>
+		<sheetdata>
+			<hnc name="suppress" />
+
+			<genericcontrol name="chapterframe">
+				<bounds>0,1,-1,-1</bounds>
+				<frame>
+					<name>reference-chapter</name>
+				</frame>
+			</genericcontrol>
+
+			<stringfield name="name">
+				<bounds>2,7,-1,15</bounds>
+				<font>reference-chapter</font>
+				<static />
+				<script>
+					function onClickDown(button, x, y)
+						return true;
+					end
+
+					function onClickRelease(button, x, y)
+						window.section.setVisible(not window.section.isVisible());
+						return true;
+					end
+				</script>
+			</stringfield>
+			<windowlist name="section">
+				<bounds>20,32,-20,-1</bounds>
+				<datasource>.section</datasource>
+				<class>referencemanualsection</class>
+				<noscroll />
+				<invisible />
+				<script>
+					function onFilter(w)
+						if w.suppress.getValue() == 1 then
+							return false;
+						end						
+						return true;
+					end
+				</script>
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_manual">
+		<frame>utilitybox</frame>
+		<placement>
+			<width>950</width>
+			<height>450</height>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>950</width>
+				<height>450</height>
+			</minimum>
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<sheetdata>
+			<!-- TITLE -->
+			<windowtitlebar>
+				<title>
+					<text>Reference</text>
+				</title>
+			</windowtitlebar>
+
+			<!-- CHAPTER/SECTION -->		
+			<list_refsections name="sectionlist">
+				<class>referencemanualchapter</class>
+				<datasource>.chapter</datasource>
+				<script>
+					function onFilter(w)
+						if w.suppress.getValue() == 1 then
+							return false;
+						end						
+						return true;
+					end
+				</script>
+			</list_refsections>
+			<scrollbar_refsections />
+
+			<!-- ARTICLE -->		
+			<list_refpages name="pagelist">
+				<datasource />
+				<class>reference_manualtextwide</class>
+			</list_refpages>
+			<scrollbar_refpages />
+
+			<!-- CONTROLS -->		
+			<filter_refsections name="filter">
+				<target>sectionlist.section.article</target>
+				<script>
+					function onValueChanged()
+				  		if super and super.onValueChanged then
+   							super.onValueChanged();
+  						end
+  						
+						local f = getValue();
+						
+  						for _, winChapter in pairs(window.sectionlist.getWindows()) do
+							local bShowChapter = false;
+
+							for _, winSection in pairs(winChapter.section.getWindows()) do
+								local bShowSection = false;
+
+								for _, winTopic in pairs(winSection.article.getWindows()) do
+									if string.find(string.lower(winTopic.keywords.getValue()), f, 0, true) then
+										bShowSection = true;
+									end									
+								end
+
+								if bShowSection then
+									bShowChapter = true;
+									winSection.suppress.setValue(0);
+								else
+									winSection.suppress.setValue(1);
+								end
+							end
+
+							winChapter.section.applyFilter()
+							
+							if bShowChapter then
+								winChapter.suppress.setValue(0);
+							else
+								winChapter.suppress.setValue(1);
+							end
+  						end
+  							
+						window.sectionlist.applyFilter()            
+					end				
+				</script>
+			</filter_refsections>
+			<button_filter_refsections name="filtertrigger" />
+			<button_expandsections>
+				<targets>sectionlist,section,article</targets>
+			</button_expandsections>
+			<button_collapsesections>
+				<targets>sectionlist,section,article</targets>
+			</button_collapsesections>
+
+			<resize_utilitybox  />
+			<close_utilitybox />
+		</sheetdata>
+	</windowclass>
+</root>

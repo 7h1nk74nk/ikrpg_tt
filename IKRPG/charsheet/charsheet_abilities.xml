@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+	<windowclass name="charsheet_abilities">
+		<placement>
+			<size>
+				<width>252</width>
+				<height>611</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+		
+			<!-- ABILITIES -->
+			
+			 <frame_char name="featframe">
+				<bounds>15,5,400,260</bounds>
+			</frame_char>
+            
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>ABILITIES</static>
+            <anchored>
+                <to>featframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			
+			<list_charabilities name="featlist">
+				<anchored>
+					<to>featframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<datasource>.featlist</datasource>
+				<class>charsheet_abilityitem</class>
+			</list_charabilities>
+			<scrollbar_charlist>
+				<anchored>
+					<to>featlist</to>
+				</anchored>
+				<target>featlist</target>
+			</scrollbar_charlist>
+			
+			
+			<!-- ARCHTYPE -->	
+			
+			 <frame_char name="abilityframe">
+				<bounds>15,270,330,260</bounds>
+			</frame_char>
+            
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>ARCHTYPE BENEFITS</static>
+            <anchored>
+                <to>abilityframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+            
+            <windowlist name="abilitylist">
+				<anchored>
+					<to>abilityframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<datasource>.abilitylist</datasource>
+				<class>charsheet_ability</class>
+                
+				<sortby><control>order</control></sortby>
+				<script file="charsheet/scripts/charsheet_abilitylist.lua" />                
+			</windowlist>
+			<scrollbar_charlist>
+				<anchored>
+					<to>abilitylist</to>
+                    <offset>-5,-10</offset>
+				</anchored>
+				<target>abilitylist</target>
+			</scrollbar_charlist>
+
+	
+		</sheetdata>
+	</windowclass>
+</root>

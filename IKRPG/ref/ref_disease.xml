@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="diseasedesc">
+		<script>
+			function onInit()
+				self.onSizeChanged = sizeChanged;
+			end
+
+			function sizeChanged()
+				local winwidth, winheight = getSize();
+
+				local defwidth = math.floor((winwidth - 140) / 4);
+
+				if defwidth ~= stage000.getSize() then
+					stage000.setAnchoredWidth(defwidth);
+					stage001.setAnchoredWidth(defwidth);
+					stage002.setAnchoredWidth(defwidth);
+					stage003.setAnchoredWidth(defwidth);
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_refflavor name="flavor" />
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>10</height>
+			</spacer>
+
+			<stringcontrol name="attackview">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<relation>relative</relation>
+						<anchor>bottom</anchor>
+						<offset>7</offset>
+					</top>
+					<left><offset>87</offset></left>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>7,7,7,5</offset>
+				</frame>
+				<font>reference-b</font>
+				<static />
+				<script>
+					function onInit()
+						setHoverCursor("hand");
+						update();
+					end
+					
+					function update()
+						local powerattacknode = window.getDatabaseNode().getChild("attacks.id-00001");
+						local s = "";
+
+						local statval = DB.getValue(powerattacknode, "attackstat", "");
+						if statval ~= "" then
+							s = s .. string.upper(string.sub(statval, 1, 1)) .. string.sub(statval, 2, 3);
+						end
+
+						local nMod = DB.getValue(powerattacknode, "attackstatmodifier", 0);
+						s = s .. string.format("%+1d", nMod);
+
+						local def = DB.getValue(powerattacknode, "attackdef", "");
+						s = s .. " vs. ";
+						if def == "ac" then
+							s = s .. string.upper(def);
+						elseif def == "reflex" then
+							s = s .. string.upper(string.sub(def, 1, 1)) .. string.sub(def, 2, 3);
+						elseif def ~= "" then
+							s = s .. string.upper(string.sub(def, 1, 1)) .. string.sub(def, 2, 4);
+						else
+							s = s .. "-";
+						end
+						
+						setValue(s);
+					end
+
+					function buildDiseaseAttackStructures()
+						local nodeDisease = window.getDatabaseNode();
+						local nodeAttack = nodeDisease.getChild("attacks").getChild("id-00001");
+
+						local rAction = {};
+						rAction.type = "attack";
+						rAction.name = DB.getValue(nodeDisease, "name", "");
+						rAction.range = "";
+						rAction.defense = DB.getValue(nodeAttack, "attackdef", "");
+
+						local rAbilityClause = {};
+						rAbilityClause.stat = {};
+						rAbilityClause.mod = DB.getValue(nodeAttack, "attackstatmodifier", 0);
+
+						rAction.clauses = { rAbilityClause };
+
+						return rAction;
+					end			
+
+					function action(draginfo)
+						local rAction = buildDiseaseAttackStructures();
+						ActionAttack.performRoll(draginfo, nil, rAction);
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+
+					function onDoubleClick(x,y)
+						return action();
+					end
+				</script>
+			</stringcontrol>
+			<label_column>
+				<anchor>attackview</anchor>
+				<static>Attack</static>
+			</label_column>
+
+			<number_column name="stable" />
+			<label_column>
+				<anchor>stable</anchor>
+				<static>Stable DC</static>
+			</label_column>
+			<number_column name="improve" />
+			<label_column>
+				<anchor>improve</anchor>
+				<static>Improve DC</static>
+			</label_column>
+
+			<stringfield name="stage000">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<relation>relative</relation>
+						<anchor>bottom</anchor>
+						<offset>10</offset>
+					</top>
+					<left />
+					<size>
+						<width>140</width>
+					</size>
+				</anchored>
+				<multilinespacing>16</multilinespacing>
+				<font>reference-r</font>
+				<selectioncolor>#FFD296</selectioncolor>
+			</stringfield>
+			<stringfield name="stage001">
+				<anchored>
+					<top>
+						<parent>stage000</parent>
+					</top>
+					<left>
+						<parent>stage000</parent>
+						<anchor>right</anchor>
+						<offset>35</offset>
+					</left>
+					<size>
+						<width>140</width>
+					</size>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<font>reference-r</font>
+				<selectioncolor>#FFD296</selectioncolor>
+			</stringfield>
+			<stringfield name="stage002">
+				<anchored>
+					<top>
+						<parent>stage000</parent>
+					</top>
+					<left>
+						<parent>stage001</parent>
+						<anchor>right</anchor>
+						<offset>70</offset>
+					</left>
+					<size>
+						<width>140</width>
+					</size>
+				</anchored>
+				<font>reference-r</font>
+				<multilinespacing>20</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+			</stringfield>
+			<stringfield name="stage003">
+				<anchored>
+					<top>
+						<parent>stage000</parent>
+					</top>
+					<left>
+						<parent>stage002</parent>
+						<anchor>right</anchor>
+						<offset>35</offset>
+					</left>
+					<size>
+						<width>140</width>
+					</size>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<font>reference-r</font>
+				<selectioncolor>#FFD296</selectioncolor>
+			</stringfield>
+
+			<genericcontrol name="left1">
+				<anchored>
+					<to>stage000</to>
+					<position>righthigh</position>
+					<offset>5,0</offset>
+					<size>
+						<height>25</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<icon>arrowleft</icon>
+			</genericcontrol>
+			<genericcontrol name="left2">
+				<anchored>
+					<to>stage001</to>
+					<position>righthigh</position>
+					<offset>5,0</offset>
+					<size>
+						<height>25</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<icon>arrowleft</icon>
+			</genericcontrol>
+			<genericcontrol name="right1">
+				<anchored>
+					<to>left2</to>
+					<position>righthigh</position>
+					<offset>5,0</offset>
+					<size>
+						<height>25</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<icon>arrowright</icon>
+			</genericcontrol>
+			<genericcontrol name="right2">
+				<anchored>
+					<to>stage002</to>
+					<position>righthigh</position>
+					<offset>5,0</offset>
+					<size>
+						<height>25</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<icon>arrowright</icon>
+			</genericcontrol>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_disease">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>600</width>
+				<height>350</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>500</width>
+			</minimum>
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name">
+				<anchored>
+					<right>
+						<offset>-130</offset>
+					</right>
+				</anchored>
+				<color>#FFFFFFFF</color>
+				<frame>
+					<name>headerdisease</name>
+					<offset>40,10,130,10</offset>
+				</frame>
+			</string_name_static>
+			<link_tl>
+				<class>reference_disease</class>
+			</link_tl>
+			<stringc_level_label>
+				<static>Disease Level</static>
+			</stringc_level_label>
+			<number_leveltop name="level" />
+
+			<sub_refcontent name="content">
+				<class>diseasedesc</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

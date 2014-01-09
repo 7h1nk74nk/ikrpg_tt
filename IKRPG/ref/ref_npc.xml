@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_npctemplate">
+		<frame>campaignframe</frame>
+		<placement>
+			<size>
+				<width>500</width>
+				<height>430</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>385</width>
+				<height>300</height>
+			</minimum>
+			<maximum>
+				<height>1200</height>
+			</maximum>
+		</sizelimits>
+		<minimize>minimized_npc</minimize>
+		<nodelete />
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script file="campaign/scripts/campaign_npc_top.lua" />
+		<sheetdata>
+			<genericcontrol name="controlframe">
+				<bounds>1,-35,-4,-1</bounds>
+				<frame>
+					<name>campaigncontrolframe</name>
+				</frame>
+				<disabled />
+			</genericcontrol>
+			<button_checkbox name="locked">
+				<bounds>5,-27,20,20</bounds>
+				<parameters>
+					<icons>indicator_padlock_closed</icons>
+					<tooltips>Fields locked</tooltips>
+					<defaulticon>indicator_padlock_open</defaulticon>
+					<defaulttooltip>Fields unlocked</defaulttooltip>
+				</parameters>
+				<sourceless />
+				<script>
+					function onValueChanged()
+						window.StateChanged();
+					end
+				</script>
+			</button_checkbox>
+			<genericcontrol name="hardlocked">
+				<bounds>5,-27,20,20</bounds>
+				<icon>indicator_padlock_closed_red</icon>
+			</genericcontrol>
+			<radio_campaign_npctype name="npctype">
+				<anchored>
+					<top>
+						<parent>controlframe</parent>
+						<offset>10</offset>
+					</top>
+					<left>
+						<parent>controlframe</parent>
+						<anchor>center</anchor>
+						<offset>-120</offset>
+					</left>
+					<size><height>15</height></size>
+				</anchored>
+				<script>
+					function onValueChanged()
+						window.TypeChanged();
+					end
+				</script>
+			</radio_campaign_npctype>
+
+			<!-- HEADER -->
+			<genericcontrol name="header">
+				<anchored>
+					<top />
+					<left />
+					<right><offset>-4</offset></right>
+					<size><height>50</height></size>
+				</anchored>
+				<frame>
+					<name>headernpc</name>
+				</frame>
+			</genericcontrol>
+			<token_npc name="token" />
+			
+			<link_campaign3>
+				<class>npc</class>
+			</link_campaign3>
+			<basicstringw name="levelrole">
+				<anchored>
+					<top><offset>8</offset></top>
+					<right><offset>-34</offset></right>
+				</anchored>
+				<empty>&#171; Level/Role &#187;</empty>
+				<font>reference-b-large</font>
+				<nodrag />
+			</basicstringw>
+			<basicstringw name="name">
+				<anchored>
+					<top><offset>8</offset></top>
+					<left><offset>66</offset></left>
+					<right>
+						<parent>levelrole</parent>
+						<anchor>left</anchor>
+						<offset>-3</offset>
+					</right>
+				</anchored>
+				<empty>&#171; New Personality &#187;</empty>
+				<font>reference-b-large</font>
+				<nodrag />
+			</basicstringw>
+
+			<basicstringw name="type">
+				<anchored>
+					<top><offset>30</offset></top>
+					<left><offset>43</offset></left>
+					<right><offset>-120</offset></right>
+				</anchored>
+				<empty>&#171; Type &#187;</empty>
+				<font>reference-b</font>
+				<nodrag />
+			</basicstringw>
+			<basicstringw name="xp">
+				<bounds>-85,30,50,15</bounds>
+				<font>reference-b</font>
+			</basicstringw>
+			<label_npc name="xp_label">
+				<bounds>-110,30,20,15</bounds>
+				<color>FFFFFFFF</color>
+				<static>XP</static>
+			</label_npc>
+			
+			<button_activateid>
+				<bounds>-30,24,23,22</bounds>
+			</button_activateid>
+
+			<!-- CONTENT -->
+			<genericcontrol name="contentframe">
+				<anchored>
+					<top>
+						<parent>header</parent>
+						<anchor>bottom</anchor>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right><offset>-28</offset></right>
+					<bottom><offset>-37</offset></bottom>
+				</anchored>
+			</genericcontrol>
+
+			<subwindow_details name="main_creature">
+				<class>npc_combat_template</class>
+			</subwindow_details>
+			<subwindow_details name="main_trap">
+				<class>npc_combat_trap</class>
+			</subwindow_details>
+			<subwindow_details name="main_vehicle">
+				<class>npc_combat_vehicle</class>
+			</subwindow_details>
+
+			<ft_campaigndesc name="text">
+				<anchored>
+					<to>contentframe</to>
+					<top />
+					<left><offset>10</offset></left>
+					<right />
+					<bottom />
+				</anchored>
+				<invisible />
+			</ft_campaigndesc>
+
+			<scrollbar_details>
+				<target>main_creature</target>
+			</scrollbar_details>
+			<scrollbar_details>
+				<target>main_trap</target>
+			</scrollbar_details>
+			<scrollbar_details>
+				<target>main_vehicle</target>
+			</scrollbar_details>
+			<scrollbar_details>
+				<target>text</target>
+			</scrollbar_details>
+
+			<buttongroup_tabs name="tabs">
+				<anchored>
+					<right><offset>1</offset></right>
+				</anchored>
+				<tab>
+					<icon>tab_main</icon>
+					<subwindow>main_creature</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_other</icon>
+					<subwindow>text</subwindow>
+				</tab>
+			</buttongroup_tabs>
+			
+			<resize_campaignframe />
+			<close_campaign_tabbed />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_npcaltpower_stats">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_column name="recharge" />
+			<label_column>
+				<anchor>recharge</anchor>
+				<static>Recharge</static>
+			</label_column>
+			<string_column name="action" />
+			<label_column>
+				<anchor>action</anchor>
+				<static>Action</static>
+			</label_column>
+			<string_column name="range" />
+			<label_column>
+				<anchor>range</anchor>
+				<static>Range</static>
+			</label_column>
+			<string_column name="keywords" />
+			<label_column>
+				<anchor>keywords</anchor>
+				<static>Keywords</static>
+			</label_column>
+			
+			<string_powerdesc_npc name="shortdescription">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>10</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<frame />
+				<script>
+					function onInit()
+						super.onInit();
+						
+						if getDatabaseNode().isReadOnly() then
+							if getValue() == "" then
+								setVisible(false);
+							end
+						end
+					end
+				</script>
+			</string_powerdesc_npc>
+			
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="reference_npcaltpower">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>340</width>
+				<height>280</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>340</width>
+				<height>410</height>
+			</minimum>
+		</sizelimits>
+		<minimize>minimized_npc</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name">
+				<anchored>
+					<offset>70,10</offset>
+				</anchored>
+				<frame>
+					<name>headergray</name>
+					<offset>70,10,20,10</offset>
+				</frame>
+			</string_name_static>
+			<link_tl name="link">
+				<class>reference_npcaltpower</class>
+			</link_tl>
+			<cycler_powertype name="powertype">
+				<bounds>40,8,20,20</bounds>
+			</cycler_powertype>
+
+			<sub_refcontent name="content">
+				<class>reference_npcaltpower_stats</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

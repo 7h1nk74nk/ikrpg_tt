@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="item_powerlistitem">
+		<sizelimits>
+			<minimum>
+				<height>18</height>
+			</minimum>
+		</sizelimits>
+		<script file="campaign/scripts/campaign_item_powerlistitem.lua" />
+		<sheetdata>
+			<hs name="source">
+				<static>Item</static>
+			</hs>
+			
+			<link_smart name="link">
+				<bounds>-22,2,20,20</bounds>
+				<defaultclass>reference_power_custom</defaultclass>
+				<toggle />
+			</link_smart>
+			
+			<string_power name="name">
+				<anchored>
+					<top><offset>5</offset></top>
+					<left><offset>15</offset></left>
+					<right><offset>-30</offset></right>
+				</anchored>
+				<frame>
+					<name>tempmodsmall</name>
+					<offset>8,3,8,3</offset>
+				</frame>
+				<font>reference-r-large</font>
+				<empty>&#171; Name &#187;</empty>
+				<gmeditonly />
+				<script>
+					function onDoubleClick(x, y)
+						if OptionsManager.isOption("DCLK", "on") then
+							window.activatePower(true);
+						end
+					end
+					
+					function updateColor()
+						local rechargeval = string.lower(string.sub(window.recharge.getValue(),1,2));
+						if rechargeval == "en" then
+							setColor("FFCD2626");
+						elseif rechargeval == "at" then
+							setColor("FF006400");
+						else
+							setColor("FF000000");
+						end
+					end
+					
+					function onInit()
+						if super.onInit then
+							super.onInit();
+						end
+						updateColor();
+					end
+				</script>
+			</string_power>
+			
+			<string_power name="action">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left>
+						<parent>name</parent>
+					</left>
+					<size>
+						<width>115</width>
+					</size>
+				</anchored>
+				<empty>&#171; Action &#187;</empty>
+				<gmeditonly />
+			</string_power>
+			
+			<string_power name="recharge">
+				<anchored>
+					<top>
+						<parent>action</parent>
+					</top>
+					<left>
+						<parent>action</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<size>
+						<width>115</width>
+					</size>
+				</anchored>
+				<empty>&#171; Recharge &#187;</empty>
+				<script>
+					function onValueChanged()
+						window.name.updateColor();
+					end
+				</script>
+				<gmeditonly />
+			</string_power>
+			
+			<string_power name="range">
+				<anchored>
+					<top>
+						<parent>action</parent>
+					</top>
+					<left>
+						<parent>recharge</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<size>
+						<width>110</width>
+					</size>
+				</anchored>
+				<empty>&#171; Range &#187;</empty>
+				<gmeditonly />
+			</string_power>
+
+			<string_power name="keywords">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>3</offset>
+					</top>
+					<left>
+						<parent>name</parent>
+					</left>
+					<right>
+						<offset>-5</offset>
+					</right>
+				</anchored>
+				<empty>&#171; Keywords &#187;</empty>
+				<gmeditonly />
+			</string_power>
+
+			<string_powerdesc_pc name="shortdescription">
+				<anchored>
+					<top>
+						<parent>keywords</parent>
+						<anchor>bottom</anchor>
+						<offset>3</offset>
+					</top>
+					<left>
+						<parent>name</parent>
+					</left>
+					<right>
+						<offset>-5</offset>
+					</right>
+				</anchored>
+				<empty>&#171; Other &#187;</empty>
+				<gmeditonly />
+			</string_powerdesc_pc>
+
+			<spacer>
+				<anchor>shortdescription</anchor>
+				<height>7</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+</root>

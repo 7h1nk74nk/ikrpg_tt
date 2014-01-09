@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- WEAPON -->
+	<windowclass name="referenceweaponcontent">
+		<script>
+			function onInit()
+				label_type.setValue("[" .. prof.getValue() .. "; " .. type.getValue() .. "; " .. heft.getValue() .. "]");
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<hs name="type" />
+			<hs name="prof" />
+			<hs name="heft" />
+			<label_reftype name="label_type" />
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<height>5</height>
+				<relative />
+			</spacer>
+			
+			<number_column name="cost" />
+			<label_column>
+				<anchor>cost</anchor>
+				<static>Cost (gp)</static>
+			</label_column>
+			
+			<number_column name="weight">
+				<right />
+				<anchor>cost</anchor>
+			</number_column>
+			<label_column>
+				<right />
+				<anchor>weight</anchor>
+				<static>Weight (lb)</static>
+			</label_column>
+			
+			<line_column />
+			
+			<number_column name="profbonus">
+				<displaysign />
+			</number_column>
+			<label_column>
+				<anchor>profbonus</anchor>
+				<static>Prof.</static>
+			</label_column>
+			
+			<string_column name="damage" />
+			<label_column>
+				<anchor>damage</anchor>
+				<static>Damage</static>
+			</label_column>
+			
+			<number_column name="range" />
+			<label_column>
+				<anchor>range</anchor>
+				<static>Range</static>
+			</label_column>
+			
+			<string_column name="group" />
+			<label_column>
+				<anchor>group</anchor>
+				<static>Group</static>
+			</label_column>
+			
+			<string_column name="properties" />
+			<label_column>
+				<anchor>properties</anchor>
+				<static>Properties</static>
+			</label_column>
+			
+			<line_column name="line_desc"/>
+			
+			<label_refdesc name="label_desc" />
+			<ft_refdesc name="description">
+				<label>label_desc</label>
+				<separator>line_desc</separator>
+			</ft_refdesc>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="referenceweapon">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>350</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name" />
+			<link_tl name="open">
+				<class>referenceweapon</class>
+			</link_tl>
+
+			<sub_refcontent name="content">
+				<class>referenceweaponcontent</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+
+	<!-- ARMOR -->
+	<windowclass name="referencearmorcontent">
+		<script>
+			function onInit()
+				label_type.setValue("[" .. type.getValue() .. "]");
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<hs name="type" />
+			<label_reftype name="label_type" />
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<height>5</height>
+				<relative />
+			</spacer>
+			
+			<number_column name="cost" />
+			<label_column>
+				<anchor>cost</anchor>
+				<static>Cost (gp)</static>
+			</label_column>
+			
+			<number_column name="weight">
+				<right />
+				<anchor>cost</anchor>
+			</number_column>
+			<label_column>
+				<right />
+				<anchor>weight</anchor>
+				<static>Weight (lb)</static>
+			</label_column>
+			
+			<line_column />
+			
+			<number_column name="ac">
+				<displaysign />
+			</number_column>
+			<label_column>
+				<anchor>ac</anchor>
+				<static>Armor Bonus</static>
+			</label_column>
+			
+			<number_column name="min_enhance">
+				<displaysign />
+			</number_column>
+			<label_column>
+				<anchor>min_enhance</anchor>
+				<static>Min. Bonus</static>
+			</label_column>
+			
+			<number_column name="checkpenalty">
+				<displaysign />
+			</number_column>
+			<label_column>
+				<anchor>checkpenalty</anchor>
+				<static>Check Penalty</static>
+			</label_column>
+			
+			<number_column name="speed">
+				<displaysign />
+			</number_column>
+			<label_column>
+				<anchor>speed</anchor>
+				<static>Speed</static>
+			</label_column>
+			
+			<string_column name="special" />
+			<label_column>
+				<anchor>special</anchor>
+				<static>Special</static>
+			</label_column>
+
+			<line_column name="line_desc"/>
+			
+			<label_refdesc name="label_desc" />
+			<ft_refdesc name="description">
+				<label>label_desc</label>
+				<separator>line_desc</separator>
+			</ft_refdesc>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="referencearmor">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>350</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name" />
+			<link_tl name="open">
+				<class>referencearmor</class>
+			</link_tl>
+
+			<sub_refcontent name="content">
+				<class>referencearmorcontent</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+
+	<!-- EQUIPMENT -->
+	<windowclass name="referenceequipmentcontent">
+		<script>
+			function onInit()
+				label_type.setValue("[" .. type.getValue() .. "]");
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<hs name="type" />
+			<label_reftype name="label_type" />
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<height>5</height>
+				<relative />
+			</spacer>
+			
+			<number_column name="cost" />
+			<label_column>
+				<anchor>cost</anchor>
+				<static>Cost (gp)</static>
+			</label_column>
+			
+			<number_column name="weight">
+				<right />
+				<anchor>cost</anchor>
+			</number_column>
+			<label_column>
+				<right />
+				<anchor>weight</anchor>
+				<static>Weight (lb)</static>
+			</label_column>
+			
+			<line_column name="line_desc" />
+
+			<label_refdesc name="label_desc" />
+			<ft_refdesc name="description">
+				<label>label_desc</label>
+				<separator>line_desc</separator>
+			</ft_refdesc>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="referenceequipment">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>350</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name" />
+			<link_tl name="open">
+				<class>referenceequipment</class>
+			</link_tl>
+
+			<sub_refcontent name="content">
+				<class>referenceequipmentcontent</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

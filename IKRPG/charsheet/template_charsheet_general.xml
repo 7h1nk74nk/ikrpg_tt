@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="number_linked">
+		<number>
+			<readonly />
+			<source mergerule="resetandadd" />
+			<script file="charsheet/scripts/charsheet_linkednumber.lua" />
+		</number>
+	</template>
+	<template name="number_modifier">
+		<number_linked>
+			<readonly />
+			<script file="charsheet/scripts/charsheet_modifiernumber.lua" />
+		</number_linked>
+	</template>
+
+	<template name="number_charadd">
+		<basicnumber>
+			<font>sheetnumber</font>
+			<stateframe>
+				<drophilight>
+					<name>sheetfocusplus</name>
+					<offset>5,5,5,5</offset>
+				</drophilight>
+			</stateframe>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("number") then
+						setValue(getValue() + draginfo.getNumberData());
+						return true;
+					end
+				end
+			</script>
+		</basicnumber>
+	</template>
+	<template name="number_charadd_sm">
+		<number_charadd>
+			<font>sheetnumbersmall</font>
+		</number_charadd>
+	</template>
+	<template name="number_chartotal">
+		<number_modifier>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<readonly />
+			<showemptywidget />
+		</number_modifier>
+	</template>
+	<template name="number_chartotalnomod">
+		<number_linked>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<readonly />
+		</number_linked>
+	</template>
+	<template name="number_chartotalwithability">
+		<number_chartotal>
+			<ability mergerule="resetandadd" />
+			<script file="charsheet/scripts/charsheet_totalwithability.lua" />
+		</number_chartotal>
+	</template>
+	<template name="number_chartotalwithabilitynomod">
+		<number_chartotalnomod>
+			<ability mergerule="resetandadd" />
+			<script file="charsheet/scripts/charsheet_totalwithability.lua" />
+		</number_chartotalnomod>
+	</template>
+	
+	<template name="cycler_ability">
+		<button_stringcycler>
+			<font>sheettext</font>
+			<center />
+			<frame mergerule="replace">
+				<name>bonus</name>
+				<offset>6,6,6,6</offset>
+			</frame>
+			<stateframe mergerule="replace">
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,6,6,6</offset>
+				</hover>
+			</stateframe>
+			<parameters>
+				<labels mergerule="replace">PHY|SPD|STR|AGI|PRW|POW|INT|ARC|PER</labels>
+				<values mergerule="replace">PHY|SPD|STR|AGI|PRW|POW|INT|ARC|PER</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+	<template name="cycler_ability_sm">
+		<button_stringcycler>
+			<font>sheettextsmall</font>
+			<center />
+			<frame mergerule="replace">
+				<name>bonus</name>
+				<offset>6,5,6,5</offset>
+			</frame>
+			<stateframe mergerule="replace">
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,5,6,5</offset>
+				</hover>
+			</stateframe>
+			<parameters>
+				<labels mergerule="replace">Str|Dex|Con|Int|Wis|Cha</labels>
+				<values mergerule="replace">strength|dexterity|constitution|intelligence|wisdom|charisma</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+	<template name="cycler_defense">
+		<button_stringcycler>
+			<center />
+			<frame mergerule="replace">
+				<name>bonus</name>
+				<offset>6,6,6,6</offset>
+			</frame>
+			<stateframe mergerule="replace">
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,6,6,6</offset>
+				</hover>
+			</stateframe>
+			<parameters>
+				<defaultlabel mergerule="replace">-</defaultlabel>
+				<labels mergerule="replace">DEF|ARM|WILL</labels>
+				<values mergerule="replace">def|arm|will</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+	<template name="cycler_defense_sm">
+		<button_stringcycler>
+			<font>sheettextsmall</font>
+			<center />
+			<frame>
+				<name>bonus</name>
+				<offset>6,5,6,5</offset>
+			</frame>
+			<stateframe mergerule="replace">
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,5,6,5</offset>
+				</hover>
+			</stateframe>
+			<parameters>
+				<defaultlabel mergerule="replace">-</defaultlabel>
+				<labels mergerule="replace">AC|Fort|Ref|Will</labels>
+				<values mergerule="replace">ac|fortitude|reflex|will</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+
+	<template name="button_charfull">
+		<windowreferencecontrol>
+			<icon>
+				<normal>button_fullsheet</normal>
+				<pressed>button_fullsheet_down</pressed>
+			</icon>
+			<class>charsheet</class>
+			<tooltip>
+				<text>Full Sheet</text>
+			</tooltip>
+			<script>
+				function onClickRelease(button, x, y)
+					local wnd = WindowManager.toggle("charsheet", window.getDatabaseNode());
+					if wnd then
+						local tabindex = window.tabs.getIndex();
+						if tabindex == 1 then
+							wnd.tabs.activateTab(1);
+						elseif tabindex == 2 then
+							wnd.tabs.activateTab(4);
+						elseif tabindex == 3 then
+							wnd.tabs.activateTab(5);
+						elseif tabindex == 4 then
+							wnd.tabs.activateTab(7);
+						end
+					end
+					return true;
+				end
+			</script>
+		</windowreferencecontrol>
+	</template>
+	<template name="button_charmini">
+		<windowreferencecontrol>
+			<icon>
+				<normal>button_minisheet</normal>
+				<pressed>button_minisheet_down</pressed>
+			</icon>
+			<class>charsheetmini_top</class>
+			<tooltip>
+				<text>Mini sheet</text>
+			</tooltip>
+			<script>
+				function onClickRelease(button, x, y)
+					local wnd = WindowManager.toggle("charsheetmini_top", window.getDatabaseNode());
+					if wnd then
+						local tabindex = window.tabs.getIndex();
+						if tabindex == 1 or tabindex == 2 or tabindex == 6 then
+							wnd.tabs.activateTab(1);
+						elseif tabindex == 3 or tabindex == 4 then
+							wnd.tabs.activateTab(2);
+						elseif tabindex == 5 then
+							wnd.tabs.activateTab(3);
+						elseif tabindex == 7 then
+							wnd.tabs.activateTab(4);
+						end
+					end
+					return true;
+				end
+			</script>
+		</windowreferencecontrol>
+	</template>
+</root>

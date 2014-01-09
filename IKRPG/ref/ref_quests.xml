@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="quest">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>350</width>
+				<height>350</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>350</width>
+				<height>350</height>
+			</minimum>
+		</sizelimits>
+		<sharable />
+		<minimize>minimized_item</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<basicstringw name="name">
+				<anchored>
+					<position>insidetopleft</position>
+					<offset>40,10</offset>
+					<right>
+						<offset>-90</offset>
+					</right>
+				</anchored>
+				<frame>
+					<name>headerquest</name>
+					<offset>40,10,90,30</offset>
+				</frame>
+				<font>reference-b-large</font>
+				<multilinespacing>18</multilinespacing>
+				<empty>&#171; New Quest &#187;</empty>
+			</basicstringw>
+			<link_tl>
+				<class>quest</class>
+			</link_tl>
+			
+			<button_stringcycler name="type">
+				<anchored>
+					<left><offset>40</offset></left>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<offset>5</offset>
+					</top>
+					<size>
+						<height>15</height>
+						<width>30</width>
+					</size>
+				</anchored>
+				<stateframe>
+					<hover>
+						<name>whitesheetfocus</name>
+						<offset>6,5,6,5</offset>
+					</hover>
+				</stateframe>
+				<font>reference-r</font>
+				<color>FFFFFF</color>
+				<parameters>
+					<defaultlabel>Minor</defaultlabel>
+					<labels>Major</labels>
+					<values>Major</values>
+				</parameters>		
+			</button_stringcycler>
+			<stringcontrol>
+				<anchored>
+					<left><offset>75</offset></left>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<offset>5</offset>
+					</top>
+				</anchored>
+				<font>reference-r</font>
+				<color>FFFFFF</color>
+				<empty>Quest</empty>
+				<disabled />
+			</stringcontrol>
+			<stringc_level_label>
+				<anchored>
+					<right><offset>-60</offset></right>
+				</anchored>
+			</stringc_level_label>
+			<basicnumberw name="level">
+				<anchored>
+					<top><offset>10</offset></top>
+					<left>
+						<anchor>right</anchor>
+						<offset>-55</offset>
+					</left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+			</basicnumberw>
+			<stringcontrol>
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<offset>5</offset>
+					</top>
+					<right>
+						<offset>-72</offset>
+					</right>
+					<size>
+						<height>15</height>
+					</size>
+				</anchored>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+				<static>XP</static>
+			</stringcontrol>
+			<basicnumberw name="xp">
+				<anchored>
+					<left>
+						<anchor>right</anchor>
+						<offset>-65</offset>
+					</left>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<offset>3</offset>
+					</top>
+					<size>
+						<width>60</width>
+						<height>16</height>
+					</size>
+				</anchored>
+			</basicnumberw>
+			
+			<ft_ps_framed name="description">
+				<anchored>
+					<left><offset>15</offset></left>
+					<top>
+						<parent>name</parent>
+						<offset>40</offset>
+						<anchor>bottom</anchor>
+					</top>
+					<right><offset>-20</offset></right>
+					<bottom><offset>-15</offset></bottom>
+				</anchored>
+			</ft_ps_framed>
+			<scrollbar_ps>
+				<anchored><to>description</to></anchored>
+				<target>description</target>
+			</scrollbar_ps>
+			
+			<resize />
+			<close />
+		</sheetdata>	
+	</windowclass>
+</root>

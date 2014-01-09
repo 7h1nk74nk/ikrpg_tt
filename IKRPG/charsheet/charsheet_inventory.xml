@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_inventoryitem">
+		<sizelimits>
+			<minimum>
+				<height>18</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function onInit()
+				local nodeItem = getDatabaseNode();
+				if nodeItem then
+					nodeItem.onDelete = onDelete;
+				end
+				
+				onIDChanged();
+			end
+
+			function onDelete(node)
+				CharManager.removeItemFromWeaponDB(node);
+			end
+			
+			function onIDChanged()
+				local bID = true;
+				if OptionsManager.isOption("MIID", "on") then
+					bID = isidentified.getValue();
+				end
+				name.setVisible(bID ~= 0);
+				nonid_name.setVisible(bID == 0);
+			end
+		</script>
+		<sheetdata>
+			<hn name="isidentified">
+				<default>1</default>
+				<script>
+					function onValueChanged()
+						window.onIDChanged();
+					end
+				</script>
+			</hn>
+
+			<number_charinv name="count">
+				<bounds>2,3,20,14</bounds>
+			</number_charinv>
+			<string_charinvname name="name">
+				<anchored>
+					<top><offset>2</offset></top>
+					<left><offset>30</offset></left>
+					<right><offset>-190</offset></right>
+					<size><height>16</height></size>
+				</anchored>
+			</string_charinvname>
+			<string_charinvname name="nonid_name">
+				<anchored>
+					<top><offset>2</offset></top>
+					<left><offset>30</offset></left>
+					<right><offset>-190</offset></right>
+					<size><height>16</height></size>
+				</anchored>
+				<empty>Unidentified Item</empty>
+				<invisible />
+			</string_charinvname>
+			<string_charinvloc name="location">
+				<bounds>-185,2,80,16</bounds>
+			</string_charinvloc>
+			<number_charinv name="weight">
+				<bounds>-98,3,30,14</bounds>
+			</number_charinv>
+			<button_checkbox name="carried">
+				<bounds>-58,4,12,12</bounds>
+				<checked />
+				<script>
+					function onValueChanged()
+						if window.name.getValue() ~= "" then
+							for _,v in ipairs(window.windowlist.getWindows()) do
+								if v.location.getValue() == window.name.getValue() then
+									v.carried.setState(getState());
+								end
+							end
+						end
+					
+						local nodeWin = window.getDatabaseNode();
+						if nodeWin then
+							CharManager.updateEncumbrance(nodeWin.getChild("..."));
+						end
+					end
+				</script>
+			</button_checkbox>
+			<button_checkbox name="showonminisheet">
+				<bounds>-39,4,12,12</bounds>
+				<checked />
+			</button_checkbox>
+			<link_control name="shortcut">
+				<bounds>-22,0,20,20</bounds>
+				<class>item</class>
+			</link_control>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charsheet_inventory">
+		<placement>
+			<size>
+				<width>252</width>
+				<height>611</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+		
+			<!-- Inventory -->
+			<frame_char name="inventoryframe">
+				<bounds>15,5,400,325</bounds>
+			</frame_char>
+
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>INVENTORY</static>
+            <anchored>
+                <to>inventoryframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<label_sm>
+				<anchored>
+					<to>inventoryframe</to>
+					<position>insidetopleft</position>
+					<offset>25,17</offset>
+				</anchored>
+				<static>#</static>
+			</label_sm>
+			<label_sm>
+				<anchored>
+					<to>inventoryframe</to>
+					<position>insidetopleft</position>
+					<offset>45,17</offset>
+				</anchored>
+				<static>Name</static>
+			</label_sm>
+			<label_sm>
+				<anchored>
+					<to>inventoryframe</to>
+					<position>insidetopleft</position>
+					<offset>200,17</offset>
+				</anchored>
+				<static>Location</static>
+			</label_sm>
+			<label_sm>
+				<anchored>
+					<to>inventoryframe</to>
+					<position>insidetopleft</position>
+					<offset>285,17</offset>
+				</anchored>
+				<static>Weight</static>
+			</label_sm>
+			<genericcontrol>
+				<anchored>
+					<to>inventoryframe</to>
+					<position>insidetopleft</position>
+					<offset>328,17</offset>
+					<size>
+						<width>10</width>
+						<height>10</height>
+					</size>
+				</anchored>
+				<icon>indicator_encumbrance</icon>
+				<tooltip>
+					<text>Apply weight to encumbrance</text>
+				</tooltip>
+			</genericcontrol>
+			<genericcontrol>
+				<anchored>
+					<to>inventoryframe</to>
+					<position>insidetopleft</position>
+					<offset>347,17</offset>
+					<size>
+						<width>10</width>
+						<height>10</height>
+					</size>
+				</anchored>
+				<icon>indicator_quicklist</icon>
+				<tooltip>
+					<text>Show on mini sheet</text>
+				</tooltip>
+			</genericcontrol>
+			
+			<list_charinv name="inventorylist">
+				<anchored>
+					<to>inventoryframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+			</list_charinv>
+			<scrollbar_charlist>
+				<anchored>
+					<to>inventorylist</to>
+				</anchored>
+				<target>inventorylist</target>
+			</scrollbar_charlist>
+
+			<!-- Armor -->
+			
+			<frame_char name="acpenaltyframe">
+				<bounds>15,335,240,75</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>ARMOR / SHIELD</static>
+            <anchored>
+                <to>acpenaltyframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>	
+			
+			<basicnumber name="armordefmodifier" source="encumbrance.armordefmodifier">
+				<anchored>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>160,40</offset>
+					<size>
+						<width>55</width>
+					</size>
+				</anchored>
+			</basicnumber>
+			
+			<label_sm>
+				<anchored>
+					<to>armordefmodifier</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>DEF Modifier</static>
+			</label_sm>
+			
+			<basicnumber name="armorspdmodifier" source="encumbrance.srmorspdmodifier">
+				<anchored>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>90,40</offset>
+					<size>
+						<width>55</width>
+					</size>
+				</anchored>
+			</basicnumber>
+			
+			<label_sm>
+				<anchored>
+					<to>armorspdmodifier</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>SPD Modifier</static>
+			</label_sm>
+
+			<basicnumber name="armorarmmodifier" source="encumbrance.srmorarmmodifier">
+				<anchored>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>20,40</offset>
+					<size>
+						<width>55</width>
+					</size>
+				</anchored>
+			</basicnumber>
+			
+			<label_sm>
+				<anchored>
+					<to>armorarmmodifier</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>ARM Modifier</static>
+			</label_sm>
+			
+			<!-- Encumbrance -->
+			<frame_char name="encumbranceframe">
+				<bounds>15,415,240,120</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>ENCUMBRANCE</static>
+            <anchored>
+                <to>encumbranceframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<basicnumber name="encumbranceload" source="encumbrance.load">
+				<anchored>
+					<to>encumbranceframe</to>
+					<position>insidetopleft</position>
+					<offset>20,38</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+			</basicnumber>
+			
+			<label_sm>
+				<anchored>
+					<to>encumbranceload</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>Current Weight</static>
+			</label_sm>
+			
+			<basicnumber name="encumbrancefatigue" source="encumbrance.fatigue">
+				<anchored>
+					<to>encumbranceframe</to>
+					<position>insidetopleft</position>
+					<offset>160,38</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+			</basicnumber>
+			
+			<label_sm>
+				<anchored>
+					<to>encumbrancefatigue</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>Fatigue Points</static>
+			</label_sm>
+			
+			<number_linked name="encumbrancenormalload" source="encumbrance.normalload">
+				<anchored>
+					<to>encumbranceframe</to>
+					<position>insidetopleft</position>
+					<offset>20,81</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+				<readonly />
+				<source>
+					<name>stats.str.score</name>
+					<op>+</op>
+				</source>
+				<script>
+					function onSourceValue(source, sourcename)
+						if sourcename == "stats.str.score" then
+							return source.getValue() * 25;
+						end
+
+						return super.onSourceValue(source, sourcename);
+					end
+				</script>
+			</number_linked>
+			
+			<label_sm>
+				<anchored>
+					<to>encumbrancenormalload</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>Carry Limit</static>
+			</label_sm>
+
+			<number_linked name="encumbranceheavyload" source="encumbrance.heavyload">
+				<anchored>
+					<to>encumbrancenormalload</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>55</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+				<readonly />
+				<source>
+					<name>stats.str.score</name>
+					<op>+</op>
+				</source>
+				<script>
+					function onSourceValue(source, sourcename)
+						if sourcename == "stats.str.score" then
+							return source.getValue() * 75;
+						end
+
+						return super.onSourceValue(source, sourcename);
+					end
+				</script>
+			</number_linked>
+			
+			<label_sm>
+				<anchored>
+					<to>encumbranceheavyload</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>Lift Limit</static>
+			</label_sm>
+
+			<number_linked name="encumbrancedragload" source="encumbrance.dragload">
+				<anchored>
+					<to>encumbranceheavyload</to>
+					<position>right</position>
+					<offset>15,0</offset>
+					<size>
+						<width>55</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+				<readonly />
+				<source>
+					<name>stats.str.score</name>
+					<op>+</op>
+				</source>
+				<script>
+					function onSourceValue(source, sourcename)
+						if sourcename == "stats.str.score" then
+							return source.getValue() * 125;
+						end
+
+						return super.onSourceValue(source, sourcename);
+					end
+				</script>
+			</number_linked>
+			
+			<label_sm>
+				<anchored>
+					<to>encumbrancedragload</to>
+					<position>above</position>
+					<offset>10,2</offset>
+				</anchored>
+				<center />
+				<static>Drag Limit</static>
+			</label_sm>
+
+			<!-- Coins -->
+			<frame_char name="coinframe">
+				<bounds>260,335,155,200</bounds>
+			</frame_char>
+
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>WEALTH</static>
+            <anchored>
+                <to>coinframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+
+			<number_charadd_sm name="coinamount1" source="coins.slot1.amount">
+				<anchored>
+					<to>coinframe</to>
+					<position>insidetopleft</position>
+					<offset>15,33</offset>
+					<size>
+						<width>45</width>
+						<height>16</height>
+					</size>
+				</anchored>
+			</number_charadd_sm>
+			<stringu_sm name="coinname1" source="coins.slot1.name">
+				<anchored>
+					<to>coinframe</to>
+					<position>insidetopleft</position>
+					<offset>64,33</offset>
+					<size>
+						<width>65</width>
+						<height>18</height>
+					</size>
+				</anchored>
+			</stringu_sm>
+
+			<number_charadd_sm name="coinamount2" source="coins.slot2.amount">
+				<anchored>
+					<to>coinamount1</to>
+					<position>below</position>
+					<offset>0,8</offset>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+			</number_charadd_sm>
+			<stringu_sm name="coinname2" source="coins.slot2.name">
+				<anchored>
+					<to>coinname1</to>
+					<position>below</position>
+					<offset>0,7</offset>
+					<size>
+						<height>18</height>
+					</size>
+				</anchored>
+			</stringu_sm>
+
+			<number_charadd_sm name="coinamount3" source="coins.slot3.amount">
+				<anchored>
+					<to>coinamount2</to>
+					<position>below</position>
+					<offset>0,8</offset>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+			</number_charadd_sm>
+			<stringu_sm name="coinname3" source="coins.slot3.name">
+				<anchored>
+					<to>coinname2</to>
+					<position>below</position>
+					<offset>0,7</offset>
+					<size>
+						<height>18</height>
+					</size>
+				</anchored>
+			</stringu_sm>
+
+			<number_charadd_sm name="coinamount4" source="coins.slot4.amount">
+				<anchored>
+					<to>coinamount3</to>
+					<position>below</position>
+					<offset>0,8</offset>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+			</number_charadd_sm>
+			<stringu_sm name="coinname4" source="coins.slot4.name">
+				<anchored>
+					<to>coinname3</to>
+					<position>below</position>
+					<offset>0,7</offset>
+					<size>
+						<height>18</height>
+					</size>
+				</anchored>
+			</stringu_sm>
+
+			<number_charadd_sm name="coinamount5" source="coins.slot5.amount">
+				<anchored>
+					<to>coinamount4</to>
+					<position>below</position>
+					<offset>0,8</offset>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+			</number_charadd_sm>
+			<stringu_sm name="coinname5" source="coins.slot5.name">
+				<anchored>
+					<to>coinname4</to>
+					<position>below</position>
+					<offset>0,7</offset>
+					<size>
+						<height>18</height>
+					</size>
+				</anchored>
+			</stringu_sm>
+
+			<number_charadd_sm name="coinamount6" source="coins.slot6.amount">
+				<anchored>
+					<to>coinamount5</to>
+					<position>below</position>
+					<offset>0,8</offset>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+			</number_charadd_sm>
+			<stringu_sm name="coinname6" source="coins.slot6.name">
+				<anchored>
+					<to>coinname5</to>
+					<position>below</position>
+					<offset>0,7</offset>
+					<size>
+						<height>18</height>
+					</size>
+				</anchored>
+			</stringu_sm>
+			
+		</sheetdata>
+	</windowclass>
+</root>

@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Top level window backgrounds -->
+	<framedef name="chatbox">
+		<bitmap file="graphics/frames/chatbox.png" />
+		<topleft rect="0,0,150,150" />
+		<top rect="150,0,200,150" />
+		<topright rect="350,0,179,150" />
+		<left rect="0,150,150,200" />
+		<middle rect="150,150,200,200" />
+		<right rect="350,150,179,200" />
+		<bottomleft rect="0,350,150,180" />
+		<bottom rect="150,350,200,180" />
+		<bottomright rect="350,350,179,180" />
+		<insideoffset>0,0,11,13</insideoffset>
+	</framedef>
+
+	<framedef name="framebox">
+		<bitmap file="graphics/frames/framebox.png" />
+		<topleft rect="0,0,92,100" />
+		<top rect="92,0,346,100" />
+		<topright rect="438,0,100,100" />
+		<left rect="0,100,92,328" />
+		<middle rect="92,100,346,328" />
+		<right rect="438,100,100,328" />
+		<bottomleft rect="0,428,92,110" />
+		<bottom rect="92,428,346,110" />
+		<bottomright rect="438,428,100,110" />
+		<insideoffset>0,0,5,10</insideoffset>
+	</framedef>
+
+	<framedef name="storybox">
+		<bitmap file="graphics/frames/storybox.png" />
+		<offset>37,55,13,16</offset>
+		<insideoffset>0,0,4,3</insideoffset>
+	</framedef>
+
+	<framedef name="scrollboxfortabs">
+		<bitmap file="graphics/frames/scrollbox.png" />
+		<topleft rect="0,0,85,110" />
+		<top rect="85,0,385,110" />
+		<topright rect="470,0,85,110" />
+		<left rect="0,110,85,428" />
+		<middle rect="85,110,385,428" />
+		<right rect="470,110,85,428" />
+		<bottomleft rect="0,538,85,32" />
+		<bottom rect="85,538,385,32" />
+		<bottomright rect="470,538,85,32" />
+		<insideoffset>0,0,9,14</insideoffset>
+	</framedef>
+
+	<framedef name="imagebox">
+		<bitmap file="graphics/frames/imagebox.png" />
+		<offset>39,47,40,47</offset>
+		<insideoffset>0,0,18,19</insideoffset>
+	</framedef>
+
+	<framedef name="indexbox">
+		<bitmap file="graphics/frames/indexbox.png" />
+		<offset>65,72,72,73</offset>
+		<insideoffset>0,0,21,18</insideoffset>
+	</framedef>
+
+	<framedef name="tokenbag">
+		<bitmap file="graphics/frames/tokencase.png" />
+		<topleft rect="0,0,19,19" />
+		<top rect="19,0,290,19" />
+		<topright rect="309,0,29,19" />
+		<left rect="0,19,19,290" />
+		<middle rect="19,19,290,290" />
+		<right rect="309,19,29,290" />
+		<bottomleft rect="0,309,19,29" />
+		<bottom rect="19,309,290,29" />
+		<bottomright rect="309,309,29,29" />
+		<insideoffset>0,0,18,18</insideoffset>
+	</framedef>
+
+	<framedef name="charsheet">
+		<bitmap file="graphics/frames/charsheet.png" />
+		<offset>25,40,25,25</offset>
+		<insideoffset>0,0,7,7</insideoffset>
+	</framedef>
+	
+	<!-- Control component frames -->
+	<framedef name="chatboxhilight">
+		<bitmap file="graphics/frames/chatboxhilight.png" />
+		<offset>12,12,16,50</offset>
+	</framedef>
+
+	<framedef name="indexboxtitle">
+		<bitmap file="graphics/frames/indexboxtitle.png" />
+		<offset>36,0,35,0</offset>
+	</framedef>
+
+	<framedef name="tokenbagbar">
+		<bitmap file="graphics/frames/tokenbagbar.png" />
+		<left rect="0,0,98,49" />
+		<middle rect="98,0,49,49" />
+	</framedef>
+	
+	<framedef name="modstackfocus">
+		<bitmap file="graphics/frames/modstackfocus.png" />
+		<offset>9,9,9,9</offset>
+	</framedef>
+
+	<framedef name="lockedfield">
+		<bitmap file="graphics/frames/lockedfield.png" />
+		<middle rect="0,0,50,50" />
+	</framedef>
+	
+	<framedef name="searchframe">
+		<bitmap file="graphics/frames/search.png" />
+		<offset>42,0,2,0</offset>
+	</framedef>
+	
+	<framedef name="modifier">
+		<bitmap file="graphics/frames/modifier.png" />
+		<offset>7,7,8,8</offset>
+	</framedef>
+	
+	<framedef name="durationadjustment">
+		<bitmap file="graphics/frames/durationadjustment.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	
+	<framedef name="slottedmodifier">
+		<bitmap file="graphics/frames/slottedmodifier.png" />
+		<topleft rect="0,0,37,12" />
+		<top rect="37,0,160,12" />
+		<topright rect="212,0,12,12" />
+		<left rect="0,12,37,187" />
+		<middle rect="37,12,160,187" />
+		<right rect="212,12,12,187" />
+		<bottomleft rect="0,199,37,12" />
+		<bottom rect="37,199,160,12" />
+		<bottomright rect="212,199,12,12" />
+	</framedef>
+	
+	<framedef name="slottedbonus">
+		<bitmap file="graphics/frames/slottedbonus.png" />
+		<topleft rect="0,0,68,12" />
+		<top rect="68,0,128,12" />
+		<topright rect="212,0,12,12" />
+		<left rect="0,12,68,187" />
+		<middle rect="68,12,128,187" />
+		<right rect="212,12,12,187" />
+		<bottomleft rect="0,199,68,12" />
+		<bottom rect="68,199,128,12" />
+		<bottomright rect="212,199,12,12" />
+	</framedef>
+	
+	<framedef name="bonus">
+		<bitmap file="graphics/frames/bonus.png" />
+		<topleft rect="0,0,9,9" />
+		<top rect="9,0,205,9" />
+		<topright rect="214,0,9,9" />
+		<left rect="0,9,9,192" />
+		<middle rect="9,9,205,192" />
+		<right rect="214,9,9,192" />
+		<bottomleft rect="0,201,9,9" />
+		<bottom rect="9,201,205,9" />
+		<bottomright rect="214,201,9,9" />
+	</framedef>
+	
+	<framedef name="sheetfocus">
+		<bitmap file="graphics/frames/sheetfocus.png" />
+		<topleft rect="0,0,9,9" />
+		<top rect="9,0,205,9" />
+		<topright rect="214,0,9,9" />
+		<left rect="0,9,9,192" />
+		<middle rect="9,9,205,192" />
+		<right rect="214,9,9,192" />
+		<bottomleft rect="0,201,9,9" />
+		<bottom rect="9,201,205,9" />
+		<bottomright rect="214,201,9,9" />
+	</framedef>
+
+	<framedef name="sheetfocusplus">
+		<bitmap file="graphics/frames/sheetfocusplus.png" />
+		<topleft rect="0,0,9,9" />
+		<top rect="9,0,205,9" />
+		<topright rect="214,0,9,9" />
+		<left rect="0,9,9,192" />
+		<middle rect="9,9,205,192" />
+		<right rect="214,9,9,192" />
+		<bottomleft rect="0,201,9,9" />
+		<bottom rect="9,201,205,9" />
+		<bottomright rect="214,201,9,9" />
+	</framedef>
+
+	<framedef name="sheetgroup">
+		<bitmap file="graphics/frames/sheetgroup.png" />
+		<offset>10,10,10,7</offset>
+	</framedef>
+
+	<framedef name="separatorline">
+		<bitmap file="graphics/frames/textline.png" />
+		<middle rect="1,14,98,3" />
+	</framedef>
+	
+	<framedef name="textline">
+		<bitmap file="graphics/frames/textline.png" />
+		<middle rect="0,2,100,20" />
+	</framedef>
+
+	<framedef name="textlinesmall">
+		<bitmap file="graphics/frames/textline.png" />
+		<middle rect="0,2,100,14" />
+	</framedef>
+	
+	<framedef name="ctbox">
+		<bitmap file="graphics/frames/ctbox.png" />
+		<offset>54,77,50,73</offset>
+		<insideoffset>0,0,10,10</insideoffset>
+	</framedef>
+
+	<framedef name="ctwindow_sheetgroup">
+		<bitmap file="graphics/frames/ctwindow_sheetgroup.png" />
+		<offset>19,22,20,24</offset>
+	</framedef>
+	<framedef name="ct_subgroup">
+		<bitmap file="graphics/frames/ct_subgroup.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	
+	<framedef name="ctentrybox">
+		<bitmap file="graphics/frames/ctentrybox.png" />
+		<offset>32,7,8,9</offset>
+	</framedef>
+	<framedef name="ctentrybox_active">
+		<bitmap file="graphics/frames/ctentrybox_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_friend">
+		<bitmap file="graphics/frames/ctentrybox_friend.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_friend_active">
+		<bitmap file="graphics/frames/ctentrybox_friend_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_neutral">
+		<bitmap file="graphics/frames/ctentrybox_neutral.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_neutral_active">
+		<bitmap file="graphics/frames/ctentrybox_neutral_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_foe">
+		<bitmap file="graphics/frames/ctentrybox_foe.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_foe_active">
+		<bitmap file="graphics/frames/ctentrybox_foe_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+
+	<framedef name="collector">
+		<bitmap file="graphics/frames/collector.png" />
+		<offset>7,7,3,3</offset>
+	</framedef>
+
+	<!-- Chat die box frame -->	
+	<framedef name="diebox">
+		<bitmap file="graphics/frames/diebox.png" />
+		<offset>16,16,16,16</offset>
+	</framedef>
+
+	<!-- Hot key bar -->	
+	<framedef name="hotkeybox">
+		<bitmap file="graphics/frames/hotkeybox.png" />
+		<offset>2,5,2,2</offset>
+	</framedef>
+	<framedef name="hotkeytitlebox">
+		<bitmap file="graphics/frames/hotkeytitlebox.png" />
+		<offset>0,0,4,5</offset>
+	</framedef>
+	
+	<!-- Utility frames -->
+	<framedef name="mini_name">
+		<bitmap file="graphics/frames/mini_name.png" />
+		<offset>7,7,7,7</offset>
+	</framedef>
+	
+	<framedef name="id_active">
+		<bitmap file="graphics/frames/id_active.png" />
+		<offset>7,0,7,0</offset>
+	</framedef>
+	<framedef name="id_inactive">
+		<bitmap file="graphics/frames/id_inactive.png" />
+		<offset>7,0,7,0</offset>
+	</framedef>
+	
+	<framedef name="tooltipbox">
+		<bitmap file="graphics/frames/tooltipbox.png" />
+		<offset>6,4,9,7</offset>
+	</framedef>
+	
+	<framedef name="tempmod">
+		<bitmap file="graphics/frames/tempmod.png" />
+		<offset>16,16,16,16</offset>
+	</framedef>
+	<framedef name="tempmodsmall">
+		<bitmap file="graphics/frames/tempmodsmall.png" />
+		<offset>12,12,11,12</offset>
+	</framedef>
+	<framedef name="tempmodmini">
+		<bitmap file="graphics/frames/tempmodmini.png" />
+		<offset>7,7,9,9</offset>
+	</framedef>
+
+	<framedef name="rowshade">
+		<bitmap file="graphics/frames/rowshade.png" />
+		<middle rect="0,0,200,100" />
+	</framedef>
+
+	<framedef name="tabs">
+		<bitmap file="graphics/frames/tabs.png" />
+		<topleft rect="0,0,18,13" />
+		<left rect="0,13,18,455" />
+		<bottomleft rect="0,468,18,24" />
+	</framedef>
+	<framedef name="tabs_long">
+		<bitmap file="graphics/frames/tabs_long.png" />
+		<topleft rect="0,0,18,13" />
+		<left rect="0,13,18,672" />
+		<bottomleft rect="0,685,18,24" />
+	</framedef>
+
+	<framedef name="acicon">
+		<bitmap file="graphics/frames/acicon.png" />
+		<topleft rect="0,0,65,72" />
+	</framedef>
+	
+	<framedef name="desktop">
+		<bitmap file="graphics/frames/desktop.png" />
+		<middle rect="0,0,512,512" />
+		<right rect="512,0,97,512" />
+		<decal rect="612,0,512,512" />
+	</framedef>
+
+	<!-- REFERENCE -->
+	<framedef name="reference-section">
+		<bitmap file="graphics/frames/reference-section.png" />
+		<topleft rect="0,0,1,0" />
+		<top rect="1,0,70,4" />
+		<topright rect="91,0,12,1" />
+		<right rect="84,0,19,40" />
+		<middle rect="0,4,80,40" />
+	</framedef>
+	<framedef name="reference-chapter">
+		<bitmap file="graphics/frames/reference-chapter.png" />
+		<middle rect="0,8,80,58" />
+		<top rect="0,0,80,8" />		
+		<bottom rect="0,52,80,8" />
+		<right rect="85,17,43,2" />
+		<topright rect="84,0,43,17" />
+		<bottomright rect="84,22,43,18" />
+	</framedef>
+	<framedef name="referencepage">
+		<bitmap file="graphics/frames/referencepage.png" />
+		<offset>90,60,90,60</offset>
+		<insideoffset>0,0,12,9</insideoffset>
+	</framedef>
+
+	<framedef name="whitecontrolarea">
+		<bitmap file="graphics/frames/whitecontrolarea.png" />
+		<offset>12,11,17,18</offset>
+	</framedef>
+
+	<framedef name="headerwhite">
+		<bitmap file="graphics/frames/headerwhite.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+
+	<framedef name="headerpoweratwill">
+		<bitmap file="graphics/frames/headerpoweratwill.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerpowerenc">
+		<bitmap file="graphics/frames/headerpowerenc.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerpowerdaily">
+		<bitmap file="graphics/frames/headerpowerdaily.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headernpc">
+		<bitmap file="graphics/frames/headernpc.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headertrap">
+		<bitmap file="graphics/frames/headertrap.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	
+	<framedef name="headergray">
+		<bitmap file="graphics/frames/headergray.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerref">
+		<bitmap file="graphics/frames/headerref.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headertable">
+		<bitmap file="graphics/frames/headertable.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+
+	<framedef name="headerparcel">
+		<bitmap file="graphics/frames/headerparcel.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerchallenge">
+		<bitmap file="graphics/frames/headerchallenge.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerpoison">
+		<bitmap file="graphics/frames/headerpoison.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerfamiliar">
+		<bitmap file="graphics/frames/headerfamiliar.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerdisease">
+		<bitmap file="graphics/frames/headerdisease.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headeritem">
+		<bitmap file="graphics/frames/headeritem.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="headerquest">
+		<bitmap file="graphics/frames/headerquest.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+
+	<framedef name="utilitybox">
+		<bitmap file="graphics/frames/utilitybox.png" />
+		<offset>150,135,150,150</offset>
+		<insideoffset>0,0,10,18</insideoffset>
+	</framedef>
+	<framedef name="utilityboxfortabs">
+		<bitmap file="graphics/frames/utilitybox.png" />
+		<topleft rect="0,0,150,135" />
+		<top rect="150,0,252,135" />
+		<topright rect="402,0,150,135" />
+		<left rect="0,135,150,270" />
+		<middle rect="150,135,252,270" />
+		<right rect="402,135,150,270" />
+		<bottomleft rect="0,405,150,160" />
+		<bottom rect="150,405,252,160" />
+		<bottomright rect="402,405,150,160" />
+		<insideoffset>0,0,10,28</insideoffset>
+	</framedef>
+	
+	<!-- Chat frames -->
+	<framedef name="chatframe_story">
+		<bitmap file="graphics/frames/chatframe_story.png" />
+		<offset>7,7,7,7</offset>
+	</framedef>
+	<framedef name="chatframe_chat">
+		<bitmap file="graphics/frames/chatframe_chat.png" />
+		<offset>17,17,7,7</offset>
+	</framedef>
+
+	<!-- Desktop toggle buttons -->
+	<framedef name="buttonup">
+		<bitmap file="graphics/frames/buttonup.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	<framedef name="buttondown">
+		<bitmap file="graphics/frames/buttondown.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	
+	<!-- Scrollbar frames -->
+	<framedef name="scrollbar_base">
+		<bitmap file="graphics/frames/scrollbar.png" />
+		<offset></offset>
+		<top rect="0,0,20,14" />
+		<middle rect="22,0,20,62" />
+		<bottom rect="0,48,20,14" />
+	</framedef>
+	<framedef name="scrollbutton_normal">
+		<bitmap file="graphics/frames/scrollbutton_normal.png" />
+		<top rect="0,0,20,16" />
+		<middle rect="0,16,20,8" />
+		<bottom rect="0,24,20,16" />
+	</framedef>
+	
+	<!-- Updated campaign entries -->
+	<framedef name="campaigncontrolframe">
+		<bitmap file="graphics/frames/campaigncontrolframe.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="campaignrowshade">
+		<bitmap file="graphics/frames/campaignrowshade.png" />
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="campaignframe">
+		<bitmap file="graphics/frames/campaignframe.png" />
+		<topleft rect="0,0,48,47" />
+		<top rect="48,0,48,47" />
+		<topright rect="96,0,48,47" />
+		<left rect="0,47,48,47" />
+		<middle rect="48,47,48,47" />
+		<right rect="96,47,48,47" />
+		<bottomleft rect="0,94,48,47" />
+		<bottom rect="48,94,48,47" />
+		<bottomright rect="96,94,48,47" />
+		<insideoffset>0,0,4,0</insideoffset>
+	</framedef>
+	<framedef name="whitesheetfocus">
+		<bitmap file="graphics/frames/whitesheetfocus.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	
+	<framedef name="powercat_up">
+		<bitmap file="graphics/frames/powercat_up.png" />
+		<offset>7,7,7,7</offset>
+	</framedef>
+	<framedef name="powercat_down">
+		<bitmap file="graphics/frames/powercat_down.png" />
+		<offset>7,7,7,7</offset>
+	</framedef>
+	
+	<!-- Party Sheet -->
+	<framedef name="partysheet">
+		<bitmap file="graphics/frames/partysheet.png" />
+		<offset>25,40,25,25</offset>
+		<insideoffset>0,0,7,7</insideoffset>
+	</framedef>
+	<framedef name="border">
+		<bitmap file="graphics/frames/border.png" />
+		<offset>3,3,3,3</offset>
+	</framedef>
+	<framedef name="calendarhighlight">
+		<bitmap file="graphics/frames/calendarhighlight.png"/>
+		<offset>4,4,4,4</offset>
+    </framedef>
+	
+	<!-- Drop down list -->
+	<framedef name="control_white">
+		<bitmap file="graphics/frames/control_white.png"/>
+		<offset>1,1,1,1</offset>
+	</framedef>
+	<framedef name="control_grey">
+		<bitmap file="graphics/frames/control_grey.png"/>
+		<offset>1,1,1,1</offset>
+	</framedef>
+
+	<!-- TOKEN OVERLAYS -->
+	<framedef name="tokennumber">
+		<bitmap file="graphics/token/tokennumber.png" />
+		<offset>6,6,6,6</offset>
+	</framedef>
+</root>

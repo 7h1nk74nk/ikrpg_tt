@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+	
+	<windowclass name="charsheet_tab_powers">
+		<placement>
+			<size>
+				<width>252</width>
+				<height>611</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+					
+			<!-- SPELLS -->
+						
+			 <frame_char name="spellframe">
+				<bounds>15,5,400,320</bounds>
+			</frame_char>
+
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>SPELLS</static>
+            <anchored>
+                <to>spellframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<stringcontrol>
+				<anchored>
+					<to>spellframe</to>
+					<position>insidetopleft</position>
+					<offset>12,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>Name</static>
+			</stringcontrol>	
+			
+			<stringcontrol>
+				<anchored>
+					<to>spellframe</to>
+					<position>insidetopleft</position>
+					<offset>125,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>COST</static>
+			</stringcontrol>	
+			
+			<stringcontrol>
+				<anchored>
+					<to>spellframe</to>
+					<position>insidetopleft</position>
+					<offset>170,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>RNG</static>
+			</stringcontrol>	
+			
+			<stringcontrol>
+				<anchored>
+					<to>spellframe</to>
+					<position>insidetopleft</position>
+					<offset>210,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>AOE</static>
+			</stringcontrol>
+			
+			<stringcontrol>
+				<anchored>
+					<to>spellframe</to>
+					<position>insidetopleft</position>
+					<offset>250,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>POW</static>
+			</stringcontrol>	
+			
+			<stringcontrol>
+				<anchored>
+					<to>spellframe</to>
+					<position>insidetopleft</position>
+					<offset>295,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>UP</static>
+			</stringcontrol>	
+			
+			<stringcontrol>
+				<anchored>
+					<to>spellframe</to>
+					<position>insidetopleft</position>
+					<offset>335,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>OFF</static>
+			</stringcontrol>	
+			
+			
+			<windowlist name="spelllist">
+				<anchored>
+					<to>spellframe</to>
+					<position>over</position>
+					<offset>-8,-30</offset>
+				</anchored>
+				<datasource>.spelllist</datasource>
+				<class>charsheet_spelllistitems</class>
+				<allowcreate />
+				<allowdelete />
+				<columns>
+					<filldown />
+					<width>232</width>
+				</columns>
+			</windowlist>
+
+			<!-- MECHANIKA -->
+			
+			 <frame_char name="mechanikaframe">
+				<bounds>15,330,400,200</bounds>
+			</frame_char>
+            
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>MECHANIKA / MAGIC ITEMS</static>
+            <anchored>
+                <to>mechanikaframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>	
+
+			<stringcontrol>
+				<anchored>
+					<to>mechanikaframe</to>
+					<position>insidetopleft</position>
+					<offset>14,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>Name</static>
+			</stringcontrol>	
+			
+			<stringcontrol>
+				<anchored>
+					<to>mechanikaframe</to>
+					<position>insidetopleft</position>
+					<offset>195,25</offset>
+				</anchored>
+				<font>sheetlabelsmall</font>
+				<static>Effect</static>
+			</stringcontrol>	
+			
+			<windowlist name="mechanikalist">
+				<anchored>
+					<to>mechanikaframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>45gg</offset>
+					</top>
+				</anchored>
+				<datasource>.mechanikalist</datasource>
+				<class>charsheet_mechanikaitem</class>
+				<allowcreate />
+				<columns>
+					<filldown />
+					<width>232</width>
+				</columns>
+			</windowlist>
+
+
+		</sheetdata>
+	</windowclass>
+		
+	
+</root>

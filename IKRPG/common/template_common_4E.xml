@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="cycler_exp">
+		<button_stringcycler>
+			<font>sheettextsmall</font>
+			<center />
+			<frame>
+				<name>bonus</name>
+				<offset>2,4,2,3</offset>
+			</frame>
+			<stateframe>
+				<hover>
+					<name>sheetfocus</name>
+					<offset>2,4,2,3</offset>
+				</hover>
+			</stateframe>
+			<parameters>
+				<labels>Save|Enc|End N|Start|End</labels>
+				<values>save|encounter|endnext|start|end</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+	
+	<template name="cycler_powertype">
+		<button_iconcycler>
+			<frame>
+				<name>modifier</name>
+				<offset>6,5,5,5</offset>
+				<hidereadonly />
+			</frame>
+			<stateframe>
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,5,6,5</offset>
+					<hidereadonly />
+				</hover>
+			</stateframe>
+			<parameters>
+				<icons>indicator_powertype_melee|indicator_powertype_meleebasic|indicator_powertype_ranged|indicator_powertype_rangedbasic|indicator_powertype_close|indicator_powertype_closebasic|indicator_powertype_area|indicator_powertype_aura|indicator_powertype_mr|indicator_powertype_mr_basic|indicator_powertype_mc|indicator_powertype_ma|indicator_powertype_rc|indicator_powertype_ra|indicator_powertype_ca</icons>
+				<values>M|m|R|r|C|c|A|Z|MR|mr|MC|MA|RC|RA|CA</values>
+				<tooltips>Melee|Basic Melee|Ranged|Basic Ranged|Close|Basic Close|Area|Aura|Melee or Ranged|Basic Melee or Ranged|Melee or Close|Melee or Area|Ranged or Close|Ranged or Area|Close or Area</tooltips>
+			</parameters>
+			<script>
+				function onInit()
+					super.onInit();
+					self.onValueChanged();
+				end
+				
+				function onValueChanged()
+					if isReadOnly() then
+						if getStringValue() == "" then
+							setVisible(false);
+						else
+							setVisible(true);
+						end
+					end
+				end
+			</script>
+		</button_iconcycler>
+	</template>
+	
+	<template name="string_powerdesc">
+		<stringfield>
+			<frame mergerule="resetandadd">
+				<name>modifier</name>
+				<offset>6,5,5,5</offset>
+			</frame>
+			<font mergerule="replace">sheettextsmall</font>
+			<multilinespacing>15</multilinespacing>
+			<nodrag />
+			<script file="common/scripts/string_powerdesc.lua" />
+		</stringfield>
+	</template>
+	<template name="string_powerdesc_pc">
+		<string_powerdesc>
+			<script file="common/scripts/string_powerdesc_pc.lua" />
+		</string_powerdesc>
+	</template>
+	<template name="string_powerdesc_npc">
+		<string_powerdesc>
+			<script file="common/scripts/string_powerdesc_npc.lua" />
+		</string_powerdesc>
+	</template>
+	
+	<template name="string_power">
+		<stringfield>
+			<font>sheettextsmall</font>
+			<frame>
+				<name>modifier</name>
+				<offset>6,5,5,5</offset>
+			</frame>
+			<nodrag />
+			<script>
+				function onEnter()
+					if Input.isShiftPressed() then
+						if window.windowlist and window.windowlist.onEnter then
+							window.windowlist.onEnter();
+						end
+						return true;
+					end
+					
+					return false;
+				end
+				
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("dice") or draginfo.isType("number") then
+						if window.onDrop then
+							return window.onDrop(x, y, draginfo);
+						end
+					end
+				end
+			</script>
+		</stringfield>
+	</template>
+
+	<template name="close_framebox">
+		<close>
+			<anchored>
+				<top><offset>4</offset></top>
+				<right><offset>0</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_ctbox">
+		<close>
+			<anchored>
+				<top><offset>14</offset></top>
+				<right><offset>-13</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_utilitybox">
+		<close>
+			<anchored>
+				<top><offset>16</offset></top>
+				<right><offset>-10</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_tokenbag">
+		<close>
+			<anchored>
+				<top><offset>1</offset></top>
+				<right><offset>-18</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_charsheet">
+		<close>
+			<anchored>
+				<top><offset>0</offset></top>
+				<right><offset>-8</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_ps">
+		<close>
+			<anchored>
+				<top><offset>10</offset></top>
+				<right><offset>-8</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_image">
+		<close>
+			<anchored>
+				<top><offset>13</offset></top>
+				<right><offset>-14</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_campaign_tabbed">
+		<close>
+			<anchored>
+				<top><offset>0</offset></top>
+				<right><offset>-5</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_storybox">
+		<close>
+			<anchored>
+				<top><offset>2</offset></top>
+				<right><offset>-3</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_indexbox">
+		<close>
+			<anchored>
+				<top><offset>9</offset></top>
+				<right><offset>-15</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_scrollbox">
+		<close>
+			<anchored>
+				<top><offset>0</offset></top>
+				<right><offset>-15</offset></right>
+			</anchored>
+		</close>
+	</template>
+	<template name="close_referencepage">
+		<close>
+			<anchored>
+				<top><offset>7</offset></top>
+				<right><offset>-10</offset></right>
+			</anchored>
+		</close>
+	</template>
+
+	<template name="resize">
+		<genericcontrol>
+			<anchored>
+				<right />
+				<bottom />
+				<size>
+					<height>18</height>
+					<width>18</width>
+				</size>
+			</anchored>
+			<icon>indicator_resize</icon>
+			<disabled />
+		</genericcontrol>
+	</template>
+	<template name="resize_chatbox">
+		<resize>
+			<anchored>
+				<right><offset>-11</offset></right>
+				<bottom><offset>-13</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_scrollboxfortabs">
+		<resize>
+			<anchored>
+				<right><offset>-9</offset></right>
+				<bottom><offset>-14</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_storybox">
+		<resize>
+			<anchored>
+				<right><offset>-4</offset></right>
+				<bottom><offset>-3</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_charsheet">
+		<resize>
+			<anchored>
+				<right><offset>-10</offset></right>
+				<bottom><offset>-10</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_ps">
+		<resize>
+			<anchored>
+				<right><offset>-10</offset></right>
+				<bottom><offset>-10</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_ctbox">
+		<resize>
+			<anchored>
+				<right><offset>-13</offset></right>
+				<bottom><offset>-13</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_indexbox">
+		<resize>
+			<anchored>
+				<right><offset>-21</offset></right>
+				<bottom><offset>-18</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_referencepage">
+		<resize>
+			<anchored>
+				<right><offset>-12</offset></right>
+				<bottom><offset>-9</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_utilitybox">
+		<resize>
+			<anchored>
+				<right><offset>-10</offset></right>
+				<bottom><offset>-18</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_utilityboxfortabs">
+		<resize>
+			<anchored>
+				<right><offset>-10</offset></right>
+				<bottom><offset>-28</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_framebox">
+		<resize>
+			<anchored>
+				<right><offset>-5</offset></right>
+				<bottom><offset>-10</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_campaignframe">
+		<resize>
+			<anchored>
+				<right><offset>-4</offset></right>
+				<bottom><offset>0</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+	<template name="resize_tokenbag">
+		<resize>
+			<anchored>
+				<right><offset>-18</offset></right>
+				<bottom><offset>-18</offset></bottom>
+			</anchored>
+		</resize>
+	</template>
+
+	<template name="resize_image">
+		<genericcontrol>
+			<anchored>
+				<right><offset>-18</offset></right>
+				<bottom><offset>-19</offset></bottom>
+				<size>
+					<height>18</height>
+					<width>18</width>
+				</size>
+			</anchored>
+			<icon>indicator_resize_filled</icon>
+			<disabled />
+		</genericcontrol>
+	</template>
+
+	<template name="scrollbar_charlist">
+		<scrollbar>
+			<anchored>
+				<position>right</position>
+				<offset>-3,0</offset>
+			</anchored>
+		</scrollbar>
+	</template>
+	<template name="scrollbar_charminilist">
+		<scrollbar>
+			<anchored>
+				<position>right</position>
+				<offset>0,-3</offset>
+			</anchored>
+		</scrollbar>
+	</template>
+
+	<template name="frame_campaign">
+		<genericcontrol>
+			<frame>
+				<name>sheetgroup</name>
+			</frame>
+		</genericcontrol>
+	</template>
+	<template name="frame_char">
+		<genericcontrol>
+			<frame>
+				<name>tempmod</name>                
+			</frame>
+		</genericcontrol>
+	</template>
+	<template name="frame_ct">
+		<genericcontrol>
+			<frame>
+				<name>ctwindow_sheetgroup</name>
+			</frame>
+		</genericcontrol>
+	</template>
+	<template name="frame_sct">
+		<genericcontrol>
+			<frame>
+				<name>sheetgroup</name>
+			</frame>
+		</genericcontrol>
+	</template>
+	<template name="frame_ref">
+		<genericcontrol>
+			<frame>
+				<name>sheetgroup</name>
+			</frame>
+		</genericcontrol>
+	</template>
+
+	<template name="stringc_level_label">
+		<stringcontrol>
+			<anchored>
+				<top><offset>12</offset></top>
+				<right mergerule="replace"><offset>-50</offset></right>
+			</anchored>
+			<font>reference-r</font>
+			<color mergerule="replace">FFFFFFFF</color>
+			<static mergerule="replace">Level</static>
+		</stringcontrol>
+	</template>
+	<template name="number_leveltop">
+		<numberfield>
+			<anchored>
+				<top><offset>12</offset></top>
+				<left mergerule="replace"><anchor>right</anchor><offset>-45</offset></left>
+				<size>
+					<width>10</width>
+				</size>
+			</anchored>
+			<font>reference-r</font>
+			<color mergerule="replace">FFFFFFFF</color>
+			<nodrag />
+			<readonly />
+		</numberfield>
+	</template>
+	<template name="string_leveltop">
+		<stringfield>
+			<anchored>
+				<top><offset>12</offset></top>
+				<left><anchor>right</anchor><offset>-45</offset></left>
+				<right><offset>-35</offset></right>
+			</anchored>
+			<font>reference-r</font>
+			<color mergerule="replace">FFFFFFFF</color>
+			<nodrag />
+			<nodragselect />
+			<readonly />
+		</stringfield>
+	</template>
+
+	<template name="label_columnheader">
+		<stringcontrol>
+			<frame>
+				<name>headergray</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>reference-b</font>
+			<nodrag />
+			<nodragselect />
+			<static />
+			<script file="common/scripts/column_labelheader.lua" />
+		</stringcontrol>
+	</template>
+	<template name="string_columnfull">
+		<basicstring>
+			<multilinespacing>16</multilinespacing>
+			<script>
+				function onInit()
+					local nOffsetX = 5;
+					local nOffsetY = 7;
+					if offset then
+						local sOffsetX, sOffsetY = string.match(offset[1], "^(%d+),(%d+)$");
+						if sOffsetX and sOffsetY then
+							nOffsetX = tonumber(sOffsetX) or 5;
+							nOffsetY = tonumber(sOffsetY) or 7;
+						end
+					end
+					
+					if anchor then
+						setAnchor("top", anchor[1], "bottom", "relative", nOffsetY);
+					elseif window.columnanchor then
+						setAnchor("top", "columnanchor", "bottom", "relative", nOffsetY);
+					else
+						setAnchor("top", "", "top", "absolute", nOffsetY);
+					end
+					
+					setAnchor("left", "", "left", "absolute", nOffsetX);
+					setAnchor("right", "", "right", "absolute", -nOffsetX);
+					
+					local node = getDatabaseNode();
+					if not node or node.isReadOnly() then
+						if getValue() == "" then
+							setVisible(false);
+						end
+					end
+				end
+			</script>
+		</basicstring>
+	</template>
+</root>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+	<windowclass name="charsheet_combat">
+		<placement>
+			<size>
+				<width>252</width>
+				<height>611</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+	
+			<!--WEAPONS-->
+             <frame_char name="weaponframe">             
+				<bounds>15,5,400,150</bounds>                                
+			</frame_char>
+			
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>WEAPONS</static>
+            <anchored>
+                <to>weaponframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<label_sm>
+				<bounds>243,20,30,10</bounds>
+				<static>RNG</static>
+			</label_sm>	
+			
+			<label_sm>
+				<bounds>285,20,30,10</bounds>
+				<static>RAT</static>
+			</label_sm>
+			
+            <label_sm>
+				<bounds>326,20,30,10</bounds>
+				<static>MAT</static>
+			</label_sm>	
+			
+			<label_sm>
+				<bounds>367,20,30,10</bounds>
+				<static>DMG</static>
+			</label_sm>	
+			
+			<windowlist name="main_weaponlist">
+				<anchored>
+					<to>weaponframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<datasource>.weaponlist</datasource>
+				<class>charsheet_weapon</class>
+				<allowcreate/>
+				<allowdelete/>
+			</windowlist>
+			<scrollbar_charlist>
+				<anchored>
+					<to>main_weaponlist</to>
+                    <offset>-5,-10</offset>
+				</anchored>
+				<target>main_weaponlist</target>
+			</scrollbar_charlist>
+			
+			<!--MAGIC-->
+             <frame_char name="magicframe">             
+				<bounds>15,160,400,150</bounds>                                
+			</frame_char>
+			
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>MAGIC</static>
+            <anchored>
+                <to>magicframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<label_sm>
+				<bounds>200,175,30,10</bounds>
+				<static>COST</static>
+			</label_sm>	
+			<label_sm>
+				<bounds>245,175,30,10</bounds>
+				<static>RNG</static>
+			</label_sm>			
+			<label_sm>
+				<bounds>286,175,30,10</bounds>
+				<static>AOE</static>
+			</label_sm>
+            <label_sm>
+				<bounds>329,175,30,10</bounds>
+				<static>ARC</static>
+			</label_sm>			
+			<label_sm>
+				<bounds>369,175,30,10</bounds>
+				<static>POW</static>
+			</label_sm>	
+			
+			<windowlist name="main_magiclist">
+				<anchored>
+					<to>magicframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<datasource>.magiclist</datasource>
+				<class>charsheet_magic</class>
+				<allowcreate/>
+				<allowdelete/>
+			</windowlist>
+			<scrollbar_charlist>
+				<anchored>
+					<to>main_magiclist</to>
+                    <offset>-5,-10</offset>
+				</anchored>
+				<target>main_magiclist</target>
+			</scrollbar_charlist>
+			
+			
+			<!-- Feat Points -->
+				
+			<frame_char name="featpointframe">
+				<bounds>15,315,77,65</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>FEAT POINTS</static>
+            <anchored>
+                <to>featpointframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<basicnumber name="featpoints" source="feat.points">
+				<anchored>
+					<to>featpointframe</to>
+					<position>insidetopleft</position>
+					<offset>11,30</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+			</basicnumber>
+			
+			<!-- Focus Points -->
+				
+			<frame_char name="focuspointframe">
+				<bounds>97,315,87,65</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>FOCUS POINTS</static>
+            <anchored>
+                <to>focuspointframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<basicnumber name="focuspoints" source="focus.points">
+				<anchored>
+					<to>focuspointframe</to>
+					<position>insidetopleft</position>
+					<offset>16,30</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+				<script> 
+								
+				    function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+					
+					function onSourceUpdate(source)
+						setValue(window.getDatabaseNode().getChild("stats.arc.score").getValue());
+					end
+					
+                </script>
+			</basicnumber>
+			
+			<!-- Will Points -->
+				
+			<frame_char name="willpointframe">
+				<bounds>190,315,225,65</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>WILL POINTS</static>
+            <anchored>
+                <to>willpointframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<basicnumber name="willpoints" source="will.points">
+				<anchored>
+					<to>willpointframe</to>
+					<position>insidetopleft</position>
+					<offset>15,30</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+				<script>   
+					function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+					
+					function onSourceUpdate(source)
+						setValue(window.getDatabaseNode().getChild("stats.arc.score").getValue());
+					end		
+                </script>
+			</basicnumber>
+			
+			<basicnumber name="willpointmax" source="will.pointmax">
+				<anchored>
+					<to>willpointframe</to>
+					<position>insidetopleft</position>
+					<offset>85,30</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+				<script> 
+					function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+					
+					function onSourceUpdate(source)
+						setValue(window.getDatabaseNode().getChild("stats.arc.score").getValue() * 2);
+					end
+                </script>
+			</basicnumber>
+			
+			<basicnumber name="willpointfatigue" source="will.pointfatigue">
+				<anchored>
+					<to>willpointframe</to>
+					<position>insidetopleft</position>
+					<offset>155,30</offset>
+					<size>
+						<width>55</width>
+						<height>22</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+				<font>sheetnumber</font>
+			</basicnumber>
+			
+			<label_sm>
+				<bounds>283,328,50,10</bounds>
+				<static>max will</static>
+			</label_sm>
+			
+			<label_sm>
+				<bounds>355,328,50,13</bounds>
+				<static>fatigue</static>
+			</label_sm>
+			
+			
+			<!-- Effects -->
+				
+			<frame_char name="effectsframe">
+				<bounds>217,385,200,145</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>CONTINUOUS EFFECTS</static>
+            <anchored>
+                <to>effectsframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<stringu name="effectsdescription">
+				<anchored>
+					<to>effectsframe</to>
+					<position>over</position>
+					<offset>-10,-10</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_charlist>
+				<anchored>
+					<to>effectsdescription</to>
+				</anchored>
+				<target>effectsdescription</target>
+			</scrollbar_charlist>
+			
+			
+			<!-- Feat Point Use -->
+			<frame_char name="featpointdescriptionframe">
+				<bounds>15,385,197,145</bounds>
+			</frame_char>
+		
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>POINT USES</static>
+            <anchored>
+                <to>featpointdescriptionframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<stringu name="featpointdescription">
+				<anchored>
+					<to>featpointdescriptionframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_charlist>
+				<anchored>
+					<to>featpointdescription</to>
+				</anchored>
+				<target>featpointdescription</target>
+			</scrollbar_charlist>
+
+				
+            
+		</sheetdata>
+	</windowclass>
+</root>

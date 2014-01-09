@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_grantedpower">
+		<sizelimits>
+			<minimum>
+				<height>0</height>
+			</minimum>
+			<maximum>
+				<height>35</height>
+			</maximum>
+		</sizelimits>
+		<sheetdata>
+			<link_field name="link">
+				<bounds>5,0,20,20</bounds>
+			</link_field>
+			<stringcontrol_linked_static name="linkedpowername">
+				<bounds>30,3,-5,15</bounds>
+				<font>reference-b</font>
+				<script>
+					function onInit()
+						local nodeLink = window.link.getTargetDatabaseNode();
+						if nodeLink then
+							if DB.getValue(nodeLink, "class", "") == "Granted" then
+								setValue(DB.getValue(nodeLink, "action", ""));
+							else
+								setValue(DB.getValue(nodeLink, "name", ""));
+							end
+						end
+					end
+				</script>
+			</stringcontrol_linked_static>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="powerdesc_stats">
+		<script file="ref/scripts/ref_powerstats.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_refflavor name="stringflavor" />
+			
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>10</height>
+			</spacer>
+			
+			<stringfield name="recharge">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+				</anchored>
+				<font>reference-b</font>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+			<genericcontrol name="diamond">
+				<anchored>
+					<to>recharge</to>
+					<top><offset>2</offset></top>
+					<left>
+						<anchor>right</anchor>
+					</left>
+					<size>
+						<width>20</width>
+						<height>10</height>
+					</size>
+				</anchored>
+				<icon>diamond</icon>
+			</genericcontrol>
+			<stringfield name="keywords">
+				<anchored>
+					<top>
+						<parent>recharge</parent>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>recharge</parent>
+						<anchor>right</anchor>
+						<offset>20</offset>
+					</left>
+					<right />
+				</anchored>
+				<font>reference-b</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+
+			<stringfield name="action">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right>
+						<anchor>left</anchor>
+						<offset>110</offset>
+					</right>
+				</anchored>
+				<font>reference-b</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+			<stringfield name="range">
+				<anchored>
+					<top>
+						<parent>action</parent>
+					</top>
+					<left><offset>120</offset></left>
+					<right />
+				</anchored>
+				<font>reference-b</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+
+			<referenceformattedtextfield name="description">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<footer>footer_wide</footer>
+			</referenceformattedtextfield>
+			
+			<windowlist name="grantlist">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<datasource>.linkedpowers</datasource>
+				<class>reference_grantedpower</class>
+				<noscroll />
+			</windowlist>
+
+			<link_field name="link">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<size>
+						<width>20</width>
+						<height>20</height>
+					</size>
+				</anchored>
+			</link_field>
+			<stringcontrol_linked_static name="linkedpowername">
+				<anchored>
+					<top>
+						<parent>link</parent>
+					</top>
+					<left>
+						<parent>link</parent>
+						<anchor>right</anchor>
+						<offset>8</offset>
+					</left>
+					<right />
+				</anchored>
+				<font>reference-b</font>
+				<linkfield>name</linkfield>
+			</stringcontrol_linked_static>
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>15</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="powerdesc">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>370</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script>
+			function onInit()
+				local rechargestr = string.lower(string.sub(DB.getValue(getDatabaseNode(), "recharge", ""),1,2))
+				if rechargestr == "da" then
+					name.setColor("ffffffff");
+					source.setColor("ffffffff");
+					name.setFrame("headerpowerdaily",40,10,160,10);
+				elseif rechargestr == "en" then
+					name.setColor("ffffffff");
+					source.setColor("ffffffff");
+					name.setFrame("headerpowerenc",40,10,160,10);
+				elseif rechargestr == "at" then
+					name.setColor("ffffffff");
+					source.setColor("ffffffff");
+					name.setFrame("headerpoweratwill",40,10,160,10);
+				else
+					name.setColor("ff000000");
+					source.setColor("ff000000");
+					name.setFrame("whitecontrolarea",40,10,160,10);
+				end
+			end
+		</script>
+		<sheetdata>
+			<string_name_static name="name">
+				<anchored>
+					<right>
+						<offset>-160</offset>
+					</right>
+				</anchored>
+			</string_name_static>
+			<link_tl>
+				<class>powerdesc</class>
+			</link_tl>
+			<stringfield name="source">
+				<anchored>
+					<top><offset>12</offset></top>
+					<left>
+						<anchor>right</anchor>
+						<offset>-140</offset>
+					</left>
+					<size>
+						<width>100</width>
+					</size>
+				</anchored>
+				<font>reference-r</font>
+				<nodragselect />
+				<static />
+			</stringfield>
+
+			<sub_refcontent name="content">
+				<class>powerdesc_stats</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+
+	<!-- REFERENCE WINDOWS FOR CUSTOM POWERS -->
+	<windowclass name="reference_power_custom_stats">
+		<script file="ref/scripts/ref_powerstats.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<stringfield name="recharge">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+				</anchored>
+				<font>reference-b</font>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+			<genericcontrol name="diamond">
+				<anchored>
+					<to>recharge</to>
+					<top><offset>2</offset></top>
+					<left>
+						<anchor>right</anchor>
+					</left>
+					<size>
+						<width>20</width>
+						<height>10</height>
+					</size>
+				</anchored>
+				<icon>diamond</icon>
+			</genericcontrol>
+			<stringfield name="keywords">
+				<anchored>
+					<top>
+						<parent>recharge</parent>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>recharge</parent>
+						<anchor>right</anchor>
+						<offset>20</offset>
+					</left>
+					<right />
+				</anchored>
+				<font>reference-b</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+
+			<stringfield name="action">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right>
+						<anchor>left</anchor>
+						<offset>110</offset>
+					</right>
+				</anchored>
+				<font>reference-b</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+			<stringfield name="range">
+				<anchored>
+					<top>
+						<parent>action</parent>
+					</top>
+					<left><offset>120</offset></left>
+					<right />
+				</anchored>
+				<font>reference-b</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+				<nodrag />
+				<nodragselect />
+				<static />
+			</stringfield>
+
+			<string_powerdesc_npc name="shortdescription">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<frame />
+				<font>reference-r</font>
+				<multilinespacing>15</multilinespacing>
+				<selectioncolor>#FFD296</selectioncolor>
+				<readonly />
+			</string_powerdesc_npc>
+
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>15</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_power_custom">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>370</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script>
+			function onInit()
+				local rechargestr = string.lower(string.sub(DB.getValue(getDatabaseNode(), "recharge", ""),1,2))
+				if rechargestr == "da" then
+					name.setColor("ffffffff");
+					source.setColor("ffffffff");
+					name.setFrame("headerpowerdaily",40,10,160,10);
+				elseif rechargestr == "en" then
+					name.setColor("ffffffff");
+					source.setColor("ffffffff");
+					name.setFrame("headerpowerenc",40,10,160,10);
+				elseif rechargestr == "at" then
+					name.setColor("ffffffff");
+					source.setColor("ffffffff");
+					name.setFrame("headerpoweratwill",40,10,160,10);
+				else
+					name.setColor("ff000000");
+					source.setColor("ff000000");
+					name.setFrame("whitecontrolarea",40,10,160,10);
+				end
+			end
+			
+			function TypeChanged(nodeType)
+				local sValue = DB.getValue(getDatabaseNode(), "powertype", "");
+				
+				local aIcons = {
+						["M"] = "indicator_powertype_melee",
+						["m"] = "indicator_powertype_meleebasic",
+						["R"] = "indicator_powertype_ranged",
+						["r"] = "indicator_powertype_rangedbasic",
+						["C"] = "indicator_powertype_close",
+						["c"] = "indicator_powertype_closebasic",
+						["A"] = "indicator_powertype_area",
+						["Z"] = "indicator_powertype_aura",
+						["MR"] = "indicator_powertype_mr",
+						["mr"] = "indicator_powertype_mr_basic",
+						["MC"] = "indicator_powertype_mc",
+						["MA"] = "indicator_powertype_ma",
+						["RC"] = "indicator_powertype_rc",
+						["RA"] = "indicator_powertype_ra",
+						["CA"] = "indicator_powertype_ca",
+					};
+
+				if aIcons[sValue] then
+					shortcut.setIcons(aIcons[sValue], aIcons[sValue]);
+					shortcut.setFrame("whitecontrolarea");
+				else
+					shortcut.setIcons("button_openwindow", "button_emptytarget");
+					shortcut.setFrame(nil);
+				end
+			end
+		</script>
+		<sheetdata>
+			<hs name="powertype">
+				<script>
+					function onValueChanged()
+						window.TypeChanged();
+					end
+				</script>
+			</hs>
+			
+			<string_name_static name="name">
+				<anchored>
+					<right>
+						<offset>-160</offset>
+					</right>
+				</anchored>
+			</string_name_static>
+			<link_tl>
+				<class>reference_power_custom</class>
+			</link_tl>
+			<stringfield name="source">
+				<anchored>
+					<top><offset>12</offset></top>
+					<left>
+						<anchor>right</anchor>
+						<offset>-140</offset>
+					</left>
+					<size>
+						<width>100</width>
+					</size>
+				</anchored>
+				<font>reference-r</font>
+				<nodragselect />
+				<static />
+			</stringfield>
+
+			<sub_refcontent name="content">
+				<class>reference_power_custom_stats</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

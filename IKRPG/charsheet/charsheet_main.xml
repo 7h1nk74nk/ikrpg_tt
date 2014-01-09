@@ -1,0 +1,2402 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>         
+	<windowclass name="charsheet_main">		
+		<nodelete />
+		<sheetdata>
+		
+			<!-- CLASS -->
+			<frame_char name="classframe">
+				<bounds>15,5,400,50</bounds>
+			</frame_char>
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>INFO</static>
+            <anchored>
+                <to>classframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+
+			<string_labeled name="class1" source="race">
+				<anchored>
+					<to>classframe</to>
+					<position>insidetopleft</position>
+					<offset>15,17</offset>
+					<size>
+						<width>70</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<label>Race</label>
+			</string_labeled>
+            
+            <!--
+			<string_labeled name="class2" source="archetype">
+				<anchored>
+					<to>class1</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>70</width>
+					</size>
+				</anchored>
+				<label>Archetype</label>
+			</string_labeled>
+            
+            <lineoffset default="on">-1</lineoffset>
+			<script>
+				labelwidget = nil;
+			
+				function onInit()
+					labelwidget = addTextWidget("sheetlabelinline", string.upper(label[1]));
+					if labelwidget then
+						local w,h = labelwidget.getSize();
+						labelwidget.setPosition("bottomleft", w/2, h/2-5);
+					end
+				end
+			</script>
+            
+            -->
+            
+            <button_stringcycler name="archetype" source="archetype">
+				<anchored>
+					<to>class1</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>70</width>
+					</size>
+				</anchored>
+				<font>sheettext</font>
+				<center />
+				<frame>
+					<name>bonus</name>
+					<offset>6,5,6,5</offset>
+				</frame>
+				<parameters>
+					<labels>Gifted|Intellectual|Mighty|Skilled</labels>					
+                    <values>Gifted|Intellectual|Mighty|Skilled</values>
+					<defaultlabel>Archetype</defaultlabel>
+				</parameters>                
+			</button_stringcycler>
+
+			<string_labeled name="class3" source="careers">
+				<anchored>
+					<to>archetype</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>220</width>
+					</size>
+				</anchored>
+				<label>Careers</label>
+			</string_labeled>
+            
+            
+            
+            
+            <frame_char name="statframe">
+				<bounds>15,60,155,290</bounds>                                
+			</frame_char>
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>STATS</static>
+            <anchored>
+                <to>statframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+            
+            
+            <basicnumber name="phy_score" source="stats.phy.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,30</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>
+			
+            <stringcontrol>
+                <anchored>
+                    <to>phy_score</to>
+                    <position>above</position>
+                    <offset>0,0</offset>                     
+                </anchored>  
+                <font>sheetlabelmini</font>
+                <center/>
+                <static>Score</static>
+            </stringcontrol>
+			
+            <basicnumber name="phy_max" source="stats.phy.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,30</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>
+            <stringcontrol>
+                <anchored>
+                    <to>phy_max</to>
+                    <position>above</position>
+                    <offset>0,0</offset>                     
+                </anchored>  
+                <font>sheetlabelmini</font>
+                <center/>
+                <static>Max</static>
+            </stringcontrol>
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,33</offset>                     
+                </anchored> 
+                <font>sheetlabel</font>
+                <static>Physique</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="spd_score" source="stats.spd.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,55</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>  
+			
+            <basicnumber name="spd_max" source="stats.spd.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,55</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,58</offset>                     
+                </anchored> 
+                <font>sheettext</font>
+                <static>Speed</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="str_score" source="stats.str.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,80</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <basicnumber name="str_max" source="stats.str.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,80</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,83</offset>                     
+                </anchored> 
+                <font>sheettext</font>
+                <static>Strength</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="agi_score" source="stats.agi.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,105</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <basicnumber name="agi_max" source="stats.agi.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,105</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,108</offset>                     
+                </anchored> 
+                <font>sheetlabel</font>
+                <static>Agility</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="prw_score" source="stats.prw.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,130</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <basicnumber name="prw_max" source="stats.prw.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,130</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,133</offset>                     
+                </anchored> 
+                <font>sheettext</font>
+                <static>Prowess</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="poi_score" source="stats.poi.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,155</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <basicnumber name="poi_max" source="stats.poi.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,155</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,158</offset>                     
+                </anchored> 
+                <font>sheettext</font>
+                <static>Poise</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="int_score" source="stats.int.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,180</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <basicnumber name="int_max" source="stats.int.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,180</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,183</offset>                     
+                </anchored> 
+                <font>sheetlabel</font>
+                <static>Intellect</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="arc_score" source="stats.arc.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,205</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <basicnumber name="arc_max" source="stats.arc.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,205</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,208</offset>                     
+                </anchored> 
+                <font>sheettext</font>
+                <static>Arcane</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="per_score" source="stats.per.score">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,230</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <basicnumber name="per_max" source="stats.per.max">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>112,230</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+            </basicnumber>            
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,233</offset>                     
+                </anchored> 
+                <font>sheettext</font>
+                <static>Perception</static>
+            </stringcontrol>
+            
+            
+            <basicnumber name="willpower_score" source="willpower">
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>91,255</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>     
+                <readonly/>
+                <script>
+                                    
+                    nodeStats = nil;
+            
+                    function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end                                                            													
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.phy_score.getDatabaseNode().getValue()+window.int_score.getDatabaseNode().getValue());
+				end
+			
+                </script>
+            </basicnumber>                        
+            <stringcontrol>
+                <anchored>
+                    <to>statframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,258</offset>                     
+                </anchored> 
+                <font>sheetlabel</font>
+                <static>Willpower</static>
+            </stringcontrol>           
+
+          
+            
+            
+            <!--DAMAGE SECTION-->
+            <frame_char name="damageframe">
+				<bounds>15,355,155,180</bounds>
+                <script>
+                    nodeStats = nil;
+                    
+                    boxes_PHY={};
+                    boxes_AGI={};
+                    boxes_INT={};
+                    
+                    function onInit()                                            
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                        
+                        table.insert(boxes_PHY,window.vitality_phy1);
+                        table.insert(boxes_PHY,window.vitality_phy2);
+                        table.insert(boxes_PHY,window.vitality_phy3);
+                        table.insert(boxes_PHY,window.vitality_phy4);
+                        table.insert(boxes_PHY,window.vitality_phy5);
+                        table.insert(boxes_PHY,window.vitality_phy6);
+                        table.insert(boxes_PHY,window.vitality_phy7);
+                        table.insert(boxes_PHY,window.vitality_phy8);
+                        table.insert(boxes_PHY,window.vitality_phy9);
+                        table.insert(boxes_PHY,window.vitality_phy10);
+                        
+                        table.insert(boxes_AGI,window.vitality_agi1);
+                        table.insert(boxes_AGI,window.vitality_agi2);
+                        table.insert(boxes_AGI,window.vitality_agi3);
+                        table.insert(boxes_AGI,window.vitality_agi4);
+                        table.insert(boxes_AGI,window.vitality_agi5);
+                        table.insert(boxes_AGI,window.vitality_agi6);
+                        table.insert(boxes_AGI,window.vitality_agi7);
+                        table.insert(boxes_AGI,window.vitality_agi8);
+                        table.insert(boxes_AGI,window.vitality_agi9);
+                        table.insert(boxes_AGI,window.vitality_agi10);
+                        
+                        table.insert(boxes_INT,window.vitality_int1);
+                        table.insert(boxes_INT,window.vitality_int2);
+                        table.insert(boxes_INT,window.vitality_int3);
+                        table.insert(boxes_INT,window.vitality_int4);
+                        table.insert(boxes_INT,window.vitality_int5);
+                        table.insert(boxes_INT,window.vitality_int6);
+                        table.insert(boxes_INT,window.vitality_int7);
+                        table.insert(boxes_INT,window.vitality_int8);
+                        table.insert(boxes_INT,window.vitality_int9);
+                        table.insert(boxes_INT,window.vitality_int10);
+                        
+                        for count=1,10 do
+                            window.getDatabaseNode().createChild(boxes_PHY[count].getName(),"number").onUpdate=checkDamage;                            
+                            window.getDatabaseNode().createChild(boxes_AGI[count].getName(),"number").onUpdate=checkDamage;
+                            window.getDatabaseNode().createChild(boxes_INT[count].getName(),"number").onUpdate=checkDamage;
+                        end
+                        
+                        onSourceUpdate();
+                        
+                    end
+                    
+                function checkDamage()
+                    
+                    local PHY=window.phy_score.getDatabaseNode().getValue();
+                    local AGI=window.agi_score.getDatabaseNode().getValue();
+                    local INT=window.int_score.getDatabaseNode().getValue();
+                    
+                    local damage_PHY=0;
+                    local damage_AGI=0;
+                    local damage_INT=0;
+                                        
+                    
+                    for count=1,10 do
+                        if boxes_PHY[count].getIndex()==1 then damage_PHY=damage_PHY+1 end
+                        if boxes_AGI[count].getIndex()==1 then damage_AGI=damage_AGI+1 end
+                        if boxes_INT[count].getIndex()==1 then damage_INT=damage_INT+1 end
+                    end
+                    
+                    if damage_PHY==PHY then
+                        window.warning_phy.setVisible(true);
+                    else
+                        window.warning_phy.setVisible(false);
+                    end
+                    
+                    if damage_AGI==AGI then
+                        window.warning_agi.setVisible(true);
+                    else
+                        window.warning_agi.setVisible(false);
+                    end
+                    
+                    if damage_INT==INT then
+                        window.warning_int.setVisible(true);
+                    else
+                        window.warning_int.setVisible(false);
+                    end
+                    
+                    if damage_PHY==PHY and damage_AGI==AGI and damage_INT==INT then
+                        window.incapacitated.setVisible(true);
+                    else
+                        window.incapacitated.setVisible(false);
+                    end
+                    
+                    
+                end;
+                    
+                function onSourceUpdate(source)
+                    updateVitality(false);
+                end
+                
+                function updateVitality(resetboxes)
+					local PHY=window.phy_score.getDatabaseNode().getValue();
+                    local AGI=window.agi_score.getDatabaseNode().getValue();
+                    local INT=window.int_score.getDatabaseNode().getValue();
+                    for count=1,10 do             
+                        local newIndex=0;
+                        
+                        if not resetboxes then newIndex=boxes_PHY[count].getIndex(); else newIndex=0; end
+                            
+                        if count&gt;PHY or PHY==0 then                                                       
+                            boxes_PHY[count].setColor("ff606060");
+                            boxes_PHY[count].setIndex(0);
+                            boxes_PHY[count].setReadOnly(true); 
+                        else
+                            boxes_PHY[count].setColor("ff0000ff");
+                            boxes_PHY[count].setIndex(newIndex);
+                            boxes_PHY[count].setReadOnly(false);
+                        end
+                        
+                        if not resetboxes then newIndex=boxes_AGI[count].getIndex(); else newIndex=0; end
+                        
+                        if count&gt;AGI or AGI==0 then                            
+                            boxes_AGI[count].setColor("ff606060");
+                            boxes_AGI[count].setIndex(0);
+                            boxes_AGI[count].setReadOnly(true);  
+                        else
+                            boxes_AGI[count].setColor("ffff0000");
+                            boxes_AGI[count].setIndex(newIndex);
+                            boxes_AGI[count].setReadOnly(false);
+                        end
+                        
+                        if not resetboxes then newIndex=boxes_INT[count].getIndex(); else newIndex=0; end
+                        
+                        if count&gt;INT or INT==0 then                                                        
+                            boxes_INT[count].setColor("ff606060");
+                            boxes_INT[count].setIndex(0);
+                            boxes_INT[count].setReadOnly(true); 
+                        else
+                            boxes_INT[count].setColor("ff00aa00");
+                            boxes_INT[count].setIndex(newIndex);
+                            boxes_INT[count].setReadOnly(false); 
+                        end                                                                                                                                      
+                    end
+                    checkDamage();
+				end
+                </script>
+			</frame_char>		
+			
+            <genericcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>over</position>
+                </anchored>
+                <icon>ikcogbg</icon>
+                <iconcolor>60ffffff</iconcolor>
+            </genericcontrol>
+            
+            <genericcontrol name="incapacitated">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>over</position>
+                </anchored>
+                <icon>ikincapacitated</icon>
+                <iconcolor>60ffffff</iconcolor>
+                <invisible/>
+            </genericcontrol>
+            
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>DAMAGE CAPACITY</static>
+            <anchored>
+                <to>damageframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+            
+            
+            
+            <button_checkbox name="vitality_phy9">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,30</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored> 
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                       
+            <button_checkbox name="vitality_phy7">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>30,30</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                      
+            <button_checkbox name="vitality_phy5">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>45,30</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                    
+            <button_checkbox name="vitality_phy3">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>60,30</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>                    
+            
+            <button_checkbox name="vitality_phy10">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,45</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>   
+				<script>
+				</script>				
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_phy8">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>30,45</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                       
+            <button_checkbox name="vitality_phy6">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>45,45</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                      
+            <button_checkbox name="vitality_phy4">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>60,45</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                     
+            <button_checkbox name="vitality_phy2">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,36</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_phy1">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>90,36</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,33</offset>
+                </anchored>
+                <font>sheetlabelsmall</font>
+                <static>1</static>
+            </stringcontrol>
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,48</offset>
+                </anchored>
+                <font>sheetlabelsmall</font>
+                <static>2</static>
+            </stringcontrol>
+            
+            <stringcontrol name="warning_phy">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>110,39</offset>
+                </anchored>
+                <font>sheetlabelmini</font>
+                <static>-2 STR</static>
+            </stringcontrol>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <button_checkbox name="vitality_agi9">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,70</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_agi7">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>30,70</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            
+            <button_checkbox name="vitality_agi5">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>45,70</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                        
+            <button_checkbox name="vitality_agi3">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>60,70</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+                      
+            <button_checkbox name="vitality_agi10">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,85</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_agi8">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>30,85</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>         
+            
+            <button_checkbox name="vitality_agi6">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>45,85</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+             
+            <button_checkbox name="vitality_agi4">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>60,85</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>          
+            
+            <button_checkbox name="vitality_agi2">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,76</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_agi1">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>90,76</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,73</offset>
+                </anchored>
+                <font>sheetlabelsmall</font>
+                <static>3</static>
+            </stringcontrol>
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,88</offset>
+                </anchored>
+                <font>sheetlabelsmall</font>
+                <static>4</static>
+            </stringcontrol>
+            
+            <stringcontrol name="warning_agi">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>110,79</offset>
+                </anchored>
+                <font>sheetlabelmini</font>
+                <static>-2 ATK</static>
+            </stringcontrol>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <button_checkbox name="vitality_int9">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,110</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int7">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>30,110</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int5">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>45,110</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+
+            <button_checkbox name="vitality_int3">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>60,110</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int10">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,125</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int8">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>30,125</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int6">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>45,125</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int4">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>60,125</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int2">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>75,116</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <button_checkbox name="vitality_int1">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>90,116</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">circle_crossed</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">circle_empty</defaulticon>
+			</parameters>
+            </button_checkbox>
+            
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,113</offset>
+                </anchored>
+                <font>sheetlabelsmall</font>
+                <static>5</static>
+            </stringcontrol>
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,128</offset>
+                </anchored>
+                <font>sheetlabelsmall</font>
+                <static>6</static>
+            </stringcontrol>
+            
+            <stringcontrol name="warning_int">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>110,109</offset>
+                </anchored>
+                <font>sheetlabelmini</font>
+                <multilinespacing >10</multilinespacing>
+                <static>-2 DEF\rno spell\rupkeep</static>
+            </stringcontrol>
+            
+            
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,20</offset>
+                </anchored>
+                <font>sheetlabelmini</font>
+                <static>Physique</static>
+                <color>ff0000ff</color>
+            </stringcontrol>
+            
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,60</offset>
+                </anchored>
+                <font>sheetlabelmini</font>
+                <static>Agility</static>
+                <color>ffff0000</color>
+            </stringcontrol>
+            
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,100</offset>
+                </anchored>
+                <font>sheetlabelmini</font>
+                <static>Intellect</static>
+                <color>ff00aa00</color>
+            </stringcontrol>
+            
+            
+            
+            
+            <stringcontrol>
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>10,154</offset>
+                </anchored>
+                <font>sheetlabelmini</font>
+                <static>Pw. Field</static>                              
+            </stringcontrol>
+            
+            <button_checkbox name="absorbfield1">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>50,150</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">box_checked</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">box_empty</defaulticon>
+                </parameters>
+                <iconcolor>328ea8</iconcolor>
+            </button_checkbox>
+            
+            <button_checkbox name="absorbfield2">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>65,150</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">box_checked</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">box_empty</defaulticon>
+                </parameters>
+                <iconcolor>328ea8</iconcolor>
+            </button_checkbox>
+            
+            <button_checkbox name="absorbfield3">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>80,150</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">box_checked</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">box_empty</defaulticon>
+                </parameters>
+                <iconcolor>328ea8</iconcolor>
+            </button_checkbox>
+            
+            <button_checkbox name="absorbfield4">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>95,150</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">box_checked</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">box_empty</defaulticon>
+                </parameters>
+                <iconcolor>328ea8</iconcolor>
+            </button_checkbox>
+            
+            <button_checkbox name="absorbfield5">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>110,150</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">box_checked</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">box_empty</defaulticon>
+                </parameters>
+                <iconcolor>328ea8</iconcolor>
+            </button_checkbox>
+            
+            <button_checkbox name="absorbfield6">
+                <anchored>
+                    <to>damageframe</to>
+                    <position>insidetopleft</position>
+                    <offset>125,150</offset>
+                    <size>
+                        <width>20</width>
+                        <height>20</height>
+                    </size>
+                </anchored>                
+                <parameters>
+                    <icons mergerule="replace">box_checked</icons>
+                    <values mergerule="replace">on</values>
+                    <defaulticon mergerule="replace">box_empty</defaulticon>
+                </parameters>
+                <iconcolor>328ea8</iconcolor>                
+            </button_checkbox>
+            
+            <numbercontrol>
+                <bounds>0,0,0,0</bounds>
+                <invisible />
+                <script>
+                    function onInit()                        
+                        window.damageframe.updateVitality(false);
+                    end
+                </script>
+            </numbercontrol>
+            
+            
+            
+            
+            
+            
+            <!--DERIVED STATS-->
+             <frame_char name="defframe">                
+				<bounds>175,355,240,180</bounds>                                
+			</frame_char>
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>DERIVED STATS</static>
+            <anchored>
+                <to>defframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+            
+            
+            
+            <basicnumber name="def_base" source="def.base">
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>40,35</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <tooltip>
+                    <text>SPD+AGI+PER</text>
+                </tooltip>
+                <readonly/>                                
+                <script>      
+                    function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.spd_score.getDatabaseNode().getValue()+window.agi_score.getDatabaseNode().getValue()+window.per_score.getDatabaseNode().getValue());
+				end
+                </script>
+            </basicnumber>
+			
+            <stringcontrol>
+                <anchored>
+                    <to>def_base</to>
+                    <position>above</position>
+                </anchored>
+                <static>Base</static>
+                <font>sheetlabelmini</font>
+                <center/>
+            </stringcontrol>
+            
+            <stringcontrol>
+                <anchored>
+                    <to>def_base</to>
+                    <position>left</position>
+                    <offset>5,-2</offset>
+                </anchored>
+                <static>DEF</static>
+                <font>sheetlabel</font>
+                <center/>
+            </stringcontrol>
+            
+            <basicnumber name="def_racialmod" source="def.racial">
+                <anchored>
+                    <to>def_base</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>                    
+                </anchored>
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Racial Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Racial");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>                                                
+            
+            <basicnumber name="def_equipmod" source="def.equip">
+                <anchored>
+                    <to>def_racialmod</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Equipment Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Equip");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+
+                </script>
+            </basicnumber> 
+            
+            
+            
+            <basicnumber name="def_total" >
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>195,35</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <readonly/>
+                                
+                <script>                    			
+                    function onInit()
+                       
+                    nodeDef = window.getDatabaseNode().createChild("def");
+                        if nodeDef then
+                            nodeDef.onChildUpdate = onSourceUpdate;
+                        end                                                            														
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.def_base.getDatabaseNode().getValue()+window.def_racialmod.getDatabaseNode().getValue()+window.def_equipmod.getDatabaseNode().getValue());
+				end
+                    
+                </script>
+            </basicnumber> 
+            <stringcontrol>
+                <anchored>
+                    <to>def_total</to>
+                    <position>above</position>
+                </anchored>
+                <static>Total</static>
+                <font>sheetlabelmini</font>
+                <center/>
+            </stringcontrol>  
+            
+
+
+            
+            
+            
+            
+            
+            <basicnumber name="arm_base" source="arm.base">
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>40,60</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <tooltip>
+                    <text>PHY</text>
+                </tooltip>
+                <readonly/>                                
+                <script>      
+                    function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.phy_score.getDatabaseNode().getValue());
+				end
+                </script>
+            </basicnumber>
+            
+            
+            <stringcontrol>
+                <anchored>
+                    <to>arm_base</to>
+                    <position>left</position>
+                    <offset>5,-2</offset>
+                </anchored>
+                <static>ARM</static>
+                <font>sheetlabel</font>
+                <center/>
+            </stringcontrol>
+            
+            <basicnumber name="arm_shieldmod" source="arm.shield">
+                <anchored>
+                    <to>arm_base</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>                    
+                </anchored>
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Shield Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Shield");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>                                                
+            
+            <basicnumber name="arm_armormod" source="arm.armor">
+                <anchored>
+                    <to>arm_shieldmod</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Armor Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Armor");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end							
+     		    </script>		
+            </basicnumber>
+
+            <basicnumber name="arm_othermod" source="arm.other">
+                <anchored>
+                    <to>arm_armormod</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Other Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Other");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>
+            
+            
+            
+            <basicnumber name="arm_total" >
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>195,60</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <readonly/>
+                                
+                <script>                    			
+                    function onInit()
+                       
+                    nodeDef = window.getDatabaseNode().createChild("arm");
+                        if nodeDef then
+                            nodeDef.onChildUpdate = onSourceUpdate;
+                        end                                                            														
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.arm_base.getDatabaseNode().getValue()+window.arm_shieldmod.getDatabaseNode().getValue()+window.arm_armormod.getDatabaseNode().getValue()+window.arm_othermod.getDatabaseNode().getValue());
+				end
+                    
+                </script>
+            </basicnumber> 
+           
+            
+            
+            
+            <basicnumber name="init_base" source="init.base">
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>40,85</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <tooltip>
+                    <text>SPD+PRW+PER</text>
+                </tooltip>
+                <readonly/>                                
+                <script>      
+                    function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.spd_score.getDatabaseNode().getValue()+window.prw_score.getDatabaseNode().getValue()+window.per_score.getDatabaseNode().getValue());
+				end
+                </script>
+            </basicnumber>
+            
+            
+            <stringcontrol>
+                <anchored>
+                    <to>init_base</to>
+                    <position>left</position>
+                    <offset>5,-2</offset>
+                </anchored>
+                <static>INIT</static>
+                <font>sheetlabel</font>
+                <center/>
+            </stringcontrol>
+            
+            <basicnumber name="init_equipmod" source="init.shield">
+                <anchored>
+                    <to>init_base</to>
+                    <position>righthigh</position>
+                    <offset>42,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>                    
+                </anchored>
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Equip Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Equip");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>                                                
+            
+            <basicnumber name="init_othermod" source="init.other">
+                <anchored>
+                    <to>init_equipmod</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Other Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Other");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>
+
+                        
+            
+            
+            <basicnumber name="init_total" >
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>195,85</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <readonly/>
+                                
+                <script>                    			
+                    function onInit()
+                       
+                    nodeDef = window.getDatabaseNode().createChild("init");
+                        if nodeDef then
+                            nodeDef.onChildUpdate = onSourceUpdate;
+                        end                                                            														
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.init_base.getDatabaseNode().getValue()+window.init_equipmod.getDatabaseNode().getValue()+window.init_othermod.getDatabaseNode().getValue());
+				end
+                    
+                </script>
+            </basicnumber> 
+           
+            
+            
+            
+            <basicnumber name="cmd_base" source="cmd.base">
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>40,110</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <tooltip>
+                    <text>INT</text>
+                </tooltip>
+                <readonly/>                                
+                <script>      
+                    function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.int_score.getDatabaseNode().getValue());
+				end
+                </script>
+            </basicnumber>
+            
+            
+            <stringcontrol>
+                <anchored>
+                    <to>cmd_base</to>
+                    <position>left</position>
+                    <offset>5,-2</offset>
+                </anchored>
+                <static>CMD</static>
+                <font>sheetlabel</font>
+                <center/>
+            </stringcontrol>
+            
+            <basicnumber name="cmd_skillmod" source="cmd.skill">
+                <anchored>
+                    <to>cmd_base</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>                    
+                </anchored>
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Skill Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Skill");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>                                                
+            
+            <basicnumber name="cmd_abilitymod" source="cmd.ability">
+                <anchored>
+                    <to>cmd_skillmod</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Ability Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Ability");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>
+
+                        
+            
+            
+            <basicnumber name="cmd_total" >
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>195,110</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <readonly/>
+                                
+                <script>                    			
+                    function onInit()
+                       
+                    nodeDef = window.getDatabaseNode().createChild("cmd");
+                        if nodeDef then
+                            nodeDef.onChildUpdate = onSourceUpdate;
+                        end                                                            														
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.cmd_base.getDatabaseNode().getValue()+window.cmd_skillmod.getDatabaseNode().getValue()+window.cmd_abilitymod.getDatabaseNode().getValue());
+				end
+                    
+                </script>
+            </basicnumber> 
+			
+			
+                        
+            <basicnumber name="ctrl_base" source="ctrl.base">
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>40,135</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <tooltip>
+                    <text>ARC</text>
+                </tooltip>
+                <readonly/>                                
+                <script>      
+                    function onInit()
+                        nodeStats = window.getDatabaseNode().createChild("stats");
+                        if nodeStats then
+                            nodeStats.onChildUpdate = onSourceUpdate;
+                        end
+                    
+                                        															
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.arc_score.getDatabaseNode().getValue() * 2);
+				end
+                </script>
+            </basicnumber>
+            
+            
+            <stringcontrol>
+                <anchored>
+                    <to>ctrl_base</to>
+                    <position>left</position>
+                    <offset>5,-2</offset>
+                </anchored>
+                <static>CTRL</static>
+                <font>sheetlabel</font>
+                <center/>
+            </stringcontrol>
+            
+            <basicnumber name="ctrl_skillmod" source="ctrl.skill">
+                <anchored>
+                    <to>ctrl_base</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>                    
+                </anchored>
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Skill Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Skill");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>                                                
+            
+            <basicnumber name="ctrl_abilitymod" source="ctrl.ability">
+                <anchored>
+                    <to>ctrl_skillmod</to>
+                    <position>righthigh</position>
+                    <offset>5,0</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+                <hideonvalue>0</hideonvalue>
+                <tooltip>
+                    <text>Ability Mod</text>
+                </tooltip>
+                <script>
+                    labelwidget = nil;
+			
+                    function onInit()                    
+                        labelwidget = addTextWidget("sheetlabelinline", "Ability");
+                        if labelwidget then                            
+                            labelwidget.setPosition("over", 0, 0);                            
+                        end
+                        onValueChanged()
+                    end
+                    
+                    function onValueChanged()
+                        if getValue()==0 then
+                            labelwidget.setVisible(true);
+                        else
+                            labelwidget.setVisible(false);
+                        end
+                    end
+                </script>
+            </basicnumber>
+
+			            
+            <basicnumber name="ctrl_total" >
+                <anchored>
+                    <to>defframe</to>
+                    <position>insidetopleft</position>
+                    <offset>195,135</offset>
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>
+                <readonly/>
+                                
+                <script>                    			
+                    function onInit()
+                       
+                    nodeDef = window.getDatabaseNode().createChild("ctrl");
+                        if nodeDef then
+                            nodeDef.onChildUpdate = onSourceUpdate;
+                        end                                                            														
+                        onSourceUpdate();
+                    end
+				
+				function onSourceUpdate(source)
+					setValue(window.ctrl_base.getDatabaseNode().getValue()+window.ctrl_skillmod.getDatabaseNode().getValue()+window.ctrl_abilitymod.getDatabaseNode().getValue());
+				end
+                    
+                </script>
+            </basicnumber> 
+			
+			<stringcontrol>
+                <anchored>
+                    <to>ctrl_abilitymod</to>
+                    <position>right</position>
+                <offset>12,8</offset>  					
+                </anchored>
+                <static>Inchs</static>
+                <font>sheetlabelmini</font>
+                <center/>
+            </stringcontrol>
+			
+			
+            
+			
+            <!--SKILLS-->
+            <frame_char name="skillframe">
+				<bounds>175,60,240,290</bounds>                                
+			</frame_char>
+            
+            <stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>SKILLS</static>
+            <anchored>
+                <to>skillframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+            
+            <label_sm>
+				<anchored>
+                    <to>skillframe</to>
+                    <position>insidetopleft</position>
+                    <offset>15,20</offset>
+                </anchored>
+				<static>Name</static>
+			</label_sm>            
+			<label_sm>
+				<anchored>
+                    <to>skillframe</to>
+                    <position>insidetopleft</position>
+                    <offset>120,20</offset>
+                </anchored>
+				<static>Stat</static>
+			</label_sm>						
+			<label_sm>
+				<anchored>
+                    <to>skillframe</to>
+                    <position>insidetopleft</position>
+                    <offset>155,20</offset>
+                </anchored>
+				<static>Rank</static>
+			</label_sm>
+            <label_sm>
+				<anchored>
+                    <to>skillframe</to>
+                    <position>insidetopleft</position>
+                    <offset>192,20</offset>
+                </anchored>
+				<static>Total</static>
+			</label_sm>
+            
+            
+            <windowlist name="main_listskills">
+                <anchored>
+                    <to>skillframe</to>                    
+                    <position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+                </anchored>
+                <class>charsheet_skill_small</class>
+                <datasource>.skilllist</datasource>
+                <sortby><control>order</control></sortby>                 
+                <script file="charsheet/scripts/charsheet_skilllist_small.lua"/>                     
+            </windowlist>            
+            <scrollbar_charlist>
+				<anchored>
+					<to>main_listskills</to>
+                    <offset>-5,-10</offset>
+				</anchored>
+				<target>main_listskills</target>
+			</scrollbar_charlist>
+            
+            <stringcontrol name="emptytext">
+                <anchored>
+                    <to>skillframe</to>
+                    <position>over</position>
+                    <offset>-25,-25</offset>
+                </anchored>
+                <frame>
+                    <name>whitecontrolarea</name>
+                    <offset>10,10,10,10</offset>
+                </frame>
+                    
+                <multilinespacing >18</multilinespacing>
+                <static>Add skill ranks or create subskills by right clicking on a skill group on the skills tab. These skills will then appear in this list. Skill groups are Lore and Craft, editable fields are highlighted.</static>
+            </stringcontrol>
+            
+            
+            
+
+            
+            
+		</sheetdata>
+	</windowclass>
+</root>

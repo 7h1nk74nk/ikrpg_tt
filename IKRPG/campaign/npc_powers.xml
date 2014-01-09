@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="npc_vpowerfield">
+		<sizelimits>
+			<minimum>
+				<height>15</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function update()
+				return onFilter();
+			end
+						
+			function onFilter()
+				return (text.getValue() ~= "");
+			end
+		</script>
+		<sheetdata>
+			<label_npc_vpowerdesc name="label" />
+			<string_npc_vpowerdesc name="text" />
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="npc_vpower_header">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function update()
+				return false;
+			end
+
+			function onFilter()
+				return true;
+			end
+		</script>
+		<sheetdata>
+			<hsc name="category" />
+			
+			<genericcontrol name="header">
+				<anchored>
+					<top />
+					<left />
+					<right />
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<frame>
+					<name>headernpc</name>
+				</frame>
+			</genericcontrol>
+			<header_npc_text name="name">
+				<anchored>
+					<to>header</to>
+				</anchored>
+				<color>FFFFFFFF</color>
+			</header_npc_text>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="npc_vpower">
+		<sizelimits>
+			<minimum>
+				<height>38</height>
+			</minimum>
+		</sizelimits>
+		<script file="campaign/scripts/campaign_npc_vpower.lua" />
+		<sheetdata>
+			<hsc name="category" />
+			
+			<hs name="name">
+				<script>
+					function onValueChanged()
+						window.updatePowerTitle();
+					end
+				</script>
+			</hs>
+			<hs name="keywords">
+				<script>
+					function onValueChanged()
+						window.updatePowerTitle();
+					end
+				</script>
+			</hs>
+			<hs name="recharge">
+				<script>
+					function onValueChanged()
+						window.updatePowerTitle();
+					end
+				</script>
+			</hs>
+
+			<hs name="action">
+				<script>
+					function onValueChanged()
+						window.updatePowerTitle();
+						window.updateCategory();
+					end
+				</script>
+			</hs>
+			<hs name="range">
+				<script>
+					function onValueChanged()
+						window.updatePowerTitle();
+						window.buildPowerFields();
+					end
+				</script>
+			</hs>
+			
+			<hs name="shortdescription">
+				<script>
+					function onValueChanged()
+						window.updateCategory();
+						window.buildPowerFields();
+					end
+				</script>
+			</hs>		
+			
+			<genericcontrol name="columnanchor">
+				<bounds>0,0,0,0</bounds>
+			</genericcontrol>
+			
+			<stringcontrol name="powertitle">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>3</offset>
+					</top>
+					<left><offset>25</offset></left>
+					<right><offset>-50</offset></right>
+				</anchored>
+				<frame>
+					<name>campaignrowshade</name>
+					<offset>25,3,50,2</offset>
+				</frame>
+				<font>reference-b</font>
+				<multilinespacing>15</multilinespacing>
+				<disabled />
+				<readonly />
+				<empty>&#171; Power Name &#187;</empty>
+			</stringcontrol>
+			<cycler_vpowertype name="powertype">
+				<bounds>8,3,15,15</bounds>
+				<readonly />
+				<disabled />
+			</cycler_vpowertype>
+			<link_smart name="link">
+				<bounds>-20,3,15,15</bounds>
+				<defaultclass>reference_power_custom</defaultclass>
+				<toggle />
+			</link_smart>
+
+			<list_npc_vpowerfields name="powerfields" />
+			
+			<spacer>
+				<anchor>shortdescription</anchor>
+				<height>3</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="npc_power">
+		<sizelimits>
+			<minimum>
+				<height>22</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function update()
+				local bLock = windowlist.isReadOnly();
+				
+				name.setReadOnly(bLock);
+				recharge.setReadOnly(bLock);
+				action.setReadOnly(bLock);
+				range.setReadOnly(bLock);
+				keywords.setReadOnly(bLock);
+				shortdescription.setReadOnly(bLock);
+
+				return true;
+			end
+			
+			function onDrop(x, y, draginfo)
+				if draginfo.isType("dice") then
+					NPCCommon.applyDiceToPower(getDatabaseNode(), draginfo.getDieList());
+					return true;
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_npcpowername name="name">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>3</offset>
+					</top>
+					<left><offset>30</offset></left>
+					<right><offset>-50</offset></right>
+				</anchored>
+				<frame>
+					<name>campaignrowshade</name>
+					<offset>30,3,50,2</offset>
+				</frame>
+				<multilinespacing>15</multilinespacing>
+			</string_npcpowername>
+			<cycler_powertype name="powertype">
+				<bounds>10,3,15,15</bounds>
+			</cycler_powertype>
+			<link_smart name="link">
+				<bounds>-20,3,15,15</bounds>
+				<defaultclass>reference_power_custom</defaultclass>
+				<toggle />
+			</link_smart>
+
+			<string_column_npcpower name="recharge" />
+			<label_column_npcpower name="recharge_label">
+				<anchored>
+					<to>recharge</to>
+				</anchored>
+				<static>Recharge:</static>
+			</label_column_npcpower>
+			
+			<string_column_npcpower name="action" />
+			<label_column_npcpower name="action_label">
+				<anchored>
+					<to>action</to>
+				</anchored>
+				<static>Action:</static>
+			</label_column_npcpower>
+			
+			<string_column_npcpower name="range" />
+			<label_column_npcpower name="range_label">
+				<anchored>
+					<to>range</to>
+				</anchored>
+				<static>Range:</static>
+			</label_column_npcpower>
+			
+			<string_column_npcpower name="keywords" />
+			<label_column_npcpower name="keywords_label">
+				<anchored>
+					<to>keywords</to>
+				</anchored>
+				<static>Keywords:</static>
+			</label_column_npcpower>
+			
+			<string_column_npcpowerdesc name="shortdescription" />
+			<label_column_npcpower name="shortdescription_label">
+				<anchored>
+					<to>shortdescription</to>
+				</anchored>
+				<static>Desc:</static>
+			</label_column_npcpower>
+			
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>2</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+</root>

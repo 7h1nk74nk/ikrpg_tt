@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="effectsmall">
+		<playercontrol />
+		<sizelimits>
+			<minimum>
+				<height>26</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function onInit()
+				if not User.isHost() then
+					isgmonly.setVisible(false);
+					apply.setStaticBounds(2,7,24,10);
+				end
+			end
+
+			function onDrop(x, y, draginfo)
+				return windowlist.onDrop(x, y, draginfo);
+			end
+			
+			function getEffect()
+				return { 
+						sName = label.getValue(), 
+						sExpire = expiration.getStringValue(), 
+						nSaveMod = effectsavemod.getValue(),
+						nGMOnly = isgmonly.getIndex(),
+						sApply = apply.getStringValue(),
+						sSource = "",
+						nInit = CTManager.getActiveInit() or 0
+						};
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				local rEffect = getEffect();
+				return ActionEffect.performRoll(draginfo, nil, rEffect);
+			end
+			
+			function onDoubleClick(x, y)
+				local rEffect = getEffect();
+				local rRoll = ActionEffect.getRoll(nil, nil, rEffect);
+				if not rRoll then
+					return true;
+				end
+
+				rRoll.sType = "effect";
+
+				local rTarget = nil;
+				if User.isHost() then
+					rTarget = ActorManager.getActor("ct", CTManager.getActiveCT());
+				else
+					rTarget = ActorManager.getActor("ct", CTManager.getCTFromNode("charsheet." .. User.getCurrentIdentity()));
+				end
+				
+				ActionsManager.resolveAction(nil, rTarget, rRoll);
+				return true;
+			end
+
+			function onGainFocus()
+				window.setFrame("rowshade");
+			end
+
+			function onLoseFocus()
+				window.setFrame(nil);
+			end
+		</script>
+		<sheetdata>
+			<button_checkbox name="isgmonly">
+				<bounds>2,1,24,10</bounds>
+				<gmeditonly />
+				<parameters>
+					<icons>button_toggle_gm</icons>
+					<defaulticon>button_toggle_visible</defaulticon>
+					<tooltips>Visible to GM</tooltips>
+					<defaulttooltip>Visible to All</defaulttooltip>
+				</parameters>
+			</button_checkbox>
+			<button_iconcycler name="apply">
+				<bounds>2,12,24,10</bounds>
+				<gmeditonly />
+				<parameters>
+					<icons>button_toggle_action|button_toggle_roll|button_toggle_single</icons>
+					<values>action|roll|single</values>
+					<tooltips>One Action|One Roll|Apply Each Once</tooltips>
+					<defaulticon>button_toggle_all</defaulticon>
+					<defaulttooltip>All Rolls</defaulttooltip>
+				</parameters>
+			</button_iconcycler>
+			
+			<string_textlistitem name="label">
+				<anchored>
+					<position>insidetopleft</position>
+					<offset>28,3</offset>
+					<right>
+						<offset>-75</offset>
+					</right>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<gmeditonly />
+				<script>
+					function onDragStart(button, x, y, draginfo)
+						return window.onDragStart(button, x, y, draginfo);
+					end
+
+					function onDoubleClick(x, y)
+						return window.onDoubleClick(x, y);
+					end
+				</script>
+			</string_textlistitem>
+
+			<cycler_exp name="expiration">
+				<bounds>-75,2,44,20</bounds>
+				<gmeditonly />
+				<script>
+					function onValueChanged()
+						if getStringValue() == "save" then
+							window.effectsavemod.setVisible(true);
+						else
+							window.effectsavemod.setVisible(false);
+						end
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return window.onDragStart(button, x, y, draginfo);
+					end
+				</script>
+			</cycler_exp>
+
+			<basicnumber_sm name="effectsavemod">
+				<bounds>-31,1,30,20</bounds>
+				<displaysign />
+				<invisible />
+				<gmeditonly />
+				<script>
+					function onDragStart(button, x, y, draginfo)
+						return window.onDragStart(button, x, y, draginfo);
+					end
+				</script>
+			</basicnumber_sm>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="effectlist">
+		<frame>utilitybox</frame>
+		<playercontrol />
+		<nodelete />
+		<tooltip>
+			<text>Effect list</text>
+		</tooltip>
+		<placement>
+			<size>
+				<width>275</width>
+				<height>350</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>200</width>
+				<height>220</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<!-- TITLE -->
+			<windowtitlebar>
+				<title>
+					<text>Effects</text>
+				</title>
+			</windowtitlebar>
+			
+			<!-- LIST -->
+			<list_utility name="list">
+				<bounds>35,55,-35,-80</bounds>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>15,15,20,15</offset>
+				</frame>
+				<datasource>.</datasource>
+				<class>effectsmall</class>
+				<script>
+					function onDrop(x, y, draginfo)
+						if User.isHost() then
+							local rEffect = ActionEffect.decodeEffectFromDrag(draginfo);
+							if rEffect then
+								local win = addEntry(true);
+								if win then
+									win.label.setValue(rEffect.sName);
+									win.expiration.setStringValue(rEffect.sExpire);
+									win.effectsavemod.setValue(rEffect.nSaveMod);
+
+									win.isgmonly.setState(rEffect.nGMOnly);
+									win.apply.setStringValue(rEffect.sApply);
+								end
+							end
+							return true;
+						end
+					end
+				</script>
+			</list_utility>
+			<scrollbar>
+				<bounds>-40,65,20,-90</bounds>
+				<target>list</target>
+			</scrollbar>
+
+			<!-- LIST CONTROLS -->
+			<filter name="filter">
+				<bounds>55,-55,-25,20</bounds>
+			</filter>
+			<button_filter name="filtertrigger">
+				<bounds>20,-65,21,41</bounds>
+			</button_filter>			
+			
+			<resize_utilitybox />
+			<close_utilitybox />
+		</sheetdata>
+	</windowclass>
+</root>

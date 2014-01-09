@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root version="2.0">
+	<template name="number_parcelitem">
+		<basicnumber>
+			<bounds>3,3,25,15</bounds>
+			<frame />
+			<font>reference-r-small</font>
+			<hideonvalue>0</hideonvalue>
+			<delaykeyupdate />
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("number") then
+						setValue(getValue() + draginfo.getNumberData());
+						return true;
+					end
+				end
+			</script>
+		</basicnumber>
+	</template>
+	<template name="string_parcelitem">
+		<basicstring>
+			<anchored>
+				<left mergerule="replace"><offset>33</offset></left>
+				<top><offset>4</offset></top>
+				<right mergerule="replace"><offset>-15</offset></right>
+			</anchored>
+			<frame />
+			<font>reference-r-small</font>
+			<multilinespacing>15</multilinespacing>
+		</basicstring>
+	</template>
+	
+	<windowclass name="parcel_coin">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<number_parcelitem name="amount" />
+			<string_parcelitem name="description" />
+			<spacer>
+				<anchor>description</anchor>
+				<height>2</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="parcel_item">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<number_parcelitem name="amount" />
+			<string_parcelitem name="description">
+				<anchored>
+					<right><offset>-30</offset></right>
+				</anchored>
+			</string_parcelitem>
+			<link_field name="shortcut">
+				<bounds>-25,0,20,20</bounds>
+			</link_field>
+			<spacer>
+				<anchor>description</anchor>
+				<height>2</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="parcel_main">
+		<script file="campaign/scripts/campaign_parcel_main.lua" />
+		<sheetdata>
+			<windowlist name="list_coins">
+				<anchored>
+					<top><offset>25</offset></top>
+					<left />
+					<size><width>130</width></size>
+					<sizelimits>
+						<minimum><height>120</height></minimum>
+					</sizelimits>
+				</anchored>
+				<datasource>.coinlist</datasource>
+				<class>parcel_coin</class>
+				<noscroll />
+				<gmeditonly />
+				<child><backcolor>1A40301E</backcolor></child>
+				<child></child>
+				<script>
+					function onInit()
+						if User.isHost() then
+							registerMenuItem("Clear All Coins", "delete", 4);
+							registerMenuItem("Confirm Delete", "delete", 4, 3);
+						end
+					end
+					
+					function onMenuSelection(selection, subselection)
+						if selection == 4 and subselection == 3 then
+							window.clearAllCoins();
+						end
+					end
+					
+					function onDrop(x, y, draginfo)
+						return window.onDrop(x, y, draginfo);
+					end
+				</script>			
+			</windowlist>
+			<stringcontrol>
+				<anchored>
+					<top><offset>10</offset></top>
+					<left><offset>3</offset></left>
+					<size><width>25</width></size>
+				</anchored>
+				<font>reference-b-small</font>
+				<static>#</static>
+				<center />
+			</stringcontrol>
+			<stringcontrol>
+				<anchored>
+					<top><offset>10</offset></top>
+					<left><offset>30</offset></left>
+					<size><width>100</width></size>
+				</anchored>
+				<font>reference-b-small</font>
+				<static>Coin Description</static>
+				<center />
+			</stringcontrol>
+
+			<windowlist name="list_items">
+				<anchored>
+					<top><offset>25</offset></top>
+					<left><offset>135</offset></left>
+					<right />
+					<sizelimits>
+						<minimum><height>120</height></minimum>
+					</sizelimits>
+				</anchored>
+				<datasource>.itemlist</datasource>
+				<class>parcel_item</class>
+				<noscroll />
+				<allowcreate />
+				<allowdelete />
+				<gmeditonly />
+				<sortby><control>description</control></sortby>
+				<child><backcolor>1A40301E</backcolor></child>
+				<child></child>
+				<script>
+					function onInit()
+						if User.isHost() then
+							registerMenuItem("Clear All Items", "delete", 4);
+							registerMenuItem("Confirm Delete", "delete", 4, 3);
+						end
+					end
+					
+					function onMenuSelection(selection, subselection)
+						if selection == 4 and subselection == 3 then
+							window.clearAllItems();
+						end
+					end
+					
+					function onDrop(x, y, draginfo)
+						return window.onDrop(x, y, draginfo);
+					end
+				</script>
+			</windowlist>
+			<stringcontrol>
+				<anchored>
+					<top><offset>10</offset></top>
+					<left><offset>138</offset></left>
+					<size><width>25</width></size>
+				</anchored>
+				<font>reference-b-small</font>
+				<static>#</static>
+				<center />
+			</stringcontrol>
+			<stringcontrol>
+				<anchored>
+					<top><offset>10</offset></top>
+					<left><offset>165</offset></left>
+					<right><offset>-15</offset></right>
+				</anchored>
+				<font>reference-b-small</font>
+				<static>Item Description</static>
+				<center />
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="treasureparcel">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>450</width>
+				<height>250</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<minimum>
+				<width>400</width>
+				<height>250</height>
+			</minimum>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<nodelete />
+		<playercontrol />
+		<sharable />
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script file="campaign/scripts/campaign_parcel_top.lua" />
+		<sheetdata>
+			<genericcontrol name="header">
+				<anchored>
+					<top />
+					<left />
+					<right />
+					<size><height>50</height></size>
+				</anchored>
+				<frame>
+					<name>headerparcel</name>
+				</frame>
+			</genericcontrol>
+			<basicstringw name="name">
+				<anchored>
+					<top><offset>10</offset></top>
+					<left><offset>40</offset></left>
+					<right><offset>-130</offset></right>
+				</anchored>
+				<empty>&#171; New Treasure Parcel &#187;</empty>
+				<font>reference-b-large</font>
+				<nodrag />
+				<nodragselect />
+				<gmeditonly />
+			</basicstringw>
+			<link_tl name="open">
+				<class>treasureparcel</class>
+			</link_tl>
+
+			<stringcontrol>
+				<anchored>
+					<top><offset>12</offset></top>
+					<right><offset>-50</offset></right>
+				</anchored>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+				<static>Party Level</static>
+			</stringcontrol>
+			<basicnumberw name="partylevel">
+				<anchored>
+					<top><offset>9</offset></top>
+					<left>
+						<anchor>right</anchor>
+						<offset>-48</offset>
+					</left>
+					<size><width>20</width></size>
+				</anchored>
+				<nodrag />
+				<default>1</default>
+				<script>
+					function onValueChanged()
+						window.onLevelChanged();
+					end
+				</script>
+			</basicnumberw>
+			
+			<stringcontrol name="label_tier">
+				<anchored>
+					<top><offset>30</offset></top>
+					<left><offset>40</offset></left>
+					<size><width>150</width></size>
+				</anchored>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+				<static />
+			</stringcontrol>
+			
+			<stringcontrol name="label_money">
+				<bounds>-22,30,20,15</bounds>
+				<static>GP</static>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+			</stringcontrol>
+			<numberfield name="monetarytotal">
+				<bounds>-70,30,45,15</bounds>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+				<nodrag />
+				<readonly />
+			</numberfield>
+			<stringcontrol name="label_moneytotal">
+				<anchored>
+					<top><offset>30</offset></top>
+					<right>
+						<parent>monetarytotal</parent>
+						<anchor>left</anchor>
+						<offset>-5</offset>
+					</right>
+				</anchored>
+				<static>Total Monetary Treasure:</static>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+			</stringcontrol>
+			
+			<genericcontrol name="contentframe">
+				<anchored>
+					<top>
+						<parent>header</parent>
+						<anchor>bottom</anchor>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right><offset>-28</offset></right>
+					<bottom><offset>-7</offset></bottom>
+				</anchored>
+			</genericcontrol>
+
+			<subwindow_details name="main">
+				<class>parcel_main</class>
+				<activate />
+				<script>
+					function onDrop(x, y, draginfo)
+						if subwindow then
+							subwindow.onDrop(x, y, draginfo);
+						end
+					end
+				</script>
+			</subwindow_details>
+
+			<scrollbar_details>
+				<target>main</target>
+			</scrollbar_details>
+
+			<resize />
+			<close />
+		</sheetdata>	
+	</windowclass>
+</root>

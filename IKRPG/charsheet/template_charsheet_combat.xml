@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="label_combat">
+		<stringcontrol>
+			<anchored>
+				<position>lefthigh</position>
+				<offset>0,4</offset>
+				<size>
+					<width>85</width>
+					<height>20</height>
+				</size>
+			</anchored>
+			<font>sheetlabel</font>
+			<static />
+		</stringcontrol>
+	</template>
+	
+	<template name="cycler_combatability">
+		<cycler_ability>
+			<anchored>
+				<position>righthigh</position>
+				<offset>8,1</offset>
+				<size>
+					<height>18</height>
+					<width>32</width>
+				</size>
+			</anchored>
+			<parameters>
+				<defaultlabel>Base</defaultlabel>
+			</parameters>
+		</cycler_ability>
+	</template>
+	<template name="cycler_weaponability">
+		<cycler_ability>
+			<frame />
+			<stateframe>
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,5,6,5</offset>
+				</hover>
+			</stateframe>
+			<parameters>
+				<defaultlabel>Base</defaultlabel>
+			</parameters>
+		</cycler_ability>
+	</template>
+	<template name="cycler_weapondefense">
+		<cycler_defense>
+			<frame />
+			<stateframe>
+				<hover>
+					<name>sheetfocus</name>
+					<offset>6,5,6,5</offset>
+				</hover>
+			</stateframe>
+		</cycler_defense>
+	</template>
+
+	<template name="number_defbase">				
+		<number_linked>
+			<anchored>
+				<position>right</position>
+				<offset>15,0</offset>
+				<size>
+					<width>32</width>
+				</size>
+			</anchored>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<nodrag />
+			<readonly />
+			<source>
+				<name>levelbonus</name>
+				<op>+</op>
+			</source>
+			<script>
+				function onSourceUpdate()
+					setValue(10 + calculateSources());
+				end
+			</script>
+		</number_linked>
+	</template>
+	<template name="number_defmod">
+		<basicnumber>
+			<anchored>
+				<position>right</position>
+				<offset>8,0</offset>
+				<size>
+					<width>32</width>
+				</size>
+			</anchored>
+			<hideonvalue>0</hideonvalue>
+			<displaysign />
+			<nodrag />
+		</basicnumber>
+	</template>
+
+	<template name="number_defability">
+		<number_linked>
+			<anchored>
+				<position>right</position>
+				<offset>8,0</offset>
+				<size>
+					<width>32</width>
+				</size>
+			</anchored>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<readonly />
+			<displaysign />
+			<nodrag />
+			<hideonvalue>0</hideonvalue>
+			<script>
+				function onInit()
+					if super.onInit then
+						super.onInit();
+					end
+					
+					local node = window.getDatabaseNode();
+					local nodeAbilities = node.createChild("abilities");
+					if nodeAbilities then
+						nodeAbilities.onChildUpdate = onStatUpdate;
+					end
+
+					local nodeSelector = node.createChild(selectfield[1], "string");
+					if nodeSelector then
+						nodeSelector.onUpdate = onStatUpdate;
+					end
+					
+					if flag then
+						local nodeFlag = node.createChild(flag[1], "number");
+						if nodeFlag then
+							nodeFlag.onUpdate = onStatUpdate;
+						end
+					end
+					
+					onStatUpdate();
+				end
+				
+				function onStatUpdate()
+					local node = window.getDatabaseNode();
+					if flag then
+						if DB.getValue(node, flag[1], 0) ~= 0 then
+							setValue(0);
+							return;
+						end
+					end
+					
+					local sAbility = DB.getValue(node, selectfield[1], "");
+					if sAbility ~= "" then
+						setValue(DB.getValue(node, "abilities." .. sAbility .. ".bonus", 0));
+						return;
+					end
+
+					local nAbility1 = DB.getValue(node, bonusfield1[1], 0);
+					local nAbility2 = DB.getValue(node, bonusfield2[1], 0);
+					setValue(math.max(nAbility1, nAbility2));
+				end
+			</script>
+		</number_linked>
+	</template>
+
+	<template name="number_deftotal">
+		<number_modifier>
+			<anchored>
+				<position>belowleft</position>
+				<offset>0,8</offset>
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<readonly />
+			<modifiersize>mini</modifiersize>
+			<showemptywidget />
+		</number_modifier>
+	</template>
+	<template name="number_deftotal_ac">
+		<number_deftotal>
+			<modifierfield>defenses.ac.temporary</modifierfield>
+			<source>
+				<name>defenses.ac.base</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.ac.ability</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.ac.armor</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.ac.misc</name>
+				<op>+</op>
+			</source>
+		</number_deftotal>
+	</template>
+	<template name="number_deftotal_fort">
+		<number_deftotal>
+			<modifierfield>defenses.fortitude.temporary</modifierfield>
+			<source>
+				<name>defenses.fortitude.base</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.fortitude.ability</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.fortitude.misc</name>
+				<op>+</op>
+			</source>
+		</number_deftotal>
+	</template>
+	<template name="number_deftotal_ref">
+		<number_deftotal>
+			<modifierfield>defenses.reflex.temporary</modifierfield>
+			<source>
+				<name>defenses.reflex.base</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.reflex.ability</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.reflex.armor</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.reflex.misc</name>
+				<op>+</op>
+			</source>
+		</number_deftotal>
+	</template>
+	<template name="number_deftotal_will">
+		<number_deftotal>
+			<modifierfield>defenses.will.temporary</modifierfield>
+			<source>
+				<name>defenses.will.base</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.will.ability</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.will.misc</name>
+				<op>+</op>
+			</source>
+		</number_deftotal>
+	</template>
+
+	<template name="number_deftotal_main">
+		<number_modifier>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<readonly />
+			<modifiersize>mini</modifiersize>
+			<showemptywidget />
+			<script>
+				function onInit()
+					if super.onInit then
+						super.onInit();
+					end
+					
+					local node = window.getDatabaseNode();
+					local nodeAbilities = node.createChild("abilities");
+					if nodeAbilities then
+						nodeAbilities.onChildUpdate = sourceUpdate;
+					end
+
+					local nodeSelector = node.createChild(selectfield[1], "string");
+					if nodeSelector then
+						nodeSelector.onUpdate = sourceUpdate;
+					end
+					
+					if flag then
+						local nodeFlag = node.createChild(flag[1], "number");
+						if nodeFlag then
+							nodeFlag.onUpdate = sourceUpdate;
+						end
+					end
+					
+					onSourceUpdate();
+				end
+				
+				function onSourceUpdate(source)
+					local val = 10 + calculateSources();
+					
+					local node = window.getDatabaseNode();
+					if flag then
+						if DB.getValue(node, flag[1], 0) ~= 0 then
+							setValue(val);
+							return;
+						end
+					end
+					
+					local sAbility = DB.getValue(node, selectfield[1], "");
+					if sAbility ~= "" then
+						setValue(val + DB.getValue(node, "abilities." .. sAbility .. ".bonus", 0));
+						return;
+					end
+
+					local nAbility1 = DB.getValue(node, bonusfield1[1], 0);
+					local nAbility2 = DB.getValue(node, bonusfield2[1], 0);
+					setValue(val + math.max(nAbility1, nAbility2));
+				end
+			</script>
+		</number_modifier>
+	</template>
+
+	<template name="number_charinit">
+		<number_chartotalwithability>
+			<description>
+				<text>Initiative</text>
+			</description>
+			<rollable />
+			<displaysign />
+			<modifierfield>initiative.temporary</modifierfield>
+			<modifiersize>mini</modifiersize>
+			<ability>
+				<source>initiative.ability</source>
+				<default>dexterity</default>
+			</ability>
+			<source>
+				<name>levelbonus</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>initiative.misc</name>
+				<op>+</op>
+			</source>
+			<script>
+				function action(draginfo)
+					local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+					ActionInit.performRoll(draginfo, rActor);
+					
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+					
+				function onDoubleClick(x,y)	
+					return action();
+				end
+			</script>
+		</number_chartotalwithability>
+	</template>
+	
+	<template name="number_charattacktotal">
+		<number_chartotal>
+			<rollable />
+			<displaysign />
+			<modifiersize>mini</modifiersize>
+			<script>
+				function action(draginfo)
+					local rActor, rAttack, rFocus = CharManager.getBaseAttackRollStructures(self.description[1].text[1], window.getDatabaseNode());
+					ActionAttack.performRoll(draginfo, rActor, rAttack, rFocus);
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</number_chartotal>
+	</template>
+	<template name="number_charmeleetotal">
+		<number_charattacktotal>
+			<description>
+				<text>Melee attack</text>
+			</description>
+			<modifierfield>attacks.melee.temporary</modifierfield>
+			<source>
+				<name>levelbonus</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>attacks.melee.ability</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>attacks.melee.misc</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>attacks.melee.temporary</name>
+				<op>+</op>
+			</source>
+		</number_charattacktotal>
+	</template>
+	<template name="number_charrangedtotal">
+		<number_charattacktotal>
+			<description>
+				<text>Ranged attack</text>
+			</description>
+			<modifierfield>attacks.ranged.temporary</modifierfield>
+			<source>
+				<name>levelbonus</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>attacks.ranged.ability</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>attacks.ranged.misc</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>attacks.ranged.temporary</name>
+				<op>+</op>
+			</source>
+		</number_charattacktotal>
+	</template>
+
+	<template name="number_charattackabilitybonus">
+		<number_linked>
+			<anchored>
+				<position>right</position>
+				<offset>8,0</offset>
+				<size>
+					<width>32</width>
+				</size>
+			</anchored>
+			<frame>
+				<name>modifier</name>
+				<offset>5,5,5,5</offset>
+			</frame>
+			<font>sheetnumber</font>
+			<readonly />
+			<displaysign />
+			<nodrag />
+			<hideonvalue>0</hideonvalue>
+			<script>
+				function onInit()
+					if super.onInit then
+						super.onInit();
+					end
+					
+					local node = window.getDatabaseNode();
+					local nodeAbilities = node.createChild("abilities");
+					if nodeAbilities then
+						nodeAbilities.onChildUpdate = onStatUpdate;
+					end
+
+					local nodeSelector = node.createChild(selectfield[1], "string");
+					if nodeSelector then
+						nodeSelector.onUpdate = onStatUpdate;
+					end
+					
+					onStatUpdate();
+				end
+				
+				function onStatUpdate()
+					local node = window.getDatabaseNode();
+					local sAbility = DB.getValue(node, selectfield[1], "");
+					if sAbility == "" then
+						sAbility = defaultval[1];
+					end
+
+					setValue(DB.getValue(node, "abilities." .. sAbility .. ".bonus", 0));
+				end
+			</script>
+		</number_linked>
+	</template>
+	
+	<template name="number_save">
+		<number_chartotal>
+			<rollable />
+			<modifierfield>defenses.save.temporary</modifierfield>
+			<modifiersize>mini</modifiersize>
+			<source>
+				<name>defenses.save.base</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>defenses.save.misc</name>
+				<op>+</op>
+			</source>
+			<script>
+				function action(draginfo)
+					local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+					ActionSave.performRoll(draginfo, rActor);
+					
+					return true;
+				end
+				
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+					
+				function onDoubleClick(x,y)	
+					return action();
+				end
+			</script>
+		</number_chartotal>
+	</template>
+
+	<template name="number_charspeed">
+		<number_chartotal>
+			<modifierfield>speed.temporary</modifierfield>
+			<modifiersize>mini</modifiersize>
+			<description>
+				<text>Speed</text>
+			</description>
+			<source>
+				<name>speed.base</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>speed.armor</name>
+				<op>+</op>
+			</source>
+			<source>
+				<name>speed.misc</name>
+				<op>+</op>
+			</source>
+		</number_chartotal>
+	</template>
+</root>

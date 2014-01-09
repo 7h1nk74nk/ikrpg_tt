@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_languagelistitem">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<string_textlistitem name="name">
+				<anchored>
+					<top />
+					<left />
+					<right />
+				</anchored>
+			</string_textlistitem>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charsheet_notes">
+		<placement>
+			<size>
+				<width>252</width>
+				<height>611</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+			<!-- OVERVIEW -->
+			<frame_char name="detailframe">
+				<bounds>15,5,400,45</bounds>
+			</frame_char>
+
+			<string_labeled name="gender">
+				<anchored>
+					<to>detailframe</to>
+					<position>insidetopleft</position>
+					<offset>15,10</offset>
+					<size>
+						<width>50</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<label>gender</label>
+			</string_labeled>
+			<string_labeled name="age">
+				<anchored>
+					<to>gender</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>50</width>
+					</size>
+				</anchored>
+				<label>age</label>
+			</string_labeled>
+			<string_labeled name="height">
+				<anchored>
+					<to>age</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>50</width>
+					</size>
+				</anchored>
+				<label>height</label>
+			</string_labeled>
+			<string_labeled name="weight">
+				<anchored>
+					<to>height</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>50</width>
+					</size>
+				</anchored>
+				<label>weight</label>
+			</string_labeled>
+			<string_labeled name="size">
+				<anchored>
+					<to>weight</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>60</width>
+					</size>
+				</anchored>
+				<label>size</label>
+			</string_labeled>
+			<string_labeled name="deity">
+				<anchored>
+					<to>size</to>
+					<position>right</position>
+					<offset>5,0</offset>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<label>faith</label>
+			</string_labeled>
+
+			<!-- APPEARANCE -->
+			<frame_char name="appearanceframe">
+				<bounds>15,55,235,210</bounds>
+			</frame_char>
+		
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>APPEARANCE</static>
+            <anchored>
+                <to>appearanceframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<stringu name="appearance">
+				<anchored>
+					<to>appearanceframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_charlist>
+				<anchored>
+					<to>appearance</to>
+				</anchored>
+				<target>appearance</target>
+			</scrollbar_charlist>
+
+			<!-- LANGUAGES -->
+			<frame_char name="languageframe">
+				<bounds>255,55,160,210</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>LANGUAGES</static>
+            <anchored>
+                <to>languageframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<list_text name="languagelist">
+				<anchored>
+					<to>languageframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<datasource>.languagelist</datasource>
+				<class>charsheet_languagelistitem</class>
+				<sortby><control>name</control></sortby>
+				<newfocus>name</newfocus>
+				<allowcreate />
+				<allowdelete />
+			</list_text>
+			<scrollbar_charlist>
+				<anchored>
+					<to>languagelist</to>
+				</anchored>
+				<target>languagelist</target>
+			</scrollbar_charlist>
+
+			<!-- NOTES -->
+			<frame_char name="notesframe">
+				<bounds>15,270,400,265</bounds>
+			</frame_char>
+			
+			<stringcontrol>
+            <font>sheetlabelsmall</font>
+            <static>NOTES</static>
+            <anchored>
+                <to>notesframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+            </stringcontrol>
+			
+			<stringu name="notes">
+				<anchored>
+					<to>notesframe</to>
+					<position>over</position>
+					<offset>-15,-15</offset>
+					<top>
+						<offset>30</offset>
+					</top>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_charlist>
+				<anchored>
+					<to>notes</to>
+				</anchored>
+				<target>notes</target>
+			</scrollbar_charlist>
+		</sheetdata>
+	</windowclass>
+</root>

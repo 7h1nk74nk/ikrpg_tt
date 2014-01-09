@@ -1,0 +1,1264 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ps_mainitem">
+		<frame>modifier</frame>
+		<sizelimits>
+			<minimum>
+				<height>55</height>
+				<width>-1</width>
+			</minimum>
+		</sizelimits>
+		<script file="ps/scripts/ps_mainitem.lua" />
+		<sheetdata>
+			<hlink name="link">
+				<script>
+					function onValueChanged()
+						window.portrait.update();
+					end
+				</script>
+			</hlink>
+			<tokenfield name="token">
+				<bounds>0,0,0,0</bounds>
+				<invisible />
+			</tokenfield>
+			
+<!-- 			<hnx name="exp">
+				<script>
+					function onValueChanged()
+						window.onXPChanged();
+					end
+				</script>
+			</hnx> -->
+<!-- 			<hnx name="expneeded">
+				<script>
+					function onValueChanged()
+						window.onXPChanged();
+					end
+				</script>
+			</hnx> -->
+<!-- 			<hnx name="hptotal">
+				<script>
+					function onValueChanged()
+						window.onHPChanged();
+					end
+				</script>
+			</hnx>
+			<hnx name="wounds">
+				<script>
+					function onValueChanged()
+						window.onHPChanged();
+					end
+				</script>
+			</hnx> -->
+<!-- 			<hnx name="surgesmax">
+				<script>
+					function onValueChanged()
+						window.onSurgesChanged();
+					end
+				</script>
+			</hnx>
+			<hnx name="vitality_phy1">
+				<script>
+					function onValueChanged()
+						window.onvitality_phy1Changed();					
+					end
+				</script>
+			</hnx>
+		 -->
+			<!-- Visible fields -->
+			<spacer>
+				<height>60</height>
+			</spacer>
+			<portrait_base>
+				<bounds>10,10,40,40</bounds>
+			</portrait_base>
+			<portrait name="portrait">
+				<bounds>10,10,40,40</bounds>
+			</portrait>
+			
+			<string_psname name="name">
+				<anchored>
+					<top><offset>10</offset></top>
+					<left><offset>55</offset></left>
+					<size>
+						<width>130</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<empty>&#171; Unnamed &#187;</empty>
+			</string_psname>
+			
+			<string_ps name="race">
+				<anchored>
+					<left><offset>55</offset></left>
+					<top><offset>33</offset></top>
+					<size>
+						<width>80</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<empty>&#171; No Race &#187;</empty>
+			</string_ps>
+			
+			<string_ps name="class">
+				<anchored>
+					<left>
+						<parent>race</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<top><offset>33</offset></top>
+					<size>
+						<width>145</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<empty>&#171; No Career title&#187;</empty>
+			</string_ps>
+			
+<!-- 			<string_ps name="paragon">
+				<anchored>
+					<left>
+						<parent>name</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<top><offset>33</offset></top>
+					<size>
+						<width>145</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<empty>&#171; No Paragon title &#187;</empty>
+			</string_ps>
+			
+			<string_ps name="epic">
+				<anchored>
+					<left>
+						<parent>name</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<top><offset>33</offset></top>
+					<size>
+						<width>145</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<empty>&#171; No Epic title &#187;</empty>
+			</string_ps> -->
+			
+			<number_ps_linked name="currentfeatpoints">
+				<anchored>
+					<top><parent>name</parent></top>
+					<left><offset>215</offset></left>
+					<size>
+						<width>30</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<script>
+				</script>
+			</number_ps_linked>	
+			
+			<number_ps_linked name="level">
+				<anchored>
+					<top><parent>name</parent></top>
+					<left><offset>255</offset></left>
+					<size>
+						<width>30</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<script>
+				</script>
+			</number_ps_linked>	
+			
+			<!-- Status Bars -->
+			
+<!-- 			<statusbar name="xpbar">
+				<anchored>
+					<top>
+						<parent>portrait</parent>
+						<offset>5</offset>
+					</top>
+					<left>
+						<parent>name</parent>
+						<anchor>right</anchor>
+						<offset>25</offset>
+					</left>
+					<size>
+						<height>10</height>
+						<width>55</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>border</name>
+				</frame>
+				<barback>0F0B0B</barback>
+			</statusbar>
+			<label name="xplabel">
+				<anchored>
+					<top><offset>12</offset></top>
+					<right>
+						<parent>xpbar</parent>
+						<anchor>left</anchor>
+						<offset>-5</offset>
+					</right>
+				</anchored>
+				<static>XP</static>
+			</label> -->
+			
+			<statusbar name="phybar">
+				<anchored>
+					<top><parent>portrait</parent></top>
+					<bottom><parent>portrait</parent></bottom>
+					<left>
+						<parent>level</parent>
+						<anchor>right</anchor>
+						<offset>10</offset>
+					</left>
+					<size>
+						<width>10</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>border</name>
+				</frame>
+				<barback>ff0000ff</barback>
+			</statusbar>
+			
+			<statusbar name="agibar">
+				<anchored>
+					<top><parent>portrait</parent></top>
+					<bottom><parent>portrait</parent></bottom>
+					<left>
+						<parent>phybar</parent>
+						<anchor>right</anchor>
+						<offset>3</offset>
+					</left>
+					<size>
+						<width>10</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>border</name>
+				</frame>
+				<barback>ffff0000</barback>
+			</statusbar>
+			
+			<statusbar name="intbar">
+				<anchored>
+					<top><parent>portrait</parent></top>
+					<bottom><parent>portrait</parent></bottom>
+					<left>
+						<parent>agibar</parent>
+						<anchor>right</anchor>
+						<offset>3</offset>
+					</left>
+					<size>
+						<width>10</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>border</name>
+				</frame>
+				<barback>ff00aa00</barback>
+			</statusbar>
+
+			<!-- Abilities -->			
+			<number_ps_ability name="Physique">
+				<anchored>
+					<to>intbar</to>
+					<left>
+						<offset>10</offset>
+					</left>
+				</anchored>
+			</number_ps_ability>			
+			<number_ps_ability name="Speed">
+				<anchored>
+					<to>Physique</to>
+				</anchored>
+			</number_ps_ability>			
+			<number_ps_ability name="Strength">
+				<anchored>
+					<to>Speed</to>
+				</anchored>
+			</number_ps_ability>			
+			<number_ps_ability name="Agility">
+				<anchored>
+					<to>Strength</to>
+				</anchored>
+			</number_ps_ability>			
+			<number_ps_ability name="Prowess">
+				<anchored>
+					<to>Agility</to>
+				</anchored>
+			</number_ps_ability>		
+			<number_ps_ability name="Poise">
+				<anchored>
+					<to>Prowess</to>
+				</anchored>
+			</number_ps_ability>	
+			<number_ps_ability name="Intellect">
+				<anchored>
+					<to>Poise</to>
+				</anchored>
+			</number_ps_ability>	
+			<number_ps_ability name="Arcane">
+				<anchored>
+					<to>Intellect</to>
+				</anchored>
+			</number_ps_ability>	
+			<number_ps_ability name="Perception">
+				<anchored>
+					<to>Arcane</to>
+				</anchored>
+			</number_ps_ability>	
+			<number_ps_ability name="Willpower">
+				<anchored>
+					<to>Perception</to>
+				</anchored>
+			</number_ps_ability>	
+
+			<number_ps_abilitycheck name="phycheck">
+				<anchored>
+					<to>Physique</to>
+				</anchored>
+				<target>Physique</target>
+			</number_ps_abilitycheck>
+			<number_ps_abilitycheck name="spdcheck">
+				<anchored>
+					<to>Speed</to>
+				</anchored>
+				<target>Speed</target>
+			</number_ps_abilitycheck>
+			<number_ps_abilitycheck name="strcheck">
+				<anchored>
+					<to>Strength</to>
+				</anchored>
+				<target>Strength</target>
+			</number_ps_abilitycheck>
+			<number_ps_abilitycheck name="agicheck">
+				<anchored>
+					<to>Agility</to>
+				</anchored>
+				<target>Agility</target>
+			</number_ps_abilitycheck>
+			<number_ps_abilitycheck name="prwcheck">
+				<anchored>
+					<to>Prowess</to>
+				</anchored>
+				<target>Prowess</target>
+			</number_ps_abilitycheck>
+			<number_ps_abilitycheck name="poicheck">
+				<anchored>
+					<to>Poise</to>
+				</anchored>
+				<target>Poise</target>
+			</number_ps_abilitycheck>	
+			<number_ps_abilitycheck name="intcheck">
+				<anchored>
+					<to>Intellect</to>
+				</anchored>
+				<target>Intellect</target>
+			</number_ps_abilitycheck>		
+			<number_ps_abilitycheck name="arccheck">
+				<anchored>
+					<to>Arcane</to>
+				</anchored>
+				<target>Arcane</target>
+			</number_ps_abilitycheck>					
+			<number_ps_abilitycheck name="percheck">
+				<anchored>
+					<to>Perception</to>
+				</anchored>
+				<target>Perception</target>
+			</number_ps_abilitycheck>	
+			<number_ps_abilitycheck name="willcheck">
+				<anchored>
+					<to>Willpower</to>
+				</anchored>
+				<target>Willpower</target>
+			</number_ps_abilitycheck>			
+			
+			
+			<!-- Defenses -->
+			<number_ps_defense name="DEF">
+				<anchored>
+					<to>Willpower</to>
+					<left>
+						<offset>10</offset>
+					</left>
+				</anchored>
+			</number_ps_defense>				
+			<number_ps_defense name="ARM">
+				<anchored>
+					<to>willcheck</to>
+					<left>
+						<offset>10</offset>
+					</left>
+				</anchored>
+			</number_ps_defense>
+			
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ps_main">
+		<script file="ps/scripts/ps_main.lua" />
+		<sheetdata>
+			<frame_ps name="sheetframe" />
+			<label_ps_sheet>
+				<static>Party Information</static>
+			</label_ps_sheet>
+			
+			<!-- Column Labels -->
+			<header_ps2 name="portraitlabel">
+				<anchored>
+					<left><offset>20</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<static>Portrait</static>
+			</header_ps2>
+			<header_ps1 name="namelabel">
+				<anchored>
+					<left><offset>65</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Name</static>
+			</header_ps1>
+			<header_ps2 name="racelabel">
+				<anchored>
+					<left><offset>65</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Race</static>
+			</header_ps2>
+			
+			<header_ps1 name="featlabel">
+				<anchored>
+					<left><offset>227</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Feat</static>
+			</header_ps1>
+			
+			<header_ps2 name="pointslabel">
+				<anchored>
+					<left><offset>224</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Points</static>
+			</header_ps2>
+			
+			<header_ps2 name="xplabel">
+				<anchored>
+					<left><offset>275</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>XP</static>
+			</header_ps2>
+			
+			<header_ps2 name="careerlabel">
+				<anchored>
+					<left><offset>150</offset></left>
+					<size>
+						<width>145</width>
+					</size>
+				</anchored>
+				<static>Career</static>
+			</header_ps2>	
+			
+			<header_ps1 name="damagelabel">
+				<anchored>
+					<left><offset>303</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<center />
+				<static>Damage</static>
+			</header_ps1>
+			
+			<header_ps2 name="capacitylabel">
+				<anchored>
+					<left><offset>303</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<center />
+				<static>Capacity</static>
+			</header_ps2>
+			
+			<header_ps1 name="abilitieslabel">
+				<anchored>
+					<left><offset>410</offset></left>
+					<size>
+						<width>230</width>
+					</size>
+				</anchored>
+				<center />
+				<static>Abilities</static>
+			</header_ps1>
+			
+			<header_ps2 name="phylabel">
+				<anchored>
+					<left><offset>350</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>PHY</static>
+			</header_ps2>
+			
+			<header_ps2 name="spdlabel">
+				<anchored>
+					<left><offset>390</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>spd</static>
+			</header_ps2>
+			
+			<header_ps2 name="strlabel">
+				<anchored>
+					<left><offset>430</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>str</static>
+			</header_ps2>
+			
+			<header_ps2 name="agilabel">
+				<anchored>
+					<left><offset>470</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>AGI</static>
+			</header_ps2>
+			
+			<header_ps2 name="prwlabel">
+				<anchored>
+					<left><offset>510</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>prw</static>
+			</header_ps2>
+			
+			<header_ps2 name="poilabel">
+				<anchored>
+					<left><offset>550</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>poi</static>
+			</header_ps2>
+			
+			<header_ps2 name="intlabel">
+				<anchored>
+					<left><offset>590</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>INT</static>
+			</header_ps2>
+			
+			<header_ps2 name="arclabel">
+				<anchored>
+					<left><offset>630</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>arc</static>
+			</header_ps2>
+			
+			<header_ps2 name="perlabel">
+				<anchored>
+					<left><offset>670</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>per</static>
+			</header_ps2>
+			
+			<header_ps2 name="willabel">
+				<anchored>
+					<left><offset>710</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>WILL</static>
+			</header_ps2>
+			
+			<header_ps1 name="deflabel">
+				<anchored>
+					<left><offset>750</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>DEF</static>
+			</header_ps1>
+			
+			<header_ps2 name="armlabel">
+				<anchored>
+					<left><offset>750</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>ARM</static>
+			</header_ps2>
+			
+			
+			<!-- Party List -->	
+			<list_ps name="partylist">
+				<anchored>
+					<bottom><offset>-52</offset></bottom>
+				</anchored>
+				<class>ps_mainitem</class>
+				<allowdelete />
+				<empty>
+					<font>reference-i</font>
+					<text>Drop PCs here to add party members.</text>
+				</empty>
+				<script file="ps/scripts/ps_mainlist.lua" />
+			</list_ps>
+			<scrollbar_ps />
+		
+			<!-- Party sheet roll visibility -->
+			<genericcontrol name="showrollframe">
+				<anchored>
+					<to>sheetframe</to>
+					<left><offset>10</offset></left>
+					<bottom><offset>-10</offset></bottom>
+					<size>
+						<height>35</height>
+						<width>40</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+			</genericcontrol>			
+			<button_checkbox name="hiderollresults">
+				<anchored>
+					<to>showrollframe</to>
+					<position>insidetopleft</position>
+					<offset>6,3</offset>
+					<size>
+						<height>30</height>
+						<width>30</width>
+					</size>
+				</anchored>
+				<parameters>
+					<icons>indicator_visibilityoff</icons>
+					<defaulticon>indicator_visibilityon</defaulticon>
+					<tooltips>Hide Roll Results</tooltips>
+					<defaulttooltip>Show Roll Results</defaulttooltip>
+				</parameters>
+			</button_checkbox>
+
+			<!-- Party Ability DC Controls -->	
+			<genericcontrol name="abilitydcframe">
+				<anchored>
+					<to>showrollframe</to>
+					<position>right</position>
+					<offset>10,0</offset>
+					<size>
+						<width>240</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+			</genericcontrol>	
+			
+			<button_ps>
+				<anchored>
+					<to>abilitydcframe</to>
+					<position>insidetopleft</position>
+					<offset>10,6</offset>
+				</anchored>
+				<script file="ps/scripts/ps_roll_ability.lua" />
+			</button_ps>
+			
+			<label name="abilitydclabel">
+				<anchored>
+					<to>abilitydcframe</to>
+					<left><offset>40</offset></left>
+					<top><offset>11</offset></top>
+				</anchored>
+				<static>Ability TN:</static>
+			</label>
+			
+			<string_dropdown name="abilityselected">
+				<anchored>
+					<to>abilitydcframe</to>
+					<position>insidetopleft</position>
+					<offset>105,10</offset>
+					<size>
+						<height>20</height>
+						<width>90</width>
+					</size>
+				</anchored>	
+				<default>physique</default>
+			</string_dropdown>
+			
+			<dropdown name="abilitydropdown">
+				<target>abilityselected</target>
+				<position>0,3</position>
+				<script>
+					function onInit()
+						super.onInit();
+						addItems(DataCommon.psabilitydata);
+					end
+				</script>
+			</dropdown>
+			
+			<basicnumber name="abilitydc">
+				<anchored>
+					<to>abilitydcframe</to>
+					<top><offset>8</offset></top>
+					<right><offset>-10</offset></right>
+					<size>
+						<width>30</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<font>sheetnumbersmall</font>
+			</basicnumber>			
+			
+			<!-- Party Attack Controls -->	
+			<genericcontrol name="partyatkframe">
+				<anchored>
+					<to>abilitydcframe</to>
+					<top />
+					<left>
+						<anchor>right</anchor>
+						<offset>10</offset>
+					</left>
+					<bottom />
+					<size>
+						<width>420</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+			</genericcontrol>							
+			<button_ps>
+				<anchored>
+					<to>partyatkframe</to>
+					<position>insidetopleft</position>
+					<offset>10,7</offset>
+				</anchored>
+				<script file="ps/scripts/ps_roll_atk.lua" />
+			</button_ps>
+			<label name="partylabel">
+				<anchored>
+					<to>partyatkframe</to>
+					<position>insidetopleft</position>
+					<offset>40,11</offset>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<static>Party:</static>
+			</label>	
+			<genericcontrol name="attackframe">
+				<anchored>
+					<top>
+						<parent>partyatkframe</parent>
+						<offset>10</offset>
+					</top>
+					<left>
+						<parent>partylabel</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<size>
+						<height>20</height>
+						<width>90</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>bonus</name>
+					<offset>0,3,0,3</offset>
+				</frame>
+			</genericcontrol>					
+			<number name="bonus">
+				<anchored>
+					<to>attackframe</to>
+					<position>insidetopleft</position>
+					<offset>0,0</offset>
+					<size>
+						<width>35</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<displaysign />
+				<stateframe>
+					<keyedit>
+						<name>sheetfocus</name>
+						<offset>1,2,1,2</offset>
+					</keyedit>
+					<hover>
+						<name>sheetfocus</name>
+						<offset>1,2,1,2</offset>
+					</hover>
+					<drophilight>
+						<name>sheetfocus</name>
+						<offset>1,2,1,2</offset>
+					</drophilight>
+				</stateframe>
+				<droptypes>
+					<type>number</type>
+				</droptypes>
+			</number>
+			<stringcontrol name="attackvslabel">
+				<anchored>
+					<to>attackframe</to>
+					<position>insidetopleft</position>
+					<offset>33,2</offset>
+					<size>
+						<width>15</width>
+					</size>
+				</anchored>
+				<font>sheettext</font>
+				<static>vs.</static>
+			</stringcontrol>
+			<cycler_defense name="attackdef">
+				<anchored>
+					<to>attackframe</to>
+					<position>insidetopleft</position>
+					<offset>53,2</offset>
+					<size>
+						<width>30</width>
+						<height>15</height>
+					</size>
+				</anchored>
+				<frame />
+			</cycler_defense>
+			
+			<genericcontrol>
+				<anchored>
+					<to>attackframe</to>
+					<position>right</position>
+					<offset>3,0</offset>
+					<size><width>25</width></size>
+				</anchored>
+				<icon>arrowright</icon>
+			</genericcontrol>
+			
+			<!-- Party Save vs Effect Controls -->	
+			<button_checkbox name="effectisgmonly">
+				<anchored>
+					<to>attackframe</to>
+					<left>
+						<anchor>right</anchor>
+						<offset>31</offset>
+					</left>			
+					<top><offset>-1</offset></top>
+					<size>
+						<width>24</width>
+						<height>10</height>
+					</size>
+				</anchored>
+				<gmeditonly />
+				<parameters>
+					<icons>button_toggle_gm</icons>
+					<defaulticon>button_toggle_visible</defaulticon>
+					<tooltips>Visible to GM</tooltips>
+					<defaulttooltip>Visible to All</defaulttooltip>
+				</parameters>
+			</button_checkbox>
+			
+			<button_iconcycler name="effectapply">
+				<anchored>
+					<to>effectisgmonly</to>
+					<top>
+						<anchor>bottom</anchor>
+						<offset>1</offset>
+					</top>
+					<right />
+					<size>
+						<width>24</width>
+						<height>10</height>
+					</size>
+				</anchored>
+				<parameters>
+					<icons>button_toggle_action|button_toggle_roll|button_toggle_single</icons>
+					<values>action|roll|single</values>
+					<tooltips>One Action|One Roll|Apply Each Once</tooltips>
+					<defaulticon>button_toggle_all</defaulticon>
+					<defaulttooltip>All Rolls</defaulttooltip>
+				</parameters>
+			</button_iconcycler>
+			
+			<stringu_sm name="effectlabel">
+				<anchored>
+					<left>
+						<parent>effectisgmonly</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<bottom>
+						<parent>effectapply</parent>
+					</bottom>
+					<size>
+						<height>17</height>
+						<width>100</width>
+					</size>
+				</anchored>
+				<script>
+					function onInit()
+						registerMenuItem("Clear Effect", "delete", 4);
+					end
+
+					function onMenuSelection(selection)
+						if selection == 4 then
+							window.clearEffect();
+						end
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						CharManager.onPowerAbilityAction(draginfo, window.getDatabaseNode());
+						return true;
+					end
+
+					function onDoubleClick(x, y)
+						CharManager.onPowerAbilityAction(nil, window.getDatabaseNode());
+						return true;
+					end
+				</script>
+			</stringu_sm>	
+			<cycler_exp name="effectexpiration">
+				<anchored>
+					<left>
+						<parent>effectlabel</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<top>
+						<parent>attackframe</parent>
+					</top>
+					<size>
+						<width>45</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<script>
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+					
+					function onValueChanged()
+						if getStringValue() == "save" then
+							window.effectsavemod.setVisible(true);
+						else
+							window.effectsavemod.setVisible(false);
+						end
+					end
+				</script>
+			</cycler_exp>
+			<basicnumber_sm name="effectsavemod">
+				<anchored>
+					<to>effectexpiration</to>
+					<left>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<top />
+					<size>
+						<width>30</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<displaysign />
+				<invisible />
+			</basicnumber_sm>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="psclient_main">
+		<script file="ps/scripts/ps_main.lua" />
+		<sheetdata>
+			<frame_ps name="sheetframe" />
+			<label_ps_sheet>
+				<static>Party Information</static>
+			</label_ps_sheet>
+
+			<!-- column labels -->	
+			<header_ps2 name="portraitlabel">
+				<anchored>
+					<left><offset>20</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<static>Portrait</static>
+			</header_ps2>
+			<header_ps1 name="namelabel">
+				<anchored>
+					<left><offset>65</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Name</static>
+			</header_ps1>
+			<header_ps2 name="racelabel">
+				<anchored>
+					<left><offset>65</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Race</static>
+			</header_ps2>
+			
+			<header_ps2 name="xplabel">
+				<anchored>
+					<left><offset>275</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>XP</static>
+			</header_ps2>
+			
+			<header_ps2 name="careerlabel">
+				<anchored>
+					<left><offset>150</offset></left>
+					<size>
+						<width>145</width>
+					</size>
+				</anchored>
+				<static>Career</static>
+			</header_ps2>	
+			
+			<header_ps1 name="damagelabel">
+				<anchored>
+					<left><offset>303</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<center />
+				<static>Damage</static>
+			</header_ps1>
+			
+			<header_ps2 name="capacitylabel">
+				<anchored>
+					<left><offset>303</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<center />
+				<static>Capacity</static>
+			</header_ps2>
+			
+			<header_ps1 name="abilitieslabel">
+				<anchored>
+					<left><offset>410</offset></left>
+					<size>
+						<width>230</width>
+					</size>
+				</anchored>
+				<center />
+				<static>Abilities</static>
+			</header_ps1>
+			
+			<header_ps2 name="phylabel">
+				<anchored>
+					<left><offset>350</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>PHY</static>
+			</header_ps2>
+			
+			<header_ps2 name="spdlabel">
+				<anchored>
+					<left><offset>390</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>spd</static>
+			</header_ps2>
+			
+			<header_ps2 name="strlabel">
+				<anchored>
+					<left><offset>430</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>str</static>
+			</header_ps2>
+			
+			<header_ps2 name="agilabel">
+				<anchored>
+					<left><offset>470</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>AGI</static>
+			</header_ps2>
+			
+			<header_ps2 name="prwlabel">
+				<anchored>
+					<left><offset>510</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>prw</static>
+			</header_ps2>
+			
+			<header_ps2 name="poilabel">
+				<anchored>
+					<left><offset>550</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>poi</static>
+			</header_ps2>
+			
+			<header_ps2 name="intlabel">
+				<anchored>
+					<left><offset>590</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>INT</static>
+			</header_ps2>
+			
+			<header_ps2 name="arclabel">
+				<anchored>
+					<left><offset>630</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>arc</static>
+			</header_ps2>
+			
+			<header_ps2 name="perlabel">
+				<anchored>
+					<left><offset>670</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>per</static>
+			</header_ps2>
+			
+			<header_ps2 name="willabel">
+				<anchored>
+					<left><offset>710</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>WILL</static>
+			</header_ps2>
+			
+			<header_ps1 name="deflabel">
+				<anchored>
+					<left><offset>750</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>DEF</static>
+			</header_ps1>
+			
+			<header_ps2 name="armlabel">
+				<anchored>
+					<left><offset>750</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>ARM</static>
+			</header_ps2>
+			
+			
+			<!-- list (party members) -->
+			<list_ps name="partylist">
+				<class>ps_mainitem</class>
+				<script file="ps/scripts/ps_mainlist.lua" />
+			</list_ps>
+			<scrollbar_ps />
+		
+			<!-- ability DC control -->	
+			<hn name="abilitydc" />
+		</sheetdata>
+	</windowclass>	
+</root>

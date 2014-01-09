@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheetmini_powerability">
+		<sizelimits>
+			<minimum>
+				<height>0</height>
+			</minimum>
+		</sizelimits>
+		<script file="charsheet/scripts/charsheetmini_powerability.lua" />
+		<sheetdata>
+			<!-- TYPE -->
+			<icon_charpowerabilitytypemini name="type" />
+
+			<!-- FRAME -->
+			<genericcontrol>
+				<bounds>23,0,-5,16</bounds>
+				<frame>
+					<name>modifier</name>
+					<offset>6,4,6,2</offset>
+				</frame>
+				<script>
+					function onHover(bOnControl)
+						window.highlight(bOnControl);
+					end
+				</script>
+			</genericcontrol>
+
+			<!-- ATTACK/DAMAGE -->
+			<stringcontrol name="focuslabel">
+				<anchored>
+					<top />
+					<left>
+						<parent>type</parent>
+						<relation>relative</relation>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+				<font>sheettextblock</font>
+				<static>Foc:</static>
+				<script>
+					function onHover(bOnControl)
+						window.highlight(bOnControl);
+					end
+				</script>
+			</stringcontrol>
+			<number name="focus">
+				<anchored>
+					<top />
+					<left>
+						<parent>type</parent>
+						<relation>relative</relation>
+						<anchor>right</anchor>
+						<offset>2</offset>
+					</left>
+					<size>
+						<height>16</height>
+						<width>10</width>
+					</size>
+				</anchored>
+				<font>sheettextblock</font>
+				<readonly />
+				<script>
+					function onHover(bOnControl)
+						window.highlight(bOnControl);
+					end
+				</script>
+			</number>
+			<string_charpowerabilitymini name="attacklabel">
+				<anchored>
+					<top />
+					<left>
+						<parent>type</parent>
+						<relation>relative</relation>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+				</anchored>
+				<subroll>attack</subroll>
+				<static>Atk:</static>
+			</string_charpowerabilitymini>
+			<icon_charpowerabilitymini name="attackicon">
+				<anchored>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>type</parent>
+						<relation>relative</relation>
+						<anchor>right</anchor>
+						<offset>2</offset>
+					</left>
+					<size>
+						<height>16</height>
+						<width>18</width>
+					</size>
+				</anchored>
+				<subroll>attack</subroll>
+			</icon_charpowerabilitymini>
+			<string_charpowerabilitymini name="damagelabel">
+				<anchored>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>type</parent>
+						<relation>relative</relation>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+				</anchored>
+				<subroll>damage</subroll>
+				<static>Dmg:</static>
+			</string_charpowerabilitymini>
+			<icon_charpowerabilitymini name="damageicon">
+				<anchored>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>type</parent>
+						<relation>relative</relation>
+						<anchor>right</anchor>
+						<offset>2</offset>
+					</left>
+					<size>
+						<height>16</height>
+						<width>18</width>
+					</size>
+				</anchored>
+				<subroll>damage</subroll>
+			</icon_charpowerabilitymini>
+
+
+			<!-- HEAL -->
+			<hs name="healtargeting">
+				<script>
+					function onValueChanged()
+						window.heallabel.onHealTargetChanged();
+					end
+				</script>
+			</hs>
+			<string_charpowerabilitymini name="heallabel">
+				<anchored>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>type</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+				</anchored>
+				<font>sheettextblock</font>
+				<static>Heal:</static>
+				<script>
+					function onInit()
+						super.onInit();
+						onHealTargetChanged();
+					end
+
+					function onHealTargetChanged()
+						local sTargeting = DB.getValue(window.getDatabaseNode(), "healtargeting", "");
+						if sTargeting == "self" then
+							setValue("SELF;  Heal:");
+						else
+							setValue("Heal:");
+						end
+					end
+				</script>
+			</string_charpowerabilitymini>
+			<icon_charpowerabilitymini name="healicon">
+				<anchored>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>heallabel</parent>
+						<anchor>right</anchor>
+						<offset>2</offset>
+					</left>
+					<size>
+						<height>16</height>
+						<width>18</width>
+					</size>
+				</anchored>
+			</icon_charpowerabilitymini>
+
+
+			<!-- EFFECT -->
+			<hs name="label">
+				<script>
+					function onValueChanged()
+						window.effectview.onEffectChanged();
+					end
+				</script>
+			</hs>
+			<hs name="apply">
+				<script>
+					function onValueChanged()
+						window.effectview.onEffectChanged();
+					end
+				</script>
+			</hs>
+			<hs name="targeting">
+				<script>
+					function onValueChanged()
+						window.effectview.onEffectChanged();
+					end
+				</script>
+			</hs>
+			<string_charpowerabilitymini name="effectview">
+				<anchored>
+					<top>
+						<anchor>top</anchor>
+					</top>
+					<left>
+						<parent>type</parent>
+						<anchor>right</anchor>
+						<offset>5</offset>
+					</left>
+					<right>
+						<anchor>right</anchor>
+						<offset>-5</offset>
+					</right>
+					<size>
+						<height>16</height>
+					</size>
+				</anchored>
+				<script>
+					function onInit()
+						super.onInit();
+						onEffectChanged();
+					end
+
+					function onEffectChanged()
+						local sLabel = window.label.getValue();
+
+						local sApply = window.apply.getValue();
+						if sApply == "action" then
+							sLabel = "ACTN; " .. sLabel;
+						elseif sApply == "roll" then
+							sLabel = "ROLL; " .. sLabel;
+						elseif sApply == "single" then
+							sLabel = "SINGLE; " .. sLabel;
+						end
+
+						local sTargeting = window.targeting.getValue();
+						if sTargeting == "self" then
+							sLabel = "SELF; " .. sLabel;
+						end
+						
+						setValue(sLabel);
+					end
+				</script>
+			</string_charpowerabilitymini>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="charsheetmini_power">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<script file="charsheet/scripts/charsheetmini_power.lua" />
+		<sheetdata>
+			<hn name="prepared" />
+			<hs name="source" />
+			<hs name="keywords">
+				<script>
+					function onValueChanged()
+						window.abilities.applyFilter();
+					end
+				</script>
+			</hs>
+			<hs name="recharge">
+				<script>
+					function onValueChanged()
+						window.onRechargeChanged();
+					end
+				</script>
+			</hs>
+
+			<state_charpowercounter name="usedcounter">
+				<anchored>
+					<top><offset>2</offset></top>
+					<left><offset>1</offset></left>
+					<size>
+						<width>12</width>
+						<height>12</height>
+					</size>
+				</anchored>
+			</state_charpowercounter>
+			<icon_charusepower name="useatwill">
+				<bounds>1,2,12,12</bounds>
+			</icon_charusepower>
+
+			<stringfield name="action">
+				<bounds>-75,0,50,16</bounds>
+				<font>sheettextblock</font>
+				<static />
+			</stringfield>
+			
+			<list_powerabilitymini name="abilities">
+				<anchored>
+					<top />
+					<right><offset>-80</offset></right>
+					<size>
+						<width>165</width>
+					</size>
+				</anchored>
+			</list_powerabilitymini>
+
+			<stringfield name="name">
+				<anchored>
+					<top><offset>1</offset></top>
+					<left>
+						<parent>shortcut</parent>
+						<anchor>right</anchor>
+						<offset>7</offset>
+					</left>
+					<right><offset>-252</offset></right>
+				</anchored>
+				<font>sheettextsmall</font>
+				<static />
+				<script>
+					function onDoubleClick(x,y)
+						window.activatePower(true);
+					end
+				</script>
+			</stringfield>
+			
+			<link_smart name="shortcut">
+				<bounds>-20,0,14,14</bounds>
+				<defaultclass>reference_power_custom</defaultclass>
+				<toggle />
+			</link_smart>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charsheetmini_power_header">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<script>
+			function onToggle()
+				windowlist.onHeaderToggle(self);
+			end
+			
+			function update()
+			end
+		</script>
+		<sheetdata>
+			<hsc name="source" />
+			<hsc name="action" />
+			<hsc name="recharge" />
+			
+			<stringcontrol name="title">
+				<anchored>
+					<top><offset>2</offset></top>
+					<left><offset>15</offset></left>
+					<right><offset>-10</offset></right>
+				</anchored>
+				<frame>
+					<name>powercat_up</name>
+					<offset>7,2,7,2</offset>
+				</frame>
+				<font>reference-b</font>
+				<readonly />
+				<nodrag />
+				<nodragselect />
+				<center />
+				<script>
+					function onClickDown()
+						return true;
+					end
+					
+					function onClickRelease()
+						window.onToggle();
+						return true;
+					end
+				</script>
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="charsheetmini_tab_powers">
+		<placement>
+			<size>
+				<width>220</width>
+				<height>200</height>
+			</size>
+		</placement>
+		<nodelete />
+		<sheetdata>
+			<frame_char name="controlframe">
+				<bounds>0,-46,-1,-8</bounds>
+			</frame_char>
+
+			<button_checkbox name="apused">
+				<anchored>
+					<to>controlframe</to>
+					<position>insidetopleft</position>
+					<offset>70,12</offset>
+					<size>
+						<width>18</width>
+						<height>16</height>
+					</size>
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored>
+					<to>apused</to>
+					<position>lefthigh</position>
+					<offset>2,1</offset>
+				</anchored>
+				<static>AP Used:</static>
+			</label>
+			
+			<number name="defaultweapon" source="powerfocus.weapon.order">
+				<anchored>
+					<to>controlframe</to>
+					<position>insidetopleft</position>
+					<offset>160,12</offset>
+					<size>
+						<width>18</width>
+						<height>16</height>
+					</size>
+				</anchored>
+				<font>sheettext</font>
+				<readonly />
+				<hideonvalue value="0" />
+			</number>
+			<label>
+				<anchored>
+					<to>defaultweapon</to>
+					<position>lefthigh</position>
+					<offset>2,1</offset>
+				</anchored>
+				<static>Def Wpn:</static>
+			</label>
+			
+			<number name="defaultimplement" source="powerfocus.implement.order">
+				<anchored>
+					<to>controlframe</to>
+					<position>insidetopleft</position>
+					<offset>240,12</offset>
+					<size>
+						<width>18</width>
+						<height>16</height>
+					</size>
+				</anchored>
+				<font>sheettext</font>
+				<readonly />
+				<hideonvalue value="0" />
+			</number>
+			<label>
+				<anchored>
+					<to>defaultimplement</to>
+					<position>lefthigh</position>
+					<offset>2,1</offset>
+				</anchored>
+				<static>Def Imp:</static>
+			</label>
+
+			<label name="powersort_label">
+				<anchored>
+					<to>controlframe</to>
+					<position>insidetopright</position>
+					<offset>110,13</offset>
+				</anchored>
+				<static>Sort:</static>
+			</label>
+			<button_stringcycler name="powersort">
+				<anchored>
+					<to>powersort_label</to>
+					<position>right</position>
+					<offset>10</offset>
+					<size><width>80</width></size>
+				</anchored>
+				<font>sheettext</font>
+				<center />
+				<frame>
+					<name>bonus</name>
+					<offset>6,6,6,6</offset>
+				</frame>
+				<stateframe>
+					<hover>
+						<name>sheetfocus</name>
+						<offset>6,6,6,6</offset>
+					</hover>
+				</stateframe>
+				<parameters>
+					<labels>Action|Source</labels>
+					<values>action|source</values>
+					<defaultlabel>Recharge</defaultlabel>
+				</parameters>
+				<script>
+					function onValueChanged()
+						window.powerlist.onSortChanged();
+					end
+				</script>
+			</button_stringcycler>
+
+			<frame_char name="mini_powerframe">
+				<bounds>0,10,-1,-46</bounds>
+			</frame_char>
+
+			<list_powermini name="powerlist">
+				<anchored>
+					<to>mini_powerframe</to>
+					<top><offset>15</offset></top>
+					<left><offset>10</offset></left>
+					<right><offset>-20</offset></right>
+					<bottom><offset>-15</offset></bottom>
+				</anchored>
+			</list_powermini>
+			<scrollbar_charminilist>
+				<anchored>
+					<to>powerlist</to>
+					<position>right</position>
+					<offset>-5,0</offset>
+				</anchored>
+				<target>powerlist</target>
+			</scrollbar_charminilist>
+		</sheetdata>
+	</windowclass>
+</root>

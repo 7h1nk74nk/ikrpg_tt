@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="item">
+		<frame>campaignframe</frame>
+		<placement>
+			<size>
+				<width>350</width>
+				<height>400</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>350</width>
+				<height>300</height>
+			</minimum>
+			<maximum>
+				<height>1200</height>
+			</maximum>
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<nodelete />
+		<playercontrol />
+		<sharable />
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<script file="campaign/scripts/campaign_item_top.lua" />
+		<sheetdata>
+			<genericcontrol name="controlframe">
+				<bounds>1,-35,-4,-1</bounds>
+				<frame>
+					<name>campaigncontrolframe</name>
+				</frame>
+				<disabled />
+			</genericcontrol>
+			<button_checkbox name="locked">
+				<bounds>5,-27,20,20</bounds>
+				<parameters>
+					<icons>indicator_padlock_closed</icons>
+					<tooltips>Fields locked</tooltips>
+					<defaulticon>indicator_padlock_open</defaulticon>
+					<defaulttooltip>Fields unlocked</defaulttooltip>
+				</parameters>
+				<sourceless />
+				<script>
+					function onValueChanged()
+						window.StateChanged();
+					end
+				</script>
+			</button_checkbox>
+			<genericcontrol name="hardlocked">
+				<bounds>5,-27,20,20</bounds>
+				<icon>indicator_padlock_closed_red</icon>
+			</genericcontrol>
+			<button_checkbox name="playeredit">
+				<bounds>30,-27,30,20</bounds>
+				<parameters>
+					<icons>indicator_padlock_sopen</icons>
+					<tooltips>PC Edit Allowed</tooltips>
+					<defaulticon>indicator_padlock_sclosed</defaulticon>
+					<defaulttooltip>PC Edit Not Allowed</defaulttooltip>
+				</parameters>
+				<gmeditonly />
+				<invisible />
+				<script>
+					function onValueChanged()
+						window.StateChanged();
+					end
+				</script>
+			</button_checkbox>
+			<radio_campaign_itemtype name="mitype">
+				<anchored>
+					<top>
+						<parent>controlframe</parent>
+						<offset>10</offset>
+					</top>
+					<left>
+						<parent>controlframe</parent>
+						<anchor>center</anchor>
+						<offset>-105</offset>
+					</left>
+					<size><height>15</height></size>
+				</anchored>
+				<script>
+					function onValueChanged()
+						window.TypeChanged();
+					end
+				</script>
+			</radio_campaign_itemtype>
+			<button_checkbox name="isidentified">
+				<bounds>-30,-27,20,20</bounds>
+				<parameters>
+					<icons>indicator_identified</icons>
+					<tooltips>Item Identified</tooltips>
+					<defaulticon>indicator_unidentified</defaulticon>
+					<defaulttooltip>Item Not Identified</defaulttooltip>
+				</parameters>
+				<gmeditonly />
+				<script>
+					function onValueChanged()
+						window.StateChanged();
+					end
+				</script>
+			</button_checkbox>
+
+			<genericcontrol name="header">
+				<anchored>
+					<top />
+					<left />
+					<right><offset>-4</offset></right>
+					<size><height>35</height></size>
+				</anchored>
+				<frame>
+					<name>headeritem</name>
+				</frame>
+			</genericcontrol>
+			<link_tl>
+				<class>item</class>
+			</link_tl>
+			<string_item_name name="name">
+				<empty>&#171; New Item &#187;</empty>
+			</string_item_name>
+			<string_item_name name="nonid_name">
+				<empty>Unidentified Item</empty>
+			</string_item_name>
+			<stringc_level_label name="level_label">
+				<anchored>
+					<right><offset>-60</offset></right>
+				</anchored>
+			</stringc_level_label>
+			<number_leveltop name="level">
+				<anchored>
+					<left>
+						<anchor>right</anchor>
+						<offset>-55</offset>
+					</left>
+				</anchored>
+			</number_leveltop>
+
+			<genericcontrol name="contentframe">
+				<anchored>
+					<top>
+						<parent>header</parent>
+						<anchor>bottom</anchor>
+						<offset>5</offset>
+					</top>
+					<left><offset>10</offset></left>
+					<right><offset>-30</offset></right>
+					<bottom><offset>-37</offset></bottom>
+				</anchored>
+			</genericcontrol>
+
+			<subwindow_details name="main_other">
+				<class>item_stats_other</class>
+			</subwindow_details>
+			<subwindow_details name="main_weapon">
+				<class>item_stats_weapon</class>
+				<script file="campaign/scripts/campaign_itemdrop.lua" />
+			</subwindow_details>
+			<subwindow_details name="main_armor">
+				<class>item_stats_armor</class>
+				<script file="campaign/scripts/campaign_itemdrop.lua" />
+			</subwindow_details>
+
+			<list_text name="propertylist">
+				<anchored>
+					<to>contentframe</to>
+					<top />
+					<left />
+					<right />
+					<bottom />
+				</anchored>
+				<datasource>.props</datasource>
+				<class>item_propertylistitem</class>
+				<newfocus>shortdescription</newfocus>
+				<sortby><control>shortdescription</control></sortby>
+				<script file="campaign/scripts/campaign_item_proplist.lua" />
+				<invisible />
+			</list_text>
+
+			<windowlist name="powerlist">
+				<anchored>
+					<to>contentframe</to>
+					<top />
+					<left />
+					<right />
+					<bottom />
+				</anchored>
+				<datasource>.powers</datasource>
+				<class>item_powerlistitem</class>
+				<script file="campaign/scripts/campaign_item_powerlist.lua" />
+				<allowcreate />
+				<allowdelete />
+				<invisible />
+			</windowlist>
+
+			<scrollbar_details>
+				<target>main_other</target>
+			</scrollbar_details>
+			<scrollbar_details>
+				<target>main_weapon</target>
+			</scrollbar_details>
+			<scrollbar_details>
+				<target>main_armor</target>
+			</scrollbar_details>
+			<scrollbar_details>
+				<target>propertylist</target>
+			</scrollbar_details>
+			<scrollbar_details>
+				<target>powerlist</target>
+			</scrollbar_details>
+
+			<buttongroup_tabs name="tabs">
+				<anchored>
+					<right><offset>1</offset></right>
+				</anchored>
+				<tab>
+					<icon>tab_main</icon>
+					<subwindow>main_other</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_abilities</icon>
+					<subwindow>propertylist</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_powers</icon>
+					<subwindow>powerlist</subwindow>
+				</tab>
+			</buttongroup_tabs>
+			
+			<resize_campaignframe />
+			<close_campaign_tabbed />
+		</sheetdata>
+	</windowclass>
+</root>

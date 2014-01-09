@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_monsterlistitem">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<link_field name="link">
+				<bounds>5,0,20,20</bounds>
+			</link_field>
+			<stringcontrol_linked_static name="name">
+				<bounds>30,2,-1,20</bounds>
+			</stringcontrol_linked_static>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_monstergroup">
+		<sizelimits>
+			<minimum>
+				<height>0</height>
+			</minimum>
+			<maximum>
+				<height>100000</height>
+			</maximum>
+		</sizelimits>
+		<script file="ref/scripts/ref_listgroup.lua" />
+		<sheetdata>
+			<anchor_column name="topanchor" />
+			
+			<string_groupdesc2 name="description" />
+			
+			<list_reftablegroupitems name="list">
+				<datasource>.monsters</datasource>
+				<class>reference_monsterlistitem</class>
+			</list_reftablegroupitems>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Monster lists -->
+	<windowclass name="reference_classmonsterlist">
+		<frame>referencepage</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>450</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic>
+				<resize>vertical</resize>
+			</dynamic>
+			<maximum>
+				<height>100000</height>
+			</maximum>
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>description</field>
+		</tooltip>
+		<sheetdata>
+			<!-- TITLE -->
+			<windowtitlebar>
+				<title>
+					<field>description</field>
+				</title>
+			</windowtitlebar>
+
+			<!-- GROUP LIST -->
+			<windowlist name="grouplist">
+				<bounds>25,55,-33,-70</bounds>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>15,15,15,15</offset>
+				</frame>
+				<datasource>.groups</datasource>
+				<class>reference_monstergroup</class>
+			</windowlist>
+			<scrollbar>
+				<bounds>-35,60,20,-70</bounds>
+				<target>grouplist</target>
+			</scrollbar>
+			
+			<!-- LIST CONTROLS -->
+			<filter2 name="filter">
+				<bounds>105,-45,-90,20</bounds>
+				<target>grouplist,list</target>
+			</filter2>
+			<button_filter name="filtertrigger">
+				<bounds>70,-55,21,41</bounds>
+			</button_filter>			
+			<button_expand>
+				<bounds>15,-55,20,20</bounds>
+			</button_expand>
+			<button_collapse>
+				<bounds>40,-55,20,20</bounds>
+			</button_collapse>
+			
+			<resize_referencepage />
+			<close_referencepage />
+		</sheetdata>
+	</windowclass>
+</root>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="radio_campaign_itemtype">
+		<buttongroup_radio>
+			<parameters>
+				<optionwidth>70</optionwidth>
+				<labels>Weapon|Armor|Other</labels>
+				<values>weapon|armor|other</values>
+				<defaultindex>3</defaultindex>
+			</parameters>
+			<gmeditonly />
+		</buttongroup_radio>
+	</template>
+
+	<template name="string_item_name">
+		<stringfield>
+			<anchored>
+				<top><offset>9</offset></top>
+				<left><offset>45</offset></left>
+				<right><offset>-90</offset></right>
+			</anchored>
+			<stateframe>
+				<keyedit>
+					<name>whitesheetfocus</name>
+					<offset>7,7,7,7</offset>
+				</keyedit>
+				<hover>
+					<name>whitesheetfocus</name>
+					<offset>7,7,7,7</offset>
+					<hidereadonly />
+				</hover>
+			</stateframe>
+			<font>reference-b-large</font>
+			<color>FFFFFFFF</color>
+			<nodrag />
+		</stringfield>
+	</template>
+</root>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_skillchallengeitem">
+		<sizelimits>
+			<minimum>
+				<height>20</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<stringfield name="name">
+				<bounds>0,2,200,15</bounds>
+				<font>reference-b</font>
+				<nodrag />
+				<nodragselect />
+				<readonly />
+				<script>
+					function onClickDown(button, x, y)
+						return true;
+					end
+
+					function onClickRelease(button, x, y)
+						window.text.setVisible(not window.text.isVisible());
+						return true;
+					end
+				</script>
+			</stringfield>
+			<number name="numberdata">
+				<bounds>215,2,50,16</bounds>
+				<font>reference-r</font>
+				<readonly />
+				<hideonvalue>0</hideonvalue>
+			</number>
+			<stringfield name="text">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<offset>3</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<font>reference-r</font>
+				<multilinespacing>15</multilinespacing>
+			</stringfield>
+			
+			<spacer>
+				<anchor>text</anchor>
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="skillchallenge_description">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_columnheader>
+				<static>Flavor</static>
+				<target>flavor</target>
+			</label_columnheader>
+			<string_columnfull name="flavor">
+				<offset>5,12</offset>
+			</string_columnfull>
+
+			<label_columnheader>
+				<static>Details</static>
+				<target>details</target>
+			</label_columnheader>
+			<string_columnfull name="details">
+				<offset>5,12</offset>
+			</string_columnfull>
+
+			<windowlist name="itemlist">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>12</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<datasource>.items</datasource>
+				<class>reference_skillchallengeitem</class>
+				<noscroll />
+				<child><backcolor>1A40301E</backcolor></child>
+				<child></child>
+				<script file="ref/scripts/ref_list.lua" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_skillchallenge">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>340</width>
+				<height>410</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<minimum>
+				<width>350</width>
+				<height>410</height>
+			</minimum>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_utility</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<!-- HEADERS -->
+			<string_name_static name="name">
+				<anchored>
+					<right>
+						<offset>-90</offset>
+					</right>
+				</anchored>
+				<color>#FFFFFFFF</color>
+				<frame>
+					<name>headerchallenge</name>
+					<offset>40,10,90,30</offset>
+				</frame>
+			</string_name_static>
+			<link_tl>
+				<class>reference_skillchallenge</class>
+			</link_tl>
+			<stringc_level_label />
+			<string_leveltop name="level" />
+
+			<stringcontrol name="SClab">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left><offset>15</offset></left>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<static>Skill Challenge</static>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+			</stringcontrol>
+			<stringfield name="xp">
+				<anchored>
+					<top>
+						<parent>SClab</parent>
+					</top>
+					<right><offset>-10</offset></right>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+			</stringfield>
+			<stringcontrol name="XPlab">
+				<anchored>
+					<top>
+						<parent>SClab</parent>
+					</top>
+					<right>
+						<parent>xp</parent>
+						<anchor>left</anchor>
+						<offset>-15</offset>
+					</right>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<static>XP</static>
+				<font>reference-r</font>
+				<color>FFFFFFFF</color>
+			</stringcontrol>
+
+			<!-- SUBWINDOWS -->
+			<subwindow name="content">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>10</offset>
+					</top>
+					<right><offset>-20</offset></right>
+					<left><offset>20</offset></left>
+					<bottom><offset>-45</offset></bottom>
+				</anchored>
+				<class>skillchallenge_description</class>
+				<activate />
+			</subwindow>
+			<scrollbar_refcontent />
+
+			<!-- CONTROLS -->
+			<button_expand>
+				<bounds>15,-35,20,20</bounds>
+				<targets>content,itemlist,text</targets>
+				<togglelevel>2</togglelevel>
+				<script>
+					function onButtonPress()
+						super.onButtonPress();
+						
+						window.content.subwindow.flavor.setVisible(true);
+						window.content.subwindow.details.setVisible(true);
+					end
+				</script>
+			</button_expand>
+			<button_collapse>
+				<bounds>40,-35,20,20</bounds>
+				<targets>content,itemlist,text</targets>
+				<togglelevel>2</togglelevel>
+				<script>
+					function onButtonPress()
+						super.onButtonPress();
+						
+						window.content.subwindow.flavor.setVisible(false);
+						window.content.subwindow.details.setVisible(false);
+					end
+				</script>
+			</button_collapse>
+			<buttoncontrol name="add">
+				<bounds>-60,-35,33,26</bounds>
+				<icon>
+					<normal>button_ctnextactor</normal>
+					<pressed>button_ctnextactor_down</pressed>
+				</icon>
+				<tooltip>
+					<text>Add skills to Skill Challenge Tracker</text>
+				</tooltip>
+				<script>
+					function onButtonPress()
+						if User.isHost() then
+							for _,v in pairs(DB.getChildren(window.getDatabaseNode(), "items")) do
+								local n = DB.getValue(v, "name", 0);
+								local dc = DB.getValue(v, "numberdata", 0);
+								SCManager.addDC(n, dc);
+							end
+						end
+					end
+				</script>
+			</buttoncontrol>
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

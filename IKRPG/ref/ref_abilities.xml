@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ref_ability">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>400</width>
+				<height>370</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<minimum>
+				<width>200</width>
+				<height>200</height>
+			</minimum>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>value</field>
+		</tooltip>
+		<sheetdata>
+			<link_control name="open">
+				<bounds>15,18,20,20</bounds>
+				<defaultclass>ref_ability</defaultclass>
+			</link_control>
+			<genericcontrol>
+				<bounds>33,11,-23,34</bounds>
+				<frame>
+					<name>modifier</name>
+				</frame>
+			</genericcontrol>
+			<stringfield name="value">
+				<anchored>
+					<top><offset>20</offset></top>
+					<left><offset>40</offset></left>
+					<right><offset>-30</offset></right>
+					<size><height>20</height></size>
+				</anchored>
+				<font>reference-b-large</font>
+				<selectioncolor>#FFD296</selectioncolor>
+			</stringfield>
+
+			<genericcontrol>
+				<bounds>15,46,-15,3</bounds>
+				<frame>
+					<name>separatorline</name>
+				</frame>
+				<disabled />
+			</genericcontrol>
+			
+			<stringfield name="description">
+				<anchored>
+					<top><offset>65</offset></top>
+					<left><offset>25</offset></left>
+					<right><offset>-30</offset></right>
+					<bottom><offset>-20</offset></bottom>
+				</anchored>
+				<frame>
+					<name>modifier</name>
+					<offset>10,10,10,10</offset>
+				</frame>
+				<font>sheettext</font>
+				<selectioncolor>#FFD296</selectioncolor>
+				<multilinespacing>15</multilinespacing>
+			</stringfield>
+			<scrollbar>
+				<target>description</target>
+				<bounds>-25,65,20,-20</bounds>
+			</scrollbar>
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>

@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ps_skillsitem">
+		<frame>modifier</frame>
+		<sizelimits>
+			<minimum>
+				<height>55</height>
+				<width>-1</width>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<hlink name="link">
+				<script>
+					function onValueChanged()
+						window.portrait.update();
+					end
+				</script>
+			</hlink>
+			
+			<spacer>
+				<height>60</height>
+			</spacer>
+			<portrait_base>
+				<bounds>10,10,40,40</bounds>
+			</portrait_base>
+			<portrait name="portrait">
+				<bounds>10,10,40,40</bounds>
+			</portrait>
+			
+			<string_psname name="name">
+				<anchored>
+					<top><offset>10</offset></top>
+					<left><offset>55</offset></left>
+					<size>
+						<width>80</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<empty>&#171; Unnamed &#187;</empty>
+			</string_psname>
+			
+			<number_ps_skill name="detection">
+				<anchored>
+					<to>name</to>
+				</anchored>
+				<skill>detection</skill>
+			</number_ps_skill>
+			<number_ps_skill name="research">
+				<anchored>
+					<to>detection</to>
+				</anchored>
+				<skill>research</skill>
+			</number_ps_skill>
+
+			<number_ps_skill name="bribery">
+				<anchored>
+					<to>detection</to>
+					<left>
+						<offset>53</offset>
+					</left>
+				</anchored>
+				<skill>bribery</skill>
+			</number_ps_skill>
+			<number_ps_skill name="command">
+				<anchored>
+					<to>bribery</to>
+				</anchored>
+				<skill>command</skill>
+			</number_ps_skill>
+			<number_ps_skill name="deception">
+				<anchored>
+					<to>command</to>
+				</anchored>
+				<skill>deception</skill>
+			</number_ps_skill>
+			<number_ps_skill name="seduction">
+				<anchored>
+					<to>deception</to>
+				</anchored>
+				<skill>seduction</skill>
+			</number_ps_skill>
+			<number_ps_skill name="intimidation">
+				<anchored>
+					<to>seduction</to>
+				</anchored>
+				<skill>intimidation</skill>
+			</number_ps_skill>
+			<number_ps_skill name="etiquette">
+				<anchored>
+					<to>intimidation</to>
+				</anchored>
+				<skill>etiquette</skill>
+			</number_ps_skill>
+			<number_ps_skill name="oratory">
+				<anchored>
+					<to>etiquette</to>
+				</anchored>
+				<skill>oratory</skill>
+			</number_ps_skill>
+			<number_ps_skill name="interrogation">
+				<anchored>
+					<to>oratory</to>
+				</anchored>
+				<skill>interrogation</skill>
+			</number_ps_skill>
+			<number_ps_skill name="negotiation">
+				<anchored>
+					<to>interrogation</to>
+				</anchored>
+				<skill>negotiation</skill>
+			</number_ps_skill>
+
+			<number_ps_skill name="drive">
+				<anchored>
+					<to>negotiation</to>
+					<left>
+						<offset>20</offset>
+					</left>
+				</anchored>
+				<skill>drive</skill>
+			</number_ps_skill>
+			<number_ps_skill name="jump">
+				<anchored>
+					<to>drive</to>
+				</anchored>
+				<skill>jump</skill>
+			</number_ps_skill>
+			<number_ps_skill name="ride">
+				<anchored>
+					<to>jump</to>
+				</anchored>
+				<skill>ride</skill>
+			</number_ps_skill>
+			<number_ps_skill name="swim">
+				<anchored>
+					<to>ride</to>
+				</anchored>
+				<skill>swim</skill>
+			</number_ps_skill>
+			<number_ps_skill name="climb">
+				<anchored>
+					<to>swim</to>
+				</anchored>
+				<skill>climb</skill>
+			</number_ps_skill>
+			<number_ps_skill name="sneak">
+				<anchored>
+					<to>climb</to>
+				</anchored>
+				<skill>sneak</skill>
+			</number_ps_skill>
+			
+			<string_ps name="senses">
+				<anchored>
+					<left><parent>detection</parent></left>
+					<top><offset>35</offset></top>
+					<size>
+						<width>240</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<empty>&#171; No Special Senses &#187;</empty>
+			</string_ps>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="ps_skills">
+		<placement>
+			<size>
+				<width>700</width>
+				<height>360</height>
+			</size>
+		</placement>
+		<sheetdata>
+			<frame_ps name="sheetframe" />
+			<label_ps_sheet>
+				<static>Skill Information</static>
+			</label_ps_sheet>
+			
+			<!-- Header Labels -->
+			<header_ps2 name="portraitlabel">
+				<anchored>
+					<left><offset>20</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<static>Portrait</static>
+			</header_ps2>
+			<header_ps2 name="namelabel">
+				<anchored>
+					<left><offset>65</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Name</static>
+			</header_ps2>
+			
+			<header_ps1 name="insightlabel">
+				<anchored>
+					<left><offset>155</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<center />
+				<static>INSIGHT</static>
+			</header_ps1>
+			<header_ps2 name="detectionlabel">
+				<anchored>
+					<left><offset>153</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>detec</static>
+			</header_ps2>			
+			<header_ps2 name="researchlabel">
+				<anchored>
+					<left><offset>188</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>resea</static>
+			</header_ps2>
+
+			<header_ps1 name="sociallabel">
+				<anchored>
+					<left><offset>230</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<center />
+				<static>SOCIAL</static>
+			</header_ps1>				
+			<header_ps2 name="bribelabel">
+				<anchored>
+					<left><offset>230</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>bribe</static>
+			</header_ps2>			
+			<header_ps2 name="commandlabel">
+				<anchored>
+					<left><offset>265</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>comma</static>
+			</header_ps2>			
+			<header_ps2 name="deceptionlabel">
+				<anchored>
+					<left><offset>300</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>decep</static>
+			</header_ps2>			
+			<header_ps2 name="seductionlabel">
+				<anchored>
+					<left><offset>335</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>seduc</static>
+			</header_ps2>			
+			<header_ps2 name="intimidationlabel">
+				<anchored>
+					<left><offset>370</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>intim</static>
+			</header_ps2>		
+			<header_ps2 name="etiquettelabel">
+				<anchored>
+					<left><offset>405</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>etiqu</static>
+			</header_ps2>			
+			<header_ps2 name="oratorylabel">
+				<anchored>
+					<left><offset>440</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>orato</static>
+			</header_ps2>			
+			<header_ps2 name="interrogationlabel">
+				<anchored>
+					<left><offset>475</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>inter</static>
+			</header_ps2>			
+			<header_ps2 name="negotiationlabel">
+				<anchored>
+					<left><offset>510</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>negot</static>
+			</header_ps2>
+			
+			
+			<header_ps1 name="movementlabel">
+				<anchored>
+					<left><offset>560</offset></left>
+					<size>
+						<width>60</width>
+					</size>
+				</anchored>
+				<center />
+				<static>MOVEMENT</static>
+			</header_ps1>		
+			<header_ps2 name="drivinglabel">
+				<anchored>
+					<left><offset>555</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>drive</static>
+			</header_ps2>			
+			<header_ps2 name="jumpinglabel">
+				<anchored>
+					<left><offset>590</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>jump</static>
+			</header_ps2>			
+			<header_ps2 name="ridinglabel">
+				<anchored>
+					<left><offset>625</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>ride</static>
+			</header_ps2>			
+			<header_ps2 name="swimminglabel">
+				<anchored>
+					<left><offset>660</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>swim</static>
+			</header_ps2>		
+			<header_ps2 name="climblabel">
+				<anchored>
+					<left><offset>695</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>climb</static>
+			</header_ps2>	
+			<header_ps2 name="sneaklabel">
+				<anchored>
+					<left><offset>730</offset></left>
+					<size>
+						<width>30</width>
+					</size>
+				</anchored>
+				<center />
+				<static>sneak</static>
+			</header_ps2>
+
+			<!-- Party List -->
+			<list_ps name="partylist">
+				<anchored>
+					<bottom><offset>-52</offset></bottom>
+				</anchored>
+				<class>ps_skillsitem</class>
+				<allowdelete />
+				<empty>
+					<font>reference-i</font>
+					<text>Drop PCs here to add party members.</text>
+				</empty>
+				<script file="ps/scripts/ps_mainlist.lua" />
+			</list_ps>
+			<scrollbar_ps />
+	
+			<!-- Party sheet roll visibility -->
+			<genericcontrol name="showrollframe">
+				<anchored>
+					<to>sheetframe</to>
+					<left><offset>10</offset></left>
+					<bottom><offset>-10</offset></bottom>
+					<size>
+						<height>35</height>
+						<width>40</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+			</genericcontrol>			
+			<button_checkbox name="hiderollresults">
+				<anchored>
+					<to>showrollframe</to>
+					<position>insidetopleft</position>
+					<offset>6,3</offset>
+					<size>
+						<height>30</height>
+						<width>30</width>
+					</size>
+				</anchored>
+				<parameters>
+					<icons>indicator_visibilityoff</icons>
+					<defaulticon>indicator_visibilityon</defaulticon>
+					<tooltips>Hide Roll Results</tooltips>
+					<defaulttooltip>Show Roll Results</defaulttooltip>
+				</parameters>
+			</button_checkbox>
+
+			<!-- Party skill check -->
+			<genericcontrol name="partyskillframe">
+				<anchored>
+					<to>showrollframe</to>
+					<position>right</position>
+					<offset>10,0</offset>
+					<size>
+						<width>360</width>
+					</size>
+				</anchored>
+				<frame>
+					<name>sheetgroup</name>
+					<offset>5,5,5,5</offset>
+				</frame>
+			</genericcontrol>							
+			<button_ps>
+				<anchored>
+					<to>partyskillframe</to>
+					<position>insidetopleft</position>
+					<offset>10,6</offset>
+				</anchored>
+				<script file="ps/scripts/ps_roll_skill.lua" />
+			</button_ps>
+			<label>
+				<anchored>
+					<to>partyskillframe</to>
+					<position>insidetopleft</position>
+					<offset>40,11</offset>
+					<size>
+						<height>20</height>
+					</size>
+				</anchored>
+				<static>Skill Check:</static>
+			</label>	
+			<string_dropdown name="selectedskill">
+				<anchored>
+					<to>partyskillframe</to>
+					<position>insidetopleft</position>
+					<offset>115,10</offset>
+					<size>
+						<height>20</height>
+						<width>200</width>
+					</size>
+				</anchored>
+				<empty>&#171; Unnamed &#187;</empty>
+			</string_dropdown>
+			<dropdown name="skilldropdown">
+				<target>selectedskill</target>
+				<position>0,3</position>
+				<script>
+					function onInit()
+						super.onInit();
+						addItems(DataCommon.psskilldata);
+					end
+				</script>
+			</dropdown>
+			<basicnumber name="skilldc">
+				<anchored>
+					<to>partyskillframe</to>
+					<top><offset>8</offset></top>
+					<right><offset>-10</offset></right>
+					<size>
+						<width>30</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<font>sheetnumbersmall</font>
+			</basicnumber>			
+
+			<dropdown name="skilldropdown">
+				<target>selectedskill</target>
+				<script>
+					function onInit()
+						super.onInit();
+						addItems(DataCommon.psskilldata);
+					end
+				</script>
+			</dropdown>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="psclient_skills">
+		<placement>
+			<size>
+				<width>700</width>
+				<height>360</height>
+			</size>
+		</placement>
+		<sheetdata>
+			<frame_ps name="sheetframe" />
+			<label_ps_sheet>
+				<static>Skill Information</static>
+			</label_ps_sheet>
+			
+			<!-- column labels -->
+			<header_ps2 name="portraitlabel">
+				<anchored>
+					<left><offset>20</offset></left>
+					<size>
+						<width>40</width>
+					</size>
+				</anchored>
+				<static>Portrait</static>
+			</header_ps2>
+			<header_ps2 name="namelabel">
+				<anchored>
+					<left><offset>65</offset></left>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<static>Name</static>
+			</header_ps2>
+			
+			<header_ps1 name="insightlabel">
+				<anchored>
+					<left><offset>155</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>INSIGHT</static>
+			</header_ps1>
+			<header_ps2 name="perceptionlabel">
+				<anchored>
+					<left><offset>155</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>percep</static>
+			</header_ps2>			
+			<header_ps2 name="researchlabel">
+				<anchored>
+					<left><offset>190</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>resea</static>
+			</header_ps2>
+
+			<header_ps1 name="sociallabel">
+				<anchored>
+					<left><offset>230</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>SOCIAL</static>
+			</header_ps1>				
+			<header_ps2 name="bribelabel">
+				<anchored>
+					<left><offset>230</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>bribe</static>
+			</header_ps2>			
+			<header_ps2 name="commandlabel">
+				<anchored>
+					<left><offset>265</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>command</static>
+			</header_ps2>			
+			<header_ps2 name="deceptionlabel">
+				<anchored>
+					<left><offset>300</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>decept</static>
+			</header_ps2>			
+			<header_ps2 name="seductionlabel">
+				<anchored>
+					<left><offset>335</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>seduc</static>
+			</header_ps2>			
+			<header_ps2 name="intimidationlabel">
+				<anchored>
+					<left><offset>370</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>intim</static>
+			</header_ps2>		
+			<header_ps2 name="etiquettelabel">
+				<anchored>
+					<left><offset>410</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>etiq</static>
+			</header_ps2>			
+			<header_ps2 name="oratorylabel">
+				<anchored>
+					<left><offset>445</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>orato</static>
+			</header_ps2>			
+			<header_ps2 name="interrogationlabel">
+				<anchored>
+					<left><offset>480</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>inter</static>
+			</header_ps2>			
+			<header_ps2 name="negotiationlabel">
+				<anchored>
+					<left><offset>515</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>negot</static>
+			</header_ps2>
+			
+			
+			<header_ps1 name="movementlabel">
+				<anchored>
+					<left><offset>555</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>MOVEMENT</static>
+			</header_ps1>		
+			<header_ps2 name="drivinglabel">
+				<anchored>
+					<left><offset>555</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>drive</static>
+			</header_ps2>			
+			<header_ps2 name="jumpinglabel">
+				<anchored>
+					<left><offset>590</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>jump</static>
+			</header_ps2>			
+			<header_ps2 name="ridinglabel">
+				<anchored>
+					<left><offset>625</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>ride</static>
+			</header_ps2>			
+			<header_ps2 name="swimminglabel">
+				<anchored>
+					<left><offset>660</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>swim</static>
+			</header_ps2>		
+			<header_ps2 name="climblabel">
+				<anchored>
+					<left><offset>695</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>climb</static>
+			</header_ps2>	
+			<header_ps2 name="sneaklabel">
+				<anchored>
+					<left><offset>730</offset></left>
+					<size>
+						<width>25</width>
+					</size>
+				</anchored>
+				<center />
+				<static>sneak</static>
+			</header_ps2>
+
+			<!-- Party List -->
+			<list_ps name="partylist">
+				<class>ps_skillsitem</class>
+			</list_ps>
+			<scrollbar_ps />
+		
+			<!-- party skill vs DC control -->
+			<hn name="skilldc" />
+		</sheetdata>
+	</windowclass>
+</root>

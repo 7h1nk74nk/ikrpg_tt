@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="mi_powerlistitem">
+		<sizelimits>
+			<minimum>
+				<width>150</width>
+				<height>0</height>
+			</minimum>
+			<maximum>
+				<width>600</width>
+			</maximum>
+		</sizelimits>
+		<sheetdata>
+			<link_field name="link">
+				<bounds>5,5,20,20</bounds>
+			</link_field>
+			<string_linked_static name="name">
+				<bounds>30,7,-1,16</bounds>
+				<font>reference-r</font>
+				<underlineoffset>0</underlineoffset>
+				<linktarget>link</linktarget>
+			</string_linked_static>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="mi_proplistitem">
+		<sizelimits>
+			<minimum>
+				<height>22</height>
+			</minimum>
+		</sizelimits>
+		<sheetdata>
+			<link_control name="shortcut">
+				<bounds>5,5,20,20</bounds>
+				<class>reference_magicitem_property</class>
+			</link_control>
+
+			<stringcontrol name="propertylabel">
+				<bounds>30,7,50,16</bounds>
+				<static>Property</static>
+				<font>reference-b</font>
+			</stringcontrol>
+			<stringfield name="shortdescription">
+				<anchored>
+					<top><offset>35</offset></top>
+					<left><offset>10</offset></left>
+					<right><offset>-10</offset></right>
+				</anchored>
+				<multilinespacing>15</multilinespacing>
+				<font>reference-r</font>
+			</stringfield>
+		
+			<spacer>
+				<anchor>shortdescription</anchor>
+				<height>5</height>
+			</spacer>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="magicitemdesc">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<string_refflavor name="flavor" />
+			
+			<spacer>
+				<anchor>columnanchor</anchor>
+				<relative />
+				<height>10</height>
+			</spacer>
+			
+			<string_column name="cost" />
+			<label_column>
+				<anchor>cost</anchor>
+				<static>Cost</static>
+			</label_column>
+
+			<string_column name="subclass" />
+			<stringfield name="class">
+				<anchor>subclass</anchor>
+				<font>sheetlabelsmallbold</font>
+				<static />
+				<script file="common/scripts/column_label.lua" />
+			</stringfield>
+
+			<string_column name="enhancement" />
+			<label_column>
+				<anchor>enhancement</anchor>
+				<static>Enhancement</static>
+			</label_column>
+
+			<string_column name="critical" />
+			<label_column>
+				<anchor>critical</anchor>
+				<static>Critical</static>
+			</label_column>
+
+			<string_column name="special" />
+			<label_column>
+				<anchor>special</anchor>
+				<static>Special</static>
+			</label_column>
+
+			<windowlist name="proplist">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<datasource>.props</datasource>
+				<class>mi_proplistitem</class>
+				<noscroll />
+			</windowlist>
+
+			<windowlist name="powerlist">
+				<anchored>
+					<top>
+						<parent>columnanchor</parent>
+						<anchor>bottom</anchor>
+						<relation>relative</relation>
+						<offset>5</offset>
+					</top>
+					<left />
+					<right />
+				</anchored>
+				<datasource>.powers</datasource>
+				<class>mi_powerlistitem</class>
+				<noscroll />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="referencemagicitem">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>300</width>
+				<height>370</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<string_name_static name="name">
+				<anchored>
+					<right>
+						<offset>-90</offset>
+					</right>
+				</anchored>
+				<color>#FFFFFFFF</color>
+				<frame>
+					<name>headeritem</name>
+					<offset>40,10,90,10</offset>
+				</frame>
+			</string_name_static>
+			<link_tl>
+				<class>referencemagicitem</class>
+			</link_tl>
+			<stringc_level_label />
+			<number_leveltop name="level" />
+
+			<sub_refcontent name="content">
+				<class>magicitemdesc</class>
+			</sub_refcontent>
+			<scrollbar_refcontent />
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="reference_magicitem_property">
+		<frame>whitecontrolarea</frame>
+		<placement>
+			<size>
+				<width>340</width>
+				<height>280</height>
+			</size>
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum>
+				<width>340</width>
+				<height>280</height>
+			</minimum>
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<tooltip>
+			<field>name</field>
+		</tooltip>
+		<sheetdata>
+			<stringcontrol name="name">
+				<anchored>
+					<position>insidetopleft</position>
+					<offset>40,10</offset>
+					<right>
+						<offset>-20</offset>
+					</right>
+				</anchored>
+				<frame>
+					<name mergerule="replace">headergray</name>
+					<offset>40,10,20,10</offset>
+				</frame>
+				<font>reference-b-large</font>
+				<multilinespacing>18</multilinespacing>
+				<static />
+				<nodrag />
+				<nodragselect />
+				<script>
+					function onInit()
+						local sItem = DB.getValue(window.getDatabaseNode(), "...name", "");
+						if string.match(sItem, " %+%d$") then
+							sItem = string.sub(sItem, 1, -4);
+						end
+						if sItem ~= "" then
+							setValue(sItem .. " - Property");
+						else
+							setValue("Property");
+						end
+					end
+				</script>
+			</stringcontrol>
+			<link_tl>
+				<class>reference_magicitem_property</class>
+			</link_tl>
+			<stringc_level_label>
+				<color />
+			</stringc_level_label>
+			<number_leveltop name="level" source="...level">
+				<color />
+			</number_leveltop>
+
+			<string_powerdesc_npc name="shortdescription">
+				<anchored>
+					<top>
+						<parent>name</parent>
+						<offset>20</offset>
+						<anchor>bottom</anchor>
+					</top>
+					<left><offset>20</offset></left>
+					<right><offset>-20</offset></right>
+					<bottom><offset>-10</offset></bottom>
+				</anchored>
+				<frame>
+					<name></name>
+				</frame>
+				<font>reference-r</font>
+				<selectioncolor>#FFD296</selectioncolor>
+				<static />
+			</string_powerdesc_npc>
+			<scrollbar>
+				<anchored>
+					<to>shortdescription</to>
+					<position>right</position>
+					<offset>-5,-5</offset>
+				</anchored>
+				<target>shortdescription</target>
+			</scrollbar>
+			
+			<resize />
+			<close />
+		</sheetdata>
+	</windowclass>
+</root>
