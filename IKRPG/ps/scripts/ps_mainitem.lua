@@ -4,14 +4,15 @@
 --
 
 function onInit()
-	-- onLevelChanged();
-	-- onXPChanged();
-	-- onHPChanged();
-	onphy_scoreChanged();
-	onagi_scoreChanged();
-	onint_scoreChanged();
+	-- onLevelChanged()
+	-- onXPChanged()
+	-- onHPChanged()
+	onPHYChanged()
+	onAGIChanged()
+	onINTChanged()
 end
 
+--[[ onLevelChanged
 -- function onLevelChanged()
 	-- local nLevel = level.getValue();
 	-- if nLevel > 20 then
@@ -28,7 +29,9 @@ end
 		-- epic.setVisible(false);
 	-- end
 -- end
+--]]
 
+--[[ onXPChanged
 -- function onXPChanged()
 	-- local nExp = exp.getValue();
 	-- local nExpNeeded = expneeded.getValue();
@@ -71,10 +74,10 @@ end
 		-- xpbar.updateBackColor("0F0B0B");
 	-- end
 -- end
+--]]
 
-
-
--- function onHPChanged()
+--[[ onHPChanged
+	function onHPChanged()
 	-- local nHP = hptotal.getValue();
 	-- local nWounds = wounds.getValue();
 	-- local nPercentWounded = 0;
@@ -100,43 +103,46 @@ end
 	-- hpbar.setValue(nHP - nWounds);
 	-- hpbar.updateText("HP: " .. (nHP - nWounds) .. " / " .. nHP);
 -- end
+--]]
 
-
-function onphy_scoreChanged()
+function onPHYChanged()
 	local nPHYMax = Physique.getValue();
-	local nPHYUsed = Poise.getValue();
+	local nPHYUsed = vitality_PHY.getValue();
 	local nPercentPHY = 0;
+	local nPHY = nPHYMax - nPHYUsed
 	if nPHYMax > 0 then
 		nPercentPHY = nPHYUsed / nPHYMax;
 	end
 	
 	phybar.setMax(nPHYMax);
-	phybar.setValue(nPHYMax - nPHYUsed);
-	phybar.updateText("Vitality: " .. nPHYUsed .. " / " .. nPHYMax);
+	phybar.setValue(nPHY);
+	phybar.updateText("Physique: " .. nPHY .. " / " .. nPHYMax);
 end
 
-function onagi_scoreChanged()
+function onAGIChanged()
 	local nAGIMax = Agility.getValue();
-	local nAGIUsed = Poise.getValue();
+	local nAGIUsed = vitality_AGI.getValue();
 	local nPercentAGI = 0;
+	local nAGI = nAGIMax - nAGIUsed
 	if nAGIMax > 0 then
 		nPercentAGI = nAGIUsed / nAGIMax;
 	end
 	
 	agibar.setMax(nAGIMax);
-	agibar.setValue(nAGIMax - nAGIUsed);
-	agibar.updateText("Vitality: " .. nAGIUsed .. " / " .. nAGIMax);
+	agibar.setValue(nAGI);
+	agibar.updateText("Agility: " .. nAGI .. " / " .. nAGIMax);
 end
 
-function onint_scoreChanged()
+function onINTChanged()
 	local nINTMax = Intellect.getValue();
-	local nINTUsed = Poise.getValue();
+	local nINTUsed = vitality_INT.getValue();
 	local nPercentINT = 0;
+	local nINT = nINTMax - nINTUsed
 	if nINTMax > 0 then
 		nPercentINT = nINTUsed / nINTMax;
 	end
 	
 	intbar.setMax(nINTMax);
-	intbar.setValue(nINTMax - nINTUsed);
-	intbar.updateText("Vitality: " .. nINTUsed .. " / " .. nINTMax);
+	intbar.setValue(nINT);
+	intbar.updateText("Intellect: " .. nINT .. " / " .. nINTMax);
 end

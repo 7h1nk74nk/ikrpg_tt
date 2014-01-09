@@ -207,9 +207,11 @@ function linkPCFields(nodePS)
 
 	linkPCField(nodeChar, nodePS, "def_total", "number", "DEF");
 	linkPCField(nodeChar, nodePS, "arm_total", "number", "ARM");
-	
-	linkPCField(nodeChar, nodePS, "damage_INT", "number", "damage_INT");
-
+	---[[ charsheet damagepane link
+	linkPCField(nodeChar, nodePS, "damage_PHY", "number", "vitality_PHY");
+	linkPCField(nodeChar, nodePS, "damage_AGI", "number", "vitality_AGI");
+	linkPCField(nodeChar, nodePS, "damage_INT", "number", "vitality_INT");
+	--]]
 	local nodeSkills = nodeChar.createChild("skilllist");
 	if nodeSkills then
 		nodeSkills.onChildUpdate = linkPCSkills;

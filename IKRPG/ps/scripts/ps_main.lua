@@ -7,9 +7,9 @@ function onSubwindowInstantiated()
 	for _,v in pairs(partylist.getWindows()) do
 		-- v.onXPChanged();
 		-- v.onHPChanged();
-		v.onint_scoreChanged();
-		v.onphy_scoreChanged();
-		v.onagi_scoreChanged();
+		v.onPHYChanged();
+		v.onAGIChanged();
+		v.onINTChanged();
 	end
 end
 

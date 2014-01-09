@@ -71,6 +71,28 @@
 				</script>
 			</hnx>
 		 -->
+			<hnx name="vitality_PHY">
+				<script>
+					function onValueChanged()
+						window.onPHYChanged()					
+					end
+				</script>
+			</hnx>
+			<hnx name="vitality_AGI">
+				<script>
+					function onValueChanged()
+						window.onAGIChanged()					
+					end
+				</script>
+			</hnx>
+			<hnx name="vitality_INT">
+				<script>
+					function onValueChanged()
+						window.onINTChanged()					
+					end
+				</script>
+			</hnx>
+			
 			<!-- Visible fields -->
 			<spacer>
 				<height>60</height>

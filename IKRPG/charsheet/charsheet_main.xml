@@ -491,156 +491,7 @@
             <!--DAMAGE SECTION-->
             <frame_char name="damageframe">
 				<bounds>15,355,155,180</bounds>
-                <script>
-                    nodeStats = nil;
-                    
-                    boxes_PHY={};
-                    boxes_AGI={};
-                    boxes_INT={};
-                    
-                    function onInit()                                            
-                        nodeStats = window.getDatabaseNode().createChild("stats");
-                        if nodeStats then
-                            nodeStats.onChildUpdate = onSourceUpdate;
-                        end
-                        
-                        table.insert(boxes_PHY,window.vitality_phy1);
-                        table.insert(boxes_PHY,window.vitality_phy2);
-                        table.insert(boxes_PHY,window.vitality_phy3);
-                        table.insert(boxes_PHY,window.vitality_phy4);
-                        table.insert(boxes_PHY,window.vitality_phy5);
-                        table.insert(boxes_PHY,window.vitality_phy6);
-                        table.insert(boxes_PHY,window.vitality_phy7);
-                        table.insert(boxes_PHY,window.vitality_phy8);
-                        table.insert(boxes_PHY,window.vitality_phy9);
-                        table.insert(boxes_PHY,window.vitality_phy10);
-                        
-                        table.insert(boxes_AGI,window.vitality_agi1);
-                        table.insert(boxes_AGI,window.vitality_agi2);
-                        table.insert(boxes_AGI,window.vitality_agi3);
-                        table.insert(boxes_AGI,window.vitality_agi4);
-                        table.insert(boxes_AGI,window.vitality_agi5);
-                        table.insert(boxes_AGI,window.vitality_agi6);
-                        table.insert(boxes_AGI,window.vitality_agi7);
-                        table.insert(boxes_AGI,window.vitality_agi8);
-                        table.insert(boxes_AGI,window.vitality_agi9);
-                        table.insert(boxes_AGI,window.vitality_agi10);
-                        
-                        table.insert(boxes_INT,window.vitality_int1);
-                        table.insert(boxes_INT,window.vitality_int2);
-                        table.insert(boxes_INT,window.vitality_int3);
-                        table.insert(boxes_INT,window.vitality_int4);
-                        table.insert(boxes_INT,window.vitality_int5);
-                        table.insert(boxes_INT,window.vitality_int6);
-                        table.insert(boxes_INT,window.vitality_int7);
-                        table.insert(boxes_INT,window.vitality_int8);
-                        table.insert(boxes_INT,window.vitality_int9);
-                        table.insert(boxes_INT,window.vitality_int10);
-                        
-                        for count=1,10 do
-                            window.getDatabaseNode().createChild(boxes_PHY[count].getName(),"number").onUpdate=checkDamage;                            
-                            window.getDatabaseNode().createChild(boxes_AGI[count].getName(),"number").onUpdate=checkDamage;
-                            window.getDatabaseNode().createChild(boxes_INT[count].getName(),"number").onUpdate=checkDamage;
-                        end
-                        
-                        onSourceUpdate();
-                        
-                    end
-                    
-                function checkDamage()
-                    
-                    local PHY=window.phy_score.getDatabaseNode().getValue();
-                    local AGI=window.agi_score.getDatabaseNode().getValue();
-                    local INT=window.int_score.getDatabaseNode().getValue();
-                    
-                    local damage_PHY=0;
-                    local damage_AGI=0;
-                    local damage_INT=0;
-                                        
-                    
-                    for count=1,10 do
-                        if boxes_PHY[count].getIndex()==1 then damage_PHY=damage_PHY+1 end
-                        if boxes_AGI[count].getIndex()==1 then damage_AGI=damage_AGI+1 end
-                        if boxes_INT[count].getIndex()==1 then damage_INT=damage_INT+1 end
-                    end
-                    
-                    if damage_PHY==PHY then
-                        window.warning_phy.setVisible(true);
-                    else
-                        window.warning_phy.setVisible(false);
-                    end
-                    
-                    if damage_AGI==AGI then
-                        window.warning_agi.setVisible(true);
-                    else
-                        window.warning_agi.setVisible(false);
-                    end
-                    
-                    if damage_INT==INT then
-                        window.warning_int.setVisible(true);
-                    else
-                        window.warning_int.setVisible(false);
-                    end
-                    
-                    if damage_PHY==PHY and damage_AGI==AGI and damage_INT==INT then
-                        window.incapacitated.setVisible(true);
-                    else
-                        window.incapacitated.setVisible(false);
-                    end
-                    
-                    
-                end;
-                    
-                function onSourceUpdate(source)
-                    updateVitality(false);
-                end
-                
-                function updateVitality(resetboxes)
-					local PHY=window.phy_score.getDatabaseNode().getValue();
-                    local AGI=window.agi_score.getDatabaseNode().getValue();
-                    local INT=window.int_score.getDatabaseNode().getValue();
-                    for count=1,10 do             
-                        local newIndex=0;
-                        
-                        if not resetboxes then newIndex=boxes_PHY[count].getIndex(); else newIndex=0; end
-                            
-                        if count&gt;PHY or PHY==0 then                                                       
-                            boxes_PHY[count].setColor("ff606060");
-                            boxes_PHY[count].setIndex(0);
-                            boxes_PHY[count].setReadOnly(true); 
-                        else
-                            boxes_PHY[count].setColor("ff0000ff");
-                            boxes_PHY[count].setIndex(newIndex);
-                            boxes_PHY[count].setReadOnly(false);
-                        end
-                        
-                        if not resetboxes then newIndex=boxes_AGI[count].getIndex(); else newIndex=0; end
-                        
-                        if count&gt;AGI or AGI==0 then                            
-                            boxes_AGI[count].setColor("ff606060");
-                            boxes_AGI[count].setIndex(0);
-                            boxes_AGI[count].setReadOnly(true);  
-                        else
-                            boxes_AGI[count].setColor("ffff0000");
-                            boxes_AGI[count].setIndex(newIndex);
-                            boxes_AGI[count].setReadOnly(false);
-                        end
-                        
-                        if not resetboxes then newIndex=boxes_INT[count].getIndex(); else newIndex=0; end
-                        
-                        if count&gt;INT or INT==0 then                                                        
-                            boxes_INT[count].setColor("ff606060");
-                            boxes_INT[count].setIndex(0);
-                            boxes_INT[count].setReadOnly(true); 
-                        else
-                            boxes_INT[count].setColor("ff00aa00");
-                            boxes_INT[count].setIndex(newIndex);
-                            boxes_INT[count].setReadOnly(false); 
-                        end                                                                                                                                      
-                    end
-                    checkDamage();
-				end
-                </script>
+                <script file="charsheet/scripts/charsheet_main_dmg.lua" />
 			</frame_char>		
 			
             <genericcontrol>
@@ -880,7 +731,7 @@
                 <static>-2 STR</static>
             </stringcontrol>
             
-            
+            <hn name="damage_PHY" />
             
             
             
@@ -1093,7 +944,7 @@
                 <static>-2 ATK</static>
             </stringcontrol>
             
-            
+            <hn name="damage_AGI" />
             
             
             
@@ -1340,7 +1191,7 @@
                 <color>ff00aa00</color>
             </stringcontrol>
             
-            
+            <hn name="damage_INT" />
             
             
             <stringcontrol>
@@ -1465,8 +1316,8 @@
                 <bounds>0,0,0,0</bounds>
                 <invisible />
                 <script>
-                    function onInit()                        
-                        window.damageframe.updateVitality(false);
+                    function onInit()
+						window.damageframe.updateVitality();
                     end
                 </script>
             </numbercontrol>
