@@ -71,19 +71,19 @@
 						onValueChanged();
 					end
 					
+					oldLevel="Heroic";
+					function setOldLevel(level)
+						oldLevel=level;
+					end
+
 					function onValueChanged()
 						local xptotal=getValue();
 						local levelstring="Heroic";
 						if xptotal >= 50 then levelstring="Veteran"; end 
 						if xptotal >= 100 then levelstring="Epic"; end
-						window.getDatabaseNode().getChild("race").getValue().setOldLevel(window.level.getValue());
 						window.level.setValue(levelstring);
-						window.race.recalcStatMax();
-						
-						
-						
-						
 					end
+					
 				</script>
             </basicnumber>
 			
@@ -94,6 +94,11 @@
 					<offset>0,-3</offset>
 					<size><width>60</width></size>
 				</anchored>
+				<script>
+					function onValueChanged()
+						window.getDatabaseNode().getChild("race").recalcStatMax();
+					end
+				</script>
 				<font>sheetlabel</font>
 				<static>Heroic</static>
 				<center/>

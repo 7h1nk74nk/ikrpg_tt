@@ -42,12 +42,7 @@
 		  <label>Race</label>
 		  <static></static>	
 		<script>
-			oldLevel="Heroic";
-			
-			function setOldLevel(level)
-				oldLevel=level;
-			end
-			
+
 			function onValueChanged()
 				if DataCommon.racedata[getValue()]~=nil then
 					window.phy_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].phy);
@@ -64,11 +59,11 @@
 				end
 				recalcStatMax();
 			end
-			
+
 			function recalcStatMax()
 				if DataCommon.racedata[getValue()]~=nil then
 					
-					local level=window.level.getValue();
+					local level=window.getDatabaseNode().getChild("level").getValue();
 					
 					window.phy_max.setValue( DataCommon.racedata[getValue()][level].phy);
 					window.spd_max.setValue( DataCommon.racedata[getValue()][level].spd);
@@ -80,9 +75,9 @@
 					window.arc_max.setValue( DataCommon.racedata[getValue()][level].arc);
 					window.per_max.setValue( DataCommon.racedata[getValue()][level].per);
 					
-					
 				end
 			end
+
 		</script>
         </string_labeled>
 		
