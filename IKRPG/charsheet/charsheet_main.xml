@@ -29,83 +29,98 @@
             </frame>
             </stringcontrol>
 
-			<string_labeled name="class1" source="race">
-				<anchored>
-					<to>classframe</to>
+			<string_labeled name="race">
+			<anchored>
+				<to>classframe</to>
 					<position>insidetopleft</position>
 					<offset>15,17</offset>
 					<size>
 						<width>70</width>
 						<height>20</height>
 					</size>
-				</anchored>
-				<label>Race</label>
-			</string_labeled>
-            
-            <!--
-			<string_labeled name="class2" source="archetype">
-				<anchored>
-					<to>class1</to>
-					<position>right</position>
-					<offset>5,0</offset>
-					<size>
-						<width>70</width>
-					</size>
-				</anchored>
-				<label>Archetype</label>
-			</string_labeled>
-            
-            <lineoffset default="on">-1</lineoffset>
-			<script>
-				labelwidget = nil;
-			
-				function onInit()
-					labelwidget = addTextWidget("sheetlabelinline", string.upper(label[1]));
-					if labelwidget then
-						local w,h = labelwidget.getSize();
-						labelwidget.setPosition("bottomleft", w/2, h/2-5);
-					end
-				end
-			</script>
-            
-            -->
-            
-            <button_stringcycler name="archetype" source="archetype">
-				<anchored>
-					<to>class1</to>
-					<position>right</position>
-					<offset>5,0</offset>
-					<size>
-						<width>70</width>
-					</size>
-				</anchored>
-				<font>sheettext</font>
-				<center />
-				<frame>
-					<name>bonus</name>
-					<offset>6,5,6,5</offset>
-				</frame>
-				<parameters>
-					<labels>Gifted|Intellectual|Mighty|Skilled</labels>					
-                    <values>Gifted|Intellectual|Mighty|Skilled</values>
-					<defaultlabel>Archetype</defaultlabel>
-				</parameters>                
-			</button_stringcycler>
+			</anchored>		  
+		  <label>Race</label>
+		  <static></static>	
+		<script>
 
-			<string_labeled name="class3" source="careers">
+			function onValueChanged()
+				if DataCommon.racedata[getValue()]~=nil then
+					window.phy_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].phy);
+					window.spd_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].spd);
+					window.str_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].str);
+					window.agi_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].agi);
+					window.prw_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].prw);
+					window.poi_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].poi);
+					window.int_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].int);
+					window.arc_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].arc);
+					window.per_score.setValue(DataCommon.racedata[getValue()]["Starting Stats"].per);
+					
+					
+				end
+				recalcStatMax();
+			end
+
+			function recalcStatMax()
+				if DataCommon.racedata[getValue()]~=nil then
+					
+					local level=window.getDatabaseNode().getChild("level").getValue();
+					
+					window.phy_max.setValue( DataCommon.racedata[getValue()][level].phy);
+					window.spd_max.setValue( DataCommon.racedata[getValue()][level].spd);
+					window.str_max.setValue( DataCommon.racedata[getValue()][level].str);
+					window.agi_max.setValue( DataCommon.racedata[getValue()][level].agi);
+					window.prw_max.setValue( DataCommon.racedata[getValue()][level].prw);
+					window.poi_max.setValue( DataCommon.racedata[getValue()][level].poi);
+					window.int_max.setValue( DataCommon.racedata[getValue()][level].int);
+					window.arc_max.setValue( DataCommon.racedata[getValue()][level].arc);
+					window.per_max.setValue( DataCommon.racedata[getValue()][level].per);
+					
+				end
+			end
+
+		</script>
+        </string_labeled>
+		
+		<DropDown name="racedropdown">
+          <target>race</target>
+          <position>0,4</position>
+          <lookup>Race</lookup>		  
+        </DropDown>
+			
+			
+		<string_labeled name="archetype">
+			<anchored>
+				<to>race</to>
+				<position>right</position>
+				<offset>5,0</offset>
+				<size>
+					<width>80</width>
+				</size>
+			</anchored>
+		  
+		  <label>Archetype</label>
+		  <static></static>
+		  <readonly/>
+        </string_labeled>
+		
+	
+		
+        
+        
+
+			<string_labeled name="careers" >
 				<anchored>
 					<to>archetype</to>
 					<position>right</position>
 					<offset>5,0</offset>
 					<size>
-						<width>220</width>
+						<width>210</width>
 					</size>
 				</anchored>
 				<label>Careers</label>
+				<readonly/>
 			</string_labeled>
-            
-            
-            
+                   
             
             <frame_char name="statframe">
 				<bounds>15,60,155,290</bounds>                                

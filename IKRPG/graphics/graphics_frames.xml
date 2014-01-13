@@ -563,4 +563,18 @@
 		<bitmap file="graphics/token/tokennumber.png" />
 		<offset>6,6,6,6</offset>
 	</framedef>
+	
+		<framedef name="control">
+      <bitmap file="graphics/frames/control.png"/>
+      <topleft rect="0,0,1,1" />
+      <top rect="1,0,1,1" />
+      <topright rect="2,0,1,1" />
+      <left rect="0,1,1,1" />
+      <middle rect="1,1,1,1" />
+      <right rect="2,1,1,1" />
+      <bottomleft rect="0,2,1,1" />
+      <bottom rect="1,2,1,1" />
+      <bottomright rect="2,2,1,1" />
+    </framedef>
+	
 </root>

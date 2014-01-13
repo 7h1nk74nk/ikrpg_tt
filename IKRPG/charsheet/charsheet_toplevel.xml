@@ -36,28 +36,84 @@
 		</tooltip>
 		<script file="charsheet/scripts/charsheet_toplevel.lua" />
 		<sheetdata>
-			<!-- ACTIVATE IDENTITY -->
-			<button_activatepc>
-				<bounds>370,30,23,22</bounds>
-			</button_activatepc>
 		
-			<!-- TOKEN -->
-			<tokenfield name="combattoken">
-				<bounds>320,23,40,40</bounds>
-				<empty>indicator_emptytoken</empty>
-				<tooltip>
-					<text>Token</text>
-				</tooltip>
-			</tokenfield>
+			<!-- NAME -->
+			<frame_char name="overviewframe">
+				<bounds>15,20,275,45</bounds>
+			</frame_char>
+			
+			<string_labeled name="name">
+				<anchored>
+					<to>overviewframe</to>
+					<position>insidetopleft</position>
+					<offset>15,10</offset>
+					<size>
+						<width>150</width>
+						<height>20</height>
+					</size>
+				</anchored>
+				<label>name</label>
+			</string_labeled>
+			
+			<!-- XP -->			
+			<basicnumber name="XP">
+                <anchored>
+                    <to>overviewframe</to>
+                    <position>insidetopleft</position>
+                    <offset>180,12</offset> 
+                    <size>
+                        <width>32</width>
+                        <height>20</height>
+                    </size>
+                </anchored>  
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					
+					oldLevel="Heroic";
+					function setOldLevel(level)
+						oldLevel=level;
+					end
+
+					function onValueChanged()
+						local xptotal=getValue();
+						local levelstring="Heroic";
+						if xptotal >= 50 then levelstring="Veteran"; end 
+						if xptotal >= 100 then levelstring="Epic"; end
+						window.level.setValue(levelstring);
+					end
+					
+				</script>
+            </basicnumber>
+			
+			<stringfield name="level">
+				<anchored>
+					<to>XP</to>
+					<position>right</position>
+					<offset>0,-3</offset>
+					<size><width>60</width></size>
+				</anchored>
+				<script>
+					function onValueChanged()
+						window.getDatabaseNode().getChild("race").recalcStatMax();
+					end
+				</script>
+				<font>sheetlabel</font>
+				<static>Heroic</static>
+				<center/>
+			</stringfield>
+
 		
 			<!-- PORTRAIT -->
 			<genericcontrol name="portraitbase">
-				<bounds>262,21,45,45</bounds>
+				<bounds>300,21,45,45</bounds>
 				<icon>charlist_base</icon>
 				<disabled />
 			</genericcontrol>
+			
 			<portraitselectioncontrol name="localportrait">
-				<bounds>337,21,45,45</bounds>
+				<bounds>300,21,45,45</bounds>
 				<base>portraittoken_base</base>
 				<mask>portraittoken_mask</mask>
 				<invisible />
@@ -91,8 +147,9 @@
 					end
 				</script>
 			</portraitselectioncontrol>
+			
 			<genericcontrol name="portrait">
-				<bounds>262,21,45,45</bounds>
+				<bounds>300,21,45,45</bounds>
 				<tooltip>
 					<text>Portrait</text>
 				</tooltip>
@@ -130,40 +187,22 @@
 				</script>
 			</genericcontrol>
 			
-			<!-- NAME -->
-			<frame_char name="overviewframe">
-				<bounds>15,20,230,45</bounds>
-			</frame_char>
-			<string_labeled name="name">
-				<anchored>
-					<to>overviewframe</to>
-					<position>insidetopleft</position>
-					<offset>15,10</offset>
-					<size>
-						<width>150</width>
-						<height>20</height>
-					</size>
-				</anchored>
-				<label>name</label>
-			</string_labeled>
+			<!-- TOKEN -->
+			<tokenfield name="combattoken">
+				<bounds>355,23,40,40</bounds>
+				<empty>indicator_emptytoken</empty>
+				<tooltip>
+					<text>Token</text>
+				</tooltip>
+			</tokenfield>
 			
-			<basicnumber name="xp_total">
-				<anchored>
-					<to>overviewframe</to>
-					<position>insidetopleft</position>
-					<offset>180,12</offset>
-					<size>
-						<width>35</width>
-						<height>22</height>
-					</size>
-				</anchored>
-				<frame>
-					<name>modifier</name>
-					<offset>5,5,5,5</offset>
-				</frame>
-				<font>sheetnumber</font>
-			</basicnumber>
+			<!-- ACTIVATE IDENTITY -->
+			<button_activatepc>
+				<bounds>400,32,23,22</bounds>
+			</button_activatepc>
+		
 
+			<!-- Subwindows -->
 
 			<subwindow name="main">
 				<bounds>0,65,-1,-22</bounds>
@@ -193,7 +232,9 @@
 				<bounds>0,65,-1,-22</bounds>
 				<class>charsheet_tab_powers</class>
 			</subwindow>
-
+			
+			
+			<!-- TABS -->
 			<buttongroup_tabs name="tabs">
 				<tab>
 					<icon>tab_main</icon>
