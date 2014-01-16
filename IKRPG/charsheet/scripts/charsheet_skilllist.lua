@@ -113,12 +113,13 @@ end
 function onFilter( w ) 
     
     --local careers=StringManager.split(w.windowlist.window.getDatabaseNode().getChild("careers").getValue(),",");
-	local careers={};
-	careers[1]=w.windowlist.window.getDatabaseNode().getChild("career1").getValue();
-	careers[2]=w.windowlist.window.getDatabaseNode().getChild("career2").getValue();
-	careers[3]=w.windowlist.window.getDatabaseNode().getChild("career3").getValue();
-	careers[4]=w.windowlist.window.getDatabaseNode().getChild("career4").getValue();
-	careers[5]=w.windowlist.window.getDatabaseNode().getChild("career5").getValue();
+	local careers={
+	w.windowlist.window.getDatabaseNode().getChild("career1").getValue(),
+	w.windowlist.window.getDatabaseNode().getChild("career2").getValue(),
+	w.windowlist.window.getDatabaseNode().getChild("career3").getValue(),
+	w.windowlist.window.getDatabaseNode().getChild("career4").getValue(),
+	w.windowlist.window.getDatabaseNode().getChild("career5").getValue()
+	};
 	
     local inList=false;
     local biggestValue=0;
