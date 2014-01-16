@@ -19,11 +19,11 @@
 		
 			<!-- ABILITIES -->
 
-			 <frame_char name="abilityframe">
+			<frame_char name="abilityframe">
 				<bounds>15,6,295,530</bounds>
 			</frame_char>
             
-           <stringcontrol>
+			<stringcontrol>
             <font>sheetlabelsmall</font>
             <static>ABILITIES</static>
             <anchored>
@@ -84,7 +84,7 @@
 		  <static></static>		  
         </string_labeled>
 		
-		<DropDown name="typedropdown">
+			<DropDown name="typedropdown">
           <target>archetype</target>
           <position>0,4</position>
           <lookup>Archetype</lookup>		  
@@ -92,7 +92,7 @@
 
 		
 		
-			
+		
 			<string_labeled name="career1">
 			<anchored>
 				<to>archetype</to>
@@ -144,198 +144,198 @@
 		</script>
         </string_labeled>
 		
-		<DropDown name="career1dropdown">
+			<DropDown name="career1dropdown">
           <target>career1</target>
           <position>0,4</position>
           <lookup>Careers</lookup>		  
         </DropDown>
 		
-		<string_labeled name="career2">
-			<anchored>
-				<to>career1</to>
+			<string_labeled name="career2">
+				<anchored>
+					<to>career1</to>
 					<position>belowleft</position>
 					<offset>0,5</offset>
 					<size>
 						<width>110</width>
 						<height>20</height>
 					</size>
-			</anchored>		  
-		  <label>Second Career</label>
-		  <static></static>		  
-		<script>
-			function onValueChanged()
+				</anchored>		  
+				<label>Second Career</label>
+				<static></static>		  
+				<script>
+					function onValueChanged()
 				
-				local careers={};
-				careers[1]=window.career1.getValue();
-				careers[2]=window.career2.getValue();
-				careers[3]=window.career3.getValue();
-				careers[4]=window.career4.getValue();
-				careers[5]=window.career5.getValue();
+						local careers={};
+						careers[1]=window.career1.getValue();
+						careers[2]=window.career2.getValue();
+						careers[3]=window.career3.getValue();
+						careers[4]=window.career4.getValue();
+						careers[5]=window.career5.getValue();
 	       
-				local careerstring="";
+						local careerstring="";
 				
-				careerstring=careers[1];
-				if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
-				if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
-				if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
-				if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
+						careerstring=careers[1];
+						if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
+						if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
+						if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
+						if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
 				
-				window.getDatabaseNode().getChild("careers").setValue(careerstring);
+						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 				
-				window.skilllist.applyFilter();
-				window.abilitylist.applyFilter();
+						window.skilllist.applyFilter();
+						window.abilitylist.applyFilter();
 				
 			
 				
-			end									
-		</script>
-        </string_labeled>
+					end									
+				</script>
+			</string_labeled>
 		
-		<DropDown name="career2dropdown">
-          <target>career2</target>
-          <position>0,4</position>
-          <lookup>Careers</lookup>		  
-        </DropDown>
+			<DropDown name="career2dropdown">
+				<target>career2</target>
+				<position>0,4</position>
+				<lookup>Careers</lookup>		  
+			</DropDown>
 		
-		<string_labeled name="career3">
-			<anchored>
-				<to>career2</to>
-					<position>belowleft</position>
-					<offset>0,5</offset>
-					<size>
-						<width>110</width>
-						<height>20</height>
-					</size>
-			</anchored>		  
-		  <label>Third Career</label>
-		  <static></static>		  
-		<script>
-			function onValueChanged()
-				
-				local careers={};
-				careers[1]=window.career1.getValue();
-				careers[2]=window.career2.getValue();
-				careers[3]=window.career3.getValue();
-				careers[4]=window.career4.getValue();
-				careers[5]=window.career5.getValue();
-	       
-				local careerstring="";
-				
-				careerstring=careers[1];
-				if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
-				if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
-				if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
-				if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
-				
-				window.getDatabaseNode().getChild("careers").setValue(careerstring);
-				
-				window.skilllist.applyFilter();
-				window.abilitylist.applyFilter();
-				
-				
-				
-			end										
-		</script>
-        </string_labeled>
+			<string_labeled name="career3">
+				<anchored>
+					<to>career2</to>
+						<position>belowleft</position>
+						<offset>0,5</offset>
+						<size>
+							<width>110</width>
+							<height>20</height>
+						</size>
+				</anchored>		  
+			  <label>Third Career</label>
+			  <static></static>		  
+				<script>
+					function onValueChanged()
+						
+						local careers={};
+						careers[1]=window.career1.getValue();
+						careers[2]=window.career2.getValue();
+						careers[3]=window.career3.getValue();
+						careers[4]=window.career4.getValue();
+						careers[5]=window.career5.getValue();
+				   
+						local careerstring="";
+						
+						careerstring=careers[1];
+						if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
+						if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
+						if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
+						if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
+						
+						window.getDatabaseNode().getChild("careers").setValue(careerstring);
+						
+						window.skilllist.applyFilter();
+						window.abilitylist.applyFilter();
+						
+						
+						
+					end										
+				</script>
+			</string_labeled>
 		
-		<DropDown name="career3dropdown">
-          <target>career3</target>
-          <position>0,4</position>
-          <lookup>Careers</lookup>		  
-        </DropDown>
+			<DropDown name="career3dropdown">
+			  <target>career3</target>
+			  <position>0,4</position>
+			  <lookup>Careers</lookup>		  
+			</DropDown>
 		
-		<string_labeled name="career4">
-			<anchored>
-				<to>career3</to>
-					<position>belowleft</position>
-					<offset>0,5</offset>
-					<size>
-						<width>110</width>
-						<height>20</height>
-					</size>
-			</anchored>		  
-		  <label>Fourth Career</label>
-		  <static></static>		  
-		<script>
-			function onValueChanged()
-				
-				local careers={};
-				careers[1]=window.career1.getValue();
-				careers[2]=window.career2.getValue();
-				careers[3]=window.career3.getValue();
-				careers[4]=window.career4.getValue();
-				careers[5]=window.career5.getValue();
-	       
-				local careerstring="";
-				
-				careerstring=careers[1];
-				if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
-				if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
-				if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
-				if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
-				
-				window.getDatabaseNode().getChild("careers").setValue(careerstring);
-				
-				window.skilllist.applyFilter();
-				window.abilitylist.applyFilter();
-				
-				
-				
-			end										
-		</script>
-        </string_labeled>
+			<string_labeled name="career4">
+				<anchored>
+					<to>career3</to>
+						<position>belowleft</position>
+						<offset>0,5</offset>
+						<size>
+							<width>110</width>
+							<height>20</height>
+						</size>
+				</anchored>		  
+			  <label>Fourth Career</label>
+			  <static></static>		  
+				<script>
+					function onValueChanged()
+						
+						local careers={};
+						careers[1]=window.career1.getValue();
+						careers[2]=window.career2.getValue();
+						careers[3]=window.career3.getValue();
+						careers[4]=window.career4.getValue();
+						careers[5]=window.career5.getValue();
+				   
+						local careerstring="";
+						
+						careerstring=careers[1];
+						if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
+						if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
+						if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
+						if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
+						
+						window.getDatabaseNode().getChild("careers").setValue(careerstring);
+						
+						window.skilllist.applyFilter();
+						window.abilitylist.applyFilter();
+						
+						
+						
+					end										
+				</script>
+			</string_labeled>
 		
-		<DropDown name="career4dropdown">
-          <target>career4</target>
-          <position>0,4</position>
-          <lookup>Careers</lookup>		  
-        </DropDown>
+			<DropDown name="career4dropdown">
+				<target>career4</target>
+				<position>0,4</position>
+				<lookup>Careers</lookup>		  
+			</DropDown>
 		
-		<string_labeled name="career5">
-			<anchored>
-				<to>career4</to>
-					<position>belowleft</position>
-					<offset>0,5</offset>
-					<size>
-						<width>110</width>
-						<height>20</height>
-					</size>
-			</anchored>		  
-		  <label>Fifth Career</label>
-		  <static></static>		  
-		<script>		
-			function onValueChanged()
-				
-				local careers={};
-				careers[1]=window.career1.getValue();
-				careers[2]=window.career2.getValue();
-				careers[3]=window.career3.getValue();
-				careers[4]=window.career4.getValue();
-				careers[5]=window.career5.getValue();
-	       
-				local careerstring="";
-				
-				careerstring=careers[1];
-				if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
-				if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
-				if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
-				if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
-				
-				window.getDatabaseNode().getChild("careers").setValue(careerstring);
-				
-				window.skilllist.applyFilter();
-				window.abilitylist.applyFilter();
-			end									
-		</script>
-        </string_labeled>
+			<string_labeled name="career5">
+				<anchored>
+					<to>career4</to>
+						<position>belowleft</position>
+						<offset>0,5</offset>
+						<size>
+							<width>110</width>
+							<height>20</height>
+						</size>
+				</anchored>		  
+			  <label>Fifth Career</label>
+			  <static></static>		  
+				<script>		
+					function onValueChanged()
+						
+						local careers={};
+						careers[1]=window.career1.getValue();
+						careers[2]=window.career2.getValue();
+						careers[3]=window.career3.getValue();
+						careers[4]=window.career4.getValue();
+						careers[5]=window.career5.getValue();
+				   
+						local careerstring="";
+						
+						careerstring=careers[1];
+						if careers[2]~="" then careerstring=careerstring..", "..careers[2]; end
+						if careers[3]~="" then careerstring=careerstring..", "..careers[3]; end
+						if careers[4]~="" then careerstring=careerstring..", "..careers[4]; end
+						if careers[5]~="" then careerstring=careerstring..", "..careers[5]; end
+						
+						window.getDatabaseNode().getChild("careers").setValue(careerstring);
+						
+						window.skilllist.applyFilter();
+						window.abilitylist.applyFilter();
+					end									
+				</script>
+			</string_labeled>
 		
-		<DropDown name="career5dropdown">
-          <target>career5</target>
-          <position>0,4</position>
-          <lookup>Careers</lookup>		  
-        </DropDown>
+			<DropDown name="career5dropdown">
+				<target>career5</target>
+				<position>0,4</position>
+				<lookup>Careers</lookup>		  
+			</DropDown>
 		
-		<button_checkbox name="limitbyLevel">
+			<button_checkbox name="limitbyLevel">
                 <anchored>
 					<to>career5</to>
 					<position>belowleft</position>
@@ -402,8 +402,8 @@
 		
 		
 			
-		<button_text name="button_addstarting">				
-			<anchored>
+			<button_text name="button_addstarting">				
+				<anchored>
 					<to>career5</to>
 					<position>below</position>
 					<offset>0,25</offset>
@@ -411,7 +411,7 @@
 					<size>
 						<height>25</height>
 					</size>
-			</anchored>	
+				</anchored>	
 				<text>Add Starting</text>
 				<script>
 					function onButtonPress()
@@ -424,7 +424,7 @@
 		
 
 		
-		<subwindow name="startingchoices">
+			<subwindow name="startingchoices">
 				<bounds>80,80,-80,-80</bounds>
 				<class>charsheet_startingskills</class>
 				<fastinit />
