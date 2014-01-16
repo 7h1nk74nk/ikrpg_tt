@@ -60,7 +60,7 @@ function onStatUpdate()
     if stat=="" then    
         total.setValue(rank.getValue());
     else        
-        local node = self.windowlist.window.getDatabaseNode().createChild("stats").createChild(stat).createChild("score");
+        local node = self.windowlist.window.getDatabaseNode().getChild("stats").getChild(stat).getChild("score");
         total.setValue(node.getValue()+rank.getValue());        
     end	
 end
