@@ -6,6 +6,92 @@
 -->
 
 <root>
+	
+	<template name="number_stat">
+		<basicnumber>
+			<anchored>				
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>			
+			<script>
+			local rollwidget;
+			function onInit()
+				rollwidget = addBitmapWidget("indicator_dice");
+				if rollwidget then
+						
+						rollwidget.setPosition("insidetopright", -5, 2);
+						rollwidget.setSize(20,20);
+						rollwidget.setColor("AAFFFFFF");
+				end
+			end
+			
+			function action(draginfo)
+				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+				ActionSkill.performRoll(draginfo, rActor,type[1],label[1],getValue(),nil,false);
+				
+				return true;
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				return action(draginfo);
+			end
+				
+			function onDoubleClick(x,y)	
+				return action();
+			end	
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="number_skill">
+		<basicnumber>
+			<anchored>				
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>			
+			<script>
+			local rollwidget;
+			function onInit()
+				rollwidget = addBitmapWidget("indicator_dice");
+				if rollwidget then
+						
+						rollwidget.setPosition("insidetopright", -5, 2);
+						rollwidget.setSize(20,20);
+						rollwidget.setColor("AAFFFFFF");
+				end
+			end
+			
+			function action(draginfo)
+				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+				ActionSkill.performRoll(draginfo, rActor,"SKILL",window[namesource[1]].getValue(),getValue(),nil,false);
+				
+				return true;
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				return action(draginfo);
+			end
+				
+			function onDoubleClick(x,y)	
+				return action();
+			end	
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="stringcontrol_dynamic">
+		<stringcontrol>
+			<anchored>
+				<top></top>
+				<left></left>
+			</anchored>
+		</stringcontrol>
+	</template>
+	
 	<template name="number_linked">
 		<number>
 			<readonly />
@@ -39,11 +125,13 @@
 			</script>
 		</basicnumber>
 	</template>
+	
 	<template name="number_charadd_sm">
 		<number_charadd>
 			<font>sheetnumbersmall</font>
 		</number_charadd>
 	</template>
+	
 	<template name="number_chartotal">
 		<number_modifier>
 			<frame>
@@ -55,6 +143,7 @@
 			<showemptywidget />
 		</number_modifier>
 	</template>
+	
 	<template name="number_chartotalnomod">
 		<number_linked>
 			<frame>
@@ -65,12 +154,14 @@
 			<readonly />
 		</number_linked>
 	</template>
+	
 	<template name="number_chartotalwithability">
 		<number_chartotal>
 			<ability mergerule="resetandadd" />
 			<script file="charsheet/scripts/charsheet_totalwithability.lua" />
 		</number_chartotal>
 	</template>
+	
 	<template name="number_chartotalwithabilitynomod">
 		<number_chartotalnomod>
 			<ability mergerule="resetandadd" />
@@ -98,6 +189,7 @@
 			</parameters>
 		</button_stringcycler>
 	</template>
+	
 	<template name="cycler_ability_sm">
 		<button_stringcycler>
 			<font>sheettextsmall</font>
@@ -118,6 +210,7 @@
 			</parameters>
 		</button_stringcycler>
 	</template>
+	
 	<template name="cycler_defense">
 		<button_stringcycler>
 			<center />
@@ -138,6 +231,7 @@
 			</parameters>
 		</button_stringcycler>
 	</template>
+	
 	<template name="cycler_defense_sm">
 		<button_stringcycler>
 			<font>sheettextsmall</font>
@@ -190,6 +284,7 @@
 			</script>
 		</windowreferencecontrol>
 	</template>
+	
 	<template name="button_charmini">
 		<windowreferencecontrol>
 			<icon>

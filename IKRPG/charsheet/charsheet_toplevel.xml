@@ -96,7 +96,7 @@
 				</anchored>
 				<script>
 					function onValueChanged()
-						window.getDatabaseNode().getChild("race").recalcStatMax();
+						  window.main.subwindow.race.recalcStatMax(); 
 					end
 				</script>
 				<font>sheetlabel</font>

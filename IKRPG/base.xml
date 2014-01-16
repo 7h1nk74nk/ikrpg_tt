@@ -74,6 +74,7 @@
 	<includefile source="charsheet/charsheet_main.xml" />
 	<includefile source="charsheet/charsheet_combat.xml" />
 	<includefile source="charsheet/charsheet_skills.xml" />
+	<includefile source="charsheet/charsheet_startingskills.xml" />	
 	<includefile source="charsheet/charsheet_abilities.xml" />
 	<includefile source="charsheet/charsheet_inventory.xml" />
 	<includefile source="charsheet/charsheet_powers.xml" />

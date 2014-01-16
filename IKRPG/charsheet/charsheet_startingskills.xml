@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_textpopup">
+		<nodelete />
+		<frame>whitecontrolarea</frame>				
+		<sheetdata>
+			
+			<numberfield name="popupClosed">
+				<bounds>0,0,0,0</bounds>
+				<invisible/>				
+			</numberfield>
+			
+			<stringcontrol name="messagetext">
+                <anchored>                    
+                    <position>over</position>
+                    <offset>-25,-25</offset>
+                </anchored>                
+                <center/>    
+                <multilinespacing >18</multilinespacing>
+                <static/>
+            </stringcontrol>
+			
+			<button_text name="button_done">				
+				<anchored>
+					<bottom>
+						<anchor>bottom</anchor>
+						<offset>-5</offset>
+					</bottom>
+					<right>
+						<anchor>right</anchor>
+						<offset>-5</offset>					
+					</right>
+					<size>
+						<width>200</width>
+						<height>25</height>
+					</size>
+				</anchored>
+				<text>DONE</text>
+				<script>
+					
+					
+					function onButtonPress()			
+						window.popupClosed.setValue(1);
+						window.parentcontrol.setVisible(false);
+							
+					end										
+				</script>
+			</button_text>
+			
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="charsheet_startingskills">
+		
+		<nodelete />
+		<frame>whitecontrolarea</frame>		
+		<script file="charsheet/scripts/charsheet_startingskills.lua" />
+		<sheetdata>
+			
+		
+			<button_text name="button_done">				
+				<anchored>
+					<bottom>
+						<anchor>bottom</anchor>
+						<offset>-5</offset>
+					</bottom>
+					<right>
+						<anchor>right</anchor>
+						<offset>-5</offset>					
+					</right>
+					<size>
+						<width>200</width>
+						<height>25</height>
+					</size>
+				</anchored>
+				<text>DONE</text>
+				<script>
+					function onButtonPress()			
+							
+						window.reset();
+							
+					end										
+				</script>
+			</button_text>
+			
+			
+		</sheetdata>
+	</windowclass>
+</root>

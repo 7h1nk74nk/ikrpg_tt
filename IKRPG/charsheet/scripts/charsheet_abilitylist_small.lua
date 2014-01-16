@@ -9,7 +9,7 @@
 
 function onFilter( w ) 
     
-    if w.aquired.getState() then        
+    if w.aquired.getState() and w.subabilitynumber.getValue()==0  then        
         return true;
     else 
         return false;

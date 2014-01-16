@@ -19,43 +19,56 @@
 				<bounds>15,5,400,525</bounds>
 			</frame_char>
 
-			<stringcontrol>
-            <font>sheetlabelsmall</font>
-            <static>SKILLS</static>
-            <anchored>
-                <to>skillframe</to>
-                <position>insidetopleft</position>
-                <offset>5,2</offset>                
-            </anchored>   
-            <color>ffffffff</color>
-            <frame>
-                <name>headerquest</name>
-                <offset>5,2,5,2</offset>
-            </frame>
+			<stringcontrol name="skilltitle">
+				<font>sheetlabelsmall</font>
+				<static>SKILLS</static>
+				<anchored>
+					<to>skillframe</to>
+					<position>insidetopleft</position>
+					<offset>5,2</offset>                
+				</anchored>   
+				<color>ffffffff</color>
+				<frame>
+					<name>headerquest</name>
+					<offset>5,2,5,2</offset>
+				</frame>
+				<tooltip><text>Click to switch to spell list</text></tooltip>
+				<script>
+					function onClickDown( button, x, y ) 
+						window.skilltitle.setVisible(false);
+						window.skillheader1.setVisible(false);
+						window.skillheader2.setVisible(false);
+						window.skillheader3.setVisible(false);
+						window.skillheader4.setVisible(false);
+						window.skillheader5.setVisible(false);
+						window.skillheader6.setVisible(false);
+						window.skilllist.setVisible(false);
+					end
+				</script>
             </stringcontrol>
 			
-			<label_sm>
+			<label_sm name="skillheader1">
 				<bounds>30,25,30,10</bounds>
 				<static>Name</static>
 			</label_sm>
-            <label_sm>
-				<bounds>220,25,30,10</bounds>
+            <label_sm name="skillheader2">
+				<bounds>140,25,30,10</bounds>
 				<static>Type</static>
 			</label_sm>			
-			<label_sm>
-				<bounds>258,25,30,10</bounds>
+			<label_sm name="skillheader3">
+				<bounds>178,25,30,10</bounds>
 				<static>Stat</static>
 			</label_sm>			
-			<label_sm>
-				<bounds>295,25,30,10</bounds>
+			<label_sm name="skillheader4">
+				<bounds>215,25,30,10</bounds>
 				<static>Max</static>
 			</label_sm>
-			<label_sm>
-				<bounds>330,25,30,10</bounds>
+			<label_sm name="skillheader5">
+				<bounds>250,25,30,10</bounds>
 				<static>Rank</static>
 			</label_sm>
-            <label_sm>
-				<bounds>365,25,30,10</bounds>
+            <label_sm name="skillheader6">
+				<bounds>285,25,30,10</bounds>
 				<static>Total</static>
 			</label_sm>
 
@@ -73,6 +86,7 @@
                 
 				<sortby><control>order</control></sortby>
 				<script file="charsheet/scripts/charsheet_skilllist.lua" />
+				
 			</windowlist>
 			<scrollbar_charlist>
 				<anchored>
@@ -81,13 +95,7 @@
 				</anchored>
 				<target>skilllist</target>
 			</scrollbar_charlist>
-            
-            
-            
-            
-            
-           
-            
+            		
             
 		</sheetdata>
 	</windowclass>

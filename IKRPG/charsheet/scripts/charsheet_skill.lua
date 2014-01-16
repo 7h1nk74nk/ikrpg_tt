@@ -19,7 +19,7 @@ function updateSubStatus()
     if parentskill.getValue()=="" then
     else
         setCustom(true);
-        label.setAnchor("left", "", "left","absolute",90);
+        label.setAnchor("left", "", "left","absolute",10);
         label.setAnchor("top", "", "top","absolute",5);
         label.setAnchoredWidth(85);
         --wnd.skilltype.setVisible(false);
@@ -40,29 +40,56 @@ end
 
 function onMenuSelection(selection, subselection)
 	if selection == 6 and subselection == 7 then
-		local node = getDatabaseNode();
-		if node then
-			node.delete();
-		else
-			close();
-		end
+		delete();
 	end
     
     if selection == 2 then
-		local wnd = self.windowlist.addEntry(true);
-			if wnd then
-				wnd.label.setValue(self.label.getValue().." subskill");
-                wnd.parentskill.setValue(self.getDatabaseNode().getNodeName());
-                self.subskillnumber.setValue(self.subskillnumber.getValue()+1);
-                self.updateSubStatus();
-                --print(self.getDatabaseNode().getNodeName());
-                wnd.order.setValue(self.order.getValue());
-                wnd.skillstat.setStringValue(self.skillstat.getValue());
-                wnd.skilltype.setStringValue(self.skilltype.getValue());
-                wnd.updateSubStatus();
-			end
+		addSubSkill(self.label.getValue().." subskill");
+		
 	end
     
+end
+
+function delete() 
+
+	windowlist.skillList[label.getValue()]=nil;
+		local node = getDatabaseNode();
+		if node then
+            local parentskillnum=DB.findNode(parentskill.getValue()).getChild("subskillnumber");
+			if parentskillnum then
+				parentskillnum.setValue(parentskillnum.getValue()-1);		
+			end
+			node.delete();
+		else			
+			local parentskillnum=DB.findNode(parentskill.getValue()).getChild("subskillnumber");
+			if parentskillnum then
+				parentskillnum.setValue(parentskillnum.getValue()-1);
+			end
+			close();
+		end
+		
+end
+
+function addSubSkill(name)
+
+	local wnd = self.windowlist.addEntry(true);
+	self.windowlist.skillList[name]=wnd;
+	if wnd then
+		
+		self.subskillnumber.setValue(self.subskillnumber.getValue()+1);
+		
+		
+		wnd.order.setValue(self.order.getValue());
+		wnd.label.setValue(name);
+		wnd.parentskill.setValue(self.getDatabaseNode().getNodeName());
+		--print(wnd.order.getValue());
+		wnd.skillstat.setStringValue(self.skillstat.getValue());
+		wnd.skilltype.setStringValue(self.skilltype.getValue());
+		wnd.updateSubStatus();
+		return wnd;
+	end
+
+	
 end
 
 function onStatUpdate()	
@@ -70,15 +97,22 @@ function onStatUpdate()
     if stat=="" then    
         total.setValue(rank.getValue());
     else        
-        local node = self.windowlist.window.getDatabaseNode().createChild("stats").createChild(stat).createChild("score");
+        local node = self.windowlist.window.getDatabaseNode().getChild("stats").getChild(stat).getChild("score");
         total.setValue(node.getValue()+rank.getValue());        
     end
+	
+	
+	if rank.getValue()>0 then
+		setFrame("rowshade");
+	else
+		setFrame(nil);
+	end
+	
 	updateSubStatus()                                                            
 end
 
--- This next function is called to set the entry to non-custom or custom.
+-- This function is called to set the entry to non-custom or custom.
 -- Custom entries have configurable stats and editable labels.
-
 function setCustom(state)
 	iscustom = state;
 	
@@ -112,7 +146,7 @@ function setHasSubSkills(state)
     
     rank.setVisible(not state);
     total.setVisible(not state);
-    max.setVisible(not state);
+    --max.setVisible(not state);
     
     hasSubSkills=state;
     setRadialOptions();

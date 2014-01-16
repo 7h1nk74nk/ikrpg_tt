@@ -261,13 +261,7 @@
 	
 	
 
-	
-	
-
-	
-	
-			
-	<windowclass name="charsheet_skill">
+<windowclass name="charsheet_skill">
 		<sizelimits>
 			<minimum>
 				<height>20</height>
@@ -298,7 +292,7 @@
 					<left><offset>0</offset></left>					
 					<size>
 						<height>18</height>
-                        <width>175</width>
+                        <width>95</width>
 					</size>
 				</anchored>
                 <font>sheettext</font>                                                                  
@@ -381,7 +375,7 @@
                 
             </basicnumber>
             
-            <basicnumber name="total">
+            <number_skill name="total">
                 <anchored>
                     <to>rank</to>
                     <position>righthigh</position>
@@ -391,8 +385,11 @@
                         <height>18</height>
                     </size>
                 </anchored>
-                <readonly/>
-            </basicnumber>
+                <readonly/>				
+				<namesource>label</namesource>
+            </number_skill>
+            
+            
 			
 		</sheetdata>
 	</windowclass>
@@ -493,7 +490,7 @@
                 <max>4</max>                
             </basicnumber>
                                     
-            <basicnumber name="total">
+            <number_skill name="total">
                 <anchored>
                     <to>rank</to>
                     <position>righthigh</position>
@@ -504,12 +501,13 @@
                     </size>
                 </anchored>
                 <readonly/>
-            </basicnumber>	
+				<namesource>label</namesource>
+            </number_skill>
+            
+            
 			
 		</sheetdata>
 	</windowclass>
-
-	
 
     <windowclass name="charsheet_ability">
         <sizelimits>
@@ -517,6 +515,7 @@
 				<height>20</height>
 			</minimum>
 		</sizelimits>  
+		
         <script file="charsheet/scripts/charsheet_ability.lua" />
 		<sheetdata>
             
@@ -524,6 +523,21 @@
                 <bounds>0,0,0,0</bounds>
                 <invisible/>
             </numberfield>
+			
+			<numberfield name="shiftedtotop">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+			
+			 <numberfield name="subabilitynumber">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>					
+			
+			<stringfield name="parentability">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield>  
                         
             <stringfield name="type">
                 <bounds>0,0,0,0</bounds>
@@ -544,52 +558,46 @@
                         <width>18</width>
 					</size>
 				</anchored>
+				<script file="charsheet/scripts/charsheet_abilityaquired.lua"/>
+					
+				
             </button_checkbox>
             
             <stringfield name="label">
 				<anchored>
 					<top><offset>5</offset></top>
-					<left><offset>25</offset></left>					
+					<left><offset>22</offset></left>					
 					<size>
 						<height>18</height>
-                        <width>240</width>
+                        <width>220</width>
 					</size>
 				</anchored>
-                <font>sheetlabel</font>     
+                <font>sheetlabelwhite</font>     
                 <center/>
                 <lineoffset default="on">-1</lineoffset>
 			</stringfield>
             
-            <stringcontrol name="prerequlabel">
-                <anchored>
-					<top><offset>25</offset></top>
-					<left><offset>25</offset></left>										
-				</anchored>
-                <font>sheettextsmall</font>                                     
-                <static>Prerequisite:</static>
-                <invisible/>
-            </stringcontrol>
+ 
             <stringfield name="prerequisite">
 				<anchored>
 					<top><offset>25</offset></top>
-					<left><parent>prerequlabel</parent><anchor>right</anchor><offset>5</offset></left>					
-					<size>						
-                        <width>170</width>
-					</size>
-				</anchored>
+					<left><offset>5</offset></left>					
+					<right><offset>-5</offset></right>
+					
+				</anchored>		
                 <font>sheettextsmall</font>                     
-                <frame><name>rowshade</name></frame>
+                
                 <multilinespacing>18</multilinespacing>
+				
                 <invisible/>
 			</stringfield>
             
             <stringfield name="description">
 				<anchored>
 					<top><parent>prerequisite</parent><anchor>bottom</anchor><offset>5</offset></top>
-					<left><offset>25</offset></left>					
-					<size>						
-                        <width>240</width>
-					</size>
+					<left><offset>5</offset></left>		
+					<right><offset>-15</offset></right>
+					
 				</anchored>
                 <font>sheettextsmall</font>                     
                 <multilinespacing>18</multilinespacing>                
@@ -599,7 +607,7 @@
              <button_toggle name="expand">
 				<anchored>
 					<top><offset>5</offset></top>
-					<left><offset>270</offset></left>					
+					<left><offset>250</offset></left>					
 					<size>
 						<height>18</height>
                         <width>18</width>
@@ -609,8 +617,7 @@
 				<script>
 					function onValueChanged()   
                         window.prerequisite.setVisible(getValue());
-                        window.description.setVisible(getValue());	
-                        window.prerequlabel.setVisible(getValue()); 
+                        window.description.setVisible(getValue());	                        
 					end
 				</script>
 			</button_toggle>
@@ -626,13 +633,23 @@
 				<height>20</height>
 			</minimum>
 		</sizelimits>  
-        
+         <script file="charsheet/scripts/charsheet_ability_small.lua" />
 		<sheetdata>
             
             <numberfield name="order">
                 <bounds>0,0,0,0</bounds>
                 <invisible/>
             </numberfield>
+			
+			<numberfield name="subabilitynumber">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+			
+			<stringfield name="parentability">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </stringfield>  
                         
             <stringfield name="type">
                 <bounds>0,0,0,0</bounds>
@@ -661,10 +678,7 @@
 				<anchored>
 					<top><offset>5</offset></top>
 					<left><offset>0</offset></left>					
-					<size>
-						<height>18</height>
-                        <width>190</width>
-					</size>
+					<right><offset>-15</offset></right>					
 				</anchored>
                 <font>sheetlabel</font>     
                 <center/>
@@ -678,9 +692,7 @@
 				<anchored>
 					<top><parent>label</parent><anchor>bottom</anchor><offset>0</offset></top>
 					<left><offset>0</offset></left>					
-					<size>						
-                        <width>190</width>
-					</size>
+					<right><offset>-10</offset></right>					
 				</anchored>
                 <font>sheettextsmall</font>                     
                 <multilinespacing>18</multilinespacing>                
@@ -704,32 +716,181 @@
 					end
 				</script>
 			</button_toggle>
-			
-   
+           
         </sheetdata>
     </windowclass>
     
-    	<windowclass name="charsheet_abilityitem">
-		<sizelimits>
+    <windowclass name="charsheet_spell">
+		 <sizelimits>
 			<minimum>
-				<height>10</height>
+				<height>25</height>
 			</minimum>
-		</sizelimits>
+		</sizelimits> 
+		<script file="charsheet/scripts/charsheet_spell.lua" />
 		<sheetdata>
-			<link_smart name="shortcut">
-				<bounds>-22,0,20,20</bounds>
-				<defaultclass>ref_ability</defaultclass>
-				<toggle />
-			</link_smart>
-
-			<string_textlistitem name="value">
+			
+			<numberfield name="order">
+                <bounds>0,0,0,0</bounds>
+                <invisible/>
+            </numberfield>
+			
+			<button_checkbox name="aquired">
+                <anchored>
+					<top><offset>5</offset></top>
+					<left><offset>4</offset></left>					
+					<size>
+						<height>18</height>
+                        <width>18</width>
+					</size>
+				</anchored>   
+				<script>
+					function onValueChanged()
+						if getState() then																				
+							window.order.setValue(window.order.getValue()-10000);							
+						else							
+							window.order.setValue(window.order.getValue()+10000);							
+						end
+					end
+				</script>
+            </button_checkbox>
+			
+			<stringfield name="label">
 				<anchored>
-					<top />
-					<left><offset>2</offset></left>
-					<right><offset>-25</offset></right>
+					<top><offset>5</offset></top>
+					<left><offset>23</offset></left>					
+					<size>						
+						<width>80</width>
+					</size>
 				</anchored>
-				<multilinespacing>20</multilinespacing>
-			</string_textlistitem>
+				<font>sheetlabel</font>     				
+				<lineoffset default="on">-1</lineoffset>
+				<multilinespacing>18</multilinespacing>  
+			</stringfield>
+            
+						
+			<stringfield name="cost">
+				<anchored>
+                    <to>label</to>
+                    <position>righthigh</position>
+                    <offset>4,0</offset>		
+					<size>
+						<height>18</height>
+						<width>24</width>
+					</size>
+				</anchored>
+				<font>sheetlabel</font>     
+				<center/>
+				<lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+			
+			<stringfield name="range">
+				<anchored>
+                    <to>cost</to>
+                    <position>righthigh</position>
+                    <offset>4,0</offset>		
+					<size>
+						<height>18</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<font>sheetlabel</font>     
+				<center/>
+				<lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+			<stringfield name="aoe">
+				<anchored>
+                    <to>range</to>
+                    <position>righthigh</position>
+                    <offset>4,0</offset>		
+					<size>
+						<height>18</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<font>sheetlabel</font>     
+				<center/>
+				<lineoffset default="on">-1</lineoffset>
+			</stringfield>					
+			
+			l<stringfield name="power">
+				<anchored>
+                    <to>aoe</to>
+                    <position>righthigh</position>
+                    <offset>4,0</offset>		
+					<size>
+						<height>18</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<font>sheetlabel</font>     
+				<center/>
+				<lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+			<stringfield name="upkeep">
+				<anchored>
+                    <to>aoe</to>
+                    <position>righthigh</position>
+                    <offset>40,0</offset>		
+					<size>
+						<height>18</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<font>sheetlabel</font>     
+				<center/>
+				<lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+			<stringfield name="offensive">
+				<anchored>
+                    <to>upkeep</to>
+                    <position>righthigh</position>
+                    <offset>4,0</offset>		
+					<size>
+						<height>18</height>
+						<width>25</width>
+					</size>
+				</anchored>
+				<font>sheetlabel</font>     
+				<center/>
+				<lineoffset default="on">-1</lineoffset>
+			</stringfield>
+			
+			<button_toggle name="expand">
+				<anchored>
+					<to>offensive</to>
+                    <position>righthigh</position>
+                    <offset>4,0</offset>						
+					<size>
+						<height>18</height>
+                        <width>18</width>
+					</size>
+				</anchored>
+				<icon>indicator_expanddown</icon>
+				<script>
+					function onValueChanged()                           
+                        window.description.setVisible(getValue());	                        
+					end
+				</script>
+			</button_toggle>
+			
+			<stringfield name="description">
+				<anchored>
+                    <to>label</to>
+                    <position>belowleft</position>
+                    <offset>0,5</offset>		
+					<size>						
+						<width>280</width>
+					</size>
+				</anchored>
+				<font>sheettextsmall</font>     				
+				<lineoffset default="on">-1</lineoffset>
+				<multilinespacing>18</multilinespacing>  
+				<invisible/>
+			</stringfield>
 			
 		</sheetdata>
 	</windowclass>

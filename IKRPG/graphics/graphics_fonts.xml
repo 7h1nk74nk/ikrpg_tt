@@ -57,6 +57,10 @@
 		<fgffile name="graphics/fonts/dnd4e-bold-10.fgf" />
 		<color value="#000000" />
 	</font>
+	<font name="sheetlabelwhite">
+		<fgffile name="graphics/fonts/dnd4e-bold-10.fgf" />
+		<color value="#FFFFFFFF" />
+	</font>
 	<font name="sheetlabelsmall">
 		<fgffile name="graphics/fonts/dnd4e-regular-9.fgf" />
 		<color value="#000000" />
