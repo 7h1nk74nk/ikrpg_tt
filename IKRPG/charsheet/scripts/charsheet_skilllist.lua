@@ -184,7 +184,7 @@ function onFilter( w )
 	
 		
 		
-	if w.windowlist.window.getDatabaseNode().getChild("limitbyLevel").getState() then
+	if w.windowlist.window.getDatabaseNode().getChild("limitbyLevel").getValue() then
 		
 		local levelLimit=4;
 		local level=w.windowlist.window.getDatabaseNode().getChild("level").getValue();		
@@ -201,7 +201,7 @@ function onFilter( w )
         w.max.setValue(biggestValue);
     end
 	
-	if w.windowlist.window.showAll.getState() then
+	if w.windowlist.window.getDatabaseNode().getChild("showAll").getValue() then
 		inList=true; 
 	end
 	
