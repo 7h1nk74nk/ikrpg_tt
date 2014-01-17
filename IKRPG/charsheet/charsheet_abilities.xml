@@ -347,7 +347,14 @@
 				</anchored>
 				<script>
 					function onValueChanged()
-						window.getDatabaseNode().getChild("skilllist").applyFilter();
+						print(getName());
+						print(window.getClass());
+						print(window.parentcontrol.getName());
+						print(window.parentcontrol.window.getClass());
+						print(window.parentcontrol.window.skills.getName());
+						local x = 1
+						--[[window.parentcontrol.window.skills.skilllist.applyFilter(); --doesnt work --]]
+						
 					end
 				</script>
             </button_checkbox>
@@ -379,7 +386,8 @@
 				</anchored>
 				<script>
 					function onValueChanged()
-						window.skilllist.applyFilter();
+						local x = 1 
+						--[[window.getDatabaseNode().getChild("skilllist").applyFilter(); --]]
 						window.abilitylist.applyFilter();
 						window.spelllist.applyFilter();
 					end

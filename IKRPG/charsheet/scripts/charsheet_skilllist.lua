@@ -15,7 +15,9 @@ function onInit()
 	local sChar = nodeChar.getNodeName();
 	DB.addHandler(sChar ..  ".stats", "onChildUpdate", onStatUpdate);
 	DB.addHandler(sChar .. ".skilllist.*.skillstat", "onUpdate", onStatUpdate);
-    DB.addHandler(sChar .. ".skilllist.*.rank", "onUpdate", onStatUpdate);    
+    DB.addHandler(sChar .. ".skilllist.*.rank", "onUpdate", onStatUpdate);
+	DB.addHandler(sChar .. ".limitbyLevel", "onUpdate", applyFilter);
+	DB.addHandler(sChar .. ".showAll", "onUpdate", applyFilter);
     applyFilter();		
 end
 
@@ -182,9 +184,9 @@ function onFilter( w )
 	]]--
 	
 	
-		
-		
-	if w.windowlist.window.getDatabaseNode().getChild("limitbyLevel").getValue() then
+	
+	
+	if w.windowlist.window.getDatabaseNode().getChild("limitbyLevel").getValue() ~= 0 then
 		
 		local levelLimit=4;
 		local level=w.windowlist.window.getDatabaseNode().getChild("level").getValue();		
