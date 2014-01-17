@@ -261,7 +261,7 @@
 	
 	
 
-<windowclass name="charsheet_skill">
+	<windowclass name="charsheet_skill">
 		<sizelimits>
 			<minimum>
 				<height>20</height>
