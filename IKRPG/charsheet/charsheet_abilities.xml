@@ -352,8 +352,9 @@
 						print(window.parentcontrol.getName());
 						print(window.parentcontrol.window.getClass());
 						print(window.parentcontrol.window.skills.getName());
-						local x = 1
-						--[[window.parentcontrol.window.skills.skilllist.applyFilter(); --doesnt work --]]
+						print(window.parentcontrol.window.skills.subwindow.getClass());
+						print(window.parentcontrol.window.skills.subwindow.skilllist.getName());
+						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 						
 					end
 				</script>
