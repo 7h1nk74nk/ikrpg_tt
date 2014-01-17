@@ -133,15 +133,10 @@ checkDamage = function(source)
 		if boxes_INT[count].getIndex() == 1 then damage_INT = damage_INT + 1 end
 	end
 	
-	---[[ partyscreen code
+	
 	window.damage_PHY.getDatabaseNode().setValue(damage_PHY)
 	window.damage_AGI.getDatabaseNode().setValue(damage_AGI)
 	window.damage_INT.getDatabaseNode().setValue(damage_INT)
-	
-	print("damage_PHY: "..tostring(window.damage_PHY.getDatabaseNode().getValue()).." "..tostring(damage_PHY));
-	print("damage_AGI: "..tostring(window.damage_AGI.getDatabaseNode().getValue()).." "..tostring(damage_AGI));
-	print("damage_INT: "..tostring(window.damage_INT.getDatabaseNode().getValue()).." "..tostring(damage_INT));
-	--]]
 	
 	--show warnings if necessary
 	if damage_PHY == PHY then window.warning_phy.setVisible(true) else window.warning_phy.setVisible(false) end
@@ -162,13 +157,19 @@ checkDamage = function(source)
 	print("INT DAMAGE: "..tostring(damage_INT).." / "..tostring(INTMAX))
 	--]]
 	
-	---[[ print debug info: boxes table ids
+	--[[ print debug info: boxes table ids
 	for i=1,10 do
 		if source == getDNC(boxes_PHY[i].getName(), "number") then print("boxes_PHY["..i.."]") end
 		if source == getDNC(boxes_AGI[i].getName(), "number") then print("boxes_AGI["..i.."]") end
 		if source == getDNC(boxes_INT[i].getName(), "number") then print("boxes_INT["..i.."]") end
 	end
 	--]]	
-
+	
+	--[[ partyscreen debug print
+	print("damage_PHY: "..tostring(window.damage_PHY.getDatabaseNode().getValue()).." "..tostring(damage_PHY));
+	print("damage_AGI: "..tostring(window.damage_AGI.getDatabaseNode().getValue()).." "..tostring(damage_AGI));
+	print("damage_INT: "..tostring(window.damage_INT.getDatabaseNode().getValue()).." "..tostring(damage_INT));
+	--]]
+	
 
 end
