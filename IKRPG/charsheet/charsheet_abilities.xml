@@ -135,7 +135,7 @@
 				
 				window.getDatabaseNode().getChild("careers").setValue(careerstring);
 				
-				window.getDatabaseNode().getChild("skillist").applyFilter();
+				window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 				window.abilitylist.applyFilter();
 				
 			
@@ -182,7 +182,7 @@
 				
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 				
-						window.skilllist.applyFilter();
+						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 						window.abilitylist.applyFilter();
 				
 			
@@ -229,7 +229,7 @@
 						
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 						
-						window.skilllist.applyFilter();
+						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 						window.abilitylist.applyFilter();
 						
 						
@@ -276,7 +276,7 @@
 						
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 						
-						window.skilllist.applyFilter();
+						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 						window.abilitylist.applyFilter();
 						
 						
@@ -323,7 +323,7 @@
 						
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 						
-						window.skilllist.applyFilter();
+						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 						window.abilitylist.applyFilter();
 					end									
 				</script>
@@ -347,13 +347,6 @@
 				</anchored>
 				<script>
 					function onValueChanged()
-						print(getName());
-						print(window.getClass());
-						print(window.parentcontrol.getName());
-						print(window.parentcontrol.window.getClass());
-						print(window.parentcontrol.window.skills.getName());
-						print(window.parentcontrol.window.skills.subwindow.getClass());
-						print(window.parentcontrol.window.skills.subwindow.skilllist.getName());
 						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 						
 					end
@@ -388,9 +381,8 @@
 				<script>
 					function onValueChanged()
 						local x = 1 
-						--[[window.getDatabaseNode().getChild("skilllist").applyFilter(); --]]
+						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 						window.abilitylist.applyFilter();
-						window.spelllist.applyFilter();
 					end
 				</script>
             </button_checkbox>

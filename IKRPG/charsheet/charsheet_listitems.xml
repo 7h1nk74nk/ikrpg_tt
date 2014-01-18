@@ -292,7 +292,7 @@
 					<left><offset>0</offset></left>					
 					<size>
 						<height>18</height>
-                        <width>95</width>
+                        <width>130</width>
 					</size>
 				</anchored>
                 <font>sheettext</font>                                                                  
@@ -303,7 +303,7 @@
 				<anchored>
 					<to>label</to>
                     <position>righthigh</position>
-                    <offset>10,-2</offset>
+                    <offset>40,-2</offset>
 					<size>
 						<height>18</height>
 						<width>32</width>

@@ -116,7 +116,7 @@ function isDone()
 end
 
 function applySelection()
-	local skillsList=parentcontrol.window.skilllist;
+	local skillsList=parentcontrol.window.parentcontrol.window.skills.subwindow.skilllist;
 	
 	for key,skillwindow in pairs(skillsList.getWindows()) do
 		--skillwindow.rank.setValue(0);
@@ -237,7 +237,7 @@ function applySelection()
 end
 
 function clearSkillRanks()
-	local skillsList=parentcontrol.window.skilllist;
+	local skillsList=parentcontrol.window.parentcontrol.window.skills.subwindow.skilllist;
 	
 	for key,skillwindow in pairs(skillsList.getWindows()) do
 		skillwindow.rank.setValue(0);

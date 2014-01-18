@@ -16,7 +16,7 @@
 		<nodelete />
 		<sheetdata>
 			<frame_char name="skillframe">
-				<bounds>15,5,400,525</bounds>
+				<bounds>15,5,400,530</bounds>
 			</frame_char>
 
 			<stringcontrol name="skilltitle">
@@ -32,9 +32,8 @@
 					<name>headerquest</name>
 					<offset>5,2,5,2</offset>
 				</frame>
-				<tooltip><text>Click to switch to spell list</text></tooltip>
 				<script>
-					function onClickDown( button, x, y ) 
+<!-- 					function onClickDown( button, x, y ) 
 						window.skilltitle.setVisible(false);
 						window.skillheader1.setVisible(false);
 						window.skillheader2.setVisible(false);
@@ -43,7 +42,7 @@
 						window.skillheader5.setVisible(false);
 						window.skillheader6.setVisible(false);
 						window.skilllist.setVisible(false);
-					end
+					end -->
 				</script>
             </stringcontrol>
 			
@@ -52,23 +51,23 @@
 				<static>Name</static>
 			</label_sm>
             <label_sm name="skillheader2">
-				<bounds>140,25,30,10</bounds>
+				<bounds>205,25,30,10</bounds>
 				<static>Type</static>
 			</label_sm>			
 			<label_sm name="skillheader3">
-				<bounds>178,25,30,10</bounds>
+				<bounds>243,25,30,10</bounds>
 				<static>Stat</static>
 			</label_sm>			
 			<label_sm name="skillheader4">
-				<bounds>215,25,30,10</bounds>
+				<bounds>280,25,30,10</bounds>
 				<static>Max</static>
 			</label_sm>
 			<label_sm name="skillheader5">
-				<bounds>250,25,30,10</bounds>
+				<bounds>315,25,30,10</bounds>
 				<static>Rank</static>
 			</label_sm>
             <label_sm name="skillheader6">
-				<bounds>285,25,30,10</bounds>
+				<bounds>352,25,30,10</bounds>
 				<static>Total</static>
 			</label_sm>
 
@@ -91,7 +90,7 @@
 			<scrollbar_charlist>
 				<anchored>
 					<to>skilllist</to>
-                    <offset>-5,-10</offset>
+                    <offset>-10,-10</offset>
 				</anchored>
 				<target>skilllist</target>
 			</scrollbar_charlist>
