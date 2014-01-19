@@ -434,6 +434,8 @@ function getAbilityBonus(rActor, sAbility)
 
 	-- GET ABILITY VALUE
 	local nStatScore = getAbilityScore(rActor, sStat);
+	print(rActor)
+	print(sStat)
 	if nStatScore < 0 then
 		return 0;
 	end
