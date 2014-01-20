@@ -7,7 +7,7 @@
 
 <root>
 	
-	<template name="number_stat">
+<!-- 	<template name="number_stat">
 		<basicnumber>
 			<anchored>				
 				<size>
@@ -43,7 +43,7 @@
 			end	
 			</script>
 		</basicnumber>
-	</template>
+	</template> -->
 	
 	<template name="number_skill">
 		<basicnumber>
@@ -60,7 +60,7 @@
 				if rollwidget then
 						
 						rollwidget.setPosition("insidetopright", -5, 2);
-						rollwidget.setSize(20,20);
+						rollwidget.setSize(15,15);
 						rollwidget.setColor("AAFFFFFF");
 				end
 			end

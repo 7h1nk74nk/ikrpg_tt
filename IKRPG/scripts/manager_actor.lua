@@ -358,9 +358,9 @@ function getAbilityScore(rActor, sAbility)
 	
 	local sShort = string.sub(string.lower(sAbility), 1, 3);
 	if rActor.sType == "npc" then
-		if sShort == "lev" then
-			nStatScore = tonumber(string.match(DB.getValue(rActor.nodeCreature, "levelrole", ""), "Level (%d*)")) or 0;
-		elseif sShort == "phy" then
+		-- if sShort == "lev" then
+			-- nStatScore = tonumber(string.match(DB.getValue(rActor.nodeCreature, "levelrole", ""), "Level (%d*)")) or 0;
+		if sShort == "phy" then
 			nStatScore = DB.getValue(rActor.nodeCreature, "Physique", 0);
 		elseif sShort == "spe" then
 			nStatScore = DB.getValue(rActor.nodeCreature, "Speed", 0);
@@ -382,9 +382,9 @@ function getAbilityScore(rActor, sAbility)
 			nStatScore = DB.getValue(rActor.nodeCreature, "Willpower", 0);
 		end
 	elseif rActor.sType == "pc" then
-		if sShort == "lev" then
-			nStatScore = DB.getValue(rActor.nodeCreature, "level", 0);
-		elseif sShort == "phy" then
+		-- if sShort == "lev" then
+			-- nStatScore = DB.getValue(rActor.nodeCreature, "level", 0);
+		if sShort == "phy" then
 			nStatScore = DB.getValue(rActor.nodeCreature, "stats.phy.score", 0);
 		elseif sShort == "spe" then
 			nStatScore = DB.getValue(rActor.nodeCreature, "stats.spd.score", 0);
@@ -421,6 +421,7 @@ function getAbilityBonus(rActor, sAbility)
 	local bHalf = false;
 	local bDouble = false;
 	local nStatVal = 0;
+
 	
 	-- HANDLE HALF/DOUBLE MODIFIERS
 	if string.match(sStat, "^half") then
@@ -434,8 +435,8 @@ function getAbilityBonus(rActor, sAbility)
 
 	-- GET ABILITY VALUE
 	local nStatScore = getAbilityScore(rActor, sStat);
-	print(rActor)
-	print(sStat)
+	Debug.console(nStatScore);
+	printstack();
 	if nStatScore < 0 then
 		return 0;
 	end
