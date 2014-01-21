@@ -18,6 +18,8 @@ function performRoll(draginfo, rActor, sAbilityStat, nTargetDC, bSecretRoll, bAd
 	rRoll.nMod = rRoll.nMod + ActorManager.getAbilityBonus(rActor, "halflevel");
 	
 	-- BUILD THE OUTPUT
+	Debug.console(sAbilityStat)
+	printstack()
 	rRoll.sDesc = "[ABILITY]";
 	rRoll.sDesc = rRoll.sDesc .. " " .. StringManager.capitalize(sAbilityStat);
 	rRoll.sDesc = rRoll.sDesc .. " check";

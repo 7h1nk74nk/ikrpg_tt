@@ -102,9 +102,9 @@
 						<width>110</width>
 						<height>20</height>
 					</size>
-			</anchored>		  
+			</anchored>	
 		  <label>First Career</label>
-		  <static></static>		  
+		  <static></static>	  
 		<script>
 			function onInit()
 				super.onInit();

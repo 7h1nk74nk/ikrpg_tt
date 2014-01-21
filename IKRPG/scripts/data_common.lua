@@ -262,7 +262,7 @@ skills = {
 Dropdown = { 
 	["Race"]={"Human","Dwarf","Gobber","Iosan","Nyss","Ogrun","Trollkin"},
 	["Archetype"]={ "Gifted","Intellectual","Mighty","Skilled"},
-	["Careers"]={"Alchemist", "Arcane Mechanik", "Arcanist", "Aristocrat", "Bounty Hunter", "Cutthroat", "Duelist", "Explorer", "Fell Caller", "Field Mechanik",
+	["Careers"]={"", "Alchemist", "Arcane Mechanik", "Arcanist", "Aristocrat", "Bounty Hunter", "Cutthroat", "Duelist", "Explorer", "Fell Caller", "Field Mechanik",
 						"Gun Mage", "Highwayman", "Investigator", "Iron Fang", "Knight", "Mage Hunter", "Man-At-Arms", "Military Officer", "Pirate", "Pistoleer",
 						"Priest of Menoth", "Priest of Morrow",  "Ranger", "Rifleman", "Soldier", "Sorcerer", "Spy", "Stormblade", "Thief", "Trencher", "Warcaster"}
 };
@@ -602,6 +602,12 @@ generalskills={
 }
 	
 careers={
+   [""]={ 
+        skills={["General Skills"]=0,},
+		abilities={},
+		startingskills={},
+		startingabilities={}
+        },
     ["Alchemist"]={ 
         skills={ ["Hand Weapon"]=2, ["Thrown Weapon"]=4, ["Unarmed Combat"]=2, ["Alchemy"]=4, ["Craft"]=4, ["Forgery"]=2, ["General Skills"]=4, ["Medicine"]=4, ["Negotiation" ]=4, ["Research"]=4 },
         --[[The =0 part is necessary so lua treats the ability names as keys - maybe there is a more elegant way but ii am relatively new to lua]]--

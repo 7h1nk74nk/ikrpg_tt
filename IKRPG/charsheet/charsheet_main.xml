@@ -150,34 +150,7 @@
                         <width>32</width>
                         <height>20</height>
                     </size>
-                </anchored> 
-				<script>
-					local rollwidget;
-					function onInit()
-						rollwidget = addBitmapWidget("indicator_dice");
-						if rollwidget then
-								
-								rollwidget.setPosition("insidetopright", -5, 2);
-								rollwidget.setSize(15,15);
-								rollwidget.setColor("AAFFFFFF");
-						end
-					end
-					
-					function action(draginfo)
-						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
-						ActionAbility.performRoll(draginfo, rActor, getValue());
-						
-						return true;
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
-					end
-						
-					function onDoubleClick(x,y)	
-						return action();
-					end	
-				</script>				
+                </anchored> 				
             </basicnumber>
 			
             <stringcontrol>

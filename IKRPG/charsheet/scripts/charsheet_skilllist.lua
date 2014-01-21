@@ -6,8 +6,9 @@
 
 
 function onInit()
+	if window.parentcontrol.window.main.subwindow.careers.getValue()=="" then
+    else
 	registerMenuItem("Create", "insert", 5);
-	
 
 	constructSkillList();
 
@@ -19,6 +20,7 @@ function onInit()
 	DB.addHandler(sChar .. ".limitbyLevel", "onUpdate", applyFilter);
 	DB.addHandler(sChar .. ".showAll", "onUpdate", applyFilter);
     applyFilter();		
+	end
 end
 
 function onStatUpdate()
@@ -52,7 +54,7 @@ function constructSkillList()
 	for skillname,skillinfo in pairs(DataCommon.skilldata) do
 		skillList[skillname]=addSkill(skillname);
 	end
-	
+
 	for k,v in pairs(getWindows()) do
 		name=v.label.getValue();
 		if not skillList[name] then

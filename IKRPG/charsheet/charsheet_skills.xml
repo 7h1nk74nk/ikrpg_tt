@@ -32,18 +32,6 @@
 					<name>headerquest</name>
 					<offset>5,2,5,2</offset>
 				</frame>
-				<script>
-<!-- 					function onClickDown( button, x, y ) 
-						window.skilltitle.setVisible(false);
-						window.skillheader1.setVisible(false);
-						window.skillheader2.setVisible(false);
-						window.skillheader3.setVisible(false);
-						window.skillheader4.setVisible(false);
-						window.skillheader5.setVisible(false);
-						window.skillheader6.setVisible(false);
-						window.skilllist.setVisible(false);
-					end -->
-				</script>
             </stringcontrol>
 			
 			<label_sm name="skillheader1">
