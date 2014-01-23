@@ -385,11 +385,8 @@
                         <height>18</height>
                     </size>
                 </anchored>
-                <readonly/>				
-				<namesource>label</namesource>
-            </number_skill>
-            
-            
+                <readonly/>	
+            </number_skill>		
 			
 		</sheetdata>
 	</windowclass>

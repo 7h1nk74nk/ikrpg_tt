@@ -103,12 +103,7 @@
 		  <readonly/>
         </string_labeled>
 		
-	
-		
-        
-        
-
-			<string_labeled name="careers" >
+		<string_labeled name="careers" >
 				<anchored>
 					<to>archetype</to>
 					<position>right</position>
@@ -117,9 +112,17 @@
 						<width>210</width>
 					</size>
 				</anchored>
+				<script>
+					function onValueChanged()
+						if window.careers.getValue()=="" then
+						else
+						window.parentcontrol.window.skills.subwindow.skilllist.constructSkillList();
+						end
+					end
+				</script>
 				<label>Careers</label>
 				<readonly/>
-			</string_labeled>
+		</string_labeled>
                    
             
             <frame_char name="statframe">
@@ -2243,22 +2246,7 @@
 				<target>main_listskills</target>
 			</scrollbar_charlist>
             
-            <stringcontrol name="emptytext">
-                <anchored>
-                    <to>skillframe</to>
-                    <position>over</position>
-                    <offset>-25,-25</offset>
-                </anchored>
-                <frame>
-                    <name>whitecontrolarea</name>
-                    <offset>10,10,10,10</offset>
-                </frame>
-                    
-                <multilinespacing >18</multilinespacing>
-                <static>Add skill ranks or create subskills by right clicking on a skill group on the skills tab. These skills will then appear in this list. Skill groups are Lore and Craft, editable fields are highlighted.</static>
-            </stringcontrol>
-            
-            
+
             
 
             

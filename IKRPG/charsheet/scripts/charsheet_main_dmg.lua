@@ -16,7 +16,7 @@ local getDNC = function(sNam,sTyp) return window.getDatabaseNode().getChild(sNam
 
 --the rest
 onInit = function()
-	
+
 	local nodeStats = getDNC("stats");
 	if nodeStats then nodeStats.onChildUpdate = onSourceUpdate end --INSTALL HANDLER(onSourceUpdate): called when anything in the stats pane is updated
 	
@@ -53,12 +53,13 @@ onInit = function()
 	table.insert(boxes_INT,window.vitality_int9);
 	table.insert(boxes_INT,window.vitality_int10);
 	
+
 	for count=1,10 do  								--INSTALL HANDLER(checkDamage): called when tickboxes are updated
 		getDNC(boxes_PHY[count].getName(),"number").onUpdate=checkDamage;                            
 		getDNC(boxes_AGI[count].getName(),"number").onUpdate=checkDamage;
 		getDNC(boxes_INT[count].getName(),"number").onUpdate=checkDamage;
-	end
 
+end
 	onSourceUpdate("onInitCall");
 	
 end
