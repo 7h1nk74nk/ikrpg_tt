@@ -721,6 +721,9 @@
            
         </sheetdata>
     </windowclass>
+	
+	
+	
     
     <windowclass name="charsheet_spell">
 		 <sizelimits>
@@ -759,9 +762,9 @@
 			<stringfield name="label">
 				<anchored>
 					<top><offset>5</offset></top>
-					<left><offset>23</offset></left>					
+					<left><offset>30</offset></left>					
 					<size>						
-						<width>80</width>
+						<width>140</width>
 					</size>
 				</anchored>
 				<font>sheetlabel</font>     				
@@ -885,7 +888,7 @@
                     <position>belowleft</position>
                     <offset>0,5</offset>		
 					<size>						
-						<width>280</width>
+						<width>320</width>
 					</size>
 				</anchored>
 				<font>sheettextsmall</font>     				
@@ -940,7 +943,7 @@
 	</windowclass>
 
 	
-	
+	<!-- 
 	<windowclass name="charsheet_spelllistitems">
 		<sizelimits>
 			<minimum>
@@ -1146,6 +1149,6 @@
 						
 		</sheetdata>
 
-	</windowclass>
+	</windowclass> -->
 
 </root>

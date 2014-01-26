@@ -24,7 +24,7 @@
 				<bounds>15,5,400,320</bounds>
 			</frame_char>
 
-            <stringcontrol>
+            <!-- <stringcontrol>
             <font>sheetlabelsmall</font>
             <static>SPELLS</static>
             <anchored>
@@ -108,23 +108,132 @@
 				<font>sheetlabelsmall</font>
 				<static>OFF</static>
 			</stringcontrol>	
+			 -->
 			
 			
-			<windowlist name="spelllist">
+			<!-- SPELLS -->			
+			
+			
+			<stringcontrol name="spelltitle">
+				<font>sheetlabelsmall</font>
+				<static>SPELLS</static>
 				<anchored>
 					<to>spellframe</to>
-					<position>over</position>
-					<offset>-8,-30</offset>
+					<position>insidetopleft</position>
+					<offset>5,2</offset>                
+				</anchored>   
+				<color>ffffffff</color>
+				<frame>
+					<name>headerquest</name>
+					<offset>5,2,5,2</offset>
+				</frame>
+            </stringcontrol>
+			
+			<label_sm name="spellheader1">
+				<anchored>
+                    <to>spellframe</to>
+                    <position>insidetopleft</position>
+                    <offset>30,20</offset>
+					<size>
+						<width>80</width>
+					</size>
+                </anchored>				
+				<static>NAME</static>
+			</label_sm>            
+			<label_sm name="spellheader2">
+				<anchored>
+                    <to>spellframe</to>
+                    <position>insidetopleft</position>
+                    <offset>172,20</offset>
+					<size>
+						<width>25</width>
+					</size>
+                </anchored>				
+				<center/>
+				<static>COST</static>
+			</label_sm>						
+			<label_sm name="spellheader3">
+				<anchored>
+                    <to>spellframe</to>
+                    <position>insidetopleft</position>
+                    <offset>202,20</offset>
+					<size>
+						<width>25</width>
+					</size>
+                </anchored>				
+				<center/>
+				<static>RNG</static>
+			</label_sm>
+            <label_sm name="spellheader4">
+				<anchored>
+                    <to>spellframe</to>
+                    <position>insidetopleft</position>
+                    <offset>232,20</offset>
+					<size>
+						<width>25</width>
+					</size>
+                </anchored>
+				<center/>
+				<static>AOE</static>
+			</label_sm>
+			<label_sm name="spellheader5">
+				<anchored>
+                    <to>spellframe</to>
+                    <position>insidetopleft</position>
+                    <offset>262,20</offset>
+					<size>
+						<width>25</width>
+					</size>
+                </anchored>
+				<center/>
+				<static>POW</static>
+			</label_sm>
+			<label_sm name="spellheader6">
+				<anchored>
+                    <to>spellframe</to>
+                    <position>insidetopleft</position>
+                    <offset>297,20</offset>
+					<size>
+						<width>25</width>
+					</size>
+                </anchored>
+				<center/>
+				<static>UP</static>
+			</label_sm>
+			<label_sm name="spellheader7">
+				<anchored>
+                    <to>spellframe</to>
+                    <position>insidetopleft</position>
+                    <offset>327,20</offset>
+					<size>
+						<width>25</width>
+					</size>
+                </anchored>
+				<center/>
+				<static>OFF</static>
+			</label_sm>
+
+			<windowlist name="spelllist">
+				<anchored>
+					<left><parent>spellframe</parent><anchor>left</anchor></left>
+					<right><parent>spellframe</parent><anchor>right</anchor></right>
+					<top><parent>spellframe</parent><anchor>top</anchor><offset>35</offset></top>
+					<bottom><parent>spellframe</parent><anchor>bottom</anchor><offset>-15</offset></bottom>					
 				</anchored>
 				<datasource>.spelllist</datasource>
-				<class>charsheet_spelllistitems</class>
-				<allowcreate />
-				<allowdelete />
-				<columns>
-					<filldown />
-					<width>232</width>
-				</columns>
+				<class>charsheet_spell</class>                
+				<sortby><control>order</control></sortby>				
+				<script file="charsheet/scripts/charsheet_spelllist.lua" />
 			</windowlist>
+			
+			<scrollbar_charlist>
+				<anchored>
+					<to>spelllist</to>
+                    <offset>-20,-10</offset>
+				</anchored>
+				<target>spelllist</target>
+			</scrollbar_charlist>
+			
 
 			<!-- MECHANIKA -->
 			

@@ -166,7 +166,7 @@ function onFilter( w )
 	
 	if w.aquired.getState() then inList=true; end
 	
-	if w.windowlist.window.showAll.getState() then
+	if w.windowlist.window.getDatabaseNode().getChild("showAll").getValue() then
 		inList=true; 
 	end
 	
