@@ -7,7 +7,7 @@
 
 <root>
 	
-<!-- 	<template name="number_stat">
+	<template name="number_stat">
 		<basicnumber>
 			<anchored>				
 				<size>
@@ -43,7 +43,7 @@
 			end	
 			</script>
 		</basicnumber>
-	</template> -->
+	</template>
 	
 	<template name="number_skill">
 		<basicnumber>
@@ -68,6 +68,196 @@
 			function action(draginfo)
 				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
 				ActionSkill.performRoll(draginfo, rActor,"SKILL",window[namesource[1]].getValue(),getValue(),nil,false);
+				
+				return true;
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				return action(draginfo);
+			end
+				
+			function onDoubleClick(x,y)	
+				return action();
+			end	
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="number_RAT">
+		<basicnumber>
+			<anchored>				
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>			
+			<script>
+			local rollwidget;
+			function onInit()
+				rollwidget = addBitmapWidget("indicator_dice");
+				if rollwidget then
+						
+						rollwidget.setPosition("insidetopright", -5, 2);
+						rollwidget.setSize(15,15);
+						rollwidget.setColor("AAFFFFFF");
+				end
+			end
+			
+			function action(draginfo)
+				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+				ActionSkill.performRoll(draginfo, rActor,"RANGED",window[namesource[1]].getValue(),getValue(),nil,false);
+				
+				return true;
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				return action(draginfo);
+			end
+				
+			function onDoubleClick(x,y)	
+				return action();
+			end	
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="number_MAT">
+		<basicnumber>
+			<anchored>				
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>			
+			<script>
+			local rollwidget;
+			function onInit()
+				rollwidget = addBitmapWidget("indicator_dice");
+				if rollwidget then
+						
+						rollwidget.setPosition("insidetopright", -5, 2);
+						rollwidget.setSize(15,15);
+						rollwidget.setColor("AAFFFFFF");
+				end
+			end
+			
+			function action(draginfo)
+				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+				ActionSkill.performRoll(draginfo, rActor,"MELEE",window[namesource[1]].getValue(),getValue(),nil,false);
+				
+				return true;
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				return action(draginfo);
+			end
+				
+			function onDoubleClick(x,y)	
+				return action();
+			end	
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="number_DMG">
+		<basicnumber>
+			<anchored>				
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>			
+			<script>
+			local rollwidget;
+			function onInit()
+				rollwidget = addBitmapWidget("indicator_dice");
+				if rollwidget then
+						
+						rollwidget.setPosition("insidetopright", -5, 2);
+						rollwidget.setSize(15,15);
+						rollwidget.setColor("AAFFFFFF");
+				end
+			end
+			
+			function action(draginfo)
+				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+				ActionSkill.performRoll(draginfo, rActor,"DAMAGE",window[namesource[1]].getValue(),getValue(),nil,false);
+				
+				return true;
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				return action(draginfo);
+			end
+				
+			function onDoubleClick(x,y)	
+				return action();
+			end	
+			</script>
+		</basicnumber>
+	</template>
+	
+		<template name="number_ARC">
+		<basicnumber>
+			<anchored>				
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>			
+			<script>
+			local rollwidget;
+			function onInit()
+				rollwidget = addBitmapWidget("indicator_dice");
+				if rollwidget then
+						
+						rollwidget.setPosition("insidetopright", -5, 2);
+						rollwidget.setSize(15,15);
+						rollwidget.setColor("AAFFFFFF");
+				end
+			end
+			
+			function action(draginfo)
+				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+				ActionSkill.performRoll(draginfo, rActor,"CHANNEL",window[namesource[1]].getValue(),getValue(),nil,false);
+				
+				return true;
+			end
+			
+			function onDragStart(button, x, y, draginfo)
+				return action(draginfo);
+			end
+				
+			function onDoubleClick(x,y)	
+				return action();
+			end	
+			</script>
+		</basicnumber>
+	</template>
+	
+		<template name="number_POW">
+		<basicnumber>
+			<anchored>				
+				<size>
+					<width>32</width>
+					<height>20</height>
+				</size>
+			</anchored>			
+			<script>
+			local rollwidget;
+			function onInit()
+				rollwidget = addBitmapWidget("indicator_dice");
+				if rollwidget then
+						
+						rollwidget.setPosition("insidetopright", -5, 2);
+						rollwidget.setSize(15,15);
+						rollwidget.setColor("AAFFFFFF");
+				end
+			end
+			
+			function action(draginfo)
+				local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+				ActionSkill.performRoll(draginfo, rActor,"DAMAGE",window[namesource[1]].getValue(),getValue(),nil,false);
 				
 				return true;
 			end

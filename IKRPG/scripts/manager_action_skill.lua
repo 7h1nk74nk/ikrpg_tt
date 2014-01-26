@@ -7,32 +7,21 @@ function onInit()
 	ActionsManager.registerActionIcon("skill", "action_roll");
 	ActionsManager.registerModHandler("skill", modRoll);
 	ActionsManager.registerResultHandler("skill", onRoll);
+	ActionsManager.registerPostRollHandler("skill", postRoll);
 end
 
-function performRoll(draginfo, rActor, sSkillName, nSkillMod, sSkillStat, nTargetDC, bSecretRoll, bAddName)
+function performRoll(draginfo, rActor,sType, sSkillName, nSkillMod, nTargetDC, bSecretRoll)
 	-- Build basic roll
 	local rRoll = {};
-	rRoll.aDice = { "d6","d6" };
+	
+		
+		rRoll.aDice = { "d6","d6" };	
+		rRoll.sDesc = "["..sType.."] " .. sSkillName;
+	
+	
 	rRoll.nMod = nSkillMod or 0;
-	rRoll.sDesc = "[SKILL] " .. sSkillName;
-	
-	-- If custom skill, then add in ability that modifies it.
-	local bCustom = true;
-	for k, v in pairs(DataCommon.skilldata) do
-		if k == sSkillName then
-			bCustom = false;
-		end
-	end
-	if bCustom then
-		local sAbilityEffect = DataCommon.ability_ltos[sSkillStat];
-		if sAbilityEffect then
-			rRoll.sDesc = rRoll.sDesc .. " [MOD:" .. sAbilityEffect .. "]";
-		end
-	end
-	
-	if bAddName then
-		rRoll.sDesc = "[ADDNAME] " .. rRoll.sDesc;
-	end
+		
+		
 	if bSecretRoll then
 		rRoll.sDesc = "[GM] " .. rRoll.sDesc;
 	end
@@ -51,11 +40,20 @@ function modRoll(rSource, rTarget, rRoll)
 		return;
 	end
 	
-	local bAssist = Input.isShiftPressed();
-	if bAssist then
-		rRoll.sDesc = rRoll.sDesc .. " [ASSIST]";
+	local bBoost = Input.isShiftPressed();
+	if bBoost then
+		rRoll.sDesc = rRoll.sDesc .. " [BOOSTED]";
+		--rRoll.aDice={"d6","d6","d6"};
+		table.insert(rRoll.aDice,"d6");
+	end
+	
+	local bAddDrop=Input.isAltPressed();
+	if bAddDrop then
+		rRoll.sDesc = rRoll.sDesc .. " [ADD AND DROP LOWEST]"
+		table.insert(rRoll.aDice,"d6");		
 	end
 
+	--[[
 	if rSource then
 		local bEffects = false;
 
@@ -128,8 +126,8 @@ function modRoll(rSource, rTarget, rRoll)
 				sEffects = "[EFFECTS]";
 			end
 			rRoll.sDesc = rRoll.sDesc .. " " .. sEffects;
-		end
-	end
+		end		
+	end]]--
 end
 
 function onRoll(rSource, rTarget, rRoll, rCustom)
@@ -138,7 +136,8 @@ function onRoll(rSource, rTarget, rRoll, rCustom)
 	if rCustom and rCustom[1] and rCustom[1].nMod then
 		local nTotal = ActionsManager.total(rRoll);
 		
-		rMessage.text = rMessage.text .. " (vs. TN " .. rCustom[1].nMod .. ")";
+		
+		rMessage.text = rMessage.text .. " (vs. " .. rCustom[1].nMod .. ")";
 		if nTotal >= rCustom[1].nMod then
 			rMessage.text = rMessage.text .. " [SUCCESS]";
 		else
@@ -148,4 +147,27 @@ function onRoll(rSource, rTarget, rRoll, rCustom)
 	
 	local nTotal = ActionsManager.total(rRoll);
 	Comm.deliverChatMessage(rMessage);
+end
+
+function postRoll(rSource, rRoll, rCustom)
+	
+	
+	--print("MATCH: "..string.match(rRoll.sDesc,"ADDDROPLOW"));
+	if string.match(rRoll.sDesc,"%[ADD AND DROP LOWEST%]") then		
+		
+		lowestRollIndex=0;
+		lowestRoll=1000;
+		if rRoll.aDice~=nil then
+			for i, roll in ipairs(rRoll.aDice) do
+				if roll.result < lowestRoll then
+					lowestRoll=roll.result;
+					lowestRollIndex=i;
+				end
+			end
+		end
+		
+		rRoll.aDice[lowestRollIndex]=nil;
+		--print(lowestRoll);
+	end
+	
 end

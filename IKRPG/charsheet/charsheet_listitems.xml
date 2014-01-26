@@ -37,7 +37,7 @@
                 </parameters>
             </button_iconcycler>
                 
-			<stringfield name="label">
+			<stringfield name="weaponlabel">
 				<anchored>
 					<to>type</to>
                     <position>righthigh</position>
@@ -54,7 +54,7 @@
             
             <stringfield name="notes">
 				<anchored>
-                    <to>label</to>
+                    <to>weaponlabel</to>
                     <position>belowleft</position>
                     <offset>0,0</offset>
                     <size>
@@ -82,7 +82,7 @@
 			
             <basicnumber name="range">
                 <anchored>
-                    <to>label</to>
+                    <to>weaponlabel</to>
                     <position>righthigh</position>
                     <offset>10,0</offset>
                     <size>
@@ -92,7 +92,7 @@
                 </anchored>
             </basicnumber>
             
-			<basicnumber name="rat">
+			<number_RAT name="rat">
                 <anchored>
                     <to>range</to>
                     <position>righthigh</position>
@@ -102,9 +102,10 @@
                         <height>18</height>
                     </size>
                 </anchored>
-            </basicnumber>
+				<namesource>weaponlabel</namesource>
+            </number_RAT>
             
-            <basicnumber name="mat">
+            <number_MAT name="mat">
                 <anchored>
                     <to>rat</to>
                     <position>righthigh</position>
@@ -113,10 +114,11 @@
                         <width>32</width>
                         <height>18</height>
                     </size>
-                </anchored>             
-            </basicnumber>
+                </anchored>  
+				<namesource>weaponlabel</namesource>				
+            </number_MAT>
             
-            <basicnumber name="damage">
+            <number_DMG name="damage">
                 <anchored>
                     <to>mat</to>
                     <position>righthigh</position>
@@ -125,8 +127,9 @@
                         <width>32</width>
                         <height>18</height>
                     </size>
-                </anchored>                
-            </basicnumber>
+                </anchored>  
+				<namesource>weaponlabel</namesource>	
+            </number_DMG>
 			
 		</sheetdata>
 	</windowclass>
@@ -164,7 +167,7 @@
                 </parameters>
             </button_iconcycler>
                 
-			<stringfield name="label">
+			<stringfield name="magiclabel">
 				<anchored>
 					<to>type</to>
                     <position>righthigh</position>
@@ -181,7 +184,7 @@
             
             <stringfield name="notes">
 				<anchored>
-                    <to>label</to>
+                    <to>magiclabel</to>
                     <position>belowleft</position>
                     <offset>0,0</offset>
                     <size>
@@ -195,7 +198,7 @@
 			
 			<basicnumber name="cost">
                 <anchored>
-                    <to>label</to>
+                    <to>magiclabel</to>
                     <position>righthigh</position>
                     <offset>10,0</offset>
                     <size>
@@ -231,7 +234,7 @@
                 </anchored>            
             </basicnumber>
             
-            <basicnumber name="arc">
+            <number_ARC name="arc">
                 <anchored>
                     <to>aoe</to>
                     <position>righthigh</position>
@@ -239,12 +242,12 @@
                     <size>
                         <width>32</width>
                         <height>18</height>
-                    </size>
-                </anchored>
-                
-            </basicnumber>
+                    </size>			
+                </anchored>  
+				<namesource>magiclabel</namesource>		
+            </number_ARC>
             
-            <basicnumber name="dmg">
+            <number_POW name="dmg">
                 <anchored>
                     <to>arc</to>
                     <position>righthigh</position>
@@ -253,8 +256,9 @@
                         <width>32</width>
                         <height>18</height>
                     </size>
-                </anchored>                
-            </basicnumber>
+                </anchored>
+               <namesource>magiclabel</namesource>	
+            </number_POW>
 			
 		</sheetdata>
 	</windowclass>
@@ -385,6 +389,7 @@
                         <height>18</height>
                     </size>
                 </anchored>
+				<namesource>label</namesource>
                 <readonly/>	
             </number_skill>		
 			
