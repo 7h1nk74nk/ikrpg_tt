@@ -213,15 +213,16 @@
 				<target>inventorylist</target>
 			</scrollbar_charlist>
 
+			
 			<!-- Armor -->
 			
 			<frame_char name="acpenaltyframe">
 				<bounds>15,335,240,75</bounds>
 			</frame_char>
 			
-			<stringcontrol>
+			<stringcontrol name="armorshieldswitch">
             <font>sheetlabelsmall</font>
-            <static>ARMOR / SHIELD</static>
+            <static>ARMOR / shield</static>
             <anchored>
                 <to>acpenaltyframe</to>
                 <position>insidetopleft</position>
@@ -232,9 +233,35 @@
                 <name>headerquest</name>
                 <offset>5,2,5,2</offset>
             </frame>
+			<tooltip><text>Click to switch</text></tooltip>
+				<script>
+					function onClickDown( button, x, y ) 
+						window.armorshieldswitch.setVisible(false);
+						window.armordefmodifier.setVisible(false);
+						window.armorspdmodifier.setVisible(false);
+						window.armorarmmodifier.setVisible(false);
+						
+						window.shieldarmorswitch.setVisible(true);						
+						window.shielddefmodifier.setVisible(true);
+						window.shieldspdmodifier.setVisible(true);
+						window.shieldarmmodifier.setVisible(true);
+					end	
+				</script>			
             </stringcontrol>	
+	
+
+			<basicnumber name="armorarmmodifier">
+				<anchored>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>20,40</offset>
+					<size>
+						<width>55</width>
+					</size>
+				</anchored>
+			</basicnumber>
 			
-			<basicnumber name="armordefmodifier" source="encumbrance.armordefmodifier">
+			<basicnumber name="armordefmodifier">
 				<anchored>
 					<to>acpenaltyframe</to>
 					<position>insidetopleft</position>
@@ -244,18 +271,8 @@
 					</size>
 				</anchored>
 			</basicnumber>
-			
-			<label_sm>
-				<anchored>
-					<to>armordefmodifier</to>
-					<position>above</position>
-					<offset>10,2</offset>
-				</anchored>
-				<center />
-				<static>DEF Modifier</static>
-			</label_sm>
-			
-			<basicnumber name="armorspdmodifier" source="encumbrance.srmorspdmodifier">
+
+			<basicnumber name="armorspdmodifier">
 				<anchored>
 					<to>acpenaltyframe</to>
 					<position>insidetopleft</position>
@@ -268,15 +285,66 @@
 			
 			<label_sm>
 				<anchored>
-					<to>armorspdmodifier</to>
-					<position>above</position>
-					<offset>10,2</offset>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>16,25</offset>
+				</anchored>
+				<center />
+				<static>ARM Modifier</static>
+			</label_sm>
+			
+			<label_sm>
+				<anchored>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>88,25</offset>
 				</anchored>
 				<center />
 				<static>SPD Modifier</static>
 			</label_sm>
+			
+			<label_sm>
+				<anchored>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>157,25</offset>
+				</anchored>
+				<center />
+				<static>DEF Modifier</static>
+			</label_sm>	
+			
+			<stringcontrol name="shieldarmorswitch">
+            <font>sheetlabelsmall</font>
+            <static>armor / SHIELD</static>
+            <anchored>
+                <to>acpenaltyframe</to>
+                <position>insidetopleft</position>
+                <offset>5,2</offset>                
+            </anchored>   
+            <color>ffffffff</color>
+            <frame>
+                <name>headerquest</name>
+                <offset>5,2,5,2</offset>
+            </frame>
+			<invisible/>
+			<tooltip><text>Click to switch</text></tooltip>
+				<script>
+					function onClickDown( button, x, y ) 
+						window.shieldarmorswitch.setVisible(false);
+						window.shielddefmodifier.setVisible(false);
+						window.shieldspdmodifier.setVisible(false);
+						window.shieldarmmodifier.setVisible(false);
+						
+						window.armorshieldswitch.setVisible(true);						
+						window.armordefmodifier.setVisible(true);
+						window.armorspdmodifier.setVisible(true);
+						window.armorarmmodifier.setVisible(true);
+					end	
+				</script>			
+            </stringcontrol>	
+	
 
-			<basicnumber name="armorarmmodifier" source="encumbrance.srmorarmmodifier">
+			<basicnumber name="shieldarmmodifier">
 				<anchored>
 					<to>acpenaltyframe</to>
 					<position>insidetopleft</position>
@@ -285,19 +353,35 @@
 						<width>55</width>
 					</size>
 				</anchored>
+				<invisible/>				
 			</basicnumber>
 			
-			<label_sm>
+			<basicnumber name="shielddefmodifier">
 				<anchored>
-					<to>armorarmmodifier</to>
-					<position>above</position>
-					<offset>10,2</offset>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>160,40</offset>
+					<size>
+						<width>55</width>
+					</size>
 				</anchored>
-				<center />
-				<static>ARM Modifier</static>
-			</label_sm>
+				<invisible/>				
+			</basicnumber>
+
+			<basicnumber name="shieldspdmodifier">
+				<anchored>
+					<to>acpenaltyframe</to>
+					<position>insidetopleft</position>
+					<offset>90,40</offset>
+					<size>
+						<width>55</width>
+					</size>
+				</anchored>
+				<invisible/>				
+			</basicnumber>		
 			
 			<!-- Encumbrance -->
+			
 			<frame_char name="encumbranceframe">
 				<bounds>15,415,240,120</bounds>
 			</frame_char>

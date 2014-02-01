@@ -117,7 +117,7 @@ errorcount=0;
 function onFilter( w ) 
    
 	local skillwindow=w.windowlist.window.getDatabaseNode();
-
+	
 	local careers={};
 	if skillwindow.getChild("career1") then
 		careers[1]=skillwindow.getChild("career1").getValue();
