@@ -124,7 +124,7 @@ function onFilter( w )
 	w.windowlist.window.getDatabaseNode().getChild("career4").getValue(),
 	w.windowlist.window.getDatabaseNode().getChild("career5").getValue()
 	};
-	
+	print(careers)
     local inList=false;
     local biggestValue=0;
 	local biggestGeneralMax=0	;

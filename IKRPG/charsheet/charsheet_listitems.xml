@@ -6,6 +6,9 @@
 -->
 
 <root>
+
+	<!-- WEAPON LIST ITEM -->
+
 	<windowclass name="charsheet_weapon">
 		<sizelimits>
 			<minimum>
@@ -134,7 +137,7 @@
 		</sheetdata>
 	</windowclass>
 	
-	
+	<!-- MAGIC LIST ITEM -->	
 	
 	<windowclass name="charsheet_magic">
 		<sizelimits>
@@ -263,7 +266,7 @@
 		</sheetdata>
 	</windowclass>
 	
-	
+	<!-- SKILL LIST ITEM -->	
 
 	<windowclass name="charsheet_skill">
 		<sizelimits>
@@ -396,7 +399,7 @@
 		</sheetdata>
 	</windowclass>
     
-    
+ 	<!-- SMALL SKILL LIST ITEM -->   
     
     <windowclass name="charsheet_skill_small">
 		<sizelimits>
@@ -510,6 +513,8 @@
 			
 		</sheetdata>
 	</windowclass>
+	
+	<!-- ABILITY LIST ITEM -->	
 
     <windowclass name="charsheet_ability">
         <sizelimits>
@@ -627,7 +632,7 @@
         </sheetdata>
     </windowclass>
     
-    
+ 	<!-- SMALL ABILITY LIST ITEM -->   
     
     <windowclass name="charsheet_ability_small">
         <sizelimits>
@@ -722,9 +727,8 @@
         </sheetdata>
     </windowclass>
 	
+	<!-- SPELL LIST ITEM -->	
 	
-	
-    
     <windowclass name="charsheet_spell">
 		 <sizelimits>
 			<minimum>
@@ -899,7 +903,8 @@
 			
 		</sheetdata>
 	</windowclass>
-	
+
+	<!-- MECHANIKA LIST ITEM -->	
 	
 	<windowclass name="charsheet_mechanikaitem">
 		<sizelimits>

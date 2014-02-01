@@ -116,7 +116,8 @@
 					function onValueChanged()
 						if window.careers.getValue()=="" then
 						else
-						window.parentcontrol.window.skills.subwindow.skilllist.constructSkillList();
+						window.parentcontrol.window.skills.subwindow.skilllist.onInit();
+						window.parentcontrol.window.powers.subwindow.spelllist.onInit();
 						end
 					end
 				</script>

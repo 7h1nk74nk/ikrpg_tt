@@ -602,12 +602,6 @@ generalskills={
 }
 	
 careers={
-   [""]={ 
-        skills={["General Skills"]=0,},
-		abilities={},
-		startingskills={},
-		startingabilities={}
-        },
     ["Alchemist"]={ 
         skills={ ["Hand Weapon"]=2, ["Thrown Weapon"]=4, ["Unarmed Combat"]=2, ["Alchemy"]=4, ["Craft"]=4, ["Forgery"]=2, ["General Skills"]=4, ["Medicine"]=4, ["Negotiation" ]=4, ["Research"]=4 },
         --[[The =0 part is necessary so lua treats the ability names as keys - maybe there is a more elegant way but ii am relatively new to lua]]--
@@ -797,6 +791,12 @@ careers={
 		startingskills={ ["Hand Weapon"]=1, ["Pistol"]=1, ["Command"]=1, ["Detection"]=1 },
 		startingabilities={ ["Bond"]={["Any"]=0} }
 	},
+	[""]={ 
+        skills={["General Skills"]=0,},
+		abilities={},
+		startingskills={},
+		startingabilities={}
+    },
 };
 
 

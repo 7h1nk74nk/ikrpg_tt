@@ -6,6 +6,8 @@
 
 
 function onInit()
+	if window.parentcontrol.window.main.subwindow.careers.getValue()=="" then
+    else
 	registerMenuItem("Create", "insert", 5);
 	
 
@@ -20,7 +22,8 @@ function onInit()
 	DB.addHandler(sChar .. ".career3", "onUpdate", applyFilter);    
 	DB.addHandler(sChar .. ".career4", "onUpdate", applyFilter);    
 	DB.addHandler(sChar .. ".career5", "onUpdate", applyFilter);    
-    applyFilter();		
+    applyFilter();	
+	end
 end
 
 
@@ -114,10 +117,7 @@ errorcount=0;
 function onFilter( w ) 
    
 	local skillwindow=w.windowlist.window.getDatabaseNode();
-	
-	
-		
-	
+
 	local careers={};
 	if skillwindow.getChild("career1") then
 		careers[1]=skillwindow.getChild("career1").getValue();
