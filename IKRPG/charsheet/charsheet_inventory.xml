@@ -242,15 +242,13 @@
 						window.armorarmmodifier.setVisible(false);
 						
 						window.shieldarmorswitch.setVisible(true);						
-						window.shielddefmodifier.setVisible(true);
-						window.shieldspdmodifier.setVisible(true);
 						window.shieldarmmodifier.setVisible(true);
 					end	
 				</script>			
             </stringcontrol>	
 	
 
-			<basicnumber name="armorarmmodifier">
+			<basicnumber name="armorarmmodifier" source="arm.armor">
 				<anchored>
 					<to>acpenaltyframe</to>
 					<position>insidetopleft</position>
@@ -261,7 +259,7 @@
 				</anchored>
 			</basicnumber>
 			
-			<basicnumber name="armordefmodifier">
+			<basicnumber name="armordefmodifier" source="def.equip">
 				<anchored>
 					<to>acpenaltyframe</to>
 					<position>insidetopleft</position>
@@ -331,8 +329,6 @@
 				<script>
 					function onClickDown( button, x, y ) 
 						window.shieldarmorswitch.setVisible(false);
-						window.shielddefmodifier.setVisible(false);
-						window.shieldspdmodifier.setVisible(false);
 						window.shieldarmmodifier.setVisible(false);
 						
 						window.armorshieldswitch.setVisible(true);						
@@ -344,7 +340,7 @@
             </stringcontrol>	
 	
 
-			<basicnumber name="shieldarmmodifier">
+			<basicnumber name="shieldarmmodifier" source="arm.shield">
 				<anchored>
 					<to>acpenaltyframe</to>
 					<position>insidetopleft</position>
@@ -355,30 +351,7 @@
 				</anchored>
 				<invisible/>				
 			</basicnumber>
-			
-			<basicnumber name="shielddefmodifier">
-				<anchored>
-					<to>acpenaltyframe</to>
-					<position>insidetopleft</position>
-					<offset>160,40</offset>
-					<size>
-						<width>55</width>
-					</size>
-				</anchored>
-				<invisible/>				
-			</basicnumber>
-
-			<basicnumber name="shieldspdmodifier">
-				<anchored>
-					<to>acpenaltyframe</to>
-					<position>insidetopleft</position>
-					<offset>90,40</offset>
-					<size>
-						<width>55</width>
-					</size>
-				</anchored>
-				<invisible/>				
-			</basicnumber>		
+				
 			
 			<!-- Encumbrance -->
 			

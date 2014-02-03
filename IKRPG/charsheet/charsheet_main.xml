@@ -1486,7 +1486,13 @@
                             labelwidget.setVisible(false);
                         end
                     end
-
+					
+					function onSourceUpdate()	
+						if armordefmodifier.getValue()==0 then
+						else
+						setValue(armordefmodifier.getValue());
+					end
+					end
                 </script>
             </basicnumber> 
             
@@ -1612,6 +1618,14 @@
                             labelwidget.setVisible(false);
                         end
                     end
+					
+										
+					function onSourceUpdate()	
+						if shieldarmmodifier.getValue()==0 then
+						else
+						setValue(shieldarmmodifier.getValue());
+					end
+					end
                 </script>
             </basicnumber>                                                
             
@@ -1636,15 +1650,7 @@
                         labelwidget = addTextWidget("sheetlabelinline", "Armor");
                         if labelwidget then                            
                             labelwidget.setPosition("over", 0, 0); 
-						end
-						
-						local armorarmmodvalue = window.parentcontrol.window.inventory.window.armor_armmodifier.getValue();
-				
-						if armorarmmodvalue==0 then
-						else
-						setValue(armorarmmodvalue);
-					end	
-						
+						end					
 					    onValueChanged()
 					end	
 						
@@ -1655,7 +1661,13 @@
                             labelwidget.setVisible(false);
 						end
                     end	 
-
+					
+					function onSourceUpdate()	
+						if armorarmmodifier.getValue()==0 then
+						else
+						setValue(armorarmmodifier.getValue());
+					end
+					end
      		    </script>		
             </basicnumber>
 

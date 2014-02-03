@@ -115,8 +115,16 @@ function trim(s)
 end
 
 function onFilter( w ) 
-    
-    --local careers=StringManager.split(w.windowlist.window.getDatabaseNode().getChild("careers").getValue(),",");
+
+    -- Debug.console(w.windowlist.getName());  --skilllist--
+	-- Debug.console(w.windowlist.window.getClass());  --charsheet_skills--
+	-- Debug.console(w.windowlist.window.parentcontrol.getName());  --skills--
+	-- Debug.console(w.windowlist.window.parentcontrol.window.getClass()); --charsheet--
+	-- Debug.console(w.windowlist.window.parentcontrol.window.abilities.getName());   --abilities--
+	-- Debug.console(w.windowlist.window.parentcontrol.window.abilities.subwindow.getClass());  --!cannot find charsheet_abilities!--
+	
+	--local careers=StringManager.split(w.windowlist.window.getDatabaseNode().getChild("careers").getValue(),",");
+	
 	local careers={
 	w.windowlist.window.getDatabaseNode().getChild("career1").getValue(),
 	w.windowlist.window.getDatabaseNode().getChild("career2").getValue(),
@@ -124,7 +132,7 @@ function onFilter( w )
 	w.windowlist.window.getDatabaseNode().getChild("career4").getValue(),
 	w.windowlist.window.getDatabaseNode().getChild("career5").getValue()
 	};
-	print(careers)
+
     local inList=false;
     local biggestValue=0;
 	local biggestGeneralMax=0	;

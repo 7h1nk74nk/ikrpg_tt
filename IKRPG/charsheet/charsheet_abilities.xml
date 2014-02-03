@@ -135,7 +135,6 @@
 				
 				window.getDatabaseNode().getChild("careers").setValue(careerstring);
 				
-				window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
 				window.abilitylist.applyFilter();
 				
 			
@@ -182,7 +181,7 @@
 				
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 				
-						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
+						
 						window.abilitylist.applyFilter();
 				
 			
@@ -229,7 +228,7 @@
 						
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 						
-						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
+						
 						window.abilitylist.applyFilter();
 						
 						
@@ -276,7 +275,7 @@
 						
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 						
-						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
+						
 						window.abilitylist.applyFilter();
 						
 						
@@ -323,7 +322,7 @@
 						
 						window.getDatabaseNode().getChild("careers").setValue(careerstring);
 						
-						window.parentcontrol.window.skills.subwindow.skilllist.applyFilter();
+						
 						window.abilitylist.applyFilter();
 					end									
 				</script>

@@ -59,7 +59,7 @@
 				<static>Total</static>
 			</label_sm>
 
-			<windowlist name="skilllist">
+			<windowlist name="skilllist" source="careersource">
 				<anchored>
 					<to>skillframe</to>
 					<position>over</position>
