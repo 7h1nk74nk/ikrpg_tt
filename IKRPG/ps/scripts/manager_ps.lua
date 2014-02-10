@@ -175,7 +175,7 @@ function linkPCFields(nodePS)
 
 	linkPCField(nodeChar, nodePS, "race", "string");
 	linkPCField(nodeChar, nodePS, "careers", "string", "class");
-	linkPCField(nodeChar, nodePS, "xp_total", "number", "level");
+	linkPCField(nodeChar, nodePS, "XP", "number", "level");
 	linkPCField(nodeChar, nodePS, "feat.points", "number", "currentfeatpoints");
 	
 	linkPCField(nodeChar, nodePS, "hp.total", "number", "hptotal");

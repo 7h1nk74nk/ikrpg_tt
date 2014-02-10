@@ -567,8 +567,6 @@ function applyModifiers(rSource, rTarget, rRoll, rCustom, bSkipModStack)
 
 		local bDescNotEmpty = (rRoll.sDesc ~= "");
 		local sStackDesc, nStackMod = ModifierStack.getStack(bDescNotEmpty);
-		Debug.console(nStackMod) 
-		printstack()
 		
 		if sStackDesc ~= "" then
 			if bDescNotEmpty then

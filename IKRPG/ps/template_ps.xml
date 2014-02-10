@@ -418,7 +418,7 @@
 			</anchored>
 			<gmrollable />
 			<script>
-				function onInit()
+				function onInit()			
 					super.onInit();
 					if not User.isHost() then
 						setEnabled(false);
@@ -434,14 +434,18 @@
 						local rActor = ActorManager.getActor("pc", window.link.getTargetDatabaseNode());
 						local nValue = CharManager.getSkillValue(rActor, skill[1]);
 
+						Debug.console(rActor)
+						Debug.console(skill[1])
+						Debug.console(nValue)											
+						
 						local nTargetDC = DB.getValue("partysheet.skilldc", 0);
 						if nTargetDC == 0 then
 							nTargetDC = nil;
 						end
-					
+						
 						local bSecretRoll = (DB.getValue("partysheet.hiderollresults", 0) == 1);
 						
-						ActionSkill.performRoll(draginfo, rActor, skill[1], nValue, nil, nTargetDC, bSecretRoll, true);
+						ActionSkill.performRoll(draginfo, rActor, self.target[1], nTargetDC, bSecretRoll, true);
 						return true;
 					end
 					
