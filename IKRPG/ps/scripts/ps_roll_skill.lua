@@ -28,7 +28,7 @@ function action()
 	local bSecretRoll = window.hiderollresults.getState();
 	
 	for _,v in pairs(aParty) do
-		local nValue = nil
+		local nValue = CharManager.getSkillValue(v, sSkill);  -- this needs to check its selectedskill name, then find the number value that is associated with that name on the same window --
 
 		ActionSkill.performRoll(nil, v, "SKILL", sSkill, nValue, nTargetDC, bSecretRoll, true);
 	end

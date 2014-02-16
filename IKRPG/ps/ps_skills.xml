@@ -519,7 +519,7 @@
 					end
 				</script>
 			</dropdown>
-			
+
 			<basicnumber name="skilldc">
 				<anchored>
 					<to>partyskillframe</to>

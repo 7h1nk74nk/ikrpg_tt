@@ -449,6 +449,7 @@
 					end
 				end
 				
+				
 				function action(draginfo)
 					if not User.isHost() then
 						return false;

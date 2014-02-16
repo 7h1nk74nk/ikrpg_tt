@@ -768,7 +768,7 @@
 						<width>90</width>
 					</size>
 				</anchored>	
-				<default>physique</default>
+				<empty>&#171; Unnamed &#187;</empty>
 			</string_dropdown>
 			
 			<dropdown name="abilitydropdown">
