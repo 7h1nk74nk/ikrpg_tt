@@ -28,9 +28,12 @@ function action()
 	local bSecretRoll = window.hiderollresults.getState();
 	
 	for _,v in pairs(aParty) do
-		local nValue = CharManager.getSkillValue(v, sSkill);
-		ActionSkill.performRoll(nil, v, sSkill, nValue, nil, nTargetDC, bSecretRoll, true);
+		local nValue = nil
+
+		ActionSkill.performRoll(nil, v, "SKILL", sSkill, nValue, nTargetDC, bSecretRoll, true);
 	end
+	
+
 	
 	return true;
 end

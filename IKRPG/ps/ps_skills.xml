@@ -51,6 +51,7 @@
 				</anchored>
 				<skill>detection</skill>
 			</number_ps_skill>
+			
 			<number_ps_skill name="research">
 				<anchored>
 					<to>detection</to>
@@ -58,6 +59,8 @@
 				<skill>research</skill>
 			</number_ps_skill>
 
+			
+			
 			<number_ps_skill name="bribery">
 				<anchored>
 					<to>detection</to>
@@ -470,7 +473,8 @@
 					<name>sheetgroup</name>
 					<offset>5,5,5,5</offset>
 				</frame>
-			</genericcontrol>							
+			</genericcontrol>	
+			
 			<button_ps>
 				<anchored>
 					<to>partyskillframe</to>
@@ -479,6 +483,7 @@
 				</anchored>
 				<script file="ps/scripts/ps_roll_skill.lua" />
 			</button_ps>
+			
 			<label>
 				<anchored>
 					<to>partyskillframe</to>
@@ -490,6 +495,7 @@
 				</anchored>
 				<static>Skill Check:</static>
 			</label>	
+			
 			<string_dropdown name="selectedskill">
 				<anchored>
 					<to>partyskillframe</to>
@@ -502,6 +508,7 @@
 				</anchored>
 				<empty>&#171; Unnamed &#187;</empty>
 			</string_dropdown>
+			
 			<dropdown name="skilldropdown">
 				<target>selectedskill</target>
 				<position>0,3</position>
@@ -512,6 +519,7 @@
 					end
 				</script>
 			</dropdown>
+			
 			<basicnumber name="skilldc">
 				<anchored>
 					<to>partyskillframe</to>
@@ -525,15 +533,6 @@
 				<font>sheetnumbersmall</font>
 			</basicnumber>			
 
-			<dropdown name="skilldropdown">
-				<target>selectedskill</target>
-				<script>
-					function onInit()
-						super.onInit();
-						addItems(DataCommon.psskilldata);
-					end
-				</script>
-			</dropdown>
 		</sheetdata>
 	</windowclass>
 	

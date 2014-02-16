@@ -13,6 +13,7 @@
 			<script file="common/scripts/number_crosslink.lua" />
 		</numberfield>
 	</template>
+	
 	<template name="hsx">
 		<stringfield>
 			<bounds>0,0,0,0</bounds>
@@ -28,6 +29,7 @@
 			<disabled />
 		</genericcontrol>
 	</template>
+	
 	<template name="frame_ps_invpitem">
 		<genericcontrol>
 			<bounds>10,35,-350,188</bounds>
@@ -35,6 +37,7 @@
 			<disabled />
 		</genericcontrol>
 	</template>
+	
 	<template name="frame_ps_invpcoin">
 		<genericcontrol>
 			<bounds>-350,35,-20,188</bounds>
@@ -42,6 +45,7 @@
 			<disabled />
 		</genericcontrol>
 	</template>
+	
 	<template name="frame_ps_invitem">
 		<genericcontrol>
 			<bounds>10,250,-350,-15</bounds>
@@ -49,6 +53,7 @@
 			<disabled />
 		</genericcontrol>
 	</template>
+	
 	<template name="frame_ps_invcoin">
 		<genericcontrol>
 			<bounds>-350,250,-20,-15</bounds>
@@ -56,6 +61,7 @@
 			<disabled />
 		</genericcontrol>
 	</template>
+	
 	<template name="label_ps_sheet">
 		<label>
 			<anchored>
@@ -76,6 +82,7 @@
 			<font>sheetlabelminibold</font>
 		</stringcontrol>
 	</template>
+	
 	<template name="header_ps2">
 		<stringcontrol>
 			<anchored>
@@ -85,6 +92,7 @@
 			<font>sheetlabelminibold</font>
 		</stringcontrol>
 	</template>
+	
 	<template name="header_psinv">
 		<stringcontrol>
 			<anchored>
@@ -94,6 +102,7 @@
 			<font>sheetlabelminibold</font>
 		</stringcontrol>
 	</template>
+	
 	<template name="header_psorder">
 		<stringcontrol>
 			<anchored>
@@ -103,6 +112,7 @@
 			<font>sheetlabelminibold</font>
 		</stringcontrol>
 	</template>
+	
 	<template name="header_psxp">
 		<stringcontrol>
 			<anchored>
@@ -115,6 +125,7 @@
 			<font>sheetlabelminibold</font>
 		</stringcontrol>
 	</template>
+	
 	<template name="header_psxp2">
 		<stringcontrol>
 			<anchored>
@@ -149,6 +160,7 @@
 			<sortby><control>name</control></sortby>
 		</windowlist>
 	</template>
+	
 	<template name="list_ps_inv">
 		<windowlist>
 			<anchored>
@@ -166,6 +178,7 @@
 			<child></child>
 		</windowlist>
 	</template>
+	
 	<template name="list_ps_xp_encounter">
 		<windowlist>
 			<anchored>
@@ -191,6 +204,7 @@
 			<filteron><control>name</control></filteron>
 		</windowlist>
 	</template>
+	
 	<template name="list_ps_xp_quest">
 		<windowlist>
 			<anchored>
@@ -220,6 +234,7 @@
 			<filteron><control>name</control></filteron>
 		</windowlist>
 	</template>
+	
 	<template name="scrollbar_ps">
 		<scrollbar>
 			<anchored>
@@ -241,6 +256,7 @@
 			<nolinkwidget />
 		</string_crosslink>
 	</template>
+	
 	<template name="string_psname">
 		<string_crosslink>
 			<font>sheetlabel</font>
@@ -262,6 +278,7 @@
 			<readonly />
 		</number>
 	</template>
+	
 	<template name="number_ps_linked">
 		<number_crosslink>
 			<frame>
@@ -273,6 +290,7 @@
 			<nolinkwidget />
 		</number_crosslink>
 	</template>
+	
 	<template name="number_ps_ability">
 		<number_ps_linked>
 			<anchored>
@@ -289,6 +307,7 @@
 			<nodrag />
 		</number_ps_linked>
 	</template>
+	
 	<template name="number_ps_abilitycheck">
 		<number_ps_linked>
 			<anchored>
@@ -341,6 +360,7 @@
 			</script>
 		</number_ps_linked>
 	</template>
+	
 	<template name="number_ps_defense">
 		<number_ps_linked>
 			<anchored>
@@ -357,6 +377,7 @@
 			<nodrag />
 		</number_ps_linked>
 	</template>
+	
 	<template name="number_ps_save">
 		<number_ps_linked>
 			<anchored>
@@ -403,6 +424,7 @@
 			</script>
 		</number_ps_linked>
 	</template>
+	
 	<template name="number_ps_skill">
 		<number_ps_linked>
 			<anchored>
@@ -417,6 +439,8 @@
 				</size>
 			</anchored>
 			<gmrollable />
+			<displaysign />
+			<nodrag />
 			<script>
 				function onInit()			
 					super.onInit();
@@ -432,20 +456,10 @@
 					
 					if skill then
 						local rActor = ActorManager.getActor("pc", window.link.getTargetDatabaseNode());
-						local nValue = CharManager.getSkillValue(rActor, skill[1]);
-
-						Debug.console(rActor)
-						Debug.console(skill[1])
-						Debug.console(nValue)											
-						
-						local nTargetDC = DB.getValue("partysheet.skilldc", 0);
-						if nTargetDC == 0 then
-							nTargetDC = nil;
-						end
 						
 						local bSecretRoll = (DB.getValue("partysheet.hiderollresults", 0) == 1);
 						
-						ActionSkill.performRoll(draginfo, rActor, self.target[1], nTargetDC, bSecretRoll, true);
+						ActionSkill.performRoll(draginfo, rActor, "SKILL", skill[1], getValue(), bSecretRoll, true);
 						return true;
 					end
 					
