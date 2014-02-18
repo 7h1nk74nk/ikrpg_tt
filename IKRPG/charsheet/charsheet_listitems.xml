@@ -164,9 +164,9 @@
                     </hover>
                 </stateframe>
                 <parameters>
-                    <icons>action_forcemagic|action_utilitymagic|action_firemagic|action_icemagic|action_acidmagic|action_lightningmagic|action_necromagic</icons>			
+                    <icons>action_magic|action_firemagic|action_icemagic|action_acidmagic|action_lightningmagic</icons>			
                     <values>1|2|3|4|5|6|7</values>   
-                    <defaulticon>action_buffmagic</defaulticon>                    
+                    <defaulticon>action_magic</defaulticon>                    
                 </parameters>
             </button_iconcycler>
                 

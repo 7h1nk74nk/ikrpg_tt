@@ -10,7 +10,7 @@
 		<buttongroup_radio>
 			<parameters>
 				<optionwidth>80</optionwidth>
-				<labels>Creature|Trap|Vehicle</labels>
+				<labels>Weak|Tough|Steamjack</labels>
 				<values>Creature|Trap|Vehicle</values>
 			</parameters>
 			<gmeditonly />
@@ -210,6 +210,7 @@
 			<script file="campaign/scripts/campaign_npc_powerlist.lua" />
 		</windowlist>
 	</template>
+	
 	<template name="list_npc_vpowers">
 		<windowlist>
 			<anchored>

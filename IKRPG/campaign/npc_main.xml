@@ -9,99 +9,250 @@
 	<windowclass name="npc_combat_creature">
 		<script file="campaign/scripts/campaign_npc_main.lua" />
 		<sheetdata>
-			<label_npc name="hp_label">
-				<bounds>10,3,15,15</bounds>
-				<static>HP</static>
+		
+
+	<!-- STAT BAR -->		
+			
+			<!-- SPD -->			
+			
+			<label_npc name="spd_label">
+				<bounds>10,1,30,15</bounds>
+				<static>SPD</static>
 			</label_npc>
-			<string_npc name="hp">
-				<anchored>
-					<top><offset>3</offset></top>
-					<left><offset>27</offset></left>
-					<right><offset>-90</offset></right>
-					<size><height>15</height></size>
-				</anchored>
-				<empty>&#171; Hit Points &#187;</empty>
-			</string_npc>
+			
+			<number_npc name="spd">
+				<bounds>35,1,15,15</bounds>
+			</number_npc>
+			
+			<!-- STR -->			
+			
+			<label_npc name="str_label">
+				<bounds>55,1,30,15</bounds>
+				<static>STR</static>
+			</label_npc>
+			
+			<number_npc name="str">
+				<bounds>80,1,15,15</bounds>
+			</number_npc>
+			
+			<!-- MAT -->			
+			
+			<label_npc name="mat_lable">
+				<bounds>100,1,30,15</bounds>
+				<static>MAT</static>
+			</label_npc>
+			
+			<number_npc name="mat">
+				<bounds>130,1,15,15</bounds>
+			</number_npc>
+			
+			<!-- RAT -->			
+			
+			<label_npc name="rat_label">
+				<bounds>150,1,30,15</bounds>
+				<static>RAT</static>
+			</label_npc>
+			
+			<number_npc name="rat">
+				<bounds>175,1,15,15</bounds>
+			</number_npc>
+			
+			<!-- DEF -->			
+			
+			<label_npc name="def_label">
+				<bounds>195,1,30,15</bounds>
+				<static>DEF</static>
+			</label_npc>
+			
+			<number_npc name="def">
+				<bounds>220,1,15,15</bounds>
+			</number_npc>
+			
+			<!-- ARM -->			
+			
+			<label_npc name="arm_label">
+				<bounds>240,1,30,15</bounds>
+				<static>ARM</static>
+			</label_npc>
+			
+			<number_npc name="arm">
+				<bounds>270,1,15,15</bounds>
+			</number_npc>
+			
+			<!-- WILLPOWER -->			
+			
+			<label_npc name="willpower_label">
+				<bounds>10,20,100,15</bounds>
+				<static>WILLPOWER</static>
+			</label_npc>
+			
+			<number_npc name="willpower">
+				<bounds>79,20,17,15</bounds>
+			</number_npc>
+
+			<!-- INITIATIVE -->			
 			
 			<label_npc name="init_label">
-				<bounds>-75,3,45,15</bounds>
-				<static>Initiative</static>
+				<bounds>100,20,100,15</bounds>
+				<static>INITIATIVE</static>
 			</label_npc>
-			<number_npc_init name="init">
-				<bounds>-25,3,17,15</bounds>
-			</number_npc_init>
 			
-			<label_npc name="ac_label">
-				<bounds>10,18,15,15</bounds>
-				<static>AC</static>
-			</label_npc>
-			<number_npc name="ac">
-				<bounds>27,18,15,15</bounds>
-			</number_npc>
-			<label_npc name="fortitude_label">
-				<bounds>45,18,48,15</bounds>
-				<static>Fortitude</static>
-			</label_npc>
-			<number_npc name="fortitude">
-				<bounds>96,18,15,15</bounds>
-			</number_npc>
-			<label_npc name="reflex_label">
-				<bounds>114,18,32,15</bounds>
-				<static>Reflex</static>
-			</label_npc>
-			<number_npc name="reflex">
-				<bounds>149,18,15,15</bounds>
-			</number_npc>
-			<label_npc name="will_label">
-				<bounds>167,18,20,15</bounds>
-				<static>Will</static>
-			</label_npc>
-			<number_npc name="will">
-				<bounds>190,18,15,15</bounds>
-			</number_npc>
+			<number_npc name="init">
+				<bounds>158,20,17,15</bounds>
+			</number_npc>	
+
+			<!-- DETECT -->			
 			
-			<label_npc name="perceptionval_label">
-				<bounds>-87,18,57,15</bounds>
-				<static>Perception</static>
+			<label_npc name="detection_label">
+				<bounds>180,20,100,15</bounds>
+				<static>DETECT</static>
 			</label_npc>
-			<number_npc_perception name="perceptionval">
-				<bounds>-25,18,17,15</bounds>
-			</number_npc_perception>
 			
-			<label_npc name="speed_label">
-				<bounds>10,33,32,15</bounds>
-				<static>Speed</static>
+			<number_npc name="detection">
+				<bounds>223,20,17,15</bounds>
+			</number_npc>	
+
+			<!-- SNEAK -->			
+			
+			<label_npc name="sneak_label">
+				<bounds>243,20,100,15</bounds>
+				<static>SNEAK</static>
 			</label_npc>
-			<string_npc name="speed">
-				<anchored>
-					<top><offset>33</offset></top>
-					<left><offset>45</offset></left>
-					<right>
-						<anchor>center</anchor>
-						<offset>-2</offset>
-					</right>
-				</anchored>
-				<empty>&#171; Speed &#187;</empty>
-			</string_npc>
-			<string_npc name="senses">
-				<anchored>
-					<top><offset>33</offset></top>
-					<left>
-						<anchor>center</anchor>
-						<offset>35</offset>
-					</left>
-					<right><offset>-5</offset></right>
+			
+			<number_npc name="sneak">
+				<bounds>283,20,17,15</bounds>
+			</number_npc>	
+			
+			<!-- ATTACKS -->				
+			
+			<button_iconcycler name="npc_attackmelee">
+                <anchored>
+					<to>willpower_label</to>
+					<top><offset>20</offset></top>
+					<left><offset>0</offset></left>					
 					<size>
-						<height>45</height>
+						<height>40</height>
+                        <width>40</width>
 					</size>
-				</anchored>
-				<center />
-			</string_npc>
+				</anchored>                
+                <stateframe>
+                    <hover>
+                        <name>sheetfocus</name>
+                        <offset>6,5,6,5</offset>
+                        <hidereadonly />
+                    </hover>
+                </stateframe>
+                <parameters>
+                    <icons>action_melee</icons>
+                    <values>melee</values>   
+                    <defaulticon>action_ranged</defaulticon>                    
+                </parameters>
+            </button_iconcycler>	
+
+			<button_iconcycler name="npc_attackrange">
+                <anchored>
+					<to>npc_attackmelee</to>
+					<top><offset>45</offset></top>
+					<left><offset>0</offset></left>					
+					<size>
+						<height>40</height>
+                        <width>40</width>
+					</size>
+				</anchored>                
+                <stateframe>
+                    <hover>
+                        <name>sheetfocus</name>
+                        <offset>6,5,6,5</offset>
+                        <hidereadonly />
+                    </hover>
+                </stateframe>
+                <parameters>
+                    <icons>action_melee</icons>
+                    <values>melee</values>   
+                    <defaulticon>action_ranged</defaulticon>                    
+                </parameters>
+            </button_iconcycler>		
 			
+			<label_npc name="meleepow_label">
+				<bounds>60,45,100,15</bounds>
+				<static>POW</static>
+			</label_npc>
+			
+			<number_npc name="meleepow">
+				<bounds>63,60,17,15</bounds>
+			</number_npc>			
+			
+			<label_npc name="meleeps_label">
+				<bounds>183,45,100,15</bounds>
+				<static>P+S</static>
+			</label_npc>
+			
+			<number_npc name="meleeps">
+				<bounds>185,60,17,15</bounds>
+			</number_npc>	
+
+			<string_npc name="npc_meleedescription">
+				<anchored>
+					<to>meleeps_label</to>
+					<top><offset>7</offset></top>
+					<left><offset>38</offset></left>
+					<size><width>150</width></size>	
+				</anchored>
+				<empty>&#171; Description &#187;</empty>
+			</string_npc>				
+
+			<label_npc name="rangerng_label">
+				<bounds>60,85,100,15</bounds>
+				<static>RNG</static>
+			</label_npc>
+			
+			<number_npc name="rangerng">
+				<bounds>63,100,17,15</bounds>
+			</number_npc>			
+			
+			<label_npc name="rangerof_label">
+				<bounds>100,85,100,15</bounds>
+				<static>ROF</static>
+			</label_npc>
+			
+			<number_npc name="rangerof">
+				<bounds>102,100,17,15</bounds>
+			</number_npc>	
+
+			<label_npc name="rangeaoe_label">
+				<bounds>140,85,100,15</bounds>
+				<static>AOE</static>
+			</label_npc>
+			
+			<number_npc name="rangeaoe">
+				<bounds>143,100,17,15</bounds>
+			</number_npc>			
+			
+			<label_npc name="rangepow_label">
+				<bounds>180,85,100,15</bounds>
+				<static>POW</static>
+			</label_npc>
+			
+			<number_npc name="rangerpow">
+				<bounds>183,100,17,15</bounds>
+			</number_npc>				
+	
+			<string_npc name="npc_rangedescription">
+				<anchored>
+					<to>rangepow_label</to>
+					<top><offset>7</offset></top>
+					<left><offset>40</offset></left>
+					<size><width>150</width></size>	
+				</anchored>
+				<empty>&#171; Description &#187;</empty>
+			</string_npc>	
+
+			
+
 			<genericcontrol name="spdefanchor">
 				<anchored>
 					<top>
-						<parent>speed</parent>
+						<parent>npc_attackrange</parent>
 						<anchor>bottom</anchor>
 					</top>
 					<left />
@@ -110,73 +261,6 @@
 				</anchored>
 				<invisible />
 			</genericcontrol>
-
-			<string_npc name="specialdefenses">
-				<anchored>
-					<top>
-						<parent>spdefanchor</parent>
-						<anchor>bottom</anchor>
-						<relation>relative</relation>
-					</top>
-					<left><offset>10</offset></left>
-					<right>
-						<parent>senses</parent>
-						<anchor>left</anchor>
-						<offset>-5</offset>
-					</right>
-				</anchored>
-				<empty>&#171; Special Defenses &#187;</empty>
-			</string_npc>
-			
-			<label_npc name="save_label">
-				<anchored>
-					<top>
-						<parent>spdefanchor</parent>
-						<anchor>bottom</anchor>
-						<relation>relative</relation>
-					</top>
-					<left><offset>10</offset></left>
-					<size>
-						<width>77</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Saving Throws</static>
-			</label_npc>
-			<number_npc_save name="save">
-				<anchored>
-					<to>save_label</to>
-					<position>righthigh</position>
-					<offset>3,0</offset>
-					<size>
-						<width>17</width>
-						<height>15</height>
-					</size>
-				</anchored>
-			</number_npc_save>
-			<label_npc name="ap_label">
-				<anchored>
-					<to>save</to>
-					<position>righthigh</position>
-					<offset>10,0</offset>
-					<size>
-						<width>70</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Action Points</static>
-			</label_npc>
-			<number_npc name="ap">
-				<anchored>
-					<to>ap_label</to>
-					<position>righthigh</position>
-					<offset>3,0</offset>
-					<size>
-						<width>17</width>
-						<height>15</height>
-					</size>
-				</anchored>
-			</number_npc>
 			
 			<genericcontrol name="columnanchor">
 				<anchored>
@@ -191,319 +275,221 @@
 				</anchored>
 				<invisible />
 			</genericcontrol>
-
-			<list_npc_vpowers name="list_vpowers" />
+						
+			
+			<!-- ABILITIES -->	
 			
 			<header_npc name="powers_header">
 				<frame>
 					<name>headernpc</name>
 				</frame>
 			</header_npc>
+			
 			<header_npc_text name="powers_label">
 				<anchored>
 					<to>powers_header</to>
 				</anchored>
 				<color>FFFFFFFF</color>
-				<static>Powers</static>
+				<static>ABILITIES</static>
 			</header_npc_text>
-			<list_npc_powers name="list_powers" />
 
-			<genericcontrol name="shadedrow">
-				<anchored>
-					<top>
-						<parent>columnanchor</parent>
-						<relation>relative</relation>
-						<anchor>bottom</anchor>
-						<offset>2</offset>
-					</top>
-					<left />
-					<right />
-					<size><height>48</height></size>
-				</anchored>
-				<frame><name>campaignrowshade</name></frame>
-			</genericcontrol>
+			<list_npc_powers name="" />
 			
-			<label_npc name="skills_label">
-				<anchored>
-					<to>shadedrow</to>
-					<top><offset>1</offset></top>
-					<left><offset>10</offset></left>
-					<size>
-						<width>28</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Skills</static>
-			</label_npc>
-			<string_npc name="skills">
-				<anchored>
-					<to>shadedrow</to>
-					<top><offset>1</offset></top>
-					<left><offset>41</offset></left>
-					<right><offset>-10</offset></right>
-					<size><height>15</height></size>
-				</anchored>
-				<empty>&#171; Skills &#187;</empty>
-				<script file="campaign/scripts/campaign_npc_skill.lua" />
-			</string_npc>
 			
-			<label_npc name="strength_label">
-				<anchored>
-					<to>shadedrow</to>
-					<top><offset>16</offset></top>
-					<left><offset>10</offset></left>
-					<size>
-						<width>22</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Str</static>
-			</label_npc>
-			<number_npc_ability name="strength">
-				<anchored>
-					<to>strength_label</to>
-				</anchored>
-				<target>strength</target>
-				<mod>strength_mod</mod>
-			</number_npc_ability>
-			<stringc_npc_abilitymod name="strength_mod">
-				<anchored>
-					<to>strength</to>
-				</anchored>
-			</stringc_npc_abilitymod>
-			<label_npc name="dexterity_label">
-				<anchored>
-					<to>strength_mod</to>
-					<top />
-					<left>
-						<anchor>right</anchor>
-						<offset>10</offset>
-					</left>
-					<size>
-						<width>22</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Dex</static>
-			</label_npc>
-			<number_npc_ability name="dexterity">
-				<anchored>
-					<to>dexterity_label</to>
-				</anchored>
-				<target>dexterity</target>
-				<mod>dexterity_mod</mod>
-			</number_npc_ability>
-			<stringc_npc_abilitymod name="dexterity_mod">
-				<anchored>
-					<to>dexterity</to>
-				</anchored>
-			</stringc_npc_abilitymod>
-			<label_npc name="wisdom_label">
-				<anchored>
-					<to>dexterity_mod</to>
-					<top />
-					<left>
-						<anchor>right</anchor>
-						<offset>10</offset>
-					</left>
-					<size>
-						<width>22</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Wis</static>
-			</label_npc>
-			<number_npc_ability name="wisdom">
-				<anchored>
-					<to>wisdom_label</to>
-				</anchored>
-				<target>wisdom</target>
-				<mod>wisdom_mod</mod>
-			</number_npc_ability>
-			<stringc_npc_abilitymod name="wisdom_mod">
-				<anchored>
-					<to>wisdom</to>
-				</anchored>
-			</stringc_npc_abilitymod>
+			<!-- VITALITY -->	
+						
+			<header_npc name="vitality_header">
+				<frame>
+					<name>headernpc</name>
+				</frame>
+			</header_npc>
 			
-			<label_npc name="constitution_label">
+			<header_npc_text name="vitality_label">
 				<anchored>
-					<to>shadedrow</to>
-					<top><offset>31</offset></top>
-					<left><offset>10</offset></left>
-					<size>
-						<width>22</width>
-						<height>15</height>
-					</size>
+					<to>vitality_header</to>
 				</anchored>
-				<static>Con</static>
-			</label_npc>
-			<number_npc_ability name="constitution">
-				<anchored>
-					<to>constitution_label</to>
-				</anchored>
-				<target>constitution</target>
-				<mod>constitution_mod</mod>
-			</number_npc_ability>
-			<stringc_npc_abilitymod name="constitution_mod">
-				<anchored>
-					<to>constitution</to>
-				</anchored>
-			</stringc_npc_abilitymod>
-			<label_npc name="intelligence_label">
-				<anchored>
-					<to>constitution_mod</to>
-					<top />
-					<left>
-						<anchor>right</anchor>
-						<offset>10</offset>
-					</left>
-					<size>
-						<width>22</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Int</static>
-			</label_npc>
-			<number_npc_ability name="intelligence">
-				<anchored>
-					<to>intelligence_label</to>
-				</anchored>
-				<target>intelligence</target>
-				<mod>intelligence_mod</mod>
-			</number_npc_ability>
-			<stringc_npc_abilitymod name="intelligence_mod">
-				<anchored>
-					<to>intelligence</to>
-				</anchored>
-			</stringc_npc_abilitymod>
-			<label_npc name="charisma_label">
-				<anchored>
-					<to>intelligence_mod</to>
-					<top />
-					<left>
-						<anchor>right</anchor>
-						<offset>10</offset>
-					</left>
-					<size>
-						<width>22</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Cha</static>
-			</label_npc>
-			<number_npc_ability name="charisma">
-				<anchored>
-					<to>charisma_label</to>
-				</anchored>
-				<target>charisma</target>
-				<mod>charisma_mod</mod>
-			</number_npc_ability>
-			<stringc_npc_abilitymod name="charisma_mod">
-				<anchored>
-					<to>charisma</to>
-				</anchored>
-			</stringc_npc_abilitymod>
+				<color>FFFFFFFF</color>
+				<static>VITALITY</static>
+			</header_npc_text>
 			
-			<label_npc name="alignment_label">
+			<number_npc name="npc_vitality">
 				<anchored>
-					<top>
-						<parent>columnanchor</parent>
-						<anchor>bottom</anchor>
-						<relation>current</relation>
-						<offset>3</offset>
-					</top>
-					<left><offset>10</offset></left>
-					<size>
-						<width>60</width>
-						<height>15</height>
-					</size>
+					<to>vitality_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>250</offset></left>
+					<size><width>20</width></size>			
 				</anchored>
-				<static>Alignment</static>
-			</label_npc>
-			<string_npc name="alignment">
-				<anchored>
-					<top>
-						<parent>alignment_label</parent>
-					</top>
-					<left>
-						<parent>alignment_label</parent>
-						<anchor>right</anchor>
-					</left>
-					<right>
-						<anchor>center</anchor>
-					</right>
-					<size><height>15</height></size>
-				</anchored>
-				<empty>&#171; Alignment &#187;</empty>
-			</string_npc>
-			<label_npc name="languages_label">
-				<anchored>
-					<top>
-						<parent>alignment_label</parent>
-					</top>
-					<left>
-						<anchor>center</anchor>
-					</left>
-					<size>
-						<width>60</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Languages</static>
-			</label_npc>
-			<string_npc name="languages">
-				<anchored>
-					<top>
-						<parent>columnanchor</parent>
-						<anchor>bottom</anchor>
-						<relation>relative</relation>
-						<offset>3</offset>
-					</top>
-					<left>
-						<parent>languages_label</parent>
-						<anchor>right</anchor>
-					</left>
-					<right><offset>-10</offset></right>
-				</anchored>
-				<empty>&#171; Languages &#187;</empty>
-			</string_npc>
+				<color>FFFFFFFF</color>
+			</number_npc>
 
-			<label_npc name="equipment_label">
-				<anchored>
-					<top>
-						<parent>columnanchor</parent>
-						<anchor>bottom</anchor>
-						<relation>relative</relation>
-					</top>
-					<left><offset>10</offset></left>
-					<size>
-						<width>60</width>
-						<height>15</height>
-					</size>
-				</anchored>
-				<static>Equipment</static>
-			</label_npc>
-			<string_npc name="equipment">
-				<anchored>
-					<top>
-						<parent>equipment_label</parent>
-					</top>
-					<left>
-						<parent>equipment_label</parent>
-						<anchor>right</anchor>
-					</left>
-					<right><offset>-10</offset></right>
-					<size><height>16</height></size>
-				</anchored>
-				<empty>&#171; Equipment &#187;</empty>
-			</string_npc>
+			<!-- BASE SIZE -->	
+						
+			<header_npc name="basesize_header">
+				<frame>
+					<name>headernpc</name>
+				</frame>
+			</header_npc>
 			
+			<header_npc_text name="basesize_label">
+				<anchored>
+					<to>basesize_header</to>
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>BASE SIZE</static>
+			</header_npc_text>
+			
+			<string_npc name="npc_basesize">
+				<anchored>
+					<to>basesize_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>242</offset></left>
+					<size><width>200</width></size>	
+				</anchored>
+				<color>FFFFFFFF</color>
+				<empty>&#171; Size &#187;</empty>
+			</string_npc>	
+			
+			<!-- ENCOUNTER POINTS -->	
+						
+			<header_npc name="encounterpoints_header">
+				<frame>
+					<name>headernpc</name>
+				</frame>
+			</header_npc>
+			
+			<header_npc_text name="encounterpoints_label">
+				<anchored>
+					<to>encounterpoints_header</to>
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>ENCOUNTER POINTS</static>
+			</header_npc_text>	
+
+			<number_npc name="npc_encounterpoints">
+				<anchored>
+					<to>encounterpoints_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>250</offset></left>
+					<size><width>20</width></size>			
+				</anchored>
+				<color>FFFFFFFF</color>
+			</number_npc>	
+			
+			<!-- ARCANE -->	
+						
+			<header_npc name="arcane_header">
+				<frame>
+					<name>headernpc</name>
+				</frame>
+			</header_npc>
+			
+			<header_npc_text name="arcane_label">
+				<anchored>
+					<to>arcane_header</to>
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>ARCANE</static>
+			</header_npc_text>
+			
+			<number_npc name="npc_arcane">
+				<anchored>
+					<to>arcane_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>250</offset></left>
+					<size><width>20</width></size>			
+				</anchored>
+				<color>FFFFFFFF</color>
+			</number_npc>			
+			
+			<!-- SPELLS -->	
+						
+			<header_npc name="spells_header">
+				<frame>
+					<name>headernpc</name>
+				</frame>
+			</header_npc>
+			
+			<header_npc_text name="spells_label">
+				<anchored>
+					<to>spells_header</to>
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>SPELLS</static>
+			</header_npc_text>	
+
+			<string_npc name="spells_cost">
+				<anchored>
+					<to>spells_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>143</offset></left>
+					<size><width>40</width></size>						
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>COST</static>
+			</string_npc>	
+
+			<string_npc name="spells_rng">
+				<anchored>
+					<to>spells_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>188</offset></left>
+					<size><width>40</width></size>						
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>RNG</static>
+			</string_npc>	
+					
+			<string_npc name="spells_aoe">
+				<anchored>
+					<to>spells_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>228</offset></left>
+					<size><width>40</width></size>						
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>AOE</static>
+			</string_npc>	
+		
+			<string_npc name="spells_pow">
+				<anchored>
+					<to>spells_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>268</offset></left>
+					<size><width>40</width></size>						
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>POW</static>
+			</string_npc>	
+		
+			<string_npc name="spells_up">
+				<anchored>
+					<to>spells_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>313</offset></left>
+					<size><width>40</width></size>						
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>UP</static>
+			</string_npc>	
+		
+			<string_npc name="spells_off">
+				<anchored>
+					<to>spells_header</to>
+					<top><offset>3</offset></top>
+					<left><offset>348</offset></left>
+					<size><width>40</width></size>						
+				</anchored>
+				<color>FFFFFFFF</color>
+				<static>OFF</static>
+			</string_npc>	
+		
+		
 			<spacer>
 				<anchor>columnanchor</anchor>
 				<relative />
 				<height>3</height>
 			</spacer>
+			
 		</sheetdata>
 	</windowclass>
 

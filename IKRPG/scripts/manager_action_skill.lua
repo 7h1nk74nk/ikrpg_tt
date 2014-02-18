@@ -10,7 +10,7 @@ function onInit()
 	ActionsManager.registerPostRollHandler("skill", postRoll);
 end
 
-function performRoll(draginfo, rActor,sType, sSkillName, nSkillMod, nTargetDC, bSecretRoll)
+function performRoll(draginfo, rActor, sType, sSkillName, nSkillMod, nTargetDC, bSecretRoll)
 	-- Build basic roll
 	local rRoll = {};
 	

@@ -56,7 +56,6 @@ function StateChanged()
 	name.setReadOnly(bLock);
 	levelrole.setReadOnly(bLock);
 	type.setReadOnly(bLock);
-	xp.setReadOnly(bLock);
 	
 	if main_trap.subwindow then
 		main_trap.subwindow.update();

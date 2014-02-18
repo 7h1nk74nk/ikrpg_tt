@@ -99,10 +99,11 @@
 					<top><offset>8</offset></top>
 					<right><offset>-34</offset></right>
 				</anchored>
-				<empty>&#171; Level/Role &#187;</empty>
+				<empty>&#171; Role &#187;</empty>
 				<font>reference-b-large</font>
 				<nodrag />
 			</basicstringw>
+			
 			<basicstringw name="name">
 				<anchored>
 					<top><offset>8</offset></top>
@@ -128,15 +129,6 @@
 				<font>reference-b</font>
 				<nodrag />
 			</basicstringw>
-			<basicnumberw name="xp">
-				<bounds>-65,29,30,16</bounds>
-				<font>reference-b</font>
-			</basicnumberw>
-			<label_npc name="xp_label">
-				<bounds>-90,30,20,15</bounds>
-				<color>FFFFFFFF</color>
-				<static>XP</static>
-			</label_npc>
 			
 			<button_activateid>
 				<bounds>-30,24,23,22</bounds>

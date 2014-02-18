@@ -504,14 +504,11 @@
     
     <icon name="action_melee" file="graphics/icons/action_melee.png" />
     <icon name="action_ranged" file="graphics/icons/action_ranged.png" />
-    <icon name="action_forcemagic" file="graphics/icons/forcemagic.png" />
-    <icon name="action_buffmagic" file="graphics/icons/buffmagic.png" />
+    <icon name="action_magic" file="graphics/icons/magic.png" />
 	<icon name="action_firemagic" file="graphics/icons/firemagic.png" />
 	<icon name="action_icemagic" file="graphics/icons/icemagic.png" />
 	<icon name="action_acidmagic" file="graphics/icons/acidmagic.png" />
-    <icon name="action_lightningmagic" file="graphics/icons/lightningmagic.png" />
-	<icon name="action_necromagic" file="graphics/icons/necromagic.png" />
-	<icon name="action_utilitymagic" file="graphics/icons/utilitymagic.png" />
+    <icon name="action_lightningmagic" file="graphics/icons/lightningmagic.png" />>
 	
 	<icon name="indicator_dice" file="graphics/icons/indicator_dice.png" />
 

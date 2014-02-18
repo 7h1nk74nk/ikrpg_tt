@@ -442,13 +442,12 @@
 			<displaysign />
 			<nodrag />
 			<script>
-				function onInit()			
+				function onInit()
 					super.onInit();
 					if not User.isHost() then
 						setEnabled(false);
 					end
 				end
-				
 				
 				function action(draginfo)
 					if not User.isHost() then
@@ -457,10 +456,15 @@
 					
 					if skill then
 						local rActor = ActorManager.getActor("pc", window.link.getTargetDatabaseNode());
-						
+
+						local nTargetDC = DB.getValue("partysheet.skilldc", 0);
+						if nTargetDC == 0 then
+							nTargetDC = nil;
+						end
+					
 						local bSecretRoll = (DB.getValue("partysheet.hiderollresults", 0) == 1);
 						
-						ActionSkill.performRoll(draginfo, rActor, "SKILL", skill[1], getValue(), bSecretRoll, true);
+						ActionSkill.performRoll(draginfo, rActor, 'SKILL', skill[1], getValue(), nTargetDC, bSecretRoll);
 						return true;
 					end
 					
